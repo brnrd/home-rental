@@ -1,4 +1,4 @@
-### LocationStore Project ###
+### Home Rental Project ###
 
 Holiday Cottages/Homes/Flats Rental Website
 
