@@ -1,0 +1,18 @@
+# NetBeans specific #                                                                                   
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+*.properties
+build.xml
+manifest.mf
+build-impl.xml
+                   
+# Class Files #
+*.class
+*.jar
+
+# Vim, OS, ...
+*.un~
+*.swp
