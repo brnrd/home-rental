@@ -1,25 +1,27 @@
 package web.model;
 
-import java.util.UUID;
-
 /**
  * @author Romain <ro.foncier@gmail.com>
  */
 public class User {
 
-    UUID id;
-    String name;
-    String fname;
-    String address;
-    String email;
-    String phone;
+    private String id;
+    private String name;
+    private String fname;
+    private String address;
+    private String email;
+    private String phone;
+    private int region;
+
+    public User() {
+    }
 
     public String getId() {
         return id.toString();
     }
 
-    private void setID() {
-        id = UUID.randomUUID();
+    private void setID(String user_id) {
+        id = user_id;
     }
 
     public String getName() {
@@ -60,5 +62,20 @@ public class User {
 
     public void setPhone(String newPhone) {
         phone = newPhone;
+    }
+
+    public int getRegion() {
+        return region;
+    }
+
+    public void setRegion(int newRegion) {
+        region = newRegion;
+    }
+
+    @Override
+    public String toString() {
+        return "{\"id\": \"+id+\", \"name\": \"+name+\", \"fname\": \"+fname+\","
+                + " \"address\": \"+address+\", \"email\": \"+email+\","
+                + " \"phone\": \"+phone+\", \"region\": " + region + "}";
     }
 }
