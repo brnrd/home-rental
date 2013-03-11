@@ -33,13 +33,18 @@
                     <a class="brand" href="./index.jsp">Home Rental Project</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="">
+                            <li class=" ">
                                 <a href="./index.jsp">Home</a>
                             </li>
                             <li class="">
                                 <a href="./test.jsp">Test</a>
                             </li>
                         </ul>
+                        <form class="navbar-form pull-right">
+                            <input class="span2" type="text" placeholder="Email">
+                            <input class="span2" type="password" placeholder="Password">
+                            <button type="submit" class="btn">Log in</button>
+                        </form>
                     </div>
                 </div>
             </div>
