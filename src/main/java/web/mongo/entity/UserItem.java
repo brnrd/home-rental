@@ -1,6 +1,7 @@
 package web.mongo.entity;
 
 import java.io.Serializable;
+import web.model.Countries;
 
 /**
  *
@@ -12,6 +13,7 @@ public class UserItem implements Serializable {
     private String id;
     private String firstName;
     private String lastName;
+    private Countries country;
     private String email;
     private char[] password;
     private boolean isAdmin;
@@ -47,6 +49,10 @@ public class UserItem implements Serializable {
         this.lastName = lastName;
     }
 
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -71,6 +77,12 @@ public class UserItem implements Serializable {
         return lastName;
     }
 
+    public Countries getCountry() {
+        return country;
+    }
+    
+    
+
     public String getEmail() {
         return email;
     }
@@ -79,7 +91,7 @@ public class UserItem implements Serializable {
         return password;
     }
     
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
     // </editor-fold>

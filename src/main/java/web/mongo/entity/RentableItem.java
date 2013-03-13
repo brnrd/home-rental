@@ -14,10 +14,12 @@ public class RentableItem {
     private Countries country;
     private int postCode;
     private String address;
-    private UserItem owner;
+    private String owner;
+    private int price;
+    private int capacity;
     
     public RentableItem() {}
-    
+
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
@@ -39,8 +41,16 @@ public class RentableItem {
         return address;
     }
 
-    public UserItem getOwner() {
+    public String getOwner() {
         return owner;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
     
     public void setId(String id) {
@@ -63,9 +73,25 @@ public class RentableItem {
         this.address = address;
     }
 
-    public void setOwner(UserItem owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+    
     // </editor-fold>
     
+    @Override
+    public String toString() {
+        return "RentableItem [id=" + id + ", type=" + type + ", country="
+                + country + ", postCode=" + postCode + ", address=" + address
+                + ", owner=" + owner + ", price=" + price + ", capacity="
+                + capacity;
+    }
 }
