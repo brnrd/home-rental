@@ -1,24 +1,36 @@
 package web.mongo.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  *
  * @author monsieurblah
  */
-@Entity
-@Table(name = "UserItems")
+
 public class UserItem implements Serializable {
     
-    @Id
     private String id;
     private String firstName;
     private String lastName;
     private String email;
     private char[] password;
+    
+    public UserItem() {
+        
+    }
+    
+    public UserItem(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
+    public UserItem(String firstName, String lastName, String email, char[] password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public void setId(String id) {
