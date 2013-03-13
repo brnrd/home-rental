@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public class AbstractDao {
     

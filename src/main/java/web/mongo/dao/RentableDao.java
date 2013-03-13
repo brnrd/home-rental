@@ -4,7 +4,7 @@ import web.mongo.entity.RentableItem;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public interface RentableDao {
     

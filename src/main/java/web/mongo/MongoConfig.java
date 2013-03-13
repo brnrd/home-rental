@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 @Configuration
 public class MongoConfig {

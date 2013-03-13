@@ -5,7 +5,7 @@ import web.model.Types;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public class RentableItem {
     

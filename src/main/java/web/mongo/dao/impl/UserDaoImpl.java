@@ -6,7 +6,7 @@ import web.mongo.entity.UserItem;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public class UserDaoImpl extends AbstractDao implements UserDao {
 

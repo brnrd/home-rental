@@ -6,13 +6,14 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 import web.model.Countries;
 import web.model.Types;
 import web.mongo.MongoConfig;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public class TestApp {
 

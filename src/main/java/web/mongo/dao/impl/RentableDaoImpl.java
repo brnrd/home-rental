@@ -6,7 +6,7 @@ import web.mongo.entity.RentableItem;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 public class RentableDaoImpl extends AbstractDao implements RentableDao {
 

@@ -5,7 +5,7 @@ import web.model.Countries;
 
 /**
  *
- * @author monsieurblah
+ * @author Bernard <bernard.debecker@gmail.com>
  */
 
 public class UserItem implements Serializable {

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : test
+    Created on : Mar 10, 2013, 2:31:34 PM
+    Author     : Bernard <bernard.debecker@gmail.com>
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 

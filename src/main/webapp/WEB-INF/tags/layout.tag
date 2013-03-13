@@ -1,7 +1,7 @@
 <%-- 
     Document   : layout
     Created on : Mar 11, 2013, 10:43:11 AM
-    Author     : monsieurblah
+    Author     : Bernard <bernard.debecker@gmail.com>
 --%>
 
 <%@tag description="Basic template" pageEncoding="UTF-8"%>
