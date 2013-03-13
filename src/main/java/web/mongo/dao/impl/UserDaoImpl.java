@@ -11,14 +11,14 @@ import web.mongo.entity.UserItem;
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @Override
-    public UserItem selectByPk(String id) {
+    public UserItem selectById(String id) {
         return (UserItem)mongoTemplate.findById(id, UserItem.class);
     }
 
     @Override
-    public String insert(UserItem entity) {
-        mongoTemplate.insert(entity);
-        return entity.getId();
+    public String insert(UserItem userItem) {
+        mongoTemplate.insert(userItem);
+        return userItem.getId();
     }
 
 }

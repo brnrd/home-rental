@@ -14,6 +14,7 @@ public class UserItem implements Serializable {
     private String lastName;
     private String email;
     private char[] password;
+    private boolean isAdmin;
     
     public UserItem() {
         
@@ -25,11 +26,12 @@ public class UserItem implements Serializable {
         this.email = email;
     }
     
-    public UserItem(String firstName, String lastName, String email, char[] password) {
+    public UserItem(String firstName, String lastName, String email, char[] password, boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
@@ -52,6 +54,10 @@ public class UserItem implements Serializable {
     public void setPassword(char[] password) {
         this.password = password;
     }
+    
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     public String getId() {
         return id;
@@ -71,6 +77,10 @@ public class UserItem implements Serializable {
 
     public char[] getPassword() {
         return password;
+    }
+    
+    public boolean isAdmin() {
+        return isAdmin;
     }
     // </editor-fold>
     
