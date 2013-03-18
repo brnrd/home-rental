@@ -1,5 +1,6 @@
 package web.mongo.entity;
 
+import java.io.Serializable;
 import web.model.Countries;
 import web.model.Types;
 
@@ -7,7 +8,7 @@ import web.model.Types;
  *
  * @author Bernard <bernard.debecker@gmail.com>
  */
-public class RentableItem {
+public class RentableItem implements Serializable {
     
     private String id;
     private Types type;

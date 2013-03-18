@@ -52,7 +52,7 @@
                 <input type="text" class="input-block-level" placeholder="Country">
                 <input type="text" class="input-block-level" placeholder="Email address">
                 <input type="password" class="input-block-level" placeholder="Password">
-                <button class="btn btn-large btn-primary" type="submit">Register</button>
+                <button action ="" class="btn btn-large btn-primary" type="submit">Register</button>
             </form>
         </div> 
     </jsp:body>
