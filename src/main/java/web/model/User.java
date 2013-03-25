@@ -5,6 +5,7 @@ package web.model;
  */
 public class User {
 
+<<<<<<< HEAD
     private String id;
     private String name;
     private String fname;
@@ -16,6 +17,15 @@ public class User {
     public User() {
     }
 
+=======
+    UUID id;
+    String name;
+    String fname;
+    String address;
+    String email;
+    String phone;
+    
+>>>>>>> dev-bernard
     public String getId() {
         return id.toString();
     }
