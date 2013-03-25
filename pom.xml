@@ -2,17 +2,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com</groupId>
+    <groupId>web</groupId>
     <artifactId>home-rental</artifactId>
+    <inceptionYear>2013</inceptionYear>
     <version>0.1.0</version>
     <packaging>war</packaging>
 
     <name>home-rental</name>
 
     <properties>
+        <releaseCandidate>1</releaseCandidate>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>3.2.1.RELEASE</spring.version>  
+        <java.version>1.7</java.version>  
+        <jackson.mapper.version>1.9.10</jackson.mapper.version>  
+        <commons.logging.version>1.1.1</commons.logging.version>
     </properties>
     
     <repositories>
@@ -45,6 +52,12 @@
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
         </dependency>
         
         <!-- Spring -->
