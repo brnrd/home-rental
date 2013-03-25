@@ -8,7 +8,7 @@ import web.mongo.entity.RentableItem;
  */
 public interface RentableDao {
     
-    RentableItem selectById(String id);
-    String insert(RentableItem rentableItem);
+    RentableItem selectById(String id) throws Exception;
+    String insert(RentableItem rentableItem) throws Exception;
     
 }

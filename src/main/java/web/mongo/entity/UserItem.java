@@ -18,9 +18,7 @@ public class UserItem implements Serializable {
     private char[] password;
     private boolean isAdmin;
     
-    public UserItem() {
-        
-    }
+    public UserItem() {}
     
     public UserItem(String firstName, String lastName, String email) {
         this.firstName = firstName;
