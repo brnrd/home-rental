@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 //import web.model.Types;
 import web.mongo.dao.RentableDao;
 import web.mongo.dao.UserDao;
-import web.mongo.dao.impl.UserDaoImpl;
 
 /**
  *
@@ -21,7 +20,8 @@ public class TestApp {
 
     private static final Log log = LogFactory.getLog(TestApp.class);
     
-    private static UserDao userDao = new UserDaoImpl();
+    
+    private static UserDao userDao;
     private static RentableDao rentableDao;
     
     public static void main(String[] args) throws Exception {
