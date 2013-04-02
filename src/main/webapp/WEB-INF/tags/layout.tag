@@ -4,6 +4,7 @@
     Author     : Bernard <bernard.debecker@gmail.com>
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@tag description="Basic template" pageEncoding="UTF-8"%>
 
 <%-- The list of normal or fragment attributes can be specified here: --%>
@@ -33,34 +34,59 @@
                     <a class="brand" href="./index.jsp">Home Rental Project</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class=" ">
+                            <c:choose>
+                                <c:when test="${param.isHome == true}" >
+                                    <li class="active">
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li class="">
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <a href="./index.jsp">Home</a>
                             </li>
-                            <li class="">
+                            <c:choose>
+                                <c:when test="${param.isTest == true}" >
+                                    <li class="active">
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li class="">
+                                    </c:otherwise>
+                                </c:choose>
                                 <a href="./test.jsp">Test</a>
                             </li>
-                        </ul>
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Log in</button>
-                        </form>
-                    </div>
+                            <c:choose>
+                                <c:when test="${param.isRegister == true}" >
+                                    <li class="active">
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li class="">
+                                    </c:otherwise>
+                                </c:choose>
+                            <a href="./register.jsp">Register</a>
+                    </ul>
+                    <!--Add if logged then just display the username with maybe a user menu-->
+                    <form class="navbar-form pull-right">
+                        <input class="span2" type="text" placeholder="Email">
+                        <input class="span2" type="password" placeholder="Password">
+                        <button type="submit" class="btn">Log in</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <header class="jumbotron subhead">
-                <div class="span6"></div>
-            </header>
-            <div class="row">
-                <div class="span6">
-                    <br>
-                    <br>
-                    <br>
-                    <jsp:doBody/>
-                </div>
+    </div>
+    <div class="container">
+        <header class="jumbotron subhead">
+            <div class="span6"></div>
+        </header>
+        <div class="row">
+            <div class="span6">
+                <br>
+                <br>
+                <br>
+                <jsp:doBody/>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -85,7 +85,6 @@ public class RentableItem implements Serializable {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-    
     // </editor-fold>
     
     @Override

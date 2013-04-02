@@ -8,7 +8,7 @@ import web.mongo.entity.UserItem;
  */
 public interface UserDao {
     
-    UserItem selectById(String id);
-    String insert(UserItem userItem);
+    UserItem selectById(String id) throws Exception;
+    String insert(UserItem userItem) throws Exception;
 
 }
