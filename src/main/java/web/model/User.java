@@ -1,64 +1,89 @@
 package web.model;
 
-import java.util.UUID;
+import java.util.Calendar;
+
 
 /**
- * @author Romain <ro.foncier@gmail.com>
+ * @author Romain <ro.foncier@gmail.com>, Bernard <bernard.debecker@gmail.com>
  */
 public class User {
 
-    UUID id;
-    String name;
-    String fname;
-    String address;
-    String email;
-    String phone;
-
-    public String getId() {
-        return id.toString();
+    private String id;
+    private String username;
+    private String name;
+    private String firstname;
+    private String email;
+    private String password;
+    private Calendar created;
+    private Boolean staff;
+    
+    public User() {
+        
     }
 
-    private void setID() {
-        id = UUID.randomUUID();
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String newName) {
-        name = newName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFName() {
-        return fname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFName(String newFName) {
-        fname = newFName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String newAddress) {
-        address = newAddress;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String newEmail) {
-        email = newEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhone(String newPhone) {
-        phone = newPhone;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public Calendar getCreated() {
+        return created;
+    }
+
+    public void setCreated(Calendar created) {
+        this.created = created;
+    }
+
+    public Boolean isStaff() {
+        return staff;
+    }
+
+    public void setStaff(Boolean staff) {
+        this.staff = staff;
+    }
+    
+    
 }
