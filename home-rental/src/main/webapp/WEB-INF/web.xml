@@ -6,9 +6,11 @@
          id="WebApp_ID"  
          version="2.5">  
     <display-name>Rental Project</display-name>
+    
+    <!-- Context Param -->
     <context-param>
-        <context-name>ContextConfig</context-name>
-        <context-value>WEB-INF/config/rest-services-config.xml</context-value>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     
     <!-- Spring config listener -->
@@ -16,21 +18,28 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
-    <!-- Spring dispatcher servlet for REST services -->
+    <!-- Spring dispatcher servlet -->
     <servlet>  
-        <servlet-name>restservices</servlet-name>  
+        <servlet-name>dispatcher</servlet-name>  
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
-        <init-param>  
-            <param-name>ContextConfig</param-name>  
-            <param-value></param-value>  
-        </init-param>  
         <load-on-startup>1</load-on-startup>  
     </servlet>
        
     <!-- This Servlet mapping means that this Servlet will handle all incoming requests -->  
     <servlet-mapping>  
-        <servlet-name>restservices</servlet-name>  
+        <servlet-name>dispatcher</servlet-name>  
         <url-pattern>/</url-pattern>  
     </servlet-mapping>
     
-    <web-app>
+    <!-- Config session -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    
+    <!-- Welcome File -->
+    <!--
+    <welcome-file-list>
+        <welcome-file>redirect.jsp</welcome-file>
+    </welcome-file-list>-->
+    
+</web-app>
