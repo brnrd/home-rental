@@ -15,6 +15,9 @@ Holiday Cottages/Homes/Flats Rental Website
 + Hibernate
 + HTML (jsp, jstl tags), CSS, JS
 
++ [Less Css][13]
++ [CoffeeScript][14]
+
 #### To read ####
 
 + [Inversion of Control][1] (For more informations, read [this][4])
@@ -36,3 +39,5 @@ Holiday Cottages/Homes/Flats Rental Website
 [10]: http://www.tutorialspoint.com/spring/spring_overview.htm
 [11]: http://www.dzone.com/tutorials/java/spring/spring-hibernate-integration-1.html
 [12]: http://www.mkyong.com/spring/maven-spring-hibernate-mysql-example/
+[13]: https://github.com/marceloverdijk/lesscss-maven-plugin
+[14]: https://github.com/iron9light/coffeescript-maven-plugin

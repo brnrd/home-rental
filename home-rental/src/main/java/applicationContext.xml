@@ -14,8 +14,10 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
        
+    <context:component-scan base-package="web.controller"/>
     <context:component-scan base-package="web.model"/>
     <context:component-scan base-package="web.mongo.dao"/>
+    <mvc:annotation-driven />
     
     <!-- Configuration with MySQL -->
     <!--
