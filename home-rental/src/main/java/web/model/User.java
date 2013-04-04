@@ -1,13 +1,12 @@
-package web.mongo.entity;
+package web.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
+
 /**
- * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER
- * <ro.foncier@gmail.com>
+ * @author Romain <ro.foncier@gmail.com>, Bernard <bernard.debecker@gmail.com>
  */
-public class UserItem implements Serializable {
+public class User {
 
     private String id;
     private String username;
@@ -17,25 +16,11 @@ public class UserItem implements Serializable {
     private String password;
     private Calendar created;
     private Boolean staff;
-
-    public UserItem() {
+    
+    public User() {
+        
     }
 
-    public UserItem(String firstName, String lastName, String email) {
-        this.firstname = firstName;
-        this.name = lastName;
-        this.email = email;
-    }
-
-    public UserItem(String firstName, String lastName, String email, char[] password, boolean isStaff) {
-        this.firstname = firstName;
-        this.name = lastName;
-        this.email = email;
-        this.password = new String(password); // Hash or Spring authentification
-        this.staff = isStaff;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -98,17 +83,5 @@ public class UserItem implements Serializable {
 
     public void setStaff(Boolean staff) {
         this.staff = staff;
-    }
-    // </editor-fold>
-
-    /**
-     * toString method with omitted password
-     *
-     * @return a String with the UserItem info
-     */
-    @Override
-    public String toString() {
-        return "UserItem [id=" + id + ", username=" + username + ", name =" + name + ", firstname"
-                + "=" + firstname + ", email=" + email + ", created=" + created;
     }
 }

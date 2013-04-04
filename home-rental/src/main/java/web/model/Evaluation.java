@@ -1,10 +1,9 @@
 package web.model;
 
 /**
- *
  * @author Bernard <bernard.debecker@gmail.com>
  */
-class Evaluation {
+public class Evaluation {
     
     private String id;
     private String property;
