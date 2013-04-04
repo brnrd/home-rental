@@ -17,7 +17,7 @@ Holiday Cottages/Homes/Flats Rental Website
 
 + [Less Css][13]
 + [CoffeeScript][14]
-
++ [thymeleaf][15] - Template framework
 #### To read ####
 
 + [Inversion of Control][1] (For more informations, read [this][4])
@@ -41,3 +41,4 @@ Holiday Cottages/Homes/Flats Rental Website
 [12]: http://www.mkyong.com/spring/maven-spring-hibernate-mysql-example/
 [13]: https://github.com/marceloverdijk/lesscss-maven-plugin
 [14]: https://github.com/iron9light/coffeescript-maven-plugin
+[15]: http://www.thymeleaf.org/documentation.html

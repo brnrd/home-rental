@@ -14,11 +14,36 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <mvc:annotation-driven />
     <context:component-scan base-package="control"/>
         
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/templates/"
-          p:suffix=".jsp" />
+    <!--
+<bean id="viewResolver"
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+    p:prefix="/WEB-INF/templates/"
+    p:suffix=".jsp" />-->
       
+    
+    <mvc:resources location="/WEB-INF/media/img/" mapping="/img/**" />
+    <mvc:resources location="/WEB-INF/media/css/" mapping="/css/**" />
+    <mvc:resources location="/WEB-INF/media/js/" mapping="/js/**" />
+
+    <bean id="templateResolver"
+        class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <!-- Template cache is true by default. Set to false if you want -->
+        <!-- templates to be automatically updated when modified.        -->
+        <property name="cacheable" value="true" />
+    </bean>
+    
+    <bean id="templateEngine"
+        class="org.thymeleaf.spring3.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+   
+    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>
 </beans>
