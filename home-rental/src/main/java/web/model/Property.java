@@ -14,6 +14,7 @@ public class Property {
     private Calendar modified;
     private String shortDesc;
     private String longDesc;
+    private Integer price;
     private Type type;
     private Integer rooms;
     private String country;
@@ -74,6 +75,14 @@ public class Property {
 
     public void setLongDesc(String longDesc) {
         this.longDesc = longDesc;
+    }
+    
+    public Integer getPrice() {
+        return this.price;
+    }
+    
+    public void setPrice(Integer newPrice) {
+        this.price = newPrice;
     }
 
     public Type getType() {
