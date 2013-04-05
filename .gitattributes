@@ -1,0 +1,2 @@
+*.ai -crlf -diff
+*.bmml -crlf -diff
