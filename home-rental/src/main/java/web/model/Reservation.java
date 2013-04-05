@@ -22,7 +22,8 @@ public class Reservation {
     public Reservation() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -102,5 +103,5 @@ public class Reservation {
     public void setNote(Integer note) {
         this.note = note;
     }
-    
+    // </editor-fold>
 }

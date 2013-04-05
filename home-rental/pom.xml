@@ -97,7 +97,7 @@
             <artifactId>spring-data-rest-webmvc</artifactId>
             <version>1.0.0.RC3</version>
         </dependency>
-        
+       
         <!-- JSTL -->
         <dependency>
             <groupId>jstl</groupId>

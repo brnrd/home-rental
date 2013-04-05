@@ -14,7 +14,8 @@ public class Evaluation {
     public Evaluation() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -54,5 +55,5 @@ public class Evaluation {
     public void setQaPrice(Integer qaPrice) {
         this.qaPrice = qaPrice;
     }
-    
+    // </editor-fold>
 }

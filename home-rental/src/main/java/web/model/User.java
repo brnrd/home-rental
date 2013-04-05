@@ -20,7 +20,8 @@ public class User {
     public User() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -84,4 +85,5 @@ public class User {
     public void setStaff(Boolean staff) {
         this.staff = staff;
     }
+    // </editor-fold>
 }
