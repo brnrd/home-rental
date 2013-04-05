@@ -18,6 +18,7 @@ public interface IUserDao {
             String password, Calendar created, Boolean staff);
     
     List<User> getByUsername(String username);
+    List<User> getByUsernameWithPassword(String username);
     List<User> getById(String id);
     
     List<User> selectAll();
