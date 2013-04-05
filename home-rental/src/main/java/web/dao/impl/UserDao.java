@@ -35,7 +35,15 @@ public class UserDao implements IUserDao {
     public List<User> getByUsername(String username) {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, name, firstname, email, "
-                + "password, created, staff from user where username = ?", 
+                + " created, staff from user where username = ?", 
+                new Object[] {username}, new UserMapper());
+    }
+    
+     @Override
+    public List<User> getByUsernameWithPassword(String username) {
+        JdbcTemplate select = new JdbcTemplate(dataSource);
+        return select.query("select id, username, password, "
+                + " staff from user where username = ?", 
                 new Object[] {username}, new UserMapper());
     }
 
@@ -43,7 +51,7 @@ public class UserDao implements IUserDao {
     public List<User> getById(String id) {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, name, firstname, email, "
-                + "password, created, staff from user where id = ?", 
+                + " created, staff from user where id = ?", 
                 new Object[] {id}, new UserMapper());
     }
 
