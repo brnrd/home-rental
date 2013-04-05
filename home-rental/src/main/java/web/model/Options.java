@@ -16,7 +16,8 @@ public class Options {
     public Options() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -41,7 +42,7 @@ public class Options {
         this.parking = parking;
     }
 
-    public Boolean isSwimmingPool() {
+    public Boolean hazSwimmingPool() {
         return swimmingPool;
     }
 
@@ -49,7 +50,7 @@ public class Options {
         this.swimmingPool = swimmingPool;
     }
 
-    public Boolean isWifi() {
+    public Boolean hazWifi() {
         return wifi;
     }
 
@@ -57,12 +58,12 @@ public class Options {
         this.wifi = wifi;
     }
 
-    public Boolean isLaundry() {
+    public Boolean hazLaundry() {
         return laundry;
     }
 
     public void setLaundry(Boolean laundry) {
         this.laundry = laundry;
     }
-    
+    // </editor-fold>
 }

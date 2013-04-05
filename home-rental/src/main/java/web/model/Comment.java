@@ -18,7 +18,8 @@ public class Comment {
     public Comment() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -66,5 +67,5 @@ public class Comment {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+    // </editor-fold>
 }

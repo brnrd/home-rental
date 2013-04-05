@@ -28,7 +28,8 @@ public class Property {
     public Property() {
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
     }
@@ -156,5 +157,5 @@ public class Property {
     public void setRentPeriodStop(Calendar rentPeriodStop) {
         this.rentPeriodStop = rentPeriodStop;
     }
-    
+    // </editor-fold>
 }
