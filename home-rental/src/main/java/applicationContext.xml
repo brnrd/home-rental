@@ -22,7 +22,7 @@
     <!--     Configuration with MySQL -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://mysql1.alwaysdata.com/airboy_hr_db"/>
+        <property name="url" value="jdbc:mysql://mysql1.alwaysdata.com:3306/airboy_hr_db"/>
         <property name="username" value="airboy_hrp"/>
         <property name="password" value="gould1in8"/>
     </bean>
