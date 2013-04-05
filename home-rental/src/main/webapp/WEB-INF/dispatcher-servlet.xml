@@ -14,16 +14,8 @@
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <context:component-scan base-package="web.controller"/>
-    <context:component-scan base-package="web.model"/>
     <mvc:annotation-driven />
-        
-    <!--
-<bean id="viewResolver"
-    class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-    p:prefix="/WEB-INF/templates/"
-    p:suffix=".jsp" />-->
-      
-    
+ 
     <mvc:resources location="/WEB-INF/media/img/" mapping="/img/**" />
     <mvc:resources location="/WEB-INF/media/css/" mapping="/css/**" />
     <mvc:resources location="/WEB-INF/media/js/" mapping="/js/**" />

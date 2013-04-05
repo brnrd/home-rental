@@ -2,7 +2,7 @@ package web.dao;
 
 import java.util.Calendar;
 import java.util.List;
-import sun.jdbc.odbc.ee.DataSource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import web.model.User;
 
 
@@ -12,13 +12,14 @@ import web.model.User;
  */
 public interface IUserDao {
     
-    void setDataSource(DataSource ds);
+    void setDataSource(DriverManagerDataSource ds);
     
     void create(String username, String name, String firstName, String email, 
             String password, Calendar created, Boolean staff);
     
     List<User> getByUsername(String username);
     List<User> getById(String id);
+    List<User> getByUsernameWithPassword(String username);
     
     List<User> selectAll();
     

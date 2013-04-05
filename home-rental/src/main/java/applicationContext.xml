@@ -16,16 +16,15 @@
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
     
     
-    <context:annotation-config />
-    <context:component-scan base-package="web.controller" />
-    <mvc:annotation-driven />
+    <context:component-scan base-package="web.dao" />
+    <context:component-scan base-package="web.model" />
  
     <!--     Configuration with MySQL -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/home_rental_db"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="url" value="jdbc:mysql://mysql1.alwaysdata.com/airboy_hr_db"/>
+        <property name="username" value="airboy_hrp"/>
+        <property name="password" value="gould1in8"/>
     </bean>
     
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">

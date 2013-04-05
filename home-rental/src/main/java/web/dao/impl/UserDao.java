@@ -3,7 +3,7 @@ package web.dao.impl;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sun.jdbc.odbc.ee.DataSource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import web.dao.IUserDao;
 import web.dao.mapper.UserMapper;
 import web.model.User;
@@ -14,10 +14,10 @@ import web.model.User;
  */
 public class UserDao implements IUserDao {
     
-    private DataSource dataSource;
+    private DriverManagerDataSource dataSource;
 
     @Override
-    public void setDataSource(DataSource ds) {
+    public void setDataSource(DriverManagerDataSource ds) {
         this.dataSource = ds;
     }
 
