@@ -14,12 +14,12 @@
         <releaseCandidate>1</releaseCandidate>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>3.2.1.RELEASE</spring.version>  
         <java.version>1.7</java.version>  
         <jackson.mapper.version>1.9.10</jackson.mapper.version>  
         <commons.logging.version>1.1.1</commons.logging.version>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
     </properties>
     
     <repositories>
