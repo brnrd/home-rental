@@ -37,10 +37,9 @@
     </session-config>
     
     <!-- Welcome File -->
-    <!--
     <welcome-file-list>
-        <welcome-file>redirect.jsp</welcome-file>
-    </welcome-file-list>-->
+        <welcome-file>base.html</welcome-file>
+    </welcome-file-list>
     
     <!-- Filter for Spring Security -->
     <filter>
