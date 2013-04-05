@@ -18,6 +18,11 @@ Holiday Cottages/Homes/Flats Rental Website
 + [Less Css][13]
 + [CoffeeScript][14]
 + [thymeleaf][15] - Template framework
+
+### Database Access ###
+
+Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
+
 #### To read ####
 
 + [Inversion of Control][1] (For more informations, read [this][4])
