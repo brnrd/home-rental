@@ -6,6 +6,5 @@ package web.model;
  */
 public enum Type {
     
-    FLAT, HOUSE, LOFT;
-    
+    FLAT, HOUSE, LOFT;   
 }

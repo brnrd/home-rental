@@ -1,22 +1,53 @@
 package web.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.*;
 
 /**
- *
- * @author Bernard <bernard.debecker@gmail.com>
+ * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
  */
-public class Reservation {
+
+@Entity
+@Table(name = "reservation")
+public class Reservation implements Serializable {
     
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "reservation_id")
+    private Long id;
+    
+    @Column(name = "target_user", length = 36)
+    @OneToOne(mappedBy = "target_user", cascade = CascadeType.ALL)
     private String user;
-    private String property;
+    
+    @Column(name = "target_property")
+    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
+    private Integer property;
+    
+    @Column(name = "rent_start")
+    @Temporal(TemporalType.DATE)
     private Calendar rentStart;
+    
+    @Column(name = "rent_stop")
+    @Temporal(TemporalType.DATE)
     private Calendar rentStop;
+    
+    @Column(name="hosts")
     private Integer hosts;
+    
+    @Column(name="price")
     private Integer price;
+    
+    @Transient
+    @Column(name="evaluated", columnDefinition="boolean default false")
     private Boolean evaluated;
+    
+    @Transient
+    @Column(name="commented", columnDefinition="boolean default false")
     private Boolean commented;
+    
+    @Column(name="note", nullable=true)
     private Integer note;
     
     public Reservation() {
@@ -24,12 +55,8 @@ public class Reservation {
     }
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public String getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUser() {
@@ -40,11 +67,11 @@ public class Reservation {
         this.user = user;
     }
 
-    public String getProperty() {
+    public Integer getProperty() {
         return property;
     }
 
-    public void setProperty(String property) {
+    public void setProperty(Integer property) {
         this.property = property;
     }
 

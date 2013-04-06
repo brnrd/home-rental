@@ -1,36 +1,53 @@
 package web.model;
 
-/**
- *
- * @author Bernard <bernard.debecker@gmail.com>
- */
-public class Options {
+import java.io.Serializable;
+import javax.persistence.*;
 
-    private String id;
-    private String property;
+/**
+ * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
+ */
+
+@Entity
+@Table(name = "property_options")
+public class Options implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "property_options_id")
+    private Long id;
+    
+    @Column(name = "target_property")
+    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
+    private Integer property;
+    
+    @Transient
+    @Column(name="parking")
     private Boolean parking;
+    
+    @Transient
+    @Column(name="swimming_pool")
     private Boolean swimmingPool;
+    
+    @Transient
+    @Column(name="wifi")
     private Boolean wifi;
+    
+    @Transient
+    @Column(name="laundry")
     private Boolean laundry;
     
-    public Options() {
-        
-    }
+    public Options() {}
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProperty() {
+    public Integer getProperty() {
         return property;
     }
 
-    public void setProperty(String property) {
+    public void setProperty(Integer property) {
         this.property = property;
     }
 

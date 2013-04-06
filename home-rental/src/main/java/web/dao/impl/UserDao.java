@@ -26,7 +26,7 @@ public class UserDao implements IUserDao {
     String email, String password, Calendar created, Boolean staff) {
         JdbcTemplate insert = new JdbcTemplate(dataSource);
         insert.update("insert into user (username, name, firstname, email, "
-                + "password, created, staff) values (?,?,?,?,?,?,?)", 
+                + "password, created, is_staff) values (?,?,?,?,?,?,?)", 
                 new Object[] {username, name, firstName, email, password, 
                     created, staff});
     }
@@ -35,7 +35,7 @@ public class UserDao implements IUserDao {
     public List<User> getByUsername(String username) {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, name, firstname, email, "
-                + " created, staff from user where username = ?", 
+                + " created, is_staff from user where username = ?", 
                 new Object[] {username}, new UserMapper());
     }
     
@@ -43,7 +43,7 @@ public class UserDao implements IUserDao {
     public List<User> getByUsernameWithPassword(String username) {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, password, "
-                + " staff from user where username = ?", 
+                + " is_staff from user where username = ?", 
                 new Object[] {username}, new UserMapper());
     }
 
@@ -51,7 +51,7 @@ public class UserDao implements IUserDao {
     public List<User> getById(String id) {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, name, firstname, email, "
-                + " created, staff from user where id = ?", 
+                + " created, is_staff from user where id = ?", 
                 new Object[] {id}, new UserMapper());
     }
 
@@ -59,7 +59,7 @@ public class UserDao implements IUserDao {
     public List<User> selectAll() {
         JdbcTemplate select = new JdbcTemplate(dataSource);
         return select.query("select id, username, name, firstname, email, "
-                + "password, created, staff from user", new UserMapper());
+                + "password, created, is_staff from user", new UserMapper());
     }
 
     @Override

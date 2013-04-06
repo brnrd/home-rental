@@ -1,33 +1,52 @@
 package web.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
-
+import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author Romain <ro.foncier@gmail.com>, Bernard <bernard.debecker@gmail.com>
  */
-public class User {
 
+@Entity
+@Table(name="user")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "user_id", unique = true)
     private String id;
+    
+    @Column(name="username", length=30)
     private String username;
+    
+    @Column(name="name", length=30)
     private String name;
+    
+    @Column(name="firstname", length=30)
     private String firstname;
+    
+    @Column(name="email", length=100)
     private String email;
+    
+    @Column(name="password", length=40)
     private String password;
+    
+    @Column(name = "created", insertable = true, updatable = false, nullable=false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar created;
+    
+    @Transient
+    @Column(name="is_staff")
     private Boolean staff;
     
-    public User() {
-        
-    }
+    public User() {}
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUsername() {
