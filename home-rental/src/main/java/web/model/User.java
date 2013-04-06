@@ -44,6 +44,16 @@ public class User implements Serializable {
     
     public User() {}
     
+    public User(String username, String name, String firstname, String email, 
+            String password, Boolean staff) {
+        this.username = username;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+        this.staff = staff;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
     public String getId() {
         return id;
