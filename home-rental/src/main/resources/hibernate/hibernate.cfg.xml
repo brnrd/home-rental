@@ -6,7 +6,12 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         
-        <mapping class="web.model.*"/>
+        <mapping class="web.model.User"/>
+        <mapping class="web.model.Property"/>
+        <mapping class="web.model.Reservation"/>
+        <mapping class="web.model.Comment"/>
+        <mapping class="web.model.Evaluation"/>
+        <mapping class="web.model.Options"/>
         
     </session-factory>
 </hibernate-configuration>

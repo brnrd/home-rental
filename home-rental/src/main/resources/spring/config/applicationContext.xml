@@ -19,20 +19,11 @@
     <context:component-scan base-package="web.dao" />
     <context:component-scan base-package="web.model" />
  
-    <!--     Configuration with MySQL -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://mysql1.alwaysdata.com:3306/airboy_hr_db"/>
-        <property name="username" value="airboy_hrp"/>
-        <property name="password" value="gould1in8"/>
-    </bean>
-    
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    <!-- Database Configuration -->
+	<import resource="../database/dbSource.xml"/>
+	<import resource="../../hibernate/hibernate.xml"/>
+ 
+	<!-- Beans Declaration -->
+	<import resource="../beans/user.xml"/>
+       
 </beans>

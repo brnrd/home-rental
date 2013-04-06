@@ -71,7 +71,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public User findByEmail(String email) {
         User user = null;
-        user = (User) hibernateTemplate.find("FROM user WHERE email="+email).get(0);
+        user = (User) hibernateTemplate.find("FROM user WHERE email=?"+email).get(0);
         return user;
     }
 
