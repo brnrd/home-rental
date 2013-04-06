@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -14,16 +13,9 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <context:component-scan base-package="web.controller"/>
     <mvc:annotation-driven />
-    <context:component-scan base-package="control"/>
-        
-    <!--
-<bean id="viewResolver"
-    class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-    p:prefix="/WEB-INF/templates/"
-    p:suffix=".jsp" />-->
-      
-    
+ 
     <mvc:resources location="/WEB-INF/media/img/" mapping="/img/**" />
     <mvc:resources location="/WEB-INF/media/css/" mapping="/css/**" />
     <mvc:resources location="/WEB-INF/media/js/" mapping="/js/**" />

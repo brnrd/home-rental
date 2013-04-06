@@ -1,41 +1,77 @@
 package web.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.*;
 
 /**
- *
- * @author Bernard <bernard.debecker@gmail.com>
+ * @author Bernard <bernard.debecker@gmail.com>,
+ * @author Romain <ro.foncier@gmail.com>
  */
-public class Property {
-    
-    private String id;
-    private String owner;
-    private Calendar added;
-    private Calendar modified;
-    private String shortDesc;
-    private String longDesc;
-    private Integer price;
-    private Type type;
-    private Integer rooms;
-    private String country;
-    private String city;
-    private String address;
-    private String coordinates;
-    private Evaluation note;
-    private Calendar rentPeriodStart;
-    private Calendar rentPeriodStop;
-    
-    public Property() {
-        
-    }
-    
-    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public String getId() {
-        return id;
-    }
+@Entity
+@Table(name = "property")
+public class Property implements Serializable {
 
-    public void setId(String id) {
-        this.id = id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "property_id")
+    private Long id;
+    
+    @Column(name = "owner", length = 36)
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
+    private String owner;
+    
+    @Column(name = "added", insertable = true, updatable = false, nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar added;
+    
+    @Column(name = "modified", insertable = true, updatable = true, nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar modified;
+    
+    @Column(name = "short_desc", length = 255)
+    private String shortDesc;
+    
+    @Column(name = "long_desc", columnDefinition = "Text")
+    private String longDesc;
+    
+    @Column(name = "price")
+    private Integer price;
+    
+    @Column(name = "type")
+    private Type type;
+    
+    @Column(name = "rooms")
+    private Integer rooms;
+    
+    @Column(name = "country", length = 45)
+    private String country;
+    
+    @Column(name = "city", length = 45)
+    private String city;
+    
+    @Column(name = "address", length = 255)
+    private String address;
+    
+    @Column(name = "coordinates", length = 45, nullable = true)
+    private String coordinates;
+    
+    @Column(name = "note", nullable = true)
+    private Integer note;
+    
+    @Column(name = "rent_period_start")
+    @Temporal(TemporalType.DATE)
+    private Calendar rentPeriodStart;
+    
+    @Column(name = "rent_period_stop")
+    @Temporal(TemporalType.DATE)
+    private Calendar rentPeriodStop;
+
+    public Property() {}
+
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
+    public Long getId() {
+        return id;
     }
 
     public String getOwner() {
@@ -77,11 +113,11 @@ public class Property {
     public void setLongDesc(String longDesc) {
         this.longDesc = longDesc;
     }
-    
+
     public Integer getPrice() {
         return this.price;
     }
-    
+
     public void setPrice(Integer newPrice) {
         this.price = newPrice;
     }
@@ -134,11 +170,11 @@ public class Property {
         this.coordinates = coordinates;
     }
 
-    public Evaluation getNote() {
+    public Integer getNote() {
         return note;
     }
 
-    public void setNote(Evaluation note) {
+    public void setNote(Integer note) {
         this.note = note;
     }
 
