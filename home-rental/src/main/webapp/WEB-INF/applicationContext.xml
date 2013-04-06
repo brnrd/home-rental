@@ -25,5 +25,10 @@
  
 	<!-- Beans Declaration -->
 	<import resource="../beans/user.xml"/>
+        
+    <!-- User Data Access Object -->
+    <bean id="userDao" class="web.dao.impl.UserDaoImp" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
        
 </beans>

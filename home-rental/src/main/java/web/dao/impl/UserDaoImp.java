@@ -70,14 +70,14 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-        User user = null;
+        User user;
         user = (User) hibernateTemplate.find("FROM user WHERE email=?"+email).get(0);
         return user;
     }
 
     @Override
     public User findById(String user_id) {
-        User user = null;
+        User user;
         user = (User) hibernateTemplate.get(User.class, user_id);
         return user;
     }
