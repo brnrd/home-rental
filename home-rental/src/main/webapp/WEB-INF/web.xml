@@ -10,7 +10,7 @@
     <!-- Context Param -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>resources/spring/config/applicationContext.xml WEB-INF/security.xml</param-value>
+        <param-value>classpath*:applicationContext.xml WEB-INF/security.xml</param-value>
     </context-param>
     
     <!-- Spring config listener -->
