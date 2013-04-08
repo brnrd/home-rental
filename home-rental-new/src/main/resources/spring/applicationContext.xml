@@ -14,17 +14,41 @@
 
     <mvc:annotation-driven />
     
-    <mvc:resources location="webapp/WEB-INF/media/img/" mapping="/img/**" /> 
-    <mvc:resources location="webapp/WEB-INF/media/css/" mapping="/css/**" />
-    <mvc:resources location="webapp/WEB-INF/media/js/" mapping="/js/**" />
+    <mvc:resources location="/WEB-INF/media/img/" mapping="/img/**" /> 
+    <mvc:resources location="/WEB-INF/media/css/" mapping="/css/**" />
+    <mvc:resources location="/WEB-INF/media/js/" mapping="/js/**" />
 
     <mvc:view-controller path="/login" view-name="login" />
 
     <mvc:view-controller path="/protected" view-name="protected" />
 
+    <!--
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
-        <property name="suffix" value=".html" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    -->
+    
+    <!-- ThymeLeaf config -->
+    <bean id="httpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+    </bean>
+        
+    <bean id="templateResolver"	class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" /> 
+        <property name="suffix" value=".html" /> 
+        <property name="templateMode" value="HTML5" /> 
+        <property name="cacheable" value="false"/>
     </bean>
 
+    <bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine"> 
+        <property name="templateResolver" ref="templateResolver" /> 
+    </bean>
+
+
+    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver"> 
+        <property name="templateEngine" ref="templateEngine" /> 
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+        
 </beans>
