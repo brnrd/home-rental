@@ -3,10 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Home Rental - "#{data.page_title}"</title>
+        <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
     </head>
     <body>
         <div>
-            <p>TODO write content</p>
+            <p class="red">${user.id}</p>
+            <p>${user.name}</p>
+            <p>${user.email}</p>
         </div>
     </body>
 </html>

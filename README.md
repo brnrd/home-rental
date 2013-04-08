@@ -15,7 +15,7 @@ Holiday Cottages/Homes/Flats Rental Website
 + Hibernate
 + HTML (jsp, jstl tags), CSS, JS
 
-+ [Less Css][13]
++ [Less Css][13] - Find here a [plugin](http://plugins.netbeans.org/plugin/32782/lesscss-module) for Netbeans ! ;-)
 + [CoffeeScript][14]
 + [thymeleaf][15] - Template framework
 
