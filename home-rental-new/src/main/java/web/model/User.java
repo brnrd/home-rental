@@ -35,7 +35,7 @@ public class User implements Serializable {
     @Transient
     @Column(name = "is_staff")
     private Boolean staff;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Property.class)
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Property.class)
     //@JoinTable(name = "user_properties", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "owner") })
     private Set<Property> listProperty = new HashSet<Property>(0);
 

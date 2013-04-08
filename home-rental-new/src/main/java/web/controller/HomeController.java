@@ -28,7 +28,7 @@ public class HomeController {
         model.addAttribute("user", user);
         
         // Get Property
-        Property prop = propertyService.findById(1);
+        Property prop = propertyService.findAll().get(0);
         model.addAttribute("property", prop);
         return "base";
     }
