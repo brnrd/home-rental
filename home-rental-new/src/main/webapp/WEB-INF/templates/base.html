@@ -7,9 +7,18 @@
     </head>
     <body>
         <div>
-            <p class="red">${user.id}</p>
-            <p>${user.name}</p>
-            <p>${user.email}</p>
+            <h3>User :</h3>
+            <p class="red" th:text="${user.id}"></p>
+            <p th:text="${user.name}"></p>
+            <p th:text="${user.email}"></p>
+            <h3>Property :</h3>
+            <p class="green" th:text="${property.id}">property_id</p>
+            <p th:text="${property.title}"></p>
+            <p th:text="${property.owner.name}"></p>
+            <p th:text="${property.shortDesc}"></p>
+            <p th:text="${property.longDesc}"></p>
+            <p class="red" th:text="${property.price}"></p>
+            <p th:text="${property.city}"></p>
         </div>
     </body>
 </html>

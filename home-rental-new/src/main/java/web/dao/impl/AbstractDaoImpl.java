@@ -51,7 +51,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     }
     
     @Override
-    public List<E> selectAll(I table) {
+    public List<E> selectAll(String table) {
         return sessionFactory.getCurrentSession().createQuery("from "+table).list();
     }
 }
