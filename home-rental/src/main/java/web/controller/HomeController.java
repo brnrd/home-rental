@@ -1,4 +1,4 @@
-package controller;
+package web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Romain <ro.foncier@gmail.com>
  */
+
 @Controller
 public class HomeController {
 
-    @RequestMapping("/")
+    @RequestMapping("/base.html")
     public String homeView() {
         return "Home";
     }

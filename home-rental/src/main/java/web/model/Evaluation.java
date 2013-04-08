@@ -1,34 +1,46 @@
 package web.model;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
- * @author Bernard <bernard.debecker@gmail.com>
+ * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
  */
-public class Evaluation {
+
+@Entity
+@Table(name = "evaluation")
+public class Evaluation implements Serializable {
     
-    private String id;
-    private String property;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "evaluation_id")
+    private Long id;
+    
+    @Column(name = "target_property")
+    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
+    private Integer property;
+    
+    @Column(name="cleanliness")
     private Integer cleanliness;
+    
+    @Column(name="confort")
     private Integer confort;
+    
+    @Column(name="qa_price")
     private Integer qaPrice;
     
-    public Evaluation() {
-        
-    }
+    public Evaluation() {}
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProperty() {
+    public Integer getProperty() {
         return property;
     }
 
-    public void setProperty(String property) {
+    public void setProperty(Integer property) {
         this.property = property;
     }
 

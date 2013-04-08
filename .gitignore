@@ -5,7 +5,6 @@ nbbuild/
 dist/
 nbdist/
 target/
-*.properties
 build.xml
 manifest.mf
 build-impl.xml
