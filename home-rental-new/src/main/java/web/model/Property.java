@@ -16,9 +16,9 @@ public class Property implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
     private Integer id;
-    //@ManyToOne(fetch=FetchType.LAZY)
-    //@JoinColumn(name="owner")
-    //private User owner;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="owner")
+    private User owner;
     @Column(name="title", length=120)
     private String title;
     @Column(name = "added", insertable = true, updatable = false, nullable = false)
@@ -33,8 +33,9 @@ public class Property implements Serializable {
     private String longDesc;
     @Column(name = "price")
     private Integer price;
-    //@Enumerated(EnumType.ORDINAL)
-    //private Type type;
+    @Column(columnDefinition = "enum('FLAT', 'HOUSE', 'LOFT')")
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
     @Column(name = "rooms")
     private Integer rooms;
     @Column(name = "country", length = 45)
@@ -56,13 +57,13 @@ public class Property implements Serializable {
 
     public Property() {}
     
-    public Property(String title, String sDesc, String lDesc, Integer price, Integer rooms, String country, String city, String address, LocalDateTime start, LocalDateTime stop) {
-        //this.owner = owner;
+    public Property(User owner, String title, String sDesc, String lDesc, Integer price, PropertyType type, Integer rooms, String country, String city, String address, LocalDateTime start, LocalDateTime stop) {
+        this.owner = owner;
         this.title = title;
         this.shortDesc = sDesc;
         this.longDesc = lDesc;
         this.price = price;
-        //this.type = type;
+        this.type = type;
         this.rooms = rooms;
         this.country = country;
         this.city = city;
@@ -76,7 +77,6 @@ public class Property implements Serializable {
         return id;
     }
     
-    /*
     public User getOwner() {
         return owner;
     }
@@ -84,7 +84,6 @@ public class Property implements Serializable {
     public void setOwner(User owner) {
         this.owner = owner;
     }
-    */
     
     public String getTitle() {
         return this.title;
@@ -134,15 +133,13 @@ public class Property implements Serializable {
         this.price = newPrice;
     }
 
-    /*
-    public Type getType() {
+    public PropertyType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(PropertyType type) {
         this.type = type;
     }
-    */
 
     public Integer getRooms() {
         return rooms;

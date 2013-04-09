@@ -1,9 +1,9 @@
 package web.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.joda.time.LocalDateTime;
 
 /**
  * @author Romain <ro.foncier@gmail.com>, Bernard <bernard.debecker@gmail.com>
@@ -28,8 +28,8 @@ public class User implements Serializable {
     @Column(name = "password", length = 40)
     private String password;
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar created;
+    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime created;
     @Transient
     @Column(name = "is_staff")
     private Boolean staff;
@@ -92,11 +92,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Calendar getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Calendar created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 

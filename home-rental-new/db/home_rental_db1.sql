@@ -32,6 +32,7 @@ CREATE TABLE property (
     short_desc VARCHAR(255) NOT NULL,
     long_desc TEXT NOT NULL,
     price INT NOT NULL,
+    type VARCHAR(10) NOT NULL,
     rooms INT NOT NULL,
     country VARCHAR(45) NOT NULL,
     city VARCHAR(45) NOT NULL,
