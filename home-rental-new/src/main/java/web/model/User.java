@@ -2,8 +2,6 @@ package web.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,9 +33,6 @@ public class User implements Serializable {
     @Transient
     @Column(name = "is_staff")
     private Boolean staff;
-    //@OneToMany(cascade = CascadeType.ALL, targetEntity = Property.class)
-    //@JoinTable(name = "user_properties", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "owner") })
-    //private Set<Property> listProperty = new HashSet<Property>(0);
 
     public User() {
     }
@@ -112,14 +107,5 @@ public class User implements Serializable {
     public void setStaff(Boolean staff) {
         this.staff = staff;
     }
-
-    /*
-    public Set<Property> getListProperty() {
-        return this.listProperty;
-    }
-
-    public void setListProperty(Set<Property> listProperty) {
-        this.listProperty = listProperty;
-    }*/
     // </editor-fold>
 }
