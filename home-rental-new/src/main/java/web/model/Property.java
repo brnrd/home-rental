@@ -16,9 +16,11 @@ public class Property implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "property_id")
     private Integer id;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="owner")
     private User owner;
+    @Column(name="title")
+    private String title;
     @Column(name = "added", insertable = true, updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar added;
@@ -31,8 +33,8 @@ public class Property implements Serializable {
     private String longDesc;
     @Column(name = "price")
     private Integer price;
-    @Column(name = "type")
-    private Type type;
+    //@Enumerated(EnumType.ORDINAL)
+    //private Type type;
     @Column(name = "rooms")
     private Integer rooms;
     @Column(name = "country", length = 45)
@@ -45,27 +47,30 @@ public class Property implements Serializable {
     private String coordinates;
     @Column(name = "note", nullable = true)
     private Integer note;
+    /*
     @Column(name = "rent_period_start")
     @Temporal(TemporalType.DATE)
     private Calendar rentPeriodStart;
     @Column(name = "rent_period_stop")
     @Temporal(TemporalType.DATE)
     private Calendar rentPeriodStop;
+    */
 
     public Property() {}
     
-    public Property(User owner, String sDesc, String lDesc, Integer price, Type type, Integer rooms, String country, String city, String address, Calendar start, Calendar stop) {
+    public Property(User owner, String title, String sDesc, String lDesc, Integer price, Integer rooms, String country, String city, String address) { //, Calendar start, Calendar stop) {
         this.owner = owner;
+        this.title = title;
         this.shortDesc = sDesc;
         this.longDesc = lDesc;
         this.price = price;
-        this.type = type;
+        //this.type = type;
         this.rooms = rooms;
         this.country = country;
         this.city = city;
         this.address = address;
-        this.rentPeriodStart = start;
-        this.rentPeriodStop = stop;
+        //this.rentPeriodStart = start;
+        //this.rentPeriodStop = stop;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
@@ -79,6 +84,14 @@ public class Property implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+    
+    public String getTitle() {
+        return this.title;
+    }
+    
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
     }
 
     public Calendar getAdded() {
@@ -105,11 +118,11 @@ public class Property implements Serializable {
         this.shortDesc = shortDesc;
     }
 
-    public String getIntegerDesc() {
-        return longDesc;
+    public String getLongDesc() {
+        return this.longDesc;
     }
 
-    public void setIntegerDesc(String longDesc) {
+    public void setLongDesc(String longDesc) {
         this.longDesc = longDesc;
     }
 
@@ -121,6 +134,7 @@ public class Property implements Serializable {
         this.price = newPrice;
     }
 
+    /*
     public Type getType() {
         return type;
     }
@@ -128,6 +142,7 @@ public class Property implements Serializable {
     public void setType(Type type) {
         this.type = type;
     }
+    */
 
     public Integer getRooms() {
         return rooms;
@@ -177,6 +192,7 @@ public class Property implements Serializable {
         this.note = note;
     }
 
+    /*
     public Calendar getRentPeriodStart() {
         return rentPeriodStart;
     }
@@ -192,5 +208,6 @@ public class Property implements Serializable {
     public void setRentPeriodStop(Calendar rentPeriodStop) {
         this.rentPeriodStop = rentPeriodStop;
     }
+    */
     // </editor-fold>
 }

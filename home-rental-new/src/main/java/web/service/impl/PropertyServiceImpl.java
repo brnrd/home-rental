@@ -20,8 +20,8 @@ public class PropertyServiceImpl implements PropertyService {
     private PropertyDao propertyDao;
     
     @Override
-    public Property findById(Integer user_id) {
-        return propertyDao.findById(user_id);
+    public Property findById(Integer property_id) {
+        return propertyDao.findById(property_id);
     }
 
     @Override

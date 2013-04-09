@@ -35,9 +35,9 @@ public class User implements Serializable {
     @Transient
     @Column(name = "is_staff")
     private Boolean staff;
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Property.class)
+    //@OneToMany(cascade = CascadeType.ALL, targetEntity = Property.class)
     //@JoinTable(name = "user_properties", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "owner") })
-    private Set<Property> listProperty = new HashSet<Property>(0);
+    //private Set<Property> listProperty = new HashSet<Property>(0);
 
     public User() {
     }
@@ -113,12 +113,13 @@ public class User implements Serializable {
         this.staff = staff;
     }
 
+    /*
     public Set<Property> getListProperty() {
         return this.listProperty;
     }
 
     public void setListProperty(Set<Property> listProperty) {
         this.listProperty = listProperty;
-    }
+    }*/
     // </editor-fold>
 }
