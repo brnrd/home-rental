@@ -31,6 +31,7 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 + Introduction au framework Spring : [cours 1][5] | [cours 2][7] | [cours 3][8]
 + Hibernate : [cours 1][9] | [cours 2][11] | [cours 3][12]
 + [Spring Framework General Reference][10]
++ [Java Persistence API](http://en.wikibooks.org/w/index.php?title=Java_Persistence&stable=1)
 
 [1]: http://fr.wikipedia.org/wiki/Spring_framework
 [2]: http://fr.wikipedia.org/wiki/Spring_framework
