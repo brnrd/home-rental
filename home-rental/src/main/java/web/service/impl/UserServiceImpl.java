@@ -11,7 +11,6 @@ import web.service.UserService;
 /**
  * @author Romain <ro.foncier@gmail.com>
  */
-
 @Service("userService")
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
@@ -23,10 +22,15 @@ public class UserServiceImpl implements UserService {
     public User findById(String user_id) {
         return userDao.findById(user_id);
     }
-    
+
     @Override
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
     @Override
