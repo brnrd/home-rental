@@ -11,11 +11,13 @@ import web.model.Evaluation;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
+import web.model.Reservation;
 import web.model.User;
 import web.service.CommentService;
 import web.service.EvaluationService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
+import web.service.ReservationService;
 import web.service.UserService;
 
 /**
@@ -39,6 +41,9 @@ public class HomeController {
     
     @Autowired
     private CommentService comService;
+    
+    @Autowired
+    private ReservationService reservService;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
@@ -83,16 +88,26 @@ public class HomeController {
         
         // Get comment
         Comment com2 = comService.findByProperty(property);
-        com2.setMessage("Test comment message updated !!!");
-        comService.saveComment(com2);
+        //com2.setMessage("Test comment message updated !!!");
+        //comService.saveComment(com2);
         Comment com3 = comService.findByUser(user).get(0);
         model.addAttribute("com2", com2);
         model.addAttribute("com3", com3);
         
         // Delete comment
-        Comment com1 = new Comment(user, property, "Test comment message");
-        comService.saveComment(com1);
-        comService.deleteComment(com1.getId());
+        //Comment com1 = new Comment(user, property, "Test comment message");
+        //comService.saveComment(com1);
+        //comService.deleteComment(com1.getId());
+        
+        // Create reservation
+        Reservation res1 = new Reservation(user, property, new LocalDateTime(2013, 4, 20, 12, 0), new LocalDateTime(2013, 4, 27, 12, 0), 2, 200);
+        reservService.saveReservation(res1);
+        
+        // Get reservation
+        Reservation res2 = reservService.findByProperty(property).get(0);
+        Reservation res3 = reservService.findByUser(user).get(0);
+        model.addAttribute("res2", res2);
+        model.addAttribute("res3", res3);
         return "base";
     }
 }
