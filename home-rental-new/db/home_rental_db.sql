@@ -58,36 +58,36 @@ CREATE TABLE property_options (
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE pictures (
-    pictures_id INT NOT NULL auto_increment,
+CREATE TABLE picture (
+    picture_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     filename VARCHAR(50) NOT NULL,
     extension VARCHAR(4) NOT NULL,
     path TEXT NOT NULL,
     size INT NOT NULL,
     added TIMESTAMP DEFAULT NOW(),
-    PRIMARY KEY (pictures_id),
+    PRIMARY KEY (picture_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE evaluations (
-    evaluations_id INT NOT NULL auto_increment,
+CREATE TABLE evaluation (
+    evaluation_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     cleanliness INT NOT NULL,
     confort INT NOT NULL,
     qa_price INT NOT NULL,
-    PRIMARY KEY (evaluations_id),
+    PRIMARY KEY (evaluation_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE commenatires (
-    commentaires_id INT NOT NULL auto_increment,
+CREATE TABLE comment (
+    comment_id INT NOT NULL auto_increment,
     creator VARCHAR(36) NOT NULL,
     target_property INT NOT NULL,
     date TIMESTAMP DEFAULT NOW(),
     modified TIMESTAMP NOT NULL,
     message TEXT NOT NULL,
-    PRIMARY KEY (commentaires_id),
+    PRIMARY KEY (comment_id),
     CONSTRAINT FOREIGN KEY (creator) REFERENCES user (user_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
