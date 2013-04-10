@@ -1,8 +1,9 @@
 package web.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
@@ -13,65 +14,71 @@ import javax.persistence.*;
 public class Comment implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
-    private Long id;
+    private Integer id;
     
-    @Column(name = "creator", length = 36)
-    @OneToOne(mappedBy = "creator", cascade = CascadeType.ALL)
-    private String creator;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="creator")
+    private User creator;
     
-    @Column(name = "target_property")
-    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
-    private Integer property;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="target_property")
+    private Property property;
     
     @Column(name = "date", insertable = true, updatable = false, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar cdate;
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime date;
     
     @Column(name = "modified", insertable = true, updatable = true, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar modified;
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime modified;
     
     @Column(name = "message", columnDefinition = "Text")
     private String message;
     
     public Comment() {}
     
+    public Comment(User creator, Property property, String message) {
+        this.creator = creator;
+        this.property = property;
+        this.message = message;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public String getCreator() {
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
-    public Integer getProperty() {
+    public Property getProperty() {
         return property;
     }
 
-    public void setProperty(Integer property) {
+    public void setProperty(Property property) {
         this.property = property;
     }
 
-    public Calendar getDate() {
-        return cdate;
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setDate(Calendar date) {
-        this.cdate = date;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
-    public Calendar getModified() {
+    public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(Calendar modified) {
+    public void setModified(LocalDateTime modified) {
         this.modified = modified;
     }
 

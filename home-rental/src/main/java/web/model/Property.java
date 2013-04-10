@@ -1,100 +1,111 @@
 package web.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
- * @author Bernard <bernard.debecker@gmail.com>,
- * @author Romain <ro.foncier@gmail.com>
+ * @author Bernard <bernard.debecker@gmail.com>,  R. FONCIER  <ro.foncier@gmail.com>
  */
 @Entity
 @Table(name = "property")
 public class Property implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
-    private Long id;
-    
-    @Column(name = "owner", length = 36)
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
-    private String owner;
-    
+    private Integer id;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="owner")
+    private User owner;
+    @Column(name="title", length=120)
+    private String title;
     @Column(name = "added", insertable = true, updatable = false, nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar added;
-    
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime added;
     @Column(name = "modified", insertable = true, updatable = true, nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar modified;
-    
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime modified;
     @Column(name = "short_desc", length = 255)
     private String shortDesc;
-    
     @Column(name = "long_desc", columnDefinition = "Text")
     private String longDesc;
-    
     @Column(name = "price")
     private Integer price;
-    
-    @Column(name = "type")
-    private Type type;
-    
+    @Column(columnDefinition = "enum('FLAT', 'HOUSE', 'LOFT')")
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
     @Column(name = "rooms")
     private Integer rooms;
-    
     @Column(name = "country", length = 45)
     private String country;
-    
     @Column(name = "city", length = 45)
     private String city;
-    
     @Column(name = "address", length = 255)
     private String address;
-    
     @Column(name = "coordinates", length = 45, nullable = true)
     private String coordinates;
-    
     @Column(name = "note", nullable = true)
     private Integer note;
-    
     @Column(name = "rent_period_start")
-    @Temporal(TemporalType.DATE)
-    private Calendar rentPeriodStart;
-    
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime rentPeriodStart;
     @Column(name = "rent_period_stop")
-    @Temporal(TemporalType.DATE)
-    private Calendar rentPeriodStop;
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime rentPeriodStop;
 
     public Property() {}
-
-    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public Long getId() {
-        return id;
+    
+    public Property(User owner, String title, String sDesc, String lDesc, Integer price, PropertyType type, Integer rooms, String country, String city, String address, LocalDateTime start, LocalDateTime stop) {
+        this.owner = owner;
+        this.title = title;
+        this.shortDesc = sDesc;
+        this.longDesc = lDesc;
+        this.price = price;
+        this.type = type;
+        this.rooms = rooms;
+        this.country = country;
+        this.city = city;
+        this.address = address;
+        this.rentPeriodStart = start;
+        this.rentPeriodStop = stop;
     }
 
-    public String getOwner() {
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
+    public Integer getId() {
+        return id;
+    }
+    
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
+    
+    public String getTitle() {
+        return this.title;
+    }
+    
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
+    }
 
-    public Calendar getAdded() {
+    public LocalDateTime getAdded() {
         return added;
     }
 
-    public void setAdded(Calendar added) {
+    public void setAdded(LocalDateTime added) {
         this.added = added;
     }
 
-    public Calendar getModified() {
+    public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(Calendar modified) {
+    public void setModified(LocalDateTime modified) {
         this.modified = modified;
     }
 
@@ -107,7 +118,7 @@ public class Property implements Serializable {
     }
 
     public String getLongDesc() {
-        return longDesc;
+        return this.longDesc;
     }
 
     public void setLongDesc(String longDesc) {
@@ -122,11 +133,11 @@ public class Property implements Serializable {
         this.price = newPrice;
     }
 
-    public Type getType() {
+    public PropertyType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(PropertyType type) {
         this.type = type;
     }
 
@@ -134,63 +145,63 @@ public class Property implements Serializable {
         return rooms;
     }
 
-    public void setRooms(Integer rooms) {
-        this.rooms = rooms;
+    public void setRooms(Integer nbRooms) {
+        this.rooms = nbRooms;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry(String newCountry) {
+        this.country = newCountry;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCity(String newCity) {
+        this.city = newCity;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String newAddress) {
+        this.address = newAddress;
     }
 
     public String getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(String newCoordinates) {
+        this.coordinates = newCoordinates;
     }
 
     public Integer getNote() {
         return note;
     }
 
-    public void setNote(Integer note) {
-        this.note = note;
+    public void setNote(Integer newNote) {
+        this.note = newNote;
     }
 
-    public Calendar getRentPeriodStart() {
+    public LocalDateTime getRentPeriodStart() {
         return rentPeriodStart;
     }
 
-    public void setRentPeriodStart(Calendar rentPeriodStart) {
+    public void setRentPeriodStart(LocalDateTime rentPeriodStart) {
         this.rentPeriodStart = rentPeriodStart;
     }
 
-    public Calendar getRentPeriodStop() {
+    public LocalDateTime getRentPeriodStop() {
         return rentPeriodStop;
     }
 
-    public void setRentPeriodStop(Calendar rentPeriodStop) {
+    public void setRentPeriodStop(LocalDateTime rentPeriodStop) {
         this.rentPeriodStop = rentPeriodStop;
     }
     // </editor-fold>

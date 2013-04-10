@@ -26,7 +26,6 @@ CREATE TABLE user (
 /* Property space */
 CREATE TABLE property (
     property_id INT NOT NULL auto_increment,
-    owner VARCHAR(36) NOT NULL,
     title VARCHAR(120) NOT NULL,
     added TIMESTAMP DEFAULT NOW(),
     modified TIMESTAMP NOT NULL,
@@ -40,10 +39,9 @@ CREATE TABLE property (
     address VARCHAR(255) NOT NULL,
     coordinates VARCHAR(45),
     note INT,
-    rent_period_start DATETIME NOT NULL,
-    rent_period_stop DATETIME NOT NULL,
-    PRIMARY KEY (property_id),
-    CONSTRAINT FOREIGN KEY (owner) REFERENCES user (user_id)
+    rent_period_start TIMESTAMP NOT NULL,
+    rent_period_stop TIMESTAMP NOT NULL,
+    PRIMARY KEY (property_id)
 )TYPE=InnoDB;
 
 CREATE TABLE property_options (
@@ -58,36 +56,36 @@ CREATE TABLE property_options (
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE picture (
-    picture_id INT NOT NULL auto_increment,
+CREATE TABLE pictures (
+    pictures_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     filename VARCHAR(50) NOT NULL,
     extension VARCHAR(4) NOT NULL,
     path TEXT NOT NULL,
     size INT NOT NULL,
     added TIMESTAMP DEFAULT NOW(),
-    PRIMARY KEY (picture_id),
+    PRIMARY KEY (pictures_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE evaluation (
-    evaluation_id INT NOT NULL auto_increment,
+CREATE TABLE evaluations (
+    evaluations_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     cleanliness INT NOT NULL,
     confort INT NOT NULL,
     qa_price INT NOT NULL,
-    PRIMARY KEY (evaluation_id),
+    PRIMARY KEY (evaluations_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE comment (
-    comment_id INT NOT NULL auto_increment,
+CREATE TABLE commenatires (
+    commentaires_id INT NOT NULL auto_increment,
     creator VARCHAR(36) NOT NULL,
     target_property INT NOT NULL,
     date TIMESTAMP DEFAULT NOW(),
     modified TIMESTAMP NOT NULL,
     message TEXT NOT NULL,
-    PRIMARY KEY (comment_id),
+    PRIMARY KEY (commentaires_id),
     CONSTRAINT FOREIGN KEY (creator) REFERENCES user (user_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;

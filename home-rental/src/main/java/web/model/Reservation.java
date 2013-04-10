@@ -1,8 +1,9 @@
 package web.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
@@ -13,25 +14,25 @@ import javax.persistence.*;
 public class Reservation implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
-    private Long id;
+    private Integer id;
     
-    @Column(name = "target_user", length = 36)
-    @OneToOne(mappedBy = "target_user", cascade = CascadeType.ALL)
-    private String user;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="target_user")
+    private User user;
     
-    @Column(name = "target_property")
-    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
-    private Integer property;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="target_property")
+    private Property property;
     
-    @Column(name = "rent_start")
-    @Temporal(TemporalType.DATE)
-    private Calendar rentStart;
+    @Column(name = "date_rent_start")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime rentStart;
     
-    @Column(name = "rent_stop")
-    @Temporal(TemporalType.DATE)
-    private Calendar rentStop;
+    @Column(name = "date_rent_stop")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime rentStop;
     
     @Column(name="hosts")
     private Integer hosts;
@@ -39,55 +40,60 @@ public class Reservation implements Serializable {
     @Column(name="price")
     private Integer price;
     
-    @Transient
-    @Column(name="evaluated", columnDefinition="boolean default false")
-    private Boolean evaluated;
+    @Column(name="evaluated")
+    private Boolean evaluated = false;
     
-    @Transient
-    @Column(name="commented", columnDefinition="boolean default false")
-    private Boolean commented;
+    @Column(name="commented")
+    private Boolean commented = false;
     
     @Column(name="note", nullable=true)
     private Integer note;
     
-    public Reservation() {
-        
+    public Reservation() {}
+    
+    public Reservation(User user, Property property, LocalDateTime start, LocalDateTime stop, Integer hosts, Integer price) {
+        this.user = user;
+        this.property = property;
+        this.rentStart = start;
+        this.rentStop = stop;
+        this.hosts = hosts;
+        this.price = price;
     }
     
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Integer getProperty() {
+    public Property getProperty() {
         return property;
     }
 
-    public void setProperty(Integer property) {
+    public void setProperty(Property property) {
         this.property = property;
     }
 
-    public Calendar getRentStart() {
+    public LocalDateTime getRentStart() {
         return rentStart;
     }
 
-    public void setRentStart(Calendar rentStart) {
+    public void setRentStart(LocalDateTime rentStart) {
         this.rentStart = rentStart;
     }
 
-    public Calendar getRentStop() {
+    public LocalDateTime getRentStop() {
         return rentStop;
     }
 
-    public void setRentStop(Calendar rentStop) {
+    public void setRentStop(LocalDateTime rentStop) {
         this.rentStop = rentStop;
     }
 
