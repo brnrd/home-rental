@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import web.model.Evaluation;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
 import web.model.User;
+import web.service.EvaluationService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
 import web.service.UserService;
@@ -29,6 +31,9 @@ public class HomeController {
     
     @Autowired
     private PropertyOptionsService propertyOptionsService;
+    
+    @Autowired
+    private EvaluationService evalService;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
@@ -56,11 +61,16 @@ public class HomeController {
         //propertyOptionsService.savePropertyOptions(po2);
         
         // Get Property
-        PropertyOptions pOptions1 = propertyOptionsService.findById(3);
-        //PropertyOptions pOptions2 = propertyOptionsService.findById(4);
-        PropertyOptions pOptions2 = propertyOptionsService.findByProperty(property);
+        PropertyOptions pOptions1 = propertyOptionsService.findByProperty(property);
         model.addAttribute("po1", pOptions1);
-        model.addAttribute("po2", pOptions2);
+        
+        // Create evaluation
+        //Evaluation ev1 = new Evaluation(property, 80, 80, 80);
+        //evalService.saveEvaluation(ev1);
+        
+        // Get evaluation
+        Evaluation ev2 = evalService.findByProperty(property);
+        model.addAttribute("ev", ev2);
         return "base";
     }
 }
