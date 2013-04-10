@@ -4,6 +4,7 @@ import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.model.Comment;
@@ -109,5 +110,16 @@ public class HomeController {
         model.addAttribute("res2", res2);
         model.addAttribute("res3", res3);
         return "base";
+    }
+    
+    @RequestMapping(value = "/user={username}", method = RequestMethod.GET)
+    public String userView(@PathVariable String username, Model model) {
+         
+        // Get User
+        User user = userService.findByUsername(username);
+        model.addAttribute("data_page", user.getUsername() + " - Home Rental");
+        model.addAttribute("user", user);
+        
+        return "user";
     }
 }

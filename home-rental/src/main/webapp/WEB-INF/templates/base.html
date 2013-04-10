@@ -11,6 +11,7 @@
             <p class="red" th:text="${user.id}"></p>
             <p th:text="${user.name}"></p>
             <p th:text="${user.email}"></p>
+            <a th:href="@{'/user=' +${user.username}}"><p th:text="${user.username}"></p></a>
             <h3>Property :</h3>
             <p class="green" th:text="${property.id}">property_id</p>
             <p th:text="${property.title}"></p>
