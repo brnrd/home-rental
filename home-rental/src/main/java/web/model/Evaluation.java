@@ -12,13 +12,13 @@ import javax.persistence.*;
 public class Evaluation implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "evaluation_id")
-    private Long id;
+    private Integer id;
     
-    @Column(name = "target_property")
-    @OneToOne(mappedBy = "target_property", cascade = CascadeType.ALL)
-    private Integer property;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="target_property")
+    private Property property;
     
     @Column(name="cleanliness")
     private Integer cleanliness;
@@ -31,16 +31,23 @@ public class Evaluation implements Serializable {
     
     public Evaluation() {}
     
+    public Evaluation(Property property, Integer clean, Integer confort, Integer qa_price) {
+        this.property = property;
+        this.cleanliness = clean;
+        this.confort = confort;
+        this.qaPrice = qa_price;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Integer getProperty() {
+    public Property getProperty() {
         return property;
     }
 
-    public void setProperty(Integer property) {
+    public void setProperty(Property property) {
         this.property = property;
     }
 

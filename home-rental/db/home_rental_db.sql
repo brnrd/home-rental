@@ -9,7 +9,7 @@
 
  USE airboy_hr_db;
 
-/* User space **/
+/* User space */
 CREATE TABLE user (
     user_id VARCHAR(36) NOT NULL,
     username VARCHAR(30) NOT NULL,
@@ -18,18 +18,12 @@ CREATE TABLE user (
     email VARCHAR(100) NOT NULL,
     password VARCHAR(40) NOT NULL,
     created TIMESTAMP DEFAULT NOW(),
-    is_staff BOOLEAN NOT NULL,
+    is_staff BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (user_id),
     UNIQUE KEY (user_id)
 )TYPE=InnoDB;
 
-/* Property space **/
-CREATE TABLE type (
-    type_id INT NOT NULL auto_increment,
-    title VARCHAR(45) NOT NULL,
-    PRIMARY KEY (type_id)
-)TYPE=InnoDB;
-
+/* Property space */
 CREATE TABLE property (
     property_id INT NOT NULL auto_increment,
     owner VARCHAR(36) NOT NULL,
@@ -39,7 +33,7 @@ CREATE TABLE property (
     short_desc VARCHAR(255) NOT NULL,
     long_desc TEXT NOT NULL,
     price INT NOT NULL,
-    type INT NOT NULL,
+    type VARCHAR(10) NOT NULL,
     rooms INT NOT NULL,
     country VARCHAR(45) NOT NULL,
     city VARCHAR(45) NOT NULL,
@@ -49,8 +43,7 @@ CREATE TABLE property (
     rent_period_start DATETIME NOT NULL,
     rent_period_stop DATETIME NOT NULL,
     PRIMARY KEY (property_id),
-    CONSTRAINT FOREIGN KEY (owner) REFERENCES user (user_id),
-    CONSTRAINT FOREIGN KEY (type) REFERENCES type (type_id)
+    CONSTRAINT FOREIGN KEY (owner) REFERENCES user (user_id)
 )TYPE=InnoDB;
 
 CREATE TABLE property_options (
@@ -65,41 +58,41 @@ CREATE TABLE property_options (
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE pictures (
-    pictures_id INT NOT NULL auto_increment,
+CREATE TABLE picture (
+    picture_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     filename VARCHAR(50) NOT NULL,
     extension VARCHAR(4) NOT NULL,
     path TEXT NOT NULL,
     size INT NOT NULL,
     added TIMESTAMP DEFAULT NOW(),
-    PRIMARY KEY (pictures_id),
+    PRIMARY KEY (picture_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE evaluations (
-    evaluations_id INT NOT NULL auto_increment,
+CREATE TABLE evaluation (
+    evaluation_id INT NOT NULL auto_increment,
     target_property INT NOT NULL,
     cleanliness INT NOT NULL,
     confort INT NOT NULL,
     qa_price INT NOT NULL,
-    PRIMARY KEY (evaluations_id),
+    PRIMARY KEY (evaluation_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-CREATE TABLE commenatires (
-    commentaires_id INT NOT NULL auto_increment,
+CREATE TABLE comment (
+    comment_id INT NOT NULL auto_increment,
     creator VARCHAR(36) NOT NULL,
     target_property INT NOT NULL,
     date TIMESTAMP DEFAULT NOW(),
     modified TIMESTAMP NOT NULL,
     message TEXT NOT NULL,
-    PRIMARY KEY (commentaires_id),
+    PRIMARY KEY (comment_id),
     CONSTRAINT FOREIGN KEY (creator) REFERENCES user (user_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
 
-/* Reservations space **/
+/* Reservations space */
 CREATE TABLE reservation (
     reservation_id INT NOT NULL auto_increment,
     target_user VARCHAR(36) NOT NULL,

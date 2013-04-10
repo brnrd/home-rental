@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Home Rental - "#{data.page_title}"</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" media="all" href="/css/base.css" th:href="@{/css/base.css}"/>
+        <title th:text="#{data.page_title}">Home Rental</title>
+        <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
     </head>
     <body>
-        <div class="red">TODO write content</div>
+        <div>
+            <h3>User :</h3>
+            <p class="red" th:text="${user.id}"></p>
+            <p th:text="${user.name}"></p>
+            <p th:text="${user.email}"></p>
+            <h3>Property :</h3>
+            <p class="green" th:text="${property.id}">property_id</p>
+            <p th:text="${property.title}"></p>
+            <p th:text="${property.owner.name}"></p>
+            <p th:text="${property.shortDesc}"></p>
+            <p th:text="${property.longDesc}"></p>
+            <p class="red" th:text="${property.price}"></p>
+            <p th:text="${property.city}"></p>
+            <h3>Property Options :</h3>
+            <p class="red" th:text="${po1.property.title}"></p>
+            <p th:text="${po1.parking}"></p>
+            <p th:text="${po1.wifi}"></p>
+            <h3>Evaluations :</h3>
+            <p>Title : <span class="red" th:text="${ev.property.title}"></span></p>
+            <p th:text="${ev.cleanliness}"></p>
+            <p th:text="${ev.confort}"></p>
+            <h3>Comments :</h3>
+            <p><strong>Message 1 : </strong><span class="red" th:text="${com2.message}"></span></p>
+            <p><strong>Message 2 : </strong><span class="red" th:text="${com3.message}"></span> - Author : <span class="green" th:text="${com3.creator.username}"></span></p>
+            <h3>Reservation :</h3>
+            <p>From <span th:text="${res2.rentStart}"></span> to <span th:text="${res2.rentStop}"></span></p>
+            <p><strong>Roomer 1 : </strong><span class="red" th:text="${res2.user.username}"></span></p>
+            <p>From <span th:text="${res3.rentStart}"></span> to <span th:text="${res3.rentStop}"></span></p>
+            <p><strong>Roomer 2 : </strong><span class="red" th:text="${res3.user.username}"></span></p>
+        </div>
     </body>
 </html>
