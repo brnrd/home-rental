@@ -30,7 +30,6 @@ public class User implements Serializable {
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
-    @Transient
     @Column(name = "is_staff")
     private Boolean staff;
 

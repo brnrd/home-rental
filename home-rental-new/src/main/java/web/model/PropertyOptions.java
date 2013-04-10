@@ -20,19 +20,15 @@ public class PropertyOptions implements Serializable {
     @JoinColumn(name="target_property")
     private Property property;
     
-    @Transient
     @Column(name="parking")
     private Boolean parking;
     
-    @Transient
     @Column(name="swimming_pool")
     private Boolean swimmingPool;
     
-    @Transient
     @Column(name="wifi")
     private Boolean wifi;
     
-    @Transient
     @Column(name="laundry")
     private Boolean laundry;
     
@@ -59,7 +55,7 @@ public class PropertyOptions implements Serializable {
         this.property = property;
     }
 
-    public Boolean hasParking() {
+    public Boolean getParking() {
         return parking;
     }
 
@@ -67,7 +63,7 @@ public class PropertyOptions implements Serializable {
         this.parking = parking;
     }
 
-    public Boolean hasSwimmingPool() {
+    public Boolean getSwimmingPool() {
         return swimmingPool;
     }
 
@@ -75,7 +71,7 @@ public class PropertyOptions implements Serializable {
         this.swimmingPool = swimmingPool;
     }
 
-    public Boolean hasWifi() {
+    public Boolean getWifi() {
         return wifi;
     }
 
@@ -83,7 +79,7 @@ public class PropertyOptions implements Serializable {
         this.wifi = wifi;
     }
 
-    public Boolean hasLaundry() {
+    public Boolean getLaundry() {
         return laundry;
     }
 

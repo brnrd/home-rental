@@ -3,7 +3,6 @@ package web.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -54,11 +53,5 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     @Override
     public List<E> selectAll(String table) {
         return sessionFactory.getCurrentSession().createQuery("FROM "+table).list();
-    }
-    
-    @Override
-    public List<E> findTargetElement(String table, String target, I id) {
-        Query q = sessionFactory.getCurrentSession().createQuery("FROM "+table+" WHERE target_"+target+"="+id);
-        return q.list();
     }
 }

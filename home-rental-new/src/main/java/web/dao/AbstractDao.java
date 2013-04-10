@@ -15,5 +15,4 @@ public interface AbstractDao<E, I extends Serializable> {
     void delete(E e);
     List<E> findByCriteria(Criterion criterion);
     List<E> selectAll(String table);
-    List<E> findTargetElement(String table, String target, I id);
 }

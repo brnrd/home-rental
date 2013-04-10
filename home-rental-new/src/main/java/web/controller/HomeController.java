@@ -32,6 +32,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
+        model.addAttribute("data_page", "HomePage - Home Rental");
         // Create User
         //User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
         //userService.saveUser(u1);
@@ -49,11 +50,14 @@ public class HomeController {
         model.addAttribute("property", property);
         
         // Create property_options
-        PropertyOptions po1 = new PropertyOptions(property, true, true, false, true);
-        propertyOptionsService.savePropertyOptions(po1);
+        //PropertyOptions po1 = new PropertyOptions(property, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
+        //propertyOptionsService.savePropertyOptions(po1);
+        //PropertyOptions po2 = new PropertyOptions(property, false, false, true, true);
+        //propertyOptionsService.savePropertyOptions(po2);
         
         // Get Property
-        PropertyOptions pOptions1 = propertyOptionsService.findById(1);
+        PropertyOptions pOptions1 = propertyOptionsService.findById(3);
+        //PropertyOptions pOptions2 = propertyOptionsService.findById(4);
         PropertyOptions pOptions2 = propertyOptionsService.findByProperty(property);
         model.addAttribute("po1", pOptions1);
         model.addAttribute("po2", pOptions2);

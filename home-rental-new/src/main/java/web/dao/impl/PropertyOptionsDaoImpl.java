@@ -1,5 +1,6 @@
 package web.dao.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import web.dao.PropertyOptionsDao;
 import web.model.Property;
@@ -18,7 +19,7 @@ public class PropertyOptionsDaoImpl extends AbstractDaoImpl<PropertyOptions, Int
     
     @Override
     public PropertyOptions findByProperty(Property property) {
-        return findTargetElement("property_options", "property", property.getId()).get(0);
+        return findByCriteria(Restrictions.eq("property", property)).get(0);
     }
     
     @Override

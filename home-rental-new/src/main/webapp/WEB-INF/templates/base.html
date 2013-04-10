@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Home Rental - "#{data.page_title}"</title>
+        <title th:text="#{data.page_title}">Home Rental</title>
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
     </head>
     <body>
@@ -23,9 +23,11 @@
             <p class="red" th:text="${po1.property.title}"></p>
             <p th:text="${po1.parking}"></p>
             <p th:text="${po1.wifi}"></p>
+            <!--
             <p class="red" th:text="${po2.property.title}"></p>
             <p th:text="${po2.swimmingPool}"></p>
             <p th:text="${po2.laundry}"></p>
+            -->
         </div>
     </body>
 </html>
