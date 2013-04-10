@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import web.model.Comment;
 import web.model.Evaluation;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
 import web.model.User;
+import web.service.CommentService;
 import web.service.EvaluationService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
@@ -34,6 +36,9 @@ public class HomeController {
     
     @Autowired
     private EvaluationService evalService;
+    
+    @Autowired
+    private CommentService comService;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
@@ -71,6 +76,23 @@ public class HomeController {
         // Get evaluation
         Evaluation ev2 = evalService.findByProperty(property);
         model.addAttribute("ev", ev2);
+        
+        // Create comment
+        //Comment com1 = new Comment(user, property, "Test first comment message !!!");
+        //comService.saveComment(com1);
+        
+        // Get comment
+        Comment com2 = comService.findByProperty(property);
+        com2.setMessage("Test comment message updated !!!");
+        comService.saveComment(com2);
+        Comment com3 = comService.findByUser(user).get(0);
+        model.addAttribute("com2", com2);
+        model.addAttribute("com3", com3);
+        
+        // Delete comment
+        Comment com1 = new Comment(user, property, "Test comment message");
+        comService.saveComment(com1);
+        comService.deleteComment(com1.getId());
         return "base";
     }
 }

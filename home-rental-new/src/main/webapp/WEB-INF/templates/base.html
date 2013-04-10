@@ -27,6 +27,9 @@
             <p>Title : <span class="red" th:text="${ev.property.title}"></span></p>
             <p th:text="${ev.cleanliness}"></p>
             <p th:text="${ev.confort}"></p>
+            <h3>Comments :</h3>
+            <p><strong>Message 1 : </strong><span class="red" th:text="${com2.message}"></span></p>
+            <p><strong>Message 2 : </strong><span class="red" th:text="${com3.message}"></span> - Author : <span class="green" th:text="${com3.creator.username}"></span></p>
         </div>
     </body>
 </html>
