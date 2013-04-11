@@ -4,6 +4,7 @@ import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.model.Comment;
@@ -49,9 +50,13 @@ public class HomeController {
     public String homeView(Model model) {
         /*
         // Create User
+        User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
+        userService.saveUser(u1);
+        
+        // Create User
         //User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
         //userService.saveUser(u1);
-        
+       
         // Get User
         User user = userService.findByEmail("johndoe@example.com");
         model.addAttribute("user", user);
@@ -109,8 +114,36 @@ public class HomeController {
         model.addAttribute("res2", res2);
         model.addAttribute("res3", res3);
         */
+        
         // Specified if the current page is active and set the tab in the navbar.
         model.addAttribute("home", true);
         return "home";
+    }
+    
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public String userView(@PathVariable String username, Model model) {
+         
+        // Get User
+        User user = userService.findByUsername(username);
+        Integer propertyCount = propertyService.findProperty(user).size();
+        
+        model.addAttribute("user", user);
+        model.addAttribute("propertyCount", propertyCount);
+        return "user";
+    }
+    
+    @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
+    public String propertyView(@PathVariable Integer id, Model model) {
+         
+        // Get Property
+        Property property = propertyService.findById(id);
+        PropertyOptions options = propertyOptionsService.findByProperty(property);
+        Evaluation evaluation = evalService.findByProperty(property);
+        Integer totalEval = evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice() / 3;
+        
+        model.addAttribute("property", property);
+        model.addAttribute("options", options);
+        model.addAttribute("totalEval", totalEval);
+        return "property";
     }
 }

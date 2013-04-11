@@ -23,6 +23,11 @@ Holiday Cottages/Homes/Flats Rental Website
 
 Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 
+### Maps API ###
+
+Infos are readable [here][16]
+The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
+
 #### To read ####
 
 + [Inversion of Control][1] (For more informations, read [this][4])
@@ -48,3 +53,4 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 [13]: https://github.com/marceloverdijk/lesscss-maven-plugin
 [14]: https://github.com/iron9light/coffeescript-maven-plugin
 [15]: http://www.thymeleaf.org/documentation.html
+[16]: https://developers.google.com/maps/documentation/javascript/?hl=fr

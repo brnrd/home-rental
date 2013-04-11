@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home Rental | Property Details</title>
+    </head>
+    <body tiles:fragment="content">
+        <div class="page-header">
+            <h3 th:text="${property.title}"></h3>
+        </div>
+        <div class="row">
+            <div class="span10">
+                <p>MAPS GOES HERE</p>
+            </div>
+            <div class="span4">
+                <h3>Description</h3>
+                <p th:text="${property.country}"></p>
+                <p th:text="${property.type}"></p>
+                <p th:text="${property.rooms}+' chambres'"></p>
+                <p></p>
+                <p>Options</p>
+                <div class="control-group">
+                    <div class="constrols">
+                        <form action="" class="checkbox">
+                            <input type="checkbox" name="options" value="parking" /> Parking
+                            <input type="checkbox" name="options" value="piscine" /> Piscine
+                            <input type="checkbox" name="options" value="wifi" /> Wi-Fi
+                        </form>
+                    </div>
+                </div>
+                <p th:text=" 'Note: '+${totalEval}+'/100'"></p>
+            </div>
+        </div>
+    </body>
+</html>

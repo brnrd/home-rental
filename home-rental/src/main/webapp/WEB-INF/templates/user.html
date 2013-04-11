@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home rental | Account</title>
+
+    </head>
+    <body tiles:fragment="content">
+        <div class="page-header">
+            <h3 th:text="${user.username}"></h3>
+        </div>
+        <div class="row">
+            <div class="span10">
+                <p>MAPS GOES HERE</p>
+            </div>
+            <div class="span4">
+                <h3>Mon compte</h3>
+                <p th:text="${user.username}"></p>
+                <p th:text="${user.name}"></p>
+                <p th:text="${user.firstname}"></p>
+                <p th:text="${user.email}"></p>
+                <p></p>
+                <p th:text="'Nombre de biens : ' +${propertyCount}"></p>
+                <button class="btn btn-success">Modifier</button>
+                <button class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </body>
+</html>
