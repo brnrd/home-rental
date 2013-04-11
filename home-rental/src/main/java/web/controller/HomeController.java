@@ -112,12 +112,12 @@ public class HomeController {
         return "base";
     }
     
-    @RequestMapping(value = "/user={username}", method = RequestMethod.GET)
-    public String userView(@PathVariable String username, Model model) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String userView(@PathVariable String id, Model model) {
          
         // Get User
-        User user = userService.findByUsername(username);
-        model.addAttribute("data_page", user.getUsername() + " - Home Rental");
+        User user = userService.findById(id);
+        model.addAttribute("data.page_title_en_US", user.getUsername() + " - Home Rental");
         model.addAttribute("user", user);
         
         return "user";

@@ -29,11 +29,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
-    }
-
-    @Override
     @Transactional(readOnly = false)
     public void saveUser(User user) {
         userDao.saveUser(user);

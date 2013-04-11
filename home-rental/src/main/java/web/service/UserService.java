@@ -11,7 +11,6 @@ public interface UserService {
     
     User findById(String user_id);
     User findByEmail(String email);
-    User findByUsername(String username);
     void saveUser(User user);
     void deleteUser(String user_id);
     List<User> findAll();

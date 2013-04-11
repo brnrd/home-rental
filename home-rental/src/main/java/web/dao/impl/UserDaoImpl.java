@@ -30,9 +30,4 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
     public User findByEmail(String email) {
         return findByCriteria(Restrictions.like("email", email, MatchMode.START)).get(0);
     }
-
-    @Override
-    public User findByUsername(String username) {
-         return findByCriteria(Restrictions.like("username", username, MatchMode.START)).get(0);
-    }
 }

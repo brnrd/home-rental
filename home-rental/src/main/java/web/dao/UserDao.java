@@ -10,5 +10,4 @@ public interface UserDao extends AbstractDao<User, String> {
     
     Boolean saveUser(User user);
     User findByEmail(String email);
-    User findByUsername(String username);
 }
