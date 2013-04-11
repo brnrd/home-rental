@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.PropertyDao;
 import web.model.Property;
+import web.model.User;
 import web.service.PropertyService;
 
 /**
@@ -22,6 +23,11 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public Property findById(Integer property_id) {
         return propertyDao.findById(property_id);
+    }
+    
+    @Override
+    public List<Property> findProperty(User user) {
+        return propertyDao.findProperty(user);
     }
 
     @Override

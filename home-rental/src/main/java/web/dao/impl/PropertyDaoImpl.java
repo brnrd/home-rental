@@ -1,8 +1,11 @@
 package web.dao.impl;
 
+import java.util.List;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import web.dao.PropertyDao;
 import web.model.Property;
+import web.model.User;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -22,5 +25,10 @@ public class PropertyDaoImpl extends AbstractDaoImpl<Property, Integer> implemen
         }
         saveOrUpdate(property);
         return true;
+    }
+
+    @Override
+    public List<Property> findProperty(User user) {
+        return findByCriteria(Restrictions.eq("owner", user));
     }
 }

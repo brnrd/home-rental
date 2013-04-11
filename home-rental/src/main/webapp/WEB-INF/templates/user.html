@@ -23,7 +23,7 @@
                 <p th:text="${user.firstname}"></p>
                 <p th:text="${user.email}"></p>
                 <p></p>
-                <p>NB DE BIEN</p>
+                <p th:text="'Nombre de biens : ' +${propertyCount}"></p>
                 <p>Appréciation globale</p>
                 <p>NOTE</p>
                 <button class="btn btn-success">Modifier</button>

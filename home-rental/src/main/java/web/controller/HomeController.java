@@ -117,8 +117,10 @@ public class HomeController {
          
         // Get User
         User user = userService.findByUsername(username);
+        Integer propertyCount = propertyService.findProperty(user).size();
         model.addAttribute("data.page_title", user.getUsername() + " - Home Rental");
         model.addAttribute("user", user);
+        model.addAttribute("propertyCount", propertyCount);
         
         return "user";
     }
