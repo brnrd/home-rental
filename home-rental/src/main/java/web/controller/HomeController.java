@@ -100,14 +100,14 @@ public class HomeController {
         //comService.deleteComment(com1.getId());
         
         // Create reservation
-        Reservation res1 = new Reservation(user, property, new LocalDateTime(2013, 4, 20, 12, 0), new LocalDateTime(2013, 4, 27, 12, 0), 2, 200);
-        reservService.saveReservation(res1);
+        //Reservation res1 = new Reservation(user, property, new LocalDateTime(2013, 4, 20, 12, 0), new LocalDateTime(2013, 4, 27, 12, 0), 2, 200);
+        //reservService.saveReservation(res1);
         
         // Get reservation
         Reservation res2 = reservService.findByProperty(property).get(0);
         Reservation res3 = reservService.findByUser(user).get(0);
         model.addAttribute("res2", res2);
         model.addAttribute("res3", res3);
-        return "base";
+        return "home";
     }
 }
