@@ -107,6 +107,7 @@
                     <compress>true</compress>
                     <includes>
                         <include>base.less</include>
+                        <include>home.less</include>
                     </includes>
                 </configuration>
                 <executions>
