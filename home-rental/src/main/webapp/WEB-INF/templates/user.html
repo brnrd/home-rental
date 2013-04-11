@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
     <head>
-        <title th:text="#{data.page_title}">Home Rental | </title>
-        <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
+        <title tiles:fragment="title" th:text="${user.username}"></title>
     </head>
-    <body>
-        <div>
-            <h3>User :</h3>
-            <p class="red" th:text="${user.id}"></p>
-            <p th:text="${user.username}"></p>
-            <p th:text="${user.firstname}"></p>
-            <p th:text="${user.name}"></p>
-            <p th:text="${user.email}"></p>
-            
+    <body tiles:fragment="content">
+        <div class="page-header">
+            <h1 th:text="${user.username}"></h1>
+        </div>
+        <div class="row">
+            <div class="span10">
+                <p> MAPS GOES HERE </p>
+            </div>
+            <div class="span4">
+                <h3>Mon compte</h3>
+                <p th:text="${user.username}"></p>
+                <p th:text="${user.name}"></p>
+                <p th:text="${user.firstname}"></p>
+                <p th:text="${user.email}"></p>
+                <p></p>
+                <p>NB DE BIEN</p>
+                <p>Appréciation globale</p>
+                <p>NOTE</p>
+                <button class="btn btn-success">Modifier</button>
+                <button class="btn btn-danger">Supprimer</button>
+            </div>
         </div>
     </body>
 </html>
