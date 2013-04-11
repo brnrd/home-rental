@@ -139,7 +139,7 @@ public class HomeController {
         Property property = propertyService.findById(id);
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         Evaluation evaluation = evalService.findByProperty(property);
-        Integer totalEval = evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice() / 3;
+        Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
         
         model.addAttribute("property", property);
         model.addAttribute("options", options);

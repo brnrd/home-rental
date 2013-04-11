@@ -24,14 +24,53 @@
                 <p>Options</p>
                 <div class="control-group">
                     <div class="constrols">
-                        <form action="" class="checkbox">
-                            <input type="checkbox" name="options" value="parking" /> Parking
-                            <input type="checkbox" name="options" value="piscine" /> Piscine
-                            <input type="checkbox" name="options" value="wifi" /> Wi-Fi
-                        </form>
+                        <label class="checkbox">
+                            <input type="checkbox" name="options" value="parking" disabled="" th:checked="${options.parking}"/> Parking
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="options" value="piscine" disabled="" th:checked="${options.swimmingPool}"/> Piscine
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="options" value="wifi" disabled="" th:checked="${options.wifi}"/> Wi-Fi
+                        </label>
                     </div>
                 </div>
                 <p th:text=" 'Note: '+${totalEval}+'/100'"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span10" id="propretyTab">
+                <ul class="nav nav-tabs">
+                    <li><a href="#presentation" data-toggle="tab">Présentation</a></li>
+                    <li><a href="#pictures" data-toggle="tab">Photos</a></li>
+                    <li><a href="#comments" data-toggle="tab">Commentaires</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="presentation">
+                        <h3 th:text="${property.title}"></h3>
+                        <p th:text="${property.longDesc}"></p>
+                    </div>
+                    <div class="tab-pane fade" id="pictures">PICTURES</div>
+                    <div class="tab-pane fade" id="comments">COMMENTS</div>
+                </div>
+                <script>
+                    $('#presentation a').click(function(e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                    $('#pictures a').click(function(e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                    $('#comments a').click(function(e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                    $(function() {
+                        $('#propretyTab a:last').tab('show');
+                    });
+                </script>
             </div>
         </div>
     </body>
