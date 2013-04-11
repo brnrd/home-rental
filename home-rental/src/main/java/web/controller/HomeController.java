@@ -47,7 +47,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
-        model.addAttribute("data_page", "HomePage - Home Rental");
+        /*
         // Create User
         //User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
         //userService.saveUser(u1);
@@ -108,6 +108,9 @@ public class HomeController {
         Reservation res3 = reservService.findByUser(user).get(0);
         model.addAttribute("res2", res2);
         model.addAttribute("res3", res3);
+        */
+        // Specified if the current page is active and set the tab in the navbar.
+        model.addAttribute("home", true);
         return "home";
     }
 }

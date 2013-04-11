@@ -7,40 +7,110 @@
     
     <head>
         <title tiles:include="title"></title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="home rental" />
+        <meta name="authors" content="airboy and brnrd" />
+        
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
     </head>
-    <body tiles:include="body">
-        <div>
-            <!--
-            <h3>User :</h3>
-            <p class="red" th:text="${user.id}"></p>
-            <p th:text="${user.name}"></p>
-            <p th:text="${user.email}"></p>
-            <h3>Property :</h3>
-            <p class="green" th:text="${property.id}">property_id</p>
-            <p th:text="${property.title}"></p>
-            <p th:text="${property.owner.name}"></p>
-            <p th:text="${property.shortDesc}"></p>
-            <p th:text="${property.longDesc}"></p>
-            <p class="red" th:text="${property.price}"></p>
-            <p th:text="${property.city}"></p>
-            <h3>Property Options :</h3>
-            <p class="red" th:text="${po1.property.title}"></p>
-            <p th:text="${po1.parking}"></p>
-            <p th:text="${po1.wifi}"></p>
-            <h3>Evaluations :</h3>
-            <p>Title : <span class="red" th:text="${ev.property.title}"></span></p>
-            <p th:text="${ev.cleanliness}"></p>
-            <p th:text="${ev.confort}"></p>
-            <h3>Comments :</h3>
-            <p><strong>Message 1 : </strong><span class="red" th:text="${com2.message}"></span></p>
-            <p><strong>Message 2 : </strong><span class="red" th:text="${com3.message}"></span> - Author : <span class="green" th:text="${com3.creator.username}"></span></p>
-            <h3>Reservation :</h3>
-            <p>From <span th:text="${res2.rentStart}"></span> to <span th:text="${res2.rentStop}"></span></p>
-            <p><strong>Roomer 1 : </strong><span class="red" th:text="${res2.user.username}"></span></p>
-            <p>From <span th:text="${res3.rentStart}"></span> to <span th:text="${res3.rentStop}"></span></p>
-            <p><strong>Roomer 2 : </strong><span class="red" th:text="${res3.user.username}"></span></p>
-            -->
-        </div>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="pull-right login">
+                                <div class="btn-login">
+                                    <a href="/signin/">
+                                        <span>Connexion</span>
+                                    </a>
+                                </div>
+                            </div><!-- /end login -->
+                            <ul class="nav">
+                                <li>
+                                    <a href="/" id="logo"></a>
+                                </li>
+                                <li th:class="${home} ? 'active' : ''">
+                                    <a href="/">
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li th:class="${help} ? 'active' : ''">
+                                    <a href="/help/">
+                                        <span>Help</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- /end span12 -->
+                    </div><!-- /end row -->
+                </div><!-- /end container -->
+            </div><!-- /end navbar-inner -->
+        </div><!-- /end navbar -->
+        
+        <div class="clearfix"></div>
+        
+        <div id="wrapper">
+            <div class="container">
+                <div class="row">
+                  <div class="span12">
+                      <div id="search-bar">
+                          <form action="" id="search_form">
+                              <div class="input-wrapper">
+                                  <input type="text" class="location" placeholder="Where do you want to go ?" />
+                              </div>
+                              <div class="input-wrapper">
+                                  <input type="text" class="checkin" placeholder="Check In" />
+                                  <i class="icon-calendar"></i>
+                              </div>
+                              <div class="input-wrapper">
+                                  <input type="text" class="checkout" placeholder="Check Out" />
+                                  <i class="icon-calendar"></i>
+                              </div>
+                              <div class="btn-group pull-left">
+                                  <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
+                                  <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                      <li><a tabindex="-1" href="#">2 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">3 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">4 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">5 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">6 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">7 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">8 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">9 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">10 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">11 hosts</a></li>
+                                      <li><a tabindex="-1" href="#">12+ hosts</a></li>
+                                  </ul>
+                              </div>
+
+                              <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
+                              <div class="clearfix"></div>
+                          </form>
+                      </div>
+                      
+                      <div class="content"></div>
+                  </div>
+                </div>
+            </div>
+        </div><!-- /end wrapper -->
+
+        <div id="footer-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p><a href="">Report a bug</a> - <a href="/help/">Help center</a></p>
+                        <p id="app-ref"><a href="http://www.springsource.org/spring-framework" target="_blank">Spring 3.2.2</a> - Home Rental © 2013 - version: <span class="warning">0.1.0</span></p>
+                    </div>
+                </div>
+            </div><!-- /end container -->
+        </div><!-- /end footer-wrapper -->
+        
+        <!-- JS import -->
+        <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
     </body>
 </html>
