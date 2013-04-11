@@ -112,16 +112,34 @@ public class HomeController {
         return "home";
     }
     
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model) {
          
         // Get User
         User user = userService.findByUsername(username);
         Integer propertyCount = propertyService.findProperty(user).size();
+        
         model.addAttribute("data.page_title", user.getUsername() + " - Home Rental");
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
         
         return "user";
+    }
+    
+    @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
+    public String propertyView(@PathVariable Integer id, Model model) {
+         
+        // Get Property
+        Property property = propertyService.findById(id);
+        PropertyOptions options = propertyOptionsService.findByProperty(property);
+        Evaluation evaluation = evalService.findByProperty(property);
+        Integer totalEval = evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice() / 3;
+        
+        model.addAttribute("data.page_title", property.getTitle() + " - Home Rental");
+        model.addAttribute("property", property);
+        model.addAttribute("options", options);
+        model.addAttribute("totalEval", totalEval);
+        
+        return "property";
     }
 }

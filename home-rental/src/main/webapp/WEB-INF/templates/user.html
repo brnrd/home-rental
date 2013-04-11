@@ -5,7 +5,7 @@
       xmlns:tiles="http://www.thymeleaf.org"
       lang="en">
     <head>
-        <title tiles:fragment="title" th:text="${user.username}"></title>
+        <title tiles:fragment="title" th:text="${data.page_title}"></title>
 
     </head>
     <body tiles:fragment="content">
@@ -24,8 +24,6 @@
                 <p th:text="${user.email}"></p>
                 <p></p>
                 <p th:text="'Nombre de biens : ' +${propertyCount}"></p>
-                <p>Appréciation globale</p>
-                <p>NOTE</p>
                 <button class="btn btn-success">Modifier</button>
                 <button class="btn btn-danger">Supprimer</button>
             </div>
