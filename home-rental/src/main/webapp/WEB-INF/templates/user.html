@@ -5,12 +5,12 @@
       xmlns:tiles="http://www.thymeleaf.org"
       lang="en">
     <head>
-        <title tiles:fragment="title" th:text="${data.page_title}"></title>
+        <title tiles:fragment="title">Home rental | Account</title>
 
     </head>
     <body tiles:fragment="content">
         <div class="page-header">
-            <h1 th:text="${user.username}"></h1>
+            <h3 th:text="${user.username}"></h3>
         </div>
         <div class="row">
             <div class="span10">
