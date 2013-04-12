@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/css/jquery-ui/jquery-ui.css" th:href="@{/css/jquery-ui/jquery-ui.css}" />
         <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.core.css" th:href="@{/css/jquery-ui/jquery.ui.core.css}" />
         <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.datepicker.css" th:href="@{/css/jquery-ui/jquery.ui.datepicker.css}" />
-        
+
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
         <link rel="stylesheet" href="/css/home.css" th:href="@{/css/home.css}" />
@@ -129,14 +129,9 @@
 
         <!-- Custom js -->
         <script type="text/javascript" src="#" th:src="@{/js/carousel.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/base.js}"></script>
 
         <!-- JS Inline -->
-        <script th:inline="javascript">
-            $(document).ready(function() {
-                $('#checkin').datepicker();
-                $('#checkout').datepicker();
-            });
-        </script>
         
     </body>
 </html>
