@@ -64,7 +64,7 @@ public class StaticMap {
                 string.append(COLOR_RED);
                 string.append(MARKER_SEPARATOR);
                 string.append(LABEL);
-                string.append(i);
+                string.append(i+1);
                 string.append(MARKER_SEPARATOR);
                 string.append(properties.get(i).getCoordinates());
 //            } else {

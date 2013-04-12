@@ -128,9 +128,13 @@ public class HomeController {
         // Get User
         User user = userService.findByUsername(username);
         Integer propertyCount = propertyService.findProperty(user).size();
+        List<Property> properties = propertyService.findProperty(user);
+        String pathMap;
+        pathMap = StaticMap.buildMapURL(properties);
         
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
+        model.addAttribute("map", pathMap);
         return "user";
     }
     
