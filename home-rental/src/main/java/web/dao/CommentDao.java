@@ -12,6 +12,6 @@ import web.model.User;
 public interface CommentDao extends AbstractDao<Comment, Integer> {
     
     Boolean saveComment(Comment comment);
-    Comment findByProperty(Property property);
+    List<Comment> findByProperty(Property property);
     List<Comment> findByUser(User user);
 }

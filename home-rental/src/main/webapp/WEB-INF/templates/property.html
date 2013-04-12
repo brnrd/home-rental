@@ -54,7 +54,23 @@
                         <p th:text="${property.longDesc}"></p>
                     </div>
                     <div class="tab-pane" id="pictures">PICTURES</div>
-                    <div class="tab-pane" id="comments">COMMENTS</div>
+                    <div class="tab-pane" id="comments">
+                        <table>
+                            <caption>Commentaires</caption>
+                            <thead>
+                                <tr>
+                                    <th>Commentaire</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comment : ${comments}">
+                                    <td th.text="${comment.message}"></td>
+                                    <td th.text="${comment.creator.username}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

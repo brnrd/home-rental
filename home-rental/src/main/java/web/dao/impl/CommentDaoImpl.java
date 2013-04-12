@@ -29,8 +29,8 @@ public class CommentDaoImpl extends AbstractDaoImpl<Comment, Integer> implements
     }
     
     @Override
-    public Comment findByProperty(Property property) {
-        return findByCriteria(Restrictions.eq("property", property)).get(0);
+    public List<Comment> findByProperty(Property property) {
+        return findByCriteria(Restrictions.eq("property", property));
     }
     
     @Override

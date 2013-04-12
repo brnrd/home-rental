@@ -141,6 +141,7 @@ public class HomeController {
         Property property = propertyService.findById(id);
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         Evaluation evaluation = evalService.findByProperty(property);
+        List<Comment> comments = comService.findByProperty(property);
         Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
         String pathMap;
         pathMap = StaticMap.buildMapURL(property);
@@ -148,76 +149,9 @@ public class HomeController {
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("totalEval", totalEval);
+        model.addAttribute("comments", comments);
         model.addAttribute("map", pathMap);
+        
         return "property";
     }
-    
-//    private String buildMapURL(List<Property> properties) {
-//        StringBuilder url = new StringBuilder();
-//        url.append(BASE_URL);
-//        url.append(ZOOM);
-//        url.append(SEPARATOR);
-//        url.append(SIZE);
-//        url.append(SEPARATOR);
-//        url.append(KEY);
-//        url.append(SEPARATOR);
-//        url.append(addMarkers(properties));
-//        url.append(SEPARATOR);
-//        url.append(SENSOR);
-//        return url.toString();
-//    }
-//    
-//    private String buildMapURL(Property property) {
-//        StringBuilder url = new StringBuilder();
-//        url.append(BASE_URL);
-//        url.append(ZOOM);
-//        url.append(SEPARATOR);
-//        url.append(SIZE);
-//        url.append(SEPARATOR);
-//        url.append(KEY);
-//        url.append(addMarkers(property));
-//        url.append(SEPARATOR);
-//        url.append(SENSOR);
-//        return url.toString();
-//    }
-//
-//    private String addMarkers(List<Property> properties) {
-//        StringBuilder string = new StringBuilder();
-//        for (int i = 0; i < properties.size(); i++) {
-//            if (i > 0) {
-//                string.append(SEPARATOR);
-//            }
-//            if (properties.get(i).getCoordinates() != null) {
-//                string.append(SEPARATOR);
-//                string.append(MARKER);
-//                string.append(COLOR_RED);
-//                string.append(MARKER_SEPARATOR);
-//                string.append(LABEL);
-//                string.append(i);
-//                string.append(MARKER_SEPARATOR);
-//                string.append(properties.get(i).getCoordinates());
-////            } else {
-////                string.append(properties.get(i).getAddress());
-//            }
-//        }
-//        return string.toString();
-//    }
-//
-//    private String addMarkers(Property property) {
-//        StringBuilder string = new StringBuilder();
-//        if (property.getCoordinates() != null) {
-//            string.append(SEPARATOR);
-//            string.append(MARKER);
-//            string.append(COLOR_RED);
-//            string.append(MARKER_SEPARATOR);
-//            string.append(LABEL);
-//            string.append(1);
-//            string.append(MARKER_SEPARATOR);
-//            string.append(property.getCoordinates());
-////            } else {
-////                string.append(properties.get(i).getAddress());
-//        }
-//        return string.toString();
-//    }
-//    
 }
