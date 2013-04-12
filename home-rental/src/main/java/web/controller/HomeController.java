@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,12 +151,17 @@ public class HomeController {
         Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
         String pathMap;
         pathMap = StaticMap.buildMapURL(property);
+        List<String> pictures = new LinkedList<String>();
+        for (int i = 1; i < 4; i++) {
+            pictures.add(new Integer(i).toString() + ".jpg");
+        }
         
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("totalEval", totalEval);
         model.addAttribute("comments", comments);
         model.addAttribute("map", pathMap);
+        model.addAttribute("pictures", pictures);
         
         return "property";
     }

@@ -21,7 +21,10 @@
                 <h3>Description</h3>
                 <p th:text="${property.country}"></p>
                 <p th:text="${property.type}"></p>
-                <p th:text="${property.rooms}+' chambres'"></p>
+                <div th:switch="${property.rooms}">
+                    <p th:case="'1'">1 room</p>
+                    <p th:case="*" th:text="${property.rooms}+' rooms'"></p>
+                </div>
                 <p></p>
                 <h5>Options</h5>
                 <div class="control-group">
@@ -55,11 +58,19 @@
                 </ul>
 
                 <div class="tab-content">
+                    <!--tab presentation-->
                     <div class="tab-pane active" id="presentation">
                         <h3 th:text="${property.title}"></h3>
                         <p th:text="${property.longDesc}"></p>
                     </div>
-                    <div class="tab-pane" id="pictures">PICTURES</div>
+                    <!--tab pictures-->
+                    <div class="tab-pane" id="pictures">
+                        <div th:each="picture : ${pictures}">
+                            <img th:src="@{'/img/property/'+${property.id}+ '/' +${picture}}"></img>
+                            <br>
+                        </div>
+                    </div>
+                    <!--tab comments-->
                     <div class="tab-pane" id="comments">
                         <table>
                             <thead>

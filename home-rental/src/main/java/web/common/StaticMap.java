@@ -19,7 +19,7 @@ public class StaticMap {
     private final static String LABEL = "label:";
     private final static String SENSOR = "sensor=false";
     private final static String SEPARATOR = "&";
-
+    
     public StaticMap() {
     }
 
