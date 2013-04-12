@@ -23,7 +23,7 @@
                 <p th:text="${property.type}"></p>
                 <p th:text="${property.rooms}+' chambres'"></p>
                 <p></p>
-                <p>Options</p>
+                <h5>Options</h5>
                 <div class="control-group">
                     <div class="constrols">
                         <label class="checkbox">
@@ -42,7 +42,7 @@
                 </div>
                 <p th:text=" 'Note: '+${totalEval}+'/100'"></p>
                 <p>
-                    <a th:href=" '/home-rental/user/'+${property.owner.username}">Propriétaire</a>
+                    <a th:href=" '/home-rental/user/'+${property.owner.username}">Owner</a>
                 </p>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="span10">
                 <ul class="nav nav-tabs" id="proprety-tab">
                     <li class="active"><a href="#presentation" data-toggle="tab">Presentation</a></li>
-                    <li><a href="#pictures" data-toggle="tab">Photos</a></li>
+                    <li><a href="#pictures" data-toggle="tab">Pictures</a></li>
                     <li><a href="#comments" data-toggle="tab">Comments</a></li>
                 </ul>
 
@@ -62,19 +62,24 @@
                     <div class="tab-pane" id="pictures">PICTURES</div>
                     <div class="tab-pane" id="comments">
                         <table>
-                            <caption>Commentaires</caption>
                             <thead>
                                 <tr>
-                                    <th>Commentaire</th>
+                                    <th>Comment</th>
                                     <th>User</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="comment : ${comments}">
+                                <tr>
                                     <td th.text="${comment.message}"></td>
                                     <td th.text="${comment.creator.username}"></td>
                                 </tr>
                             </tbody>
+<!--                            <tbody>
+                                <tr th:each="comment : ${comments}">
+                                    <td th.text="${comment.message}"></td>
+                                    <td th.text="${comment.creator.username}"></td>
+                                </tr>
+                            </tbody>-->
                         </table>
                     </div>
                 </div>

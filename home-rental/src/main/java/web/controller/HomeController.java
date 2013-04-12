@@ -149,11 +149,12 @@ public class HomeController {
         Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
         String pathMap;
         pathMap = StaticMap.buildMapURL(property);
+        System.out.println("TEST = " + comments.get(0).getMessage() + " " + comments.get(0).getCreator().getUsername());
         
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("totalEval", totalEval);
-        model.addAttribute("comments", comments);
+        model.addAttribute("comment", comments.get(0));
         model.addAttribute("map", pathMap);
         
         return "property";
