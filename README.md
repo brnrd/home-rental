@@ -25,9 +25,9 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 
 ### Maps API ###
 
-The doc on the Maps API is [here][16]
-The doc on the Static Maps API is [here][17]
-The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
++The doc on the Maps API is [here][16]
++The doc on the Static Maps API is [here][17]
++The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
 
 #### To read ####
 
