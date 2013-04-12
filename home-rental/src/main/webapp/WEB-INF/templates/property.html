@@ -35,9 +35,15 @@
                         <label class="checkbox">
                             <input type="checkbox" name="options" value="wifi" disabled="" th:checked="${options.wifi}"/> Wi-Fi
                         </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="options" value="lavoir" disabled="" th:checked="${options.laundry}"/> Lavoir
+                        </label>
                     </div>
                 </div>
                 <p th:text=" 'Note: '+${totalEval}+'/100'"></p>
+                <p>
+                    <a th:href=" '/home-rental/user/'+${property.owner.username}">Propriétaire</a>
+                </p>
             </div>
         </div>
         <div class="row">
