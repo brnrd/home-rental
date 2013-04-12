@@ -15,7 +15,6 @@ current_slide = MIN;
 
 # Update slide and selector
 change_slide = (ind) ->    
-    console.log "change slide"
     # Update CSS Class
     $('#frame-container li#loft_'+ind).addClass('active')
     $('#frame-container li#loft_'+current_slide).removeClass('active')
@@ -26,14 +25,11 @@ check_change = (ind) ->
       current_slide = MIN
     else
       change_slide(ind)
-      current_slide = ind
+      current_slide = ind    
 
-auto_carousel = () ->
+# Main function
+jQuery ->
     setInterval ->
         check_change(current_slide+1)
     , TIME
     true
-
-# Main function
-jQuery ->
-    auto_carousel()

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" 
-            xmlns:th="http://www.thymeleaf.org"
-            xmlns:tiles="http://www.thymeleaf.org"
-            lang="en">
-    
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+
     <head>
         <title tiles:include="title"></title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="keywords" content="home rental" />
         <meta name="authors" content="airboy and brnrd" />
+
+        <!-- JQuery UI CSS -->
+        <link rel="stylesheet" href="/css/jquery-ui/jquery-ui.css" th:href="@{/css/jquery-ui/jquery-ui.css}" />
+        <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.core.css" th:href="@{/css/jquery-ui/jquery.ui.core.css}" />
+        <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.datepicker.css" th:href="@{/css/jquery-ui/jquery.ui.datepicker.css}" />
         
+        <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
         <link rel="stylesheet" href="/css/home.css" th:href="@{/css/home.css}" />
     </head>
@@ -49,53 +55,53 @@
                 </div><!-- /end container -->
             </div><!-- /end navbar-inner -->
         </div><!-- /end navbar -->
-        
+
         <div class="clearfix"></div>
-        
+
         <div id="wrapper">
             <div class="container">
                 <div class="row">
-                  <div class="span12">
-                      <div id="search-bar">
-                          <form action="" id="search_form">
-                              <div class="input-wrapper">
-                                  <input type="text" class="location" placeholder="Where do you want to go ?" />
-                              </div>
-                              <div class="input-wrapper">
-                                  <input type="text" class="checkin" placeholder="Check In" />
-                                  <i class="icon-calendar"></i>
-                              </div>
-                              <div class="input-wrapper">
-                                  <input type="text" class="checkout" placeholder="Check Out" />
-                                  <i class="icon-calendar"></i>
-                              </div>
-                              <div class="btn-group pull-left">
-                                  <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
-                                  <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
-                                      <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                      <li><a tabindex="-1" href="#">2 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">3 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">4 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">5 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">6 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">7 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">8 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">9 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">10 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">11 hosts</a></li>
-                                      <li><a tabindex="-1" href="#">12+ hosts</a></li>
-                                  </ul>
-                              </div>
+                    <div class="span12">
+                        <div id="search-bar">
+                            <form action="" id="search_form">
+                                <div class="input-wrapper">
+                                    <input type="text" class="location" placeholder="Where do you want to go ?" />
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" class="checkin" id="checkin" placeholder="Check In" />
+                                    <i class="icon-calendar"></i>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" class="checkout" id="checkout" placeholder="Check Out" />
+                                    <i class="icon-calendar"></i>
+                                </div>
+                                <div class="btn-group pull-left">
+                                    <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
+                                    <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                        <li><a tabindex="-1" href="#">2 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">3 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">4 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">5 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">6 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">7 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">8 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">9 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">10 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">11 hosts</a></li>
+                                        <li><a tabindex="-1" href="#">12+ hosts</a></li>
+                                    </ul>
+                                </div>
 
-                              <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
-                              <div class="clearfix"></div>
-                          </form>
-                      </div>
-                      
-                      <div class="content" tiles:include="body"></div>
-                  </div>
+                                <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+
+                        <div class="content" tiles:include="body"></div>
+                    </div>
                 </div>
             </div>
         </div><!-- /end wrapper -->
@@ -110,18 +116,27 @@
                 </div>
             </div><!-- /end container -->
         </div><!-- /end footer-wrapper -->
-        
+
         <!-- JS import -->
         <!-- Global imports -->
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
-        
+        <script type="text/javascript" src="#" th:src="@{/js/global/jquery-ui.js}"></script>
+
         <!-- Bootstrap imports -->
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
-        
+
         <!-- Custom js -->
         <script type="text/javascript" src="#" th:src="@{/js/carousel.js}"></script>
 
+        <!-- JS Inline -->
+        <script th:inline="javascript">
+            $(document).ready(function() {
+                $('#checkin').datepicker();
+                $('#checkout').datepicker();
+            });
+        </script>
+        
     </body>
 </html>

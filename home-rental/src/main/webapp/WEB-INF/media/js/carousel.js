@@ -9,7 +9,7 @@ comment :
 
 
 (function() {
-  var MAX, MIN, TIME, auto_carousel, change_slide, check_change, current_slide;
+  var MAX, MIN, TIME, change_slide, check_change, current_slide;
 
   MIN = 1;
 
@@ -20,7 +20,6 @@ comment :
   current_slide = MIN;
 
   change_slide = function(ind) {
-    console.log("change slide");
     $('#frame-container li#loft_' + ind).addClass('active');
     return $('#frame-container li#loft_' + current_slide).removeClass('active');
   };
@@ -35,15 +34,11 @@ comment :
     }
   };
 
-  auto_carousel = function() {
+  jQuery(function() {
     setInterval(function() {
       return check_change(current_slide + 1);
     }, TIME);
     return true;
-  };
-
-  jQuery(function() {
-    return auto_carousel();
   });
 
 }).call(this);
