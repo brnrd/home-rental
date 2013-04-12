@@ -8,13 +8,47 @@
     </head>
 
     <body tiles:fragment="content">
-        <div class="carousel-container">
-            <ul class="pict-list">
-                <li>
-                    <img src="/img/carousel/time_square.jpg" th:src="@{/img/carousel/time_square.jpg}" alt="time square new york city" />
+        <div id="carousel">
+            <ul id="frame-container">
+                <li id="loft_1" class="active">
+                    <img src="/img/carousel/loft1.jpg" th:src="@{/img/carousel/loft1.jpg}" alt="loft1" />
+                    <div class="frame-caption">
+                        <span class="frame-caption-title"><strong>Find a great place for holidays</strong></span>
+                        <span class="frame-caption-description"><strong>Want to discover <b class="frame-caption-cityname">New York City</b> ? Find a great place to stay there !</strong></span>
+                        <a href="search/new_york_city" class="btn btn-primary">Search for <strong>NYC</strong></a>
+                    </div>
                 </li>
-                <li class="disabled">
-                    <img src="/img/carousel/connemara.jpg" th:src="@{/img/carousel/connemara.jpg}" alt="connemara ireland" />
+                <li id="loft_2">
+                    <img src="/img/carousel/loft2.jpg" th:src="@{/img/carousel/loft2.jpg}" alt="loft2" />
+                    <div class="frame-caption">
+                        <span class="frame-caption-title"><strong>Find a great place for holidays</strong></span>
+                        <span class="frame-caption-description"><strong>Want to discover <b class="frame-caption-cityname">Berlin</b> ? Find a great place to stay there !</strong></span>
+                        <a href="search/berlin" class="btn btn-primary">Search for <strong>Berlin</strong></a>
+                    </div>
+                </li>
+                <li id="loft_3">
+                    <img src="/img/carousel/loft3.jpg" th:src="@{/img/carousel/loft3.jpg}" alt="loft3" />
+                    <div class="frame-caption">
+                        <span class="frame-caption-title"><strong>Find a great place for holidays</strong></span>
+                        <span class="frame-caption-description"><strong>Want to discover <b class="frame-caption-cityname">Los Angeles</b> ? Find a great place to stay there !</strong></span>
+                        <a href="search/los_angeles" class="btn btn-primary">Search for <strong>Los Angeles</strong></a>
+                    </div>
+                </li>
+                <li id="loft_4">
+                    <img src="/img/carousel/loft4.jpg" th:src="@{/img/carousel/loft4.jpg}" alt="loft4" />
+                    <div class="frame-caption">
+                        <span class="frame-caption-title"><strong>Find a great place for holidays</strong></span>
+                        <span class="frame-caption-description"><strong>Want to discover <b class="frame-caption-cityname">Dublin</b> ? Find a great place to stay there !</strong></span>
+                        <a href="search/dublin" class="btn btn-primary">Search for <strong>Dublin</strong></a>
+                    </div>
+                </li>
+                <li id="loft_5">
+                    <img src="/img/carousel/loft5.jpg" th:src="@{/img/carousel/loft5.jpg}" alt="loft5" />
+                    <div class="frame-caption">
+                        <span class="frame-caption-title"><strong>Find a great place for holidays</strong></span>
+                        <span class="frame-caption-description"><strong>Want to discover <b class="frame-caption-cityname">Stockhölm</b> ? Find a great place to stay there !</strong></span>
+                        <a href="search/stockholm" class="btn btn-primary">Search for <strong>Stockhölm</strong></a>
+                    </div>
                 </li>
             </ul>
         </div>
