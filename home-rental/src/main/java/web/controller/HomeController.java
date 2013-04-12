@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,17 @@ import web.service.UserService;
 
 @Controller
 public class HomeController {
+    
+    private final static String BASE_URL = "http://maps.googleapis.com/maps/api/staticmap?";
+    private final static String ZOOM = "zoom=10";
+    private final static String SIZE = "size=600x300";
+    private final static String KEY = "key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I";
+    private final static String MARKER = "markers=";
+    private final static String MARKER_SEPARATOR = "%7C";
+    private final static String COLOR_RED = "color:red";
+    private final static String LABEL = "label:";
+    private final static String SENSOR = "sensor=false";
+    private final static String SEPARATOR = "&";
 
     @Autowired
     private UserService userService;
@@ -140,9 +152,8 @@ public class HomeController {
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         Evaluation evaluation = evalService.findByProperty(property);
         Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
-        String pathMap = "http://maps.googleapis.com/maps/api/staticmap?zoom=10&size=600x300&key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I&markers=color:red%7Ccolor:red%7Clabel:A%7C";
-        pathMap += property.getCoordinates();
-        pathMap += "&sensor=false";
+        String pathMap;
+        pathMap = buildMapURL(property);
         
         model.addAttribute("property", property);
         model.addAttribute("options", options);
@@ -150,4 +161,73 @@ public class HomeController {
         model.addAttribute("map", pathMap);
         return "property";
     }
+    
+    private String buildMapURL(List<Property> properties) {
+        StringBuilder url = new StringBuilder();
+        url.append(BASE_URL);
+        url.append(ZOOM);
+        url.append(SEPARATOR);
+        url.append(SIZE);
+        url.append(SEPARATOR);
+        url.append(KEY);
+        url.append(SEPARATOR);
+        url.append(addMarkers(properties));
+        url.append(SEPARATOR);
+        url.append(SENSOR);
+        return url.toString();
+    }
+    
+    private String buildMapURL(Property property) {
+        StringBuilder url = new StringBuilder();
+        url.append(BASE_URL);
+        url.append(ZOOM);
+        url.append(SEPARATOR);
+        url.append(SIZE);
+        url.append(SEPARATOR);
+        url.append(KEY);
+        url.append(addMarkers(property));
+        url.append(SEPARATOR);
+        url.append(SENSOR);
+        return url.toString();
+    }
+
+    private String addMarkers(List<Property> properties) {
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i < properties.size(); i++) {
+            if (i > 0) {
+                string.append(SEPARATOR);
+            }
+            if (properties.get(i).getCoordinates() != null) {
+                string.append(SEPARATOR);
+                string.append(MARKER);
+                string.append(COLOR_RED);
+                string.append(MARKER_SEPARATOR);
+                string.append(LABEL);
+                string.append(i);
+                string.append(MARKER_SEPARATOR);
+                string.append(properties.get(i).getCoordinates());
+//            } else {
+//                string.append(properties.get(i).getAddress());
+            }
+        }
+        return string.toString();
+    }
+
+    private String addMarkers(Property property) {
+        StringBuilder string = new StringBuilder();
+        if (property.getCoordinates() != null) {
+            string.append(SEPARATOR);
+            string.append(MARKER);
+            string.append(COLOR_RED);
+            string.append(MARKER_SEPARATOR);
+            string.append(LABEL);
+            string.append(1);
+            string.append(MARKER_SEPARATOR);
+            string.append(property.getCoordinates());
+//            } else {
+//                string.append(properties.get(i).getAddress());
+        }
+        return string.toString();
+    }
+    
 }
