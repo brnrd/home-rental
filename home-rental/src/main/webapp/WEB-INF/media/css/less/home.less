@@ -1,0 +1,32 @@
+/* CSS - base - Home Renatl Project
+ * Date of creation : 11/04/2013
+ * Creator : Romain FONCIER
+ * Target : home
+ * Last modification : 11/04/2013
+ * Comment :
+ *
+ * ------------------------------------------------------------------- */
+
+/* Bootstrap Imports */
+@import "../bootstrap/variables";
+@import "../bootstrap/mixins";
+
+.carousel-container {
+    height: 390px;
+    ul.pict-list {
+        height: 390px;
+        margin: 0;
+        li {
+            border: 1px solid #111;
+            .border-radius(5px);
+            img {
+                heigh: 390px;
+                width: 940px;
+                .border-radius(5px);
+            }
+        }
+        li.disabled {
+            display: none;
+        }
+    }
+}

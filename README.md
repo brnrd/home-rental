@@ -25,7 +25,8 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 
 ### Maps API ###
 
-Infos are readable [here][16]
+The doc on the Maps API is [here][16]
+The doc on the Static Maps API is [here][17]
 The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
 
 #### To read ####
@@ -54,3 +55,4 @@ The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
 [14]: https://github.com/iron9light/coffeescript-maven-plugin
 [15]: http://www.thymeleaf.org/documentation.html
 [16]: https://developers.google.com/maps/documentation/javascript/?hl=fr
+[17]: https://developers.google.com/maps/documentation/staticmaps/?hl=fr

@@ -140,10 +140,14 @@ public class HomeController {
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         Evaluation evaluation = evalService.findByProperty(property);
         Integer totalEval = (evaluation.getCleanliness() + evaluation.getConfort() + evaluation.getQaPrice())/3;
+        String pathMap = "http://maps.googleapis.com/maps/api/staticmap?zoom=10&size=600x300&key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I&markers=color:red%7Ccolor:red%7Clabel:A%7C";
+        pathMap += property.getCoordinates();
+        pathMap += "&sensor=false";
         
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("totalEval", totalEval);
+        model.addAttribute("map", pathMap);
         return "property";
     }
 }

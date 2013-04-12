@@ -8,6 +8,15 @@
     </head>
 
     <body tiles:fragment="content">
-        <div><p>Test import body</p></div>
+        <div class="carousel-container">
+            <ul class="pict-list">
+                <li>
+                    <img src="/img/carousel/time_square.jpg" th:src="@{/img/carousel/time_square.jpg}" alt="time square new york city" />
+                </li>
+                <li class="disabled">
+                    <img src="/img/carousel/connemara.jpg" th:src="@{/img/carousel/connemara.jpg}" alt="connemara ireland" />
+                </li>
+            </ul>
+        </div>
     </body>
 </html>
