@@ -69,17 +69,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td th.text="${comment.message}"></td>
-                                    <td th.text="${comment.creator.username}"></td>
+                                <tr th:each="comment : ${comments}">
+                                    <td th:text="${comment.message}"></td>
+                                    <td th:text="${comment.creator.username}"></td>
                                 </tr>
                             </tbody>
-<!--                            <tbody>
-                                <tr th:each="comment : ${comments}">
-                                    <td th.text="${comment.message}"></td>
-                                    <td th.text="${comment.creator.username}"></td>
-                                </tr>
-                            </tbody>-->
                         </table>
                     </div>
                 </div>

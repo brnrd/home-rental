@@ -154,7 +154,7 @@ public class HomeController {
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("totalEval", totalEval);
-        model.addAttribute("comment", comments.get(0));
+        model.addAttribute("comments", comments);
         model.addAttribute("map", pathMap);
         
         return "property";
