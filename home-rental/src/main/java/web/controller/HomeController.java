@@ -120,8 +120,8 @@ public class HomeController {
         model.addAttribute("home", true);
         
         // SetUp the typeahead list with country and city names.
-        List<String> cities = propertyService.selectDistinctCities();
-        model.addAttribute("cities", cities);
+        //List<String> cities = propertyService.selectDistinctCities();
+        //model.addAttribute("cities", cities);
         return "home";
     }
     

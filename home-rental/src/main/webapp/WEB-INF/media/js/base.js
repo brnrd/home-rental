@@ -9,7 +9,7 @@ comment :
 
 
 (function() {
-  var ckeckin, formatDate, target;
+  var ckeckin, formatDate, geocoder, service, target;
 
   ckeckin = null;
 
@@ -44,6 +44,37 @@ comment :
       if (checkin) {
         return $('#checkin').datepicker('option', 'maxDate', selectedDate);
       }
+    }
+  });
+
+  service = new google.maps.places.AutocompleteService();
+
+  geocoder = new google.maps.Geocoder();
+
+  $('#location-search').typeahead({
+    source: function(query, process) {
+      return service.getPlacePredictions({
+        input: query
+      }, function(predictions, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          return process($.map(predictions, function(prediction) {
+            return prediction.description;
+          }));
+        }
+      });
+    },
+    updater: function(item) {
+      geocoder.geocode({
+        address: item
+      }, function(results, status) {
+        if (status !== google.maps.GeocoderStatus.OK) {
+          alert('Cannot find address');
+          return;
+        }
+        map.setCenter(results[0].geometry.location);
+        return map.setZoom(12);
+      });
+      return item;
     }
   });
 

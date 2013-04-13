@@ -45,7 +45,7 @@ $('#checkout').datepicker(
 service = new google.maps.places.AutocompleteService()
 geocoder = new google.maps.Geocoder()
 
-$('location-search').typeahead(
+$('#location-search').typeahead(
     source: (query, process) ->
         service.getPlacePredictions(
             input: query,
