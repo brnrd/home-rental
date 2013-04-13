@@ -10,6 +10,12 @@
         <put-attribute name="body" value="/home.html :: content" type="thymeleaf"/>
     </definition>
     
+    <definition name="search" extends="baseLayout">
+        <put-attribute name="title" value="/search.html :: title" type="thymeleaf"/>
+        <put-attribute name="body" value="/search.html :: content" type="thymeleaf"/>
+        <put-attribute name="[//div[@id='js-specific']]" value="/search.html :: js-specific" type="thymeleaf"/>
+    </definition>
+    
     <definition name="user" extends="baseLayout">
         <put-attribute name="title" value="/user.html :: title" type="thymeleaf"/>
         <put-attribute name="body" value="/user.html :: content" type="thymeleaf"/>

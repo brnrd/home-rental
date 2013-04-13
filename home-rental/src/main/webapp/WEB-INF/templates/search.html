@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+
+    <head>
+        <title tiles:fragment="title">Home Rental | Search</title>
+    </head>
+
+    <body tiles:fragment="content">
+        <div class="map-container">
+            <div id="map" class="pull-left map"></div>
+            <div class="pull-left map-container-caption"></div>
+            <div class="clearfix"></div>
+        </div>
+        
+        <!-- Bloc Search results -->
+        <div class="search-result">
+            
+        </div>
+        
+        <!-- Custom js page specific -->
+        <div id="js-specific" tiles:fragment="js-specific">
+            <script type="text/javascript" src="#"></script>
+        </div>
+        
+    </body>
+</html>

@@ -125,6 +125,11 @@ public class HomeController {
         return "home";
     }
     
+    @RequestMapping(value = "/search/", method = RequestMethod.GET)
+    public String searchView(Model model) {
+        return "search";
+    }
+    
     @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model) {
          

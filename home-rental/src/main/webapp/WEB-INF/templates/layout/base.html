@@ -136,6 +136,9 @@
         <script type="text/javascript" src="#" th:src="@{/js/base.js}"></script>
 
         <!-- JS Inline -->
+        
+        <!-- Custom JS page specific imports - Little hack to import page specific js ! ;-) -->
+        <div id="js-specific" tiles:include="[//div[@id='js-specific']]"></div>
 
     </body>
 </html>
