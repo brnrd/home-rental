@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,6 +118,10 @@ public class HomeController {
         
         // Specified if the current page is active and set the tab in the navbar.
         model.addAttribute("home", true);
+        
+        // SetUp the typeahead list with country and city names.
+        List<String> cities = propertyService.selectDistinctCities();
+        model.addAttribute("cities", cities);
         return "home";
     }
     

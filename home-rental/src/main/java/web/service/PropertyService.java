@@ -15,4 +15,6 @@ public interface PropertyService {
     void saveProperty(Property property);
     void deleteProperty(Integer property_id);
     List<Property> findAll();
+    List<String> selectDistinctCities();
+    List<String> selectDistinctCountries();
 }
