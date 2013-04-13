@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:tiles="http://www.thymeleaf.org"
       lang="en">
@@ -19,6 +19,9 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
         <link rel="stylesheet" href="/css/home.css" th:href="@{/css/home.css}" />
+
+        <!-- Google Maps API import -->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     </head>
     <body>
         <div class="navbar navbar-fixed-top navbar-inverse">
@@ -65,7 +68,7 @@
                         <div id="search-bar">
                             <form action="" id="search_form">
                                 <div class="input-wrapper">
-                                    <input type="text" class="location" placeholder="Where do you want to go ?" />
+                                    <input type="text" class="location" id="location-search" placeholder="Where do you want to go ?" />
                                 </div>
                                 <div class="input-wrapper">
                                     <input type="text" class="checkin" id="checkin" placeholder="Check In" />
@@ -126,12 +129,13 @@
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-typeahead.js}"></script>
 
         <!-- Custom js -->
         <script type="text/javascript" src="#" th:src="@{/js/carousel.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/base.js}"></script>
 
         <!-- JS Inline -->
-        
+
     </body>
 </html>

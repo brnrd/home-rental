@@ -3,8 +3,12 @@ JS - Base
 Date of creation : 12/04/2013
 Creator : Romain FONCIER
 target : all (datepicker, ...)
-comment : 
+comment :
 ###
+
+##################
+#   Datepicker   #
+##################
 
 ckeckin = null
 target = null
@@ -26,10 +30,45 @@ $('#checkin').datepicker(
         $('#checkout').datepicker( "option", "minDate", selectedDate)
         $('#checkout').val(formatDate(target))
 )
-        
+
 $('#checkout').datepicker(
     defaultDate: if target then target else ''
     onClose: (selectedDate) ->
         if checkin
             $('#checkin').datepicker('option', 'maxDate', selectedDate)
+)
+
+#############################
+#   Typeahead Google Maps   #
+#############################
+
+service = new google.maps.places.AutocompleteService()
+geocoder = new google.maps.Geocoder()
+
+$('location-search').typeahead(
+    source: (query, process) ->
+        service.getPlacePredictions(
+            input: query,
+            (predictions, status) ->
+                if status == google.maps.places.PlacesServiceStatus.OK
+                    process(
+                        $.map(
+                            predictions,
+                            (prediction) ->
+                                prediction.description
+                        )
+                    )
+        )
+    ,
+    updater: (item) ->
+        geocoder.geocode(
+            address: item,
+            (results, status) ->
+                if status != google.maps.GeocoderStatus.OK
+                    alert('Cannot find address')
+                    return
+                map.setCenter(results[0].geometry.location)
+                map.setZoom(12)
+        )
+        item
 )
