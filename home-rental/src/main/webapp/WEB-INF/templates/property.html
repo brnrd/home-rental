@@ -19,7 +19,7 @@
             </div>
             <div class="span4">
                 <h3>Description</h3>
-                <p th:text="${property.country}"></p>
+                <p th:text="${property.shortDesc}"></p>
                 <p th:text="${property.type}"></p>
                 <div th:switch="${property.rooms}">
                     <p th:case="'1'">1 room</p>
@@ -32,14 +32,14 @@
                 <p th:if="${options.wifi}"><i class="icon-check"> Wi-Fi</i></p>
                 <p th:if="${options.laundry}"><i class="icon-check"> Laundry</i></p>
                 <br/>
-                <p th:text=" 'Note: '+${totalEval}+'/100'"></p>
+                <h5  th:text=" 'Note: '+${totalEval}+'/100'"></h5>
                 <p>
                     <a th:href=" '/home-rental/user/'+${property.owner.username}">Owner</a>
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="span10">
+            <div class="span12">
                 <ul class="nav nav-tabs" id="proprety-tab">
                     <li class="active"><a href="#presentation" data-toggle="tab">Presentation</a></li>
                     <li><a href="#pictures" data-toggle="tab">Pictures</a></li>
@@ -49,14 +49,13 @@
                 <div class="tab-content">
                     <!--tab presentation-->
                     <div class="tab-pane active" id="presentation">
-                        <h3 th:text="${property.title}"></h3>
+                        <h4 th:text="${property.title}"></h4>
                         <p th:text="${property.longDesc}"></p>
                     </div>
                     <!--tab pictures-->
                     <div class="tab-pane" id="pictures">
                         <div th:each="picture : ${pictures}">
                             <img th:src="@{'/img/property/'+${property.id}+ '/' +${picture}}"></img>
-                            <br></br>
                         </div>
                     </div>
                     <!--tab comments-->

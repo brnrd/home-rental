@@ -19,11 +19,11 @@ public class StaticMap {
     private final static String LABEL = "label:";
     private final static String SENSOR = "sensor=false";
     private final static String SEPARATOR = "&";
-    
+
     public StaticMap() {
     }
 
-     public static String buildMapURL(List<Property> properties) {
+    public static String buildMapURL(List<Property> properties) {
         StringBuilder url = new StringBuilder();
         url.append(BASE_URL);
         url.append(ZOOM);
@@ -37,7 +37,7 @@ public class StaticMap {
         url.append(SENSOR);
         return url.toString();
     }
-    
+
     public static String buildMapURL(Property property) {
         StringBuilder url = new StringBuilder();
         url.append(BASE_URL);
@@ -58,17 +58,17 @@ public class StaticMap {
             if (i > 0) {
                 string.append(SEPARATOR);
             }
-            if (properties.get(i).getCoordinates() != null) {
-                string.append(SEPARATOR);
-                string.append(MARKER);
-                string.append(COLOR_RED);
-                string.append(MARKER_SEPARATOR);
-                string.append(LABEL);
-                string.append(i+1);
-                string.append(MARKER_SEPARATOR);
+            string.append(SEPARATOR);
+            string.append(MARKER);
+            string.append(COLOR_RED);
+            string.append(MARKER_SEPARATOR);
+            string.append(LABEL);
+            string.append(i + 1);
+            string.append(MARKER_SEPARATOR);
+            if (properties.get(i).getCoordinates() != null && !"".equals(properties.get(i).getCoordinates())) {
                 string.append(properties.get(i).getCoordinates());
-//            } else {
-//                string.append(properties.get(i).getAddress());
+            } else {
+                string.append(formatAddress(properties.get(i).getAddress(), properties.get(i).getCity(), properties.get(i).getCountry()));
             }
         }
         return string.toString();
@@ -76,18 +76,24 @@ public class StaticMap {
 
     private static String addMarkers(Property property) {
         StringBuilder string = new StringBuilder();
-        if (property.getCoordinates() != null) {
-            string.append(SEPARATOR);
-            string.append(MARKER);
-            string.append(COLOR_RED);
-            string.append(MARKER_SEPARATOR);
-            string.append(LABEL);
-            string.append(1);
-            string.append(MARKER_SEPARATOR);
+        string.append(SEPARATOR);
+        string.append(MARKER);
+        string.append(COLOR_RED);
+        string.append(MARKER_SEPARATOR);
+        string.append(LABEL);
+        string.append(1);
+        string.append(MARKER_SEPARATOR);
+        if ((property.getCoordinates() == null) || ("".equals(property.getCoordinates()))) {
+            string.append(formatAddress(property.getAddress(), property.getCity(), property.getCountry()));
+        } else {
             string.append(property.getCoordinates());
-//            } else {
-//                string.append(properties.get(i).getAddress());
         }
         return string.toString();
+    }
+
+    private static String formatAddress(String address, String city, String country) {
+        StringBuilder result = new StringBuilder();
+        result.append(address).append(" ").append(city).append(" ").append(country);
+        return result.toString().replaceAll(" ", "+");
     }
 }
