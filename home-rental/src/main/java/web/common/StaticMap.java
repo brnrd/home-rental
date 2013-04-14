@@ -65,10 +65,10 @@ public class StaticMap {
             string.append(LABEL);
             string.append(i + 1);
             string.append(MARKER_SEPARATOR);
-            if (properties.get(i).getCoordinates() != null && !"".equals(properties.get(i).getCoordinates())) {
-                string.append(properties.get(i).getCoordinates());
-            } else {
+            if ((properties.get(i).getCoordinates() == null) || ("".equals(properties.get(i).getCoordinates()))) {
                 string.append(formatAddress(properties.get(i).getAddress(), properties.get(i).getCity(), properties.get(i).getCountry()));
+            } else {
+                string.append(properties.get(i).getCoordinates());
             }
         }
         return string.toString();
