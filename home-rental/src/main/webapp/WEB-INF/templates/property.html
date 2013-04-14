@@ -20,7 +20,7 @@
                     <h4>Description</h4>
                     <ul class="unstyled">
                         <li th:text="${property.shortDesc}"></li>
-                        <li th:text="${property.type}"</li>
+                        <li th:text="${property.type}"></li>
                         <div th:switch="${property.rooms}">
                             <li th:case="'1'">1 room</li>
                             <li th:case="*" th:text="${property.rooms}+' rooms'"></li>
@@ -71,7 +71,7 @@
                         </div>
                         <!--tab comments-->
                         <div class="tab-pane" id="comments">
-                            <table>
+                            <table class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Comment</th>
@@ -81,7 +81,7 @@
                                 <tbody>
                                     <tr th:each="comment : ${comments}">
                                         <td th:text="${comment.message}"></td>
-                                        <td th:text="${comment.creator.username}"></td>
+                                        <td><a th:href="'/home-rental/user/'+${comment.creator.username}" th:text="${comment.creator.username}" /></td>
                                     </tr>
                                 </tbody>
                             </table>
