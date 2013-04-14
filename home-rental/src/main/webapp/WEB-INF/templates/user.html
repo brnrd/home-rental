@@ -12,22 +12,22 @@
         <div class="page-header">
             <h3 th:text="${user.username}"></h3>
         </div>
-        <div class="row">
-            <div class="span8">
-                <p>
-                    <img th:src="${map}"></img>
-                </p>
-            </div>
-            <div class="span4">
-                <h3>My account</h3>
-                <p th:text="${user.username}"></p>
-                <p th:text="${user.name}"></p>
-                <p th:text="${user.firstname}"></p>
-                <p th:text="${user.email}"></p>
-                <p></p>
-                <p th:text="'Number of property : ' +${propertyCount}"></p>
-                <button class="btn btn-success">Modify</button>
-                <button class="btn btn-danger">Delete</button>
+        <div class="container">
+            <div class="row">
+                <div class="span9">
+                    <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+                </div>
+                <div class="span3">
+                    <h3>My account</h3>
+                    <p th:text="${user.username}"></p>
+                    <p th:text="${user.name}"></p>
+                    <p th:text="${user.firstname}"></p>
+                    <p th:text="${user.email}"></p>
+                    <p></p>
+                    <p th:text="'Number of property : ' +${propertyCount}"></p>
+                    <button class="btn btn-small">Modify</button>
+                    <button class="btn btn-small btn-danger">Delete</button>
+                </div>
             </div>
         </div>
     </body>

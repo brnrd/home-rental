@@ -11,7 +11,8 @@ public class StaticMap {
 
     private final static String BASE_URL = "http://maps.googleapis.com/maps/api/staticmap?";
     private final static String ZOOM = "zoom=13";
-    private final static String SIZE = "size=600x300";
+    private final static String SIZE = "size=400x220";
+    private final static String SCALE = "scale=2";
     private final static String KEY = "key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I";
     private final static String MARKER = "markers=";
     private final static String MARKER_SEPARATOR = "%7C";
@@ -26,9 +27,10 @@ public class StaticMap {
     public static String buildMapURL(List<Property> properties) {
         StringBuilder url = new StringBuilder();
         url.append(BASE_URL);
-        url.append(ZOOM);
         url.append(SEPARATOR);
         url.append(SIZE);
+        url.append(SEPARATOR);
+        url.append(SCALE);
         url.append(SEPARATOR);
         url.append(KEY);
         url.append(SEPARATOR);
@@ -45,7 +47,10 @@ public class StaticMap {
         url.append(SEPARATOR);
         url.append(SIZE);
         url.append(SEPARATOR);
+        url.append(SCALE);
+        url.append(SEPARATOR);
         url.append(KEY);
+        url.append(SEPARATOR);
         url.append(addMarkers(property));
         url.append(SEPARATOR);
         url.append(SENSOR);
@@ -58,7 +63,6 @@ public class StaticMap {
             if (i > 0) {
                 string.append(SEPARATOR);
             }
-            string.append(SEPARATOR);
             string.append(MARKER);
             string.append(COLOR_RED);
             string.append(MARKER_SEPARATOR);
@@ -76,12 +80,8 @@ public class StaticMap {
 
     private static String addMarkers(Property property) {
         StringBuilder string = new StringBuilder();
-        string.append(SEPARATOR);
         string.append(MARKER);
         string.append(COLOR_RED);
-        string.append(MARKER_SEPARATOR);
-        string.append(LABEL);
-        string.append(1);
         string.append(MARKER_SEPARATOR);
         if ((property.getCoordinates() == null) || ("".equals(property.getCoordinates()))) {
             string.append(formatAddress(property.getAddress(), property.getCity(), property.getCountry()));
