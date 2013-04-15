@@ -24,19 +24,12 @@
 
     <import resource="security.xml" />
     
-    <!--
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/templates/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-    -->
-    
     <!-- ThymeLeaf config -->
     <bean id="httpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
         <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
     </bean>
         
-    <bean id="templateResolver"	class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" /> 
         <property name="templateMode" value="HTML5" /> 
     </bean>
