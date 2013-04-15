@@ -21,8 +21,11 @@
     <mvc:view-controller path="/login" view-name="login" />
 
     <mvc:view-controller path="/protected" view-name="protected" />
-
-    <import resource="security.xml" />
+    
+    <!-- Provides internationalization of messages -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
     
     <!-- ThymeLeaf config -->
     <bean id="httpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -30,7 +33,8 @@
     </bean>
         
     <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-        <property name="prefix" value="/WEB-INF/templates/" /> 
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" /> 
         <property name="templateMode" value="HTML5" /> 
     </bean>
 

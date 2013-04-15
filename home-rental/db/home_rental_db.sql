@@ -110,10 +110,12 @@ CREATE TABLE reservation (
 )TYPE=InnoDB;
 
 /* Security space */
-CREATE TABLE authorities (
-    user_id VARCHAR(36) not null,
-    authority VARCHAR(50) not null,
-    constraint fk_authorities_users foreign key(user_id) references user(user_id)
+CREATE TABLE roles (
+    roles_id INT NOT NULL auto_increment,
+    target_user VARCHAR(36) NOT NULL,
+    user_role VARCHAR(12) NOT NULL, /* Choices : 'ADMIN', 'USER' (registered), 'GUEST' */
+    PRIMARY KEY (roles_id),    
+    CONSTRAINT FOREIGN KEY (target_user) REFERENCES user (user_id)
 )TYPE=InnoDB;
 
-CREATE UNIQUE index ix_auth_username ON authorities (user_id,authority);
+CREATE UNIQUE index ix_auth_username ON roles (target_user, user_role);

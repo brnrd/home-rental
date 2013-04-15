@@ -30,20 +30,20 @@ public class User implements Serializable {
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
-    @Column(name = "is_staff")
-    private Boolean staff;
+    @Column(name = "role")
+    private Role role;
 
     public User() {
     }
 
     public User(String username, String name, String firstname, String email,
-            String password, Boolean staff) {
+            String password, Role role) {
         this.username = username;
         this.name = name;
         this.firstname = firstname;
         this.email = email;
         this.password = password;
-        this.staff = staff;
+        this.role = role;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">
@@ -99,12 +99,12 @@ public class User implements Serializable {
         this.created = created;
     }
 
-    public Boolean isStaff() {
-        return staff;
+    public Role getRole() {
+        return role;
     }
 
-    public void setStaff(Boolean staff) {
-        this.staff = staff;
+    public void setRole(Role role) {
+        this.role = role;
     }
     // </editor-fold>
 }
