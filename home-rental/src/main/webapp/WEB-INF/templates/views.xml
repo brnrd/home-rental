@@ -13,7 +13,7 @@
     <definition name="search" extends="baseLayout">
         <put-attribute name="title" value="/search.html :: title" type="thymeleaf"/>
         <put-attribute name="body" value="/search.html :: content" type="thymeleaf"/>
-        <put-attribute name="[//div[@id='js-specific']]" value="/search.html :: js-specific" type="thymeleaf"/>
+        <!--<put-attribute name="js" value="/search.html :: js-specific" type="thymeleaf"/>-->
     </definition>
     
     <definition name="user" extends="baseLayout">

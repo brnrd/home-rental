@@ -21,6 +21,7 @@
         <junit.version>4.11</junit.version>
         <mysql.connector.java.version>5.1.24</mysql.connector.java.version>
         <spring.version>3.2.2.RELEASE</spring.version>
+        <springsecurity-version>3.1.3.RELEASE</springsecurity-version>
         <springdata.common.core.version>1.2.0.RELEASE</springdata.common.core.version>
         <thymeleaf-version>2.0.16</thymeleaf-version>
         <thymeleaf-extras-tiles2-version>2.0.0</thymeleaf-extras-tiles2-version>
@@ -401,6 +402,24 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.1.3.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>3.1.3.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.1.3.RELEASE</version>					
         </dependency>
         
         <dependency>

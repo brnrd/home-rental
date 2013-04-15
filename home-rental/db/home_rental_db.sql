@@ -108,3 +108,12 @@ CREATE TABLE reservation (
     CONSTRAINT FOREIGN KEY (target_user) REFERENCES user (user_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
+
+/* Security space */
+CREATE TABLE authorities (
+    user_id VARCHAR(36) not null,
+    authority VARCHAR(50) not null,
+    constraint fk_authorities_users foreign key(user_id) references user(user_id)
+)TYPE=InnoDB;
+
+CREATE UNIQUE index ix_auth_username ON authorities (user_id,authority);
