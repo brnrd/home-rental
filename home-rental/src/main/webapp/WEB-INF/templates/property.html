@@ -21,10 +21,10 @@
                     <ul class="unstyled">
                         <li th:text="${property.shortDesc}"></li>
                         <li th:text="${property.type}"></li>
-                        <div th:switch="${property.rooms}">
+                        <span th:switch="${property.rooms}">
                             <li th:case="'1'">1 room</li>
                             <li th:case="*" th:text="${property.rooms}+' rooms'"></li>
-                        </div>
+                        </span>
                     </ul>
                     <h5>Options</h5>
                     <ul class="unstyled">
@@ -34,13 +34,18 @@
                         <li th:if="${options.laundry}"><i class="icon-check"></i> Laundry</li>
                     </ul>
                     <br/>
-                    <div class="text-success">
-                        <h4 th:text=" 'Note: '+${totalEval}+'/100'"></h4>
+                    <div>
+                        <h4>
+                            <!--<p th:if="${evaluation} &gt; 50" th:text="${evaluation}"></p>-->
+                            <span th:if="${evaluation} &gt; 50">Note: <span class="text-success" th:text="${evaluation}">/100</span></span>
+                            <span th:if="${evaluation} &lt; 30">Note: <span class="text-error" th:text="${evaluation}">/100</span></span>
+                            <!--<span th:if="(${evaluation} &ge; 30) and (${evaluation} &lt; 50)">Note: <span class="text-warning" th:text="${evaluation}">/100</span></span>-->
+                        </h4>
                     </div>
                     <address>
                         <strong th:text="${property.title}"></strong><br />
-                        <div th:text="${property.address}"></div>
-                        <div th:text="${property.city} + ', ' + ${property.country}"></div>
+                        <span th:text="${property.address}"></span><br />
+                        <span th:text="${property.city} + ', ' + ${property.country}"></span>
                     </address>
                     <address>
                         <strong>Owner's page</strong><br/>

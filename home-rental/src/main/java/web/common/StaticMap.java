@@ -11,8 +11,8 @@ public class StaticMap {
 
     private final static String BASE_URL = "http://maps.googleapis.com/maps/api/staticmap?";
     private final static String ZOOM = "zoom=13";
-    private final static String SIZE = "size=400x220";
-    private final static String SCALE = "scale=2";
+    private final static String SIZE = "size=640x400";
+    private final static String SCALE = "scale=1";
     private final static String KEY = "key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I";
     private final static String MARKER = "markers=";
     private final static String MARKER_SEPARATOR = "%7C";
@@ -93,7 +93,7 @@ public class StaticMap {
 
     private static String formatAddress(String address, String city, String country) {
         StringBuilder result = new StringBuilder();
-        result.append(address).append(" ").append(city).append(" ").append(country);
+        result.append(address).append("+").append(city).append(" ").append(country);
         return result.toString().replaceAll(" ", "+");
     }
 }

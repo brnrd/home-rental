@@ -18,15 +18,14 @@
                     <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
                 </div>
                 <div class="span3">
-                    <h3>My account</h3>
-                    <p th:text="${user.username}"></p>
-                    <p th:text="${user.name}"></p>
-                    <p th:text="${user.firstname}"></p>
-                    <p th:text="${user.email}"></p>
-                    <p></p>
-                    <p th:text="'Number of property : ' +${propertyCount}"></p>
-                    <button class="btn btn-small">Modify</button>
-                    <button class="btn btn-small btn-danger">Delete</button>
+                    <ul class="unstyled">
+                        <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
+                        <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
+                        <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
+                        <li><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
+                    </ul>
+                    <button class="btn">Modify</button><br />
+                    <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
                 </div>
             </div>
         </div>
