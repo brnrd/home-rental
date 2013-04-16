@@ -141,6 +141,7 @@ public class HomeController {
         model.addAttribute("propertyCount", propertyCount);
         model.addAttribute("map", pathMap);
         model.addAttribute("evaluation", evaluation);
+        
         return "user";
     }
 
@@ -167,5 +168,14 @@ public class HomeController {
         model.addAttribute("pictures", pictures);
 
         return "property";
+    }
+    
+    @RequestMapping(value = "/new}", method = RequestMethod.GET)
+    public String newView(Model model) {
+        String test = "LEFT";
+        
+        model.addAttribute("test", test);
+
+        return "new";
     }
 }

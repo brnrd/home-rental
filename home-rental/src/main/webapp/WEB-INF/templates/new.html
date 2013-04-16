@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home Rental | New Property</title>
+        
+    </head>
+    <body tiles:fragment="content">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <p>MAPS</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    <p th:text="${test}"></p>
+                </div>
+                <div class="span4">
+                    <p>CENTER</p>
+                </div>
+                <div class="span4">
+                    <p>RIGHT</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
