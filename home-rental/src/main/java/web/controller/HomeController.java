@@ -125,7 +125,7 @@ public class HomeController {
         return "home";
     }
     
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/", method = RequestMethod.GET)
     public String searchView(Model model) {
         return "search";
     }
