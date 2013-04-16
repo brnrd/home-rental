@@ -1,0 +1,2 @@
+/* INSERTS FOR property TABLE */
+INSERT INTO 'airboy_db_hr'.'property' ('owner', 'title', 'short_desc', 'long_desc', 'price', 'type', 'rooms', 'country', 'city', 'address', 'rent_period_start', 'rent_period_stop') VALUES ('0e4a3868-c88f-41ff-9991-0cfca2b26798', 'Beautiful loft in Berlin', 'Luxury loft in heart of Berlin', 'You love art, you love space, you love freacky places ? Welcome to our home sweet home in heart of Berlin', '300', 'LOFT', '2', 'germany', 'berlin', 'rathausstrass, 115, 10178', '2013-01-01 00:00:00', '2013-12-31 00:00:00');

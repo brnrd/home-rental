@@ -31,4 +31,14 @@ public class PropertyDaoImpl extends AbstractDaoImpl<Property, Integer> implemen
     public List<Property> findProperty(User user) {
         return findByCriteria(Restrictions.eq("owner", user));
     }
+    
+    @Override
+    public List<String> selectDistinctCities() {
+        return listDistinctCriteria("city", "property");
+    }
+    
+    @Override
+    public List<String> selectDistinctCountries() {
+        return listDistinctCriteria("country", "property");
+    }
 }

@@ -21,21 +21,19 @@
     <mvc:view-controller path="/login" view-name="login" />
 
     <mvc:view-controller path="/protected" view-name="protected" />
-
-    <!--
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/templates/" />
-        <property name="suffix" value=".jsp" />
+    
+    <!-- Provides internationalization of messages -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
     </bean>
-    -->
     
     <!-- ThymeLeaf config -->
     <bean id="httpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
         <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
     </bean>
         
-    <bean id="templateResolver"	class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-        <property name="prefix" value="/WEB-INF/templates/" /> 
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
         <property name="templateMode" value="HTML5" /> 
     </bean>
 
@@ -44,7 +42,7 @@
         <property name="additionalDialects">
             <set>
                 <bean class="org.thymeleaf.extras.tiles2.dialect.TilesDialect"/>
-                <!--<bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>-->
+                <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>
                 <bean class="org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect"/>
             </set>
         </property>
@@ -65,10 +63,4 @@
         </property>
     </bean>
 
-    <!--
-    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver"> 
-        <property name="templateEngine" ref="templateEngine" /> 
-        <property name="characterEncoding" value="UTF-8"/>
-    </bean>
-    -->
 </beans>

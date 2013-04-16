@@ -1,0 +1,52 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green45\blue153;\red0\green61\blue204;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs24 \cf0 R\'e8gles d'authentification et de s\'e9curit\'e9\
+
+\b0 \
+1. On doit \'eatre authentifi\'e9 et donc avoir cr\'e9\'e9 un compte pour effectuer une r\'e9servation.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 2. On doit \'eatre authentifi\'e9 et donc avoir cr\'e9\'e9 un compte pour d\'e9poser une annonce.\
+3. Seul le propri\'e9taire d'un compte peut modifier son compte et ses informations.\
+4. Seul le propri\'e9taire d'une propri\'e9t\'e9 peut en modifier les informations.\
+5. Seul l'utilisateur(locataire) d'une propri\'e9t\'e9 peut modifier les informations concernant une r\'e9servation. (Certaines \'e9tapes n\'e9cessitent la validation de l'utilisateur(propri\'e9taire) du bien lou\'e9)\
+6. Seul un utilisateur ayant effectu\'e9 un s\'e9jour dans une propri\'e9t\'e9 peut lui attribuer une note et d\'e9poser un commentaire.\
+\
+7. Les pages localis\'e9es dans le dossier '
+\b /secure/
+\b0 ' ne sont uniquement visibles par les utilisateurs enregistr\'e9s.\
+8. Les pages localis\'e9es dans le dossier '
+\b /secure/extreme/
+\b0 ' ne sont uniquement visibles par les administrateurs du site.\
+\
+Pour les deux derniers points, ceci nous am\'e8ne \'e0 repenser les URLs du site. Il sera en effet plus simple de contr\'f4ler l'acc\'e8s \'e0 l'ensemble du site en sp\'e9cifiant dans l'url, les chemins \'e0 s\'e9curiser ou non. \
+\
+Ainsi, seules les pages 
+\b home.html
+\b0  et 
+\b search.html
+\b0  seront accessibles \'e0 tous. Les modals de login/signup \'e9tant stock\'e9 dans ces pages, ils sont \'e9galement accessibles.\
+\
+Pour le reste du site qui n\'e9cessite d'\'eatre authentifi\'e9, l'url sera construit de la mani\'e8re suivante : \
+\
+	
+\i \cf2 /home-rental/s/\
+	/home-rental/s/account/**\
+	/home-rental/s/property/**\
+	/home-rental/s/reservation/**
+\i0 \cf0 \
+\
+De cette mani\'e8re il est ais\'e9 de contr\'f4ler l'acc\'e8s \'e0 l'aide d'une simple r\'e8gle de s\'e9curit\'e9 :\
+\
+	<intercep-url pattern="/s/**" access="isAuthenticated()" />\
+\
+Pour l'interface admin, elle sera accessible \'e0 l'adresse suivante : \
+\
+	
+\i \cf3 /home-rental/admin/**\cf0 \
+\
+
+\i0 Cette Zone sera \'e9galement facilement s\'e9curisante \'e0 l'aide d'une seul r\'e8gle. (c.f securityContext.xml)}

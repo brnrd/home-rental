@@ -49,6 +49,11 @@ body {
 li { list-style-type: none; }
 
 /*** BASE ***/
+#logo img {
+    height: 24px;
+    width: 160px;
+}
+
 .login {
     height: 40px;
     .btn-login {
@@ -68,14 +73,14 @@ li { list-style-type: none; }
     margin-bottom: 20px;
     padding: 4px 2px;
     background-color: @hrb;
-    border: 1px solid #111;
+    border: 1px solid #777;
     .border-radius(5px);
     form { margin: 0px }
     .input-wrapper {
         float: left;
         margin: 0px 2px;
         padding: 10px;
-        border: 1px solid #444;
+        border: 1px solid #777;
         .border-radius(4px);
         .box-shadow(inset 1px 1px 5px rgba(0, 0, 0, 0.5));
         background: #fff;
@@ -93,6 +98,7 @@ li { list-style-type: none; }
         .checkin, .checkout {
             height: 20px;
             width: 98px;
+            z-index: 150;
         }
         .icon-calendar {
             position: relative;
@@ -128,6 +134,13 @@ li { list-style-type: none; }
             left: -8px;
         }
     }
+}
+
+#ui-datepicker-div.ui-datepicker {
+    margin-top: 12px !important;
+    margin-left: -10px !important;
+    width: 220px;
+    z-index: 200 !important;
 }
 
 #wrapper {

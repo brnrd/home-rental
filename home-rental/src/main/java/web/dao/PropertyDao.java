@@ -12,4 +12,6 @@ public interface PropertyDao extends AbstractDao<Property, Integer> {
 
     Boolean saveProperty(Property property);
     List<Property> findProperty(User user);
+    List<String> selectDistinctCities();
+    List<String> selectDistinctCountries();
 }
