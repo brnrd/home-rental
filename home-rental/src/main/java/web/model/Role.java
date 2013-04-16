@@ -15,23 +15,29 @@ public class Role implements Serializable {
     @Column(name = "role_id")
     private Integer id;
     
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="target_user")
-    private User user;
+    @OneToOne
+    private User target_user;
     
     @Column(name = "user_role")
     private String role;
 
+    public Role() {}
+    
+    public Role(User user, String role) {
+        this.target_user = user;
+        this.role = role;
+    }
+    
     public Integer getId() {
         return id;
     }
 
     public User getUser() {
-        return user;
+        return target_user;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.target_user = user;
     }
 
     public String getRole() {

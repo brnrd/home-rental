@@ -30,8 +30,10 @@ public class User implements Serializable {
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
-    @Column(name = "role")
+    @OneToOne(mappedBy="target_user", cascade={CascadeType.ALL})
     private Role role;
+    @Column(name="enabled")
+    private Boolean enabled = true;
 
     public User() {
     }
@@ -105,6 +107,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+    
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+    
+    public void setEnabled(Boolean e) {
+        this.enabled = e;
     }
     // </editor-fold>
 }

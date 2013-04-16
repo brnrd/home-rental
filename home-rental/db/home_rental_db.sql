@@ -16,9 +16,9 @@ CREATE TABLE user (
     name VARCHAR(30) NOT NULL,
     firstname VARCHAR(30) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(40) NOT NULL,
+    password VARCHAR(70) NOT NULL,
     created TIMESTAMP DEFAULT NOW(),
-    is_staff BOOLEAN DEFAULT FALSE,
+    enabled BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (user_id),
     UNIQUE KEY (user_id)
 )TYPE=InnoDB;
