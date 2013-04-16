@@ -49,4 +49,14 @@ public class PropertyServiceImpl implements PropertyService {
     public List<Property> findAll() {
         return propertyDao.selectAll("property");
     }
+    
+    @Override
+    public List<String> selectDistinctCities() {
+        return propertyDao.selectDistinctCities();
+    }
+    
+    @Override
+    public List<String> selectDistinctCountries() {
+        return propertyDao.selectDistinctCountries();
+    }
 }

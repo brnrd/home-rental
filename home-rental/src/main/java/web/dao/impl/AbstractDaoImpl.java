@@ -54,4 +54,9 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     public List<E> selectAll(String table) {
         return sessionFactory.getCurrentSession().createQuery("FROM "+table).list();
     }
+    
+    @Override
+    public List<String> listDistinctCriteria(String criterion, String table) {
+        return sessionFactory.getCurrentSession().createQuery("SELECT DISTINCT "+criterion+" FROM "+table).list();
+    }
 }

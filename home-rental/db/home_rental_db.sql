@@ -16,9 +16,9 @@ CREATE TABLE user (
     name VARCHAR(30) NOT NULL,
     firstname VARCHAR(30) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(40) NOT NULL,
+    password VARCHAR(70) NOT NULL,
     created TIMESTAMP DEFAULT NOW(),
-    is_staff BOOLEAN DEFAULT FALSE,
+    enabled BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (user_id),
     UNIQUE KEY (user_id)
 )TYPE=InnoDB;
@@ -108,3 +108,14 @@ CREATE TABLE reservation (
     CONSTRAINT FOREIGN KEY (target_user) REFERENCES user (user_id),
     CONSTRAINT FOREIGN KEY (target_property) REFERENCES property (property_id)
 )TYPE=InnoDB;
+
+/* Security space */
+CREATE TABLE roles (
+    roles_id INT NOT NULL auto_increment,
+    target_user VARCHAR(36) NOT NULL,
+    user_role VARCHAR(12) NOT NULL, /* Choices : 'ADMIN', 'USER' (registered), 'GUEST' */
+    PRIMARY KEY (roles_id),    
+    CONSTRAINT FOREIGN KEY (target_user) REFERENCES user (user_id)
+)TYPE=InnoDB;
+
+CREATE UNIQUE index ix_auth_username ON roles (target_user, user_role);

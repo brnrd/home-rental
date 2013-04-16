@@ -11,22 +11,56 @@
 @import "../bootstrap/variables";
 @import "../bootstrap/mixins";
 
-.carousel-container {
-    height: 390px;
-    ul.pict-list {
-        height: 390px;
+#carousel {
+    height: 400px;
+    ul#frame-container {
         margin: 0;
         li {
-            border: 1px solid #111;
+            height: 400px;
+            width: 940px;
+            position: absolute;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            float: left;
+            border: 1px solid #777;
             .border-radius(5px);
+            z-index: 50;
+            opacity: 0;
+            transition:opacity 3s ease-out;
+            -moz-transition:opacity 3s ease-out;
+            -webkit-transition:opacity 3s ease-out;
+            zoom: 1;
             img {
-                heigh: 390px;
-                width: 940px;
+                height: 425px;
+                width: 1000px;
                 .border-radius(5px);
             }
+            .frame-caption {
+                position: relative;
+                top: -150px;
+                width: 90%;
+                margin: auto;
+                padding: 10px;
+                text-align: center;
+                text-shadow: 2px 4px 5px #111;
+                color: #fff;
+                z-index: 101;
+                span { 
+                    display: block; 
+                }
+                .frame-caption-title {
+                    margin-bottom: 16px;
+                    font-size: 40px;
+                }
+                .frame-caption-description {
+                    margin-bottom: 10px;
+                    font-size: 22px;
+                }
+            }
         }
-        li.disabled {
-            display: none;
+        li.active {
+            z-index: 100;
+            opacity: 1;
         }
     }
 }

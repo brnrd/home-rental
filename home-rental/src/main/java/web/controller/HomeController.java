@@ -1,29 +1,9 @@
 package web.controller;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-import org.joda.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import web.common.StaticMap;
-import web.model.Comment;
-import web.model.Evaluation;
-import web.model.Property;
-import web.model.PropertyOptions;
-import web.model.PropertyType;
-import web.model.Reservation;
-import web.model.User;
-import web.service.CommentService;
-import web.service.EvaluationService;
-import web.service.PropertyOptionsService;
-import web.service.PropertyService;
-import web.service.ReservationService;
-import web.service.UserService;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -31,18 +11,18 @@ import web.service.UserService;
 @Controller
 public class HomeController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PropertyService propertyService;
-    @Autowired
-    private PropertyOptionsService propertyOptionsService;
-    @Autowired
-    private EvaluationService evalService;
-    @Autowired
-    private CommentService comService;
-    @Autowired
-    private ReservationService reservService;
+//    @Autowired
+//    private UserService userService;
+//    @Autowired
+//    private PropertyService propertyService;
+//    @Autowired
+//    private PropertyOptionsService propertyOptionsService;
+//    @Autowired
+//    private EvaluationService evalService;
+//    @Autowired
+//    private CommentService comService;
+//    @Autowired
+//    private ReservationService reservService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
@@ -115,6 +95,10 @@ public class HomeController {
 
         // Specified if the current page is active and set the tab in the navbar.
         model.addAttribute("home", true);
+        
+        // SetUp the typeahead list with country and city names.
+        //List<String> cities = propertyService.selectDistinctCities();
+        //model.addAttribute("cities", cities);
         return "home";
     }
 }
