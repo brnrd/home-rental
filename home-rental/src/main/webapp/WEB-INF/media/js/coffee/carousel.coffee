@@ -28,8 +28,7 @@ check_change = (ind) ->
       current_slide = ind    
 
 # Main function
-jQuery ->
-    setInterval ->
-        check_change(current_slide+1)
-    , TIME
-    true
+setInterval ->
+    check_change(current_slide+1)
+, TIME
+true

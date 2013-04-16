@@ -6,6 +6,8 @@ target : login, signup.
 comment :
 ###
 
+#signupHandler = (dataToSend) ->
+
 ##############
 #   HANDLERS   #
 ##############
@@ -15,3 +17,13 @@ $('#signup').on "click", (event) ->
     
 $('#login').on "click", (event) ->
     $('#auth-modal-login').modal('show')
+    
+### Call authHandler ###
+$('#auth-modal-signup #auth-process').on "submit", (event) ->
+        event.preventDefault()
+        console.log "form : "+$(this).auth_username
+        #signupHandler($(this).serialize())
+
+$('#auth-modal-login #auth-process').on "submit", (event) ->
+        event.preventDefault()
+        loginHandler($(this).serialize())
