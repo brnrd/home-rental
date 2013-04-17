@@ -111,6 +111,7 @@
                         <include>base.less</include>
                         <include>home.less</include>
                         <include>search.less</include>
+                        <include>new.less</include>
                     </includes>
                 </configuration>
                 <executions>

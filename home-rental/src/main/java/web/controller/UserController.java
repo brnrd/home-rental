@@ -17,7 +17,6 @@ import web.service.UserService;
  *
  * @author Bernard <bernard.debecker@gmail.com>
  */
-@RequestMapping("/user")
 @Controller
 public class UserController {
     
@@ -26,7 +25,7 @@ public class UserController {
     @Autowired
     private PropertyService propertyService;
     
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model) {
 
         // Get User

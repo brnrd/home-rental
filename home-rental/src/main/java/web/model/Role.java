@@ -7,12 +7,12 @@ import javax.persistence.*;
  * @author Romain <ro.foncier@gmail.com>
  */
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "roles_id")
     private Integer id;
     
     @OneToOne

@@ -7,27 +7,55 @@
     <head>
         <title tiles:fragment="title">Home Rental | New Property</title>
         
+        
     </head>
     <body tiles:fragment="content">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <p>MAPS</p>
+        <form id="propertyForm" action="#" th:object="${property}" th:action="@{/s/property/add}">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div id="map">
+                            <input type="text" class="city-new" id="location-search" placeholder="Please type the city here" />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="span4">
-                    <p th:text="${test}"></p>
-                </div>
-                <div class="span4">
-                    <p>CENTER</p>
-                </div>
-                <div class="span4">
-                    <p>RIGHT</p>
+            <div class="container">
+                <div class="row">
+                    <div class="span4">
+                        <input id="title" type="text" placeholder="Property title" th:text="${property.title}"/>
+                        <input id="address" type="text" placeholder="Address"  th:text="${property.address}"/>
+                        <select id="type" th:each="type : ${types}">
+                            <option th:value="${type}" th:text="type"></option>
+                        </select>
+                        <select id="rooms">
+                            <option value="type">1 room</option>
+                            <option value="type">2 rooms</option>
+                            <option value="type">3 rooms</option>
+                            <option value="type">4 rooms</option>
+                            <option value="type">5 rooms</option>
+                            <option value="type">6+ rooms</option>
+                            
+                        </select>
+                        <div class="submit">
+                            <button class="btn btn-success btn-large" type="submit" name="save" th:text="#{property.submit}">Save</button> 
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <h4>Options :</h4>
+                        <input type="checkbox" />Parking<br />
+                        <input type="checkbox" />Swimming pool<br />
+                        <input type="checkbox" />Wi-Fi<br />
+                        <input type="checkbox" />Laundry<br />
+                    </div>
+                    <div class="span4">
+                        <h4>Pictures</h4>
+                        <input type="file" name="pict1" /><br />
+                        <input type="file" name="pict2" /><br />
+                        <input type="file" name="pict3" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </body>
 </html>
