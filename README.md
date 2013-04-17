@@ -25,8 +25,8 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 
 ### Maps API ###
 
-Infos are readable [here][16]
-The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
++ Infos are readable [here][16]
++ The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
 
 #### To read ####
 
