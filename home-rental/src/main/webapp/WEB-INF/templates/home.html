@@ -63,7 +63,7 @@
             <div class="modal-body">
                 <p>Welcome to <strong>Home Rental</strong> Website. To create a new account, please enter your informations and click on <strong>Signup</strong>.</p>
                 <p class="form-error"></p>
-                <form method="POST" action="" id="auth-process">
+                <form method="POST" action="" id="auth-process-signup">
                     <div class="form-group">
                         <p class="pull-left"><strong>Username :</strong></p>
                         <div class="pull-left field-container">
@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <input type="submit" form="auth-process" class="btn btn-primary" value="Signup" />
+                <input type="submit" form="auth-process-signup" class="btn btn-primary" value="Signup" />
             </div>
         </div>
         
@@ -112,29 +112,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <img src="/img/global/ajax-loader.gif" th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="auth-label">Home Rental Login</h3>
             </div>
-            <div class="modal-body">
-                <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
-                <p class="form-error"></p>
-                <form method="POST" action="" id="auth-process">
-                    <div class="form-group">
-                        <p class="pull-left"><strong>Username :</strong></p>
-                        <div class="pull-left field-container">
-                            <input type="text" name="auth_username" maxlength="30" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="form-group">
-                        <p class="pull-left"><strong>Password :</strong></p>
-                        <div class="pull-left field-container">
-                            <input type="password" name="auth_pwd" maxlength="30" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </form>
-            </div>
+            <div class="modal-body"></div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <input type="submit" form="auth-process" class="btn btn-primary" value="Login" />
+                <input type="submit" form="auth-process-login" class="btn btn-primary" value="Login" />
             </div>
         </div>
 

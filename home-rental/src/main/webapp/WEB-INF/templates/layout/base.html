@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="en">
 
     <head>
@@ -30,23 +31,36 @@
                     <div class="row">
                         <div class="span12">
                             <div class="pull-right login">
-                                <div class="btn-login">
+                                
+                                <div class="user-logged" sec:authorize="isAuthenticated()">
+                                    <div class="btn-group">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <!--<img src="" class="avatar avatar28">-->
+                                            <span class="username"><strong></strong></span>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                            <li><a tabindex="-1" href="/home-rental/signout/">Signout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-login" th:disabled="! ${#authentication}">
                                     <a href="#" id="signup"><span>Signup</span></a> - <a href="#" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->
                             <ul class="nav">
                                 <li>
-                                    <a href="/" id="logo">
+                                    <a href="/home-rental/" id="logo">
                                         <img src="/img/global/logo.png" th:src="@{/img/global/logo.png}" alt="logo home rental" />
                                     </a>
                                 </li>
                                 <li th:class="${home} ? 'active' : ''">
-                                    <a href="/">
+                                    <a href="/home-rental/">
                                         <span>Home</span>
                                     </a>
                                 </li>
                                 <li th:class="${help} ? 'active' : ''">
-                                    <a href="/help/">
+                                    <a href="/home-rental/help/">
                                         <span>Help</span>
                                     </a>
                                 </li>
@@ -122,6 +136,7 @@
         <!-- Global imports -->
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery-ui.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
 
         <!-- Bootstrap imports -->
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>

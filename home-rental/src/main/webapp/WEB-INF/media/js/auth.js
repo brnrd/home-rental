@@ -8,13 +8,53 @@ comment :
 */
 
 
+/* Noty
+*/
+
+
 (function() {
+  var authHandler, notifyMessage, validForm;
+
+  notifyMessage = function(type, msg) {
+    return noty({
+      text: msg,
+      type: type,
+      dismissQueue: false,
+      timeout: 2000,
+      layout: 'topCenter',
+      theme: 'defaultTheme'
+    });
+  };
+
+  authHandler = function(dataToSend, target) {
+    return $.post('/home-rental/' + target, dataToSend, function(data) {
+      $('.ajax-loader').hide();
+      data = JSON.parse(data);
+      switch (data.status) {
+        case 'success':
+          return notifyMessage('success', data.msg);
+        case 'error':
+          return notifyMessage('error', data.msg);
+      }
+    });
+  };
+
+  validForm = function(array) {
+    var i, valid;
+    valid = true;
+    i = 0;
+    while (valid && i < array.length) {
+      valid = array[i].value.length > 0;
+    }
+    return valid;
+  };
 
   $('#signup').on("click", function(event) {
     return $('#auth-modal-signup').modal('show');
   });
 
   $('#login').on("click", function(event) {
+    $('#auth-modal-login .modal-body').load('/home-rental/login');
     return $('#auth-modal-login').modal('show');
   });
 
@@ -22,14 +62,19 @@ comment :
   */
 
 
-  $('#auth-modal-signup #auth-process').on("submit", function(event) {
+  $('#auth-process-signup').on("submit", function(event) {
     event.preventDefault();
-    return console.log("form : " + $(this).auth_username);
+    if (validForm($(this).serializeArray())) {
+
+    } else {
+      return $('#auth-modal-signup .form-error').text("Warning ! All fields must be filled !");
+    }
   });
 
-  $('#auth-modal-login #auth-process').on("submit", function(event) {
+  $('#auth-process-login').on("submit", function(event) {
     event.preventDefault();
-    return loginHandler($(this).serialize());
+    $('.ajax-loader').show();
+    return authHandler($(this).serialize(), 'login');
   });
 
 }).call(this);
