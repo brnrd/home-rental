@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private PropertyService propertyService;
     
-    @RequestMapping(value = "/account/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/s/account/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model) {
 
         // Get User

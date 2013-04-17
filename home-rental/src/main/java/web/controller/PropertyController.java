@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import web.common.StaticMap;
 import web.model.Comment;
 import web.model.Property;
 import web.model.PropertyOptions;
+import web.model.PropertyType;
 import web.service.CommentService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
@@ -56,25 +58,29 @@ public class PropertyController {
         return "property";
     }
     
-    @RequestMapping(value = "/property/new", method = RequestMethod.GET)
-    public String newView(Model model) {
-        String test = "LEFT";
-        Property property = new Property();
+    @RequestMapping(value = "/s/property/new", method = RequestMethod.GET)
+    public String newView(final Property property, Model model) {
+//        String test = "LEFT";
+//        PropertyOptions options = new PropertyOptions();
+//        List<PropertyType> types = Arrays.asList(PropertyType.values());
         
-        model.addAttribute("test", test);
-        model.addAttribute("property", property);
+        
+//        model.addAttribute("test", test);
+//        model.addAttribute("types", types);
+//        model.addAttribute("options", options);
 
         return "new";
     }
     
     @RequestMapping(value="/s/property/add", params={"save"})
-    public String subscribe(final Property property, final BindingResult bindingResult, final Model model) {
+    public String saveProperty(final Property property, final BindingResult bindingResult, final Model model) {
         if (bindingResult.hasErrors()) {
             return "new";
         }
+        
 //        handle new property
-//        String id = getnewpropertyid and add it to the redirect path
-        return "redirect:/property/";
+        propertyService.saveProperty(property);
+        return "redirect:/property/1";
     }
 
 }

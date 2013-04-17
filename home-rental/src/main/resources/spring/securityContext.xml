@@ -21,7 +21,7 @@
         <intercept-url pattern="/property/**" access="permitAll" />
         <intercept-url pattern="/account/**" access="permitAll" />
         <intercept-url pattern="/admin/" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/s/**" access="isAuthenticated()" />  
+        <intercept-url pattern="/s/**" access="permitAll" />  
         <intercept-url pattern="/**" access="denyAll" />
         
         <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?login_error=1" />

@@ -6,8 +6,8 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home Rental | New Property</title>
-        
-        
+
+
     </head>
     <body tiles:fragment="content">
         <form id="propertyForm" action="#" th:object="${property}" th:action="@{/s/property/add}">
@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="span12">
                         <div id="map">
-                            <input type="text" class="city-new" id="location-search" placeholder="Please type the city here" />
+                            <input type="text" class="city-new" id="location-search" placeholder="Please type the city here" th:field="*{city}" />
                         </div>
                     </div>
                 </div>
@@ -23,32 +23,40 @@
             <div class="container">
                 <div class="row">
                     <div class="span4">
-                        <input id="title" type="text" placeholder="Property title" th:text="${property.title}"/>
-                        <input id="address" type="text" placeholder="Address"  th:text="${property.address}"/>
-                        <select id="type" th:each="type : ${types}">
-                            <option th:value="${type}" th:text="type"></option>
-                        </select>
+                        <input id="title" type="text" placeholder="Property title" th:field="*{title}"/>
+                        <input id="address" type="text" placeholder="Address"  th:field="*{address}"/>
+                        <input id="country" type="text" placeholder="Country"  th:field="*{country}"/>
+                        <input id="shortDesc" type="text" placeholder="Short description of the property" th:field="*{shortDesc}"/>
+                        <!--                        <select id="type" th:each="type : ${types}">
+                                                    <option th:value="${type}" th:text="type"></option>
+                                                </select>-->
                         <select id="rooms">
-                            <option value="type">1 room</option>
-                            <option value="type">2 rooms</option>
-                            <option value="type">3 rooms</option>
-                            <option value="type">4 rooms</option>
-                            <option value="type">5 rooms</option>
-                            <option value="type">6+ rooms</option>
-                            
+                            <option value="1" th:field="*{rooms}">1 room</option>
+                            <option value="2" th:field="*{rooms}">2 rooms</option>
+                            <option value="3" th:field="*{rooms}">3 rooms</option>
+                            <option value="4" th:field="*{rooms}">4 rooms</option>
+                            <option value="5" th:field="*{rooms}">5 rooms</option>
+                            <option value="6" th:field="*{rooms}">6+ rooms</option>
+
                         </select>
                         <div class="submit">
-                            <button class="btn btn-success btn-large" type="submit" name="save" th:text="#{property.submit}">Save</button> 
+                            <button class="btn btn-success btn-large" type="submit" name="save">Save</button> 
                         </div>
                     </div>
                     <div class="span4">
+                        <input id="price" type="text" placeholder="Price" th:field="*{price}"/>
+                        <textarea id="longDesc" placeholder="Complete description of the property" th:field="*{longDesc}"/>
                         <h4>Options :</h4>
-                        <input type="checkbox" />Parking<br />
-                        <input type="checkbox" />Swimming pool<br />
-                        <input type="checkbox" />Wi-Fi<br />
-                        <input type="checkbox" />Laundry<br />
+                        <!--                        <input type="checkbox" th:field="${options.parking}"/>Parking<br />
+                                                <input type="checkbox" th:field="${options.swimmingPool}"/>Swimming pool<br />
+                                                <input type="checkbox" th:field="${options.wifi}"/>Wi-Fi<br />
+                                                <input type="checkbox" th:field="${options.laundry}"/>Laundry<br />-->
                     </div>
                     <div class="span4">
+                        <input type="text" id="rentPeriodStart" placeholder="Rent period start" th:field="*{rentPeriodStart}"/>
+                        <i class="icon-calendar"></i>
+                        <input type="text" id="rentPeriodStpo" placeholder="Rent period stop" th:field="*{rentPeriodStop}"/>
+                        <i class="icon-calendar"></i>
                         <h4>Pictures</h4>
                         <input type="file" name="pict1" /><br />
                         <input type="file" name="pict2" /><br />

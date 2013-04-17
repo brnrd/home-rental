@@ -15,7 +15,8 @@ public class Role implements Serializable {
     @Column(name = "roles_id")
     private Integer id;
     
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="target_user")
     private User target_user;
     
     @Column(name = "user_role")
