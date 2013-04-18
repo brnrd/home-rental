@@ -12,10 +12,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import web.model.User;
 import web.service.UserService;
 
 /**
@@ -40,26 +42,46 @@ public class AuthController {
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "auth/login";
+        return "login";
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
     public String loginProcess(@RequestParam("auth_username") String username, 
                                         @RequestParam("auth_pwd") String password,
                                         HttpServletRequest request, HttpServletResponse response) {
         
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
-            System.out.println("Before authenticate");
             Authentication auth = authenticationManager.authenticate(token);
-            System.out.println("After authenticate");
             SecurityContextHolder.getContext().setAuthentication(auth);
-            repository.saveContext(SecurityContextHolder.getContext(), request, response);
+            //repository.saveContext(SecurityContextHolder.getContext(), request, response);
             rememberMeServices.loginSuccess(request, response, auth);
-            return "{\"status\": \"succes\", \"msg\": \"Welcome ! You are successfully logged !\"}";
+            return "redirect:/";
         } catch (BadCredentialsException ex) {
-            return "{\"status\": \"error\", \"msg\": \"Warning ! Your login/password are incorrects !\"}";
+            return "login";
+        }
+    }
+    
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String signup() {
+        return "signup";
+    }
+    
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signupProcess(@RequestParam("auth_username") String username, 
+                                        @RequestParam("auth_pwd") String password,
+                                        HttpServletRequest request, HttpServletResponse response) {
+        
+        // Create new player and add in context
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        try {
+            Authentication auth = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            //repository.saveContext(SecurityContextHolder.getContext(), request, response);
+            rememberMeServices.loginSuccess(request, response, auth);
+            return "redirect:/";
+        } catch (BadCredentialsException ex) {
+            return "signup";
         }
     }
 }

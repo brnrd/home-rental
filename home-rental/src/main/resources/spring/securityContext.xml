@@ -18,13 +18,14 @@
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/signup" access="permitAll" />
+        <intercept-url pattern="/property/**" access="permitAll" />
         <intercept-url pattern="/search/**" access="permitAll" />
         <intercept-url pattern="/admin/" access="hasRole('ADMIN')" />
         <intercept-url pattern="/s/**" access="isAuthenticated()" />        
-        <!--<intercept-url pattern="/**" access="denyAll" />-->
+        <intercept-url pattern="/**" access="denyAll" />
         
         <remember-me />
-        <form-login authentication-success-handler-ref="ajaxAuthenticationSuccessHandler" login-page="/login" />
+        <form-login login-page="/login" />
         <logout />
     </http>
         

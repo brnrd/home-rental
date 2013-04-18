@@ -56,6 +56,29 @@ li { list-style-type: none; }
 
 .login {
     height: 40px;
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .user-logged {
+        padding: 6px 0;
+        .btn-group {
+            margin: 6px 0px 0px 0px;
+            .username {
+                font-size: 16px;
+                padding: 0 10px;
+                color: @hrb;
+            }
+            .caret {
+                position: relative;
+                top: 10px;
+                border-top: 4px solid #fff; // Override bootstrap
+            }
+            ul.dropdown-menu {
+                margin-top: 6px;
+            }
+        }
+    }
     .btn-login {
         margin-top: 10px;
         a {
@@ -179,14 +202,50 @@ li { list-style-type: none; }
         text-align: center;
         p { color: #111; }
     }
-    .help-inline {
-        font-weight: bold;
-        color: @hrr;
-    }
 }
 
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+/** AUTH **/
+#auth-container {
+    width: 600px;
+    margin: auto;
+    border: 1px solid #bbb;
+    .border-radius(5px);
+    background: #fff;
+    .auth-header {
+        padding: 0px 20px;
+        h3 { color: @hrb; }
+    }
+    .auth-body {
+        padding: 20px 20px;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        background-color: #eee;
+        text-align: center;
+        p { 
+            width: 100%;
+            color: #111;
+        }
+        label {
+            width: 40%;
+            margin-top: 6px;
+        }
+        .form-error {
+            height: 20px;
+            width: 100%;
+        }
+    }
+    .auth-footer {
+        padding: 20px;
+        text-align: center;
+        .btn {
+            width: 120px;
+            margin: 0px 10px;
+        }
+    }
 }
 
 /** FORM **/
@@ -207,6 +266,9 @@ li { list-style-type: none; }
         background: #fff;
         .border-radius(3px);
         input {
+            height: 24px;
+            margin: 0;
+            padding: 0;
             border: 0;
             box-shadow: none;
         }

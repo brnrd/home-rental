@@ -5,30 +5,29 @@
 
     <head>
         <title tiles:fragment="title">Home Rental | Login</title>
-        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/auth.css" th:href="@{/css/auth.css}" />
     </head>
 
     <body tiles:fragment="content">
 
-        <div class="auth-container">
+        <div id="auth-container">
             <div class="auth-header">
-                <img src="/img/global/ajax-loader.gif" th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="auth-label">Home Rental Login</h3>
+                <h3 id="auth-label">Home Rental Login</h3>
             </div>
             <div class="auth-body">
                 <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
                 <p class="form-error"></p>
                 <form method="POST" action="/home-rental/login" id="auth-process-login">
                     <div class="form-group">
-                        <p class="pull-left"><strong>Username :</strong></p>
+                        <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="text" name="auth_username" maxlength="30" />
+                            <input type="text" id="auth_username" name="auth_username" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <p class="pull-left"><strong>Password :</strong></p>
+                        <label class="pull-left" for="auth_pwd"><strong>Password :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="password" name="auth_pwd" maxlength="30" />
+                            <input type="password" id="auth_pwd" name="auth_pwd" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -42,7 +41,7 @@
         
         <!-- Custom js page specific -->
         <div tiles:fragment="js-specific">
-            <script type="text/javascript" src="#" th:src="@{/js/auth.js}"></script>
+            <!--<script type="text/javascript" src="#" th:src="@{/js/auth.js}"></script>-->
         </div>
         
     </body>

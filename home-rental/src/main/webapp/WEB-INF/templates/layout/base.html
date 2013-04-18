@@ -36,16 +36,20 @@
                                     <div class="btn-group">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             <!--<img src="" class="avatar avatar28">-->
-                                            <span class="username"><strong></strong></span>
+                                            <span class="username"><strong th:text="${current.username}"></strong></span>
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                            <li><a tabindex="-1" href="/home-rental/signout/">Signout</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/user/__${current.username}__}">Account</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/home-rental/s/user/__${current.username}__/properties}">My Properties</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/user/__${current.username}__/reservations}">My Reservations</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="btn-login" th:disabled="! ${#authentication}">
-                                    <a href="/home-rental/signup/" id="signup"><span>Signup</span></a> - <a href="/home-renatl/login/" id="login"><span>Login</span></a>
+                                    <a href="#" th:href="@{/signup}" id="signup"><span>Signup</span></a> - <a href="#" th:href="@{/login}" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->
                             <ul class="nav">
