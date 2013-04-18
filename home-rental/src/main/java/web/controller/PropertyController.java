@@ -3,6 +3,7 @@ package web.controller;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ import web.model.Comment;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
+import web.model.User;
 import web.service.CommentService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
+import web.service.UserService;
 
 /**
  *
@@ -32,6 +35,8 @@ public class PropertyController {
     private PropertyOptionsService propertyOptionsService;
     @Autowired
     private CommentService comService;
+    @Autowired
+    private UserService userService;
     
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
     public String propertyView(@PathVariable Integer id, Model model) {
@@ -62,11 +67,11 @@ public class PropertyController {
     public String newView(final Property property, Model model) {
 //        String test = "LEFT";
 //        PropertyOptions options = new PropertyOptions();
-//        List<PropertyType> types = Arrays.asList(PropertyType.values());
+        List<PropertyType> types = Arrays.asList(PropertyType.values());
         
         
 //        model.addAttribute("test", test);
-//        model.addAttribute("types", types);
+        model.addAttribute("types", types);
 //        model.addAttribute("options", options);
 
         return "new";
@@ -74,10 +79,13 @@ public class PropertyController {
     
     @RequestMapping(value="/s/property/new", method = RequestMethod.POST)
     public String saveProperty(final Property property, final BindingResult bindingResult, final Model model) {
-        if (bindingResult.hasErrors()) {
-            return "new";
-        }
         
+        User user = userService.findByUsername("johndoe");
+        property.setOwner(user);
+        property.setRooms(1);
+        property.setType(PropertyType.FLAT);
+        property.setRentPeriodStart(LocalDateTime.now());
+        property.setRentPeriodStop(LocalDateTime.now());
 //        handle new property
         propertyService.saveProperty(property);
         return "redirect:/property/1";

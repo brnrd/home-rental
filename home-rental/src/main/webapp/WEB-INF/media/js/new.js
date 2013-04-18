@@ -30,7 +30,7 @@ target : all (typeahead, maps, ...)
       console.log(selectedDate);
       checkin = new Date(selectedDate);
       console.log(checkin);
-      target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 1);
+      target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 7);
       console.log(target);
       $('#rentPeriodStop').datepicker("option", "minDate", selectedDate);
       return $('#rentPeriodStop').val(formatDate(target));
