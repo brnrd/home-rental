@@ -44,7 +44,7 @@ $('#signup').on "click", (event) ->
     $('#auth-modal-signup').modal('show')
     
 $('#login').on "click", (event) ->
-    $('#auth-modal-login .modal-body').load('/home-rental/login')
+    $('#auth-modal-login .modal-body').load('/home-rental/login .modal-body')
     $('#auth-modal-login').modal('show')
     
 ### Call authHandler ###

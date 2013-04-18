@@ -14,6 +14,7 @@ import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
 import web.model.Reservation;
+import web.model.Role;
 import web.model.User;
 import web.service.CommentService;
 import web.service.EvaluationService;
@@ -21,6 +22,7 @@ import web.service.PropertyOptionsService;
 import web.service.PropertyService;
 import web.service.ReservationService;
 import web.service.UserService;
+import web.utils.PasswordHasher;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -47,13 +49,16 @@ public class HomeController {
     @Autowired
     private ReservationService reservService;
     
+    private PasswordHasher hash = new PasswordHasher();
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model) {
-        /*
+        
         // Create User
-        User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
+        User u1 = new User("airboy", "foncier", "romain", "airboy@example.com", hash.MakePassword("test"), Role.USER);
         userService.saveUser(u1);
         
+        /*
         // Create User
         //User u1 = new User("johndoe", "doe", "john", "johndoe@example.com", "test", false);
         //userService.saveUser(u1);

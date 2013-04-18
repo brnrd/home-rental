@@ -1,20 +1,125 @@
-<div class="modal-body">
-    <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
-    <p class="form-error"></p>
-    <form method="POST" action="/home-rental/login" id="auth-process-login">
-        <div class="form-group">
-            <p class="pull-left"><strong>Username :</strong></p>
-            <div class="pull-left field-container">
-                <input type="text" name="auth_username" maxlength="30" />
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+    <head>
+        <title>Home Rental | Login</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="home rental" />
+        <meta name="authors" content="airboy and brnrd" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
+
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="pull-right login">
+
+                                <div class="user-logged" sec:authorize="isAuthenticated()">
+                                    <div class="btn-group">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <!--<img src="" class="avatar avatar28">-->
+                                            <span class="username"><strong></strong></span>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                            <li><a tabindex="-1" href="/home-rental/signout/">Signout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-login" th:disabled="! ${#authentication}">
+                                    <a href="#" id="signup"><span>Signup</span></a> - <a href="#" id="login"><span>Login</span></a>
+                                </div>
+                            </div><!-- /end login -->
+                            <ul class="nav">
+                                <li>
+                                    <a href="/home-rental/" id="logo">
+                                        <img src="/img/global/logo.png" th:src="@{/img/global/logo.png}" alt="logo home rental" />
+                                    </a>
+                                </li>
+                                <li th:class="${home} ? 'active' : ''">
+                                    <a href="/home-rental/">
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li th:class="${help} ? 'active' : ''">
+                                    <a href="/home-rental/help/">
+                                        <span>Help</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- /end span12 -->
+                    </div><!-- /end row -->
+                </div><!-- /end container -->
+            </div><!-- /end navbar-inner -->
+        </div><!-- /end navbar -->
+
+        <div class="clearfix"></div>
+
+        <div id="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+
+                        <div class="modal-body">
+                            <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
+                            <p class="form-error"></p>
+                            <form method="POST" action="/home-rental/login" id="auth-process-login">
+                                <div class="form-group">
+                                    <p class="pull-left"><strong>Username :</strong></p>
+                                    <div class="pull-left field-container">
+                                        <input type="text" name="auth_username" maxlength="30" />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                    <p class="pull-left"><strong>Password :</strong></p>
+                                    <div class="pull-left field-container">
+                                        <input type="password" name="auth_pwd" maxlength="30" />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="form-group">
-            <p class="pull-left"><strong>Password :</strong></p>
-            <div class="pull-left field-container">
-                <input type="password" name="auth_pwd" maxlength="30" />
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </form>
-</div>
+        </div><!-- /end wrapper -->
+
+        <div id="footer-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p><a href="">Report a bug</a> - <a href="/help/">Help center</a></p>
+                        <p id="app-ref"><a href="http://www.springsource.org/spring-framework" target="_blank">Spring 3.2.2</a> - Home Rental © 2013 - version: <span class="warning">0.1.0</span></p>
+                    </div>
+                </div>
+            </div><!-- /end container -->
+        </div><!-- /end footer-wrapper -->
+
+        <!-- JS import -->
+        <!-- Global imports -->
+        <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
+
+        <!-- Bootstrap imports -->
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
+
+        <!-- Custom js -->
+
+        <!-- JS Inline -->
+
+    </body>
+</html>

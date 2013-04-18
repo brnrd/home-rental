@@ -51,7 +51,9 @@ public class AuthController {
         
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
+            System.out.println("Before authenticate");
             Authentication auth = authenticationManager.authenticate(token);
+            System.out.println("After authenticate");
             SecurityContextHolder.getContext().setAuthentication(auth);
             repository.saveContext(SecurityContextHolder.getContext(), request, response);
             rememberMeServices.loginSuccess(request, response, auth);

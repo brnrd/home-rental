@@ -54,7 +54,7 @@ comment :
   });
 
   $('#login').on("click", function(event) {
-    $('#auth-modal-login .modal-body').load('/home-rental/login');
+    $('#auth-modal-login .modal-body').load('/home-rental/login .modal-body');
     return $('#auth-modal-login').modal('show');
   });
 
