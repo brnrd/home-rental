@@ -9,7 +9,6 @@
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <!-- Configure Spring Security -->
-    <!--<http pattern="/templates/**" security="none" />-->
     <http pattern="/img/**" security="none" />
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
@@ -25,15 +24,10 @@
         <!--<intercept-url pattern="/**" access="denyAll" />-->
         
         <remember-me />
-        <form-login login-page="/login" authentication-success-handler-ref="authenticationSuccessHandlerWithoutReferer" />
+        <form-login authentication-success-handler-ref="ajaxAuthenticationSuccessHandler" login-page="/login" />
         <logout />
     </http>
-    
-    <beans:bean id="authenticationSuccessHandlerWithoutReferer" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-        <!-- After login, return to the last visited page -->
-        <beans:property name="useReferer" value="false" />
-    </beans:bean>
-    
+        
     <beans:bean id="pwd-encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
         <beans:constructor-arg index="0" value="256"/>
     </beans:bean>

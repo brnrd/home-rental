@@ -4,24 +4,44 @@
       lang="en">
 
     <head>
-        <title tiles:fragment="title">Home Rental | Login</title>
-        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/auth.css" th:href="@{/css/auth.css}" />
+        <title tiles:fragment="title">Home Rental | Signup</title>
     </head>
 
     <body tiles:fragment="content">
 
         <div class="auth-container">
             <div class="auth-header">
-                <img src="/img/global/ajax-loader.gif" th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="auth-label">Home Rental Login</h3>
+                <img src="/img/global/ajax-loader.gif" th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="auth-label">Home Rental Signup</h3>
             </div>
             <div class="auth-body">
-                <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
+                <p>Welcome to <strong>Home Rental</strong> Website. To create a new account, please enter your informations and click on <strong>Signup</strong>.</p>
                 <p class="form-error"></p>
-                <form method="POST" action="/home-rental/login" id="auth-process-login">
+                <form method="POST" action="" id="auth-process-signup">
                     <div class="form-group">
                         <p class="pull-left"><strong>Username :</strong></p>
                         <div class="pull-left field-container">
                             <input type="text" name="auth_username" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <p class="pull-left"><strong>Name :</strong></p>
+                        <div class="pull-left field-container">
+                            <input type="text" name="auth_name" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <p class="pull-left"><strong>Firstname :</strong></p>
+                        <div class="pull-left field-container">
+                            <input type="text" name="auth_firstname" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <p class="pull-left"><strong>Email :</strong></p>
+                        <div class="pull-left field-container">
+                            <input type="email" name="auth_email" maxlength="100" />
                         </div>
                         <div class="clearfix"></div>
                     </div>

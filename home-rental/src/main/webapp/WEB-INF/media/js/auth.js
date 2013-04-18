@@ -13,7 +13,7 @@ comment :
 
 
 (function() {
-  var authHandler, notifyMessage, validForm;
+  var authHandler, notifyMessage, setAjaxHeader, validForm;
 
   notifyMessage = function(type, msg) {
     return noty({
@@ -26,7 +26,16 @@ comment :
     });
   };
 
+  setAjaxHeader = function() {
+    return $.ajaxSetup({
+      beforeSend: function(xhr) {
+        return xhr.setRequestHeader("X-Ajax-call", "true");
+      }
+    });
+  };
+
   authHandler = function(dataToSend, target) {
+    setAjaxHeader();
     return $.post('/home-rental/' + target, dataToSend, function(data) {
       $('.ajax-loader').hide();
       data = JSON.parse(data);

@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="btn-login" th:disabled="! ${#authentication}">
-                                    <a href="#" id="signup"><span>Signup</span></a> - <a href="#" id="login"><span>Login</span></a>
+                                    <a href="/home-rental/signup/" id="signup"><span>Signup</span></a> - <a href="/home-renatl/login/" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->
                             <ul class="nav">
@@ -77,44 +77,7 @@
             <div class="container">
                 <div class="row">
                     <div class="span12">
-                        <div id="search-bar">
-                            <form action="" id="search_form">
-                                <div class="input-wrapper">
-                                    <input type="text" class="location" id="location-search" placeholder="Where do you want to go ?" />
-                                </div>
-                                <div class="input-wrapper">
-                                    <input type="text" class="checkin" id="checkin" placeholder="Check In" />
-                                    <i class="icon-calendar"></i>
-                                </div>
-                                <div class="input-wrapper">
-                                    <input type="text" class="checkout" id="checkout" placeholder="Check Out" />
-                                    <i class="icon-calendar"></i>
-                                </div>
-                                <div class="btn-group pull-left">
-                                    <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
-                                    <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                        <li><a tabindex="-1" href="#">2 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">3 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">4 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">5 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">6 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">7 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">8 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">9 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">10 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">11 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">12+ hosts</a></li>
-                                    </ul>
-                                </div>
-
-                                <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>
-
+                        <div class="content" tiles:include="search_bar"></div>
                         <div class="content" tiles:include="body"></div>
                     </div>
                 </div>

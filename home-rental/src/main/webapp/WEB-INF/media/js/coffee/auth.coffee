@@ -17,7 +17,14 @@ notifyMessage = (type, msg) ->
         theme: 'defaultTheme'
      )
 
+setAjaxHeader = () ->
+    $.ajaxSetup(
+        beforeSend: (xhr) ->
+            xhr.setRequestHeader("X-Ajax-call", "true")
+    )
+
 authHandler = (dataToSend, target) ->
+    setAjaxHeader()
     $.post '/home-rental/'+target,
         dataToSend,
         (data) ->

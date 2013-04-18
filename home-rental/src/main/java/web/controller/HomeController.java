@@ -55,8 +55,8 @@ public class HomeController {
     public String homeView(Model model) {
         
         // Create User
-        User u1 = new User("airboy", "foncier", "romain", "airboy@example.com", hash.MakePassword("test"), Role.USER);
-        userService.saveUser(u1);
+        //User u1 = new User("airboy", "foncier", "romain", "airboy@example.com", hash.MakePassword("test"), Role.USER);
+        //userService.saveUser(u1);
         
         /*
         // Create User
