@@ -82,8 +82,6 @@ public class PropertyController {
         
         User user = userService.findByUsername("johndoe");
         property.setOwner(user);
-        property.setRooms(1);
-        property.setType(PropertyType.FLAT);
         property.setRentPeriodStart(LocalDateTime.now());
         property.setRentPeriodStop(LocalDateTime.now());
 //        handle new property
