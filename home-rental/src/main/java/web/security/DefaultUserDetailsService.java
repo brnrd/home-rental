@@ -31,7 +31,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         if (currentUser == null) {
             throw new UsernameNotFoundException("User not found", username);
         }
-        return new DefaultUserDetails(currentUser, getAuthorities(currentUser.getRole().getRole()));
+        return new DefaultUserDetails(currentUser, getAuthorities(currentUser.getRole().toString()));
     }
 
     public List<GrantedAuthority> getAuthorities(String role) {

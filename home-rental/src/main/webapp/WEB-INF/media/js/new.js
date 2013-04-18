@@ -32,8 +32,8 @@ target : all (typeahead, maps, ...)
       console.log(checkin);
       target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 1);
       console.log(target);
-      $('#checkout').datepicker("option", "minDate", selectedDate);
-      return $('#checkout').val(formatDate(target));
+      $('#rentPeriodStop').datepicker("option", "minDate", selectedDate);
+      return $('#rentPeriodStop').val(formatDate(target));
     }
   });
 
@@ -41,7 +41,7 @@ target : all (typeahead, maps, ...)
     defaultDate: target ? target : '',
     onClose: function(selectedDate) {
       if (checkin) {
-        return $('#checkin').datepicker('option', 'maxDate', selectedDate);
+        return $('#rentPeriodStart').datepicker('option', 'maxDate', selectedDate);
       }
     }
   });

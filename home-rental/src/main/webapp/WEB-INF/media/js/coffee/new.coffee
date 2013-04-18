@@ -25,15 +25,15 @@ $('#rentPeriodStart').datepicker(
         console.log selectedDate
         checkin = new Date(selectedDate)
         console.log checkin
-        target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+1)
+        target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+7)
         console.log target
-        $('#checkout').datepicker( "option", "minDate", selectedDate)
-        $('#checkout').val(formatDate(target))
+        $('#rentPeriodStop').datepicker( "option", "minDate", selectedDate)
+        $('#rentPeriodStop').val(formatDate(target))
 )
 
 $('#rentPeriodStop').datepicker(
     defaultDate: if target then target else ''
     onClose: (selectedDate) ->
         if checkin
-            $('#checkin').datepicker('option', 'maxDate', selectedDate)
+            $('#rentPeriodStart').datepicker('option', 'maxDate', selectedDate)
 )

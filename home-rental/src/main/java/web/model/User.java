@@ -30,7 +30,8 @@ public class User implements Serializable {
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
-    @OneToOne(mappedBy="target_user", cascade={CascadeType.ALL})
+    @Column(columnDefinition = "enum('USER', 'ADMIN')")
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name="enabled")
     private Boolean enabled = true;

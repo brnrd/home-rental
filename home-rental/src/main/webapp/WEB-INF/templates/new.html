@@ -10,7 +10,7 @@
 
     </head>
     <body tiles:fragment="content">
-        <form id="propertyForm" action="#" th:object="${property}" th:action="@{/s/property/add}">
+        <form id="propertyForm" action="#" th:object="${property}" th:action="@{/s/property/new}" method="post">
             <div class="container">
                 <div class="row">
                     <div class="span12">
@@ -40,7 +40,7 @@
 
                         </select>
                         <div class="submit">
-                            <button class="btn btn-success btn-large" type="submit" name="save">Save</button> 
+                            <button class="btn btn-success btn-large" type="submit" >Save</button> 
                         </div>
                     </div>
                     <div class="span4">

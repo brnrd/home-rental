@@ -72,7 +72,7 @@ public class PropertyController {
         return "new";
     }
     
-    @RequestMapping(value="/s/property/add", params={"save"})
+    @RequestMapping(value="/s/property/new", method = RequestMethod.POST)
     public String saveProperty(final Property property, final BindingResult bindingResult, final Model model) {
         if (bindingResult.hasErrors()) {
             return "new";
