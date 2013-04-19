@@ -236,6 +236,9 @@ li { list-style-type: none; }
         .form-error {
             height: 20px;
             width: 100%;
+            span {
+                color: @hrr;
+            }
         }
     }
     .auth-footer {
@@ -272,5 +275,8 @@ li { list-style-type: none; }
             border: 0;
             box-shadow: none;
         }
+    }
+    .field-container.error {
+        border-color: @hrr;
     }
 }

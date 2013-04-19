@@ -16,7 +16,7 @@
             <div class="auth-body">
                 <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
                 <p class="form-error"></p>
-                <form method="POST" action="/home-rental/login" id="auth-process-login">
+                <form method="POST" th:action="@{/login}" id="auth-process-login">
                     <div class="form-group">
                         <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
                         <div class="pull-left field-container">

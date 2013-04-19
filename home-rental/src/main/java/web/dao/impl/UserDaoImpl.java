@@ -1,5 +1,6 @@
 package web.dao.impl;
 
+import java.util.List;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -28,11 +29,19 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
 
     @Override
     public User findByEmail(String email) {
-        return findByCriteria(Restrictions.like("email", email, MatchMode.START)).get(0);
+        List<User> res = findByCriteria(Restrictions.like("email", email, MatchMode.START));
+        if (res != null && res.size() > 0) {
+            return res.get(0);
+        }
+        return null;
     }
 
     @Override
     public User findByUsername(String username) {
-        return findByCriteria(Restrictions.like("username", username, MatchMode.START)).get(0);
+        List<User> res = findByCriteria(Restrictions.like("username", username, MatchMode.START));
+        if (res != null && res.size() > 0) {
+            return res.get(0);
+        }
+        return null;
     }
 }

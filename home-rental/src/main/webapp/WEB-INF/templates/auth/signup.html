@@ -15,40 +15,42 @@
             </div>
             <div class="auth-body">
                 <p>Welcome to <strong>Home Rental</strong> Website. To create a new account, please enter your informations and click on <strong>Signup</strong>.</p>
-                <p class="form-error"></p>
-                <form method="POST" action="" id="auth-process-signup">
+                <p class="form-error">
+                    <span th:if="${username_error}">This username is already in use. Please choose another one.</span>
+                </p>
+                <form method="POST" th:object="${userData}" th:action="@{/signup}" id="auth-process-signup">
                     <div class="form-group">
                         <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
-                        <div class="pull-left field-container">
-                            <input type="text" id="auth_username" name="auth_username" maxlength="30" />
+                        <div th:class="${username_error} ? 'pull-left field-container' : 'pull-left field-container error'">
+                            <input type="text" id="auth_username" th:field="*{username}" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="pull-left" for="auth_name"><strong>Name :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="text" id="auth_name" name="auth_name" maxlength="30" />
+                            <input type="text" id="auth_name" th:field="*{name}" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="pull-left" for="auth_firstname"><strong>Firstname :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="text" id="auth_firstname" name="auth_firstname" maxlength="30" />
+                            <input type="text" id="auth_firstname" th:field="*{firstname}" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="pull-left" for="auth_email"><strong>Email :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="email" id="auth_email" name="auth_email" maxlength="100" />
+                            <input type="email" id="auth_email" th:field="*{email}" maxlength="100" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="pull-left" for="auth_pwd"><strong>Password :</strong></label>
                         <div class="pull-left field-container">
-                            <input type="password" id="auth_pwd" name="auth_pwd" maxlength="30" />
+                            <input type="password" id="auth_pwd" th:field="*{password}" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -56,7 +58,7 @@
             </div>
             <div class="auth-footer">
                 <button class="btn" data-dismiss="auth" aria-hidden="true">Cancel</button>
-                <input type="submit" form="auth-process-login" class="btn btn-primary" value="Signup" />
+                <input type="submit" form="auth-process-signup" class="btn btn-primary" value="Signup" />
             </div>
         </div><!-- /end auth-container -->
 
