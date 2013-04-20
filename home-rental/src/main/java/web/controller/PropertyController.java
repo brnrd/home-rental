@@ -1,9 +1,13 @@
 package web.controller;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.common.StaticMap;
 import web.model.Comment;
+import web.model.NewProperty;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
@@ -28,7 +33,7 @@ import web.service.UserService;
  */
 @Controller
 public class PropertyController {
-    
+
     @Autowired
     private PropertyService propertyService;
     @Autowired
@@ -37,7 +42,7 @@ public class PropertyController {
     private CommentService comService;
     @Autowired
     private UserService userService;
-    
+
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
     public String propertyView(@PathVariable Integer id, Model model) {
 
@@ -62,31 +67,32 @@ public class PropertyController {
 
         return "property";
     }
-    
+
     @RequestMapping(value = "/s/property/new", method = RequestMethod.GET)
-    public String newView(final Property property, Model model) {
-//        String test = "LEFT";
-//        PropertyOptions options = new PropertyOptions();
+    public String newView(final NewProperty newProperty, Model model) {
+
         List<PropertyType> types = Arrays.asList(PropertyType.values());
-        
-        
-//        model.addAttribute("test", test);
+
         model.addAttribute("types", types);
-//        model.addAttribute("options", options);
 
         return "new";
     }
-    
-    @RequestMapping(value="/s/property/new", method = RequestMethod.POST)
-    public String saveProperty(final Property property, final BindingResult bindingResult, final Model model) {
+
+    @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)
+    public String saveProperty(final NewProperty newProperty, final BindingResult bindingResult, final Model model, Principal current) {
+        if (current != null) {
+            newProperty.getProperty().setOwner(userService.findByUsername(current.getName()));
+        } else {
+            newProperty.getProperty().setOwner(userService.findByUsername("johndoe"));
+        }
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+        DateTime rentStart = formatter.parseDateTime(newProperty.getRentStart() + " 00:00:00");
+        DateTime rentStop = formatter.parseDateTime(newProperty.getRentStop() + " 00:00:00");
+        newProperty.getProperty().setRentPeriodStart(rentStart.toLocalDateTime());
+        newProperty.getProperty().setRentPeriodStop(rentStop.toLocalDateTime());
         
-        User user = userService.findByUsername("johndoe");
-        property.setOwner(user);
-        property.setRentPeriodStart(LocalDateTime.now());
-        property.setRentPeriodStop(LocalDateTime.now());
 //        handle new property
-        propertyService.saveProperty(property);
+        propertyService.saveProperty(newProperty.getProperty());
         return "redirect:/property/1";
     }
-
 }

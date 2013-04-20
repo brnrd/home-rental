@@ -19,20 +19,20 @@
                 </div>
             </div>
         </div>
-        <form id="propertyForm" th:object="${property}" th:action="@{/s/property/new}" method="post">
+        <form id="propertyForm" th:object="${newProperty}" th:action="@{/s/property/new}" method="post">
             <div class="container">
                 <div class="row">
                     <div class="span4">
-                        <input id="title" type="text" placeholder="Property title" th:field="*{title}"/>
-                        <input id="address" type="text" placeholder="Address"  th:field="*{address}"/>
-                        <input id="city" type="hidden" th:field="*{city}"/>
-                        <input id="country" type="hidden" th:field="*{country}"/>
-                        <input id="shortDesc" type="text" placeholder="Short description of the property" th:field="*{shortDesc}"/>
-                        <select id="type" th:field="*{type}">
+                        <input id="title" type="text" placeholder="Property title" th:field="*{property.title}"/>
+                        <input id="address" type="text" placeholder="Address"  th:field="*{property.address}"/>
+                        <input id="city" type="hidden" th:field="*{property.city}"/>
+                        <input id="country" type="hidden" th:field="*{property.country}"/>
+                        <input id="shortDesc" type="text" placeholder="Short description of the property" th:field="*{property.shortDesc}"/>
+                        <select id="type" th:field="*{property.type}">
                             <option th:each="type : ${types}" 
                                     th:value="${type}" th:text="${type}"></option>
                         </select>
-                        <select id="rooms" th:field="*{rooms}">
+                        <select id="rooms" th:field="*{property.rooms}">
                             <option th:value="1">1 room</option>
                             <option th:value="2">2 rooms</option>
                             <option th:value="3">3 rooms</option>
@@ -46,18 +46,18 @@
                         </div>
                     </div>
                     <div class="span4">
-                        <input id="price" type="text" placeholder="Price" th:field="*{price}"/>
-                        <textarea id="longDesc" placeholder="Complete description of the property" th:field="*{longDesc}"/>
+                        <input id="price" type="text" placeholder="Price" th:field="*{property.price}"/>
+                        <textarea id="longDesc" placeholder="Complete description of the property" th:field="*{property.longDesc}"/>
                         <h4>Options :</h4>
-                        <!--                        <input type="checkbox" th:field="${options.parking}"/>Parking<br />
-                                                <input type="checkbox" th:field="${options.swimmingPool}"/>Swimming pool<br />
-                                                <input type="checkbox" th:field="${options.wifi}"/>Wi-Fi<br />
-                                                <input type="checkbox" th:field="${options.laundry}"/>Laundry<br />-->
+                        <input type="checkbox" th:field="*{options.parking}"/>Parking<br />
+                        <input type="checkbox" th:field="*{options.swimmingPool}"/>Swimming pool<br />
+                        <input type="checkbox" th:field="*{options.wifi}"/>Wi-Fi<br />
+                        <input type="checkbox" th:field="*{options.laundry}"/>Laundry<br />
                     </div>
                     <div class="span4">
-                        <input type="text" id="rentPeriodStart" placeholder="Rent period start" th:field="*{rentPeriodStart}"/>
+                        <input type="text" id="rentPeriodStart" placeholder="Rent period start" th:field="*{rentStart}"/>
                         <i class="icon-calendar"></i>
-                        <input type="text" id="rentPeriodStop" placeholder="Rent period stop" th:field="*{rentPeriodStop}"/>
+                        <input type="text" id="rentPeriodStop" placeholder="Rent period stop" th:field="*{rentStop}"/>
                         <i class="icon-calendar"></i>
                         <h4>Pictures</h4>
                         <input type="file" name="pict1" /><br />
