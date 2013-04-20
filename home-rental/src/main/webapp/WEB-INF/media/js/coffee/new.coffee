@@ -20,22 +20,22 @@ formatDate = (date) ->
         return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
     return t_res.join("/")
 
-$('#rentPeriodStart').datepicker(
+$('#rentStart').datepicker(
     onClose: (selectedDate) ->
         console.log selectedDate
         checkin = new Date(selectedDate)
         console.log checkin
         target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+7)
         console.log target
-        $('#rentPeriodStop').datepicker('option', 'minDate', selectedDate)
-        $('#rentPeriodStop').val(formatDate(target))
+        $('#rentStop').datepicker('option', 'minDate', selectedDate)
+        $('#rentStop').val(formatDate(target))
 )
 
-$('#rentPeriodStop').datepicker(
+$('#rentStop').datepicker(
     defaultDate: if target then target else ''
     onClose: (selectedDate) ->
         if checkin
-            $('#rentPeriodStart').datepicker('option', 'maxDate', selectedDate)
+            $('#rentStart').datepicker('option', 'maxDate', selectedDate)
 )
 
 #############################
@@ -78,3 +78,13 @@ $('#city-maps').typeahead(
 #############################
 
 
+temp = $('#city-maps').split(",")
+$('#city').text(temp[0])
+$('#country').text(temp[temp.length - 1])
+
+#############################
+#   Format Datetime         #
+#############################
+
+$('#rentPeriodStart').text($('#rentStart') + " 00:00:00")
+$('#rentPeriodStop').text($('#rentStop') + " 00:00:00")

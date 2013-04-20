@@ -8,7 +8,7 @@ target : all (typeahead, maps, ...)
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, service, target;
+  var ckeckin, formatDate, geocoder, service, target, temp;
 
   ckeckin = null;
 
@@ -24,7 +24,7 @@ target : all (typeahead, maps, ...)
     return t_res.join("/");
   };
 
-  $('#rentPeriodStart').datepicker({
+  $('#rentStart').datepicker({
     onClose: function(selectedDate) {
       var checkin;
       console.log(selectedDate);
@@ -32,16 +32,16 @@ target : all (typeahead, maps, ...)
       console.log(checkin);
       target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 7);
       console.log(target);
-      $('#rentPeriodStop').datepicker('option', 'minDate', selectedDate);
-      return $('#rentPeriodStop').val(formatDate(target));
+      $('#rentStop').datepicker('option', 'minDate', selectedDate);
+      return $('#rentStop').val(formatDate(target));
     }
   });
 
-  $('#rentPeriodStop').datepicker({
+  $('#rentStop').datepicker({
     defaultDate: target ? target : '',
     onClose: function(selectedDate) {
       if (checkin) {
-        return $('#rentPeriodStart').datepicker('option', 'maxDate', selectedDate);
+        return $('#rentStart').datepicker('option', 'maxDate', selectedDate);
       }
     }
   });
@@ -76,5 +76,15 @@ target : all (typeahead, maps, ...)
       return item;
     }
   });
+
+  temp = $('#city-maps').split(",");
+
+  $('#city').text(temp[0]);
+
+  $('#country').text(temp[temp.length - 1]);
+
+  $('#rentPeriodStart').text($('#rentStart') + " 00:00:00");
+
+  $('#rentPeriodStop').text($('#rentStop') + " 00:00:00");
 
 }).call(this);

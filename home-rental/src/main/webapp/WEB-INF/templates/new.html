@@ -14,12 +14,12 @@
             <div class="row">
                 <div class="span12">
                     <div id="map">
-                        <input type="text" class="city-maps" id="location-search" placeholder="Please type the city here"/>
+                        <input type="text" class="city-maps" id="city-maps" placeholder="Please type the city here"/>
                     </div>
                 </div>
             </div>
         </div>
-        <form id="propertyForm" th:object="${newProperty}" th:action="@{/s/property/new}" method="post">
+       <form id="propertyForm" th:object="${newProperty}" th:action="@{/s/property/new}" method="post">
             <div class="container">
                 <div class="row">
                     <div class="span4">
@@ -27,6 +27,8 @@
                         <input id="address" type="text" placeholder="Address"  th:field="*{property.address}"/>
                         <input id="city" type="hidden" th:field="*{property.city}"/>
                         <input id="country" type="hidden" th:field="*{property.country}"/>
+                        <input id="rentPeriodStart" type="hidden" th:field="*{property.rentPeriodStart}"/>
+                        <input id="rentPediodStop" type="hidden" th:field="*{property.rentPeriodStop}"/>
                         <input id="shortDesc" type="text" placeholder="Short description of the property" th:field="*{property.shortDesc}"/>
                         <select id="type" th:field="*{property.type}">
                             <option th:each="type : ${types}" 
@@ -55,9 +57,9 @@
                         <input type="checkbox" th:field="*{options.laundry}"/>Laundry<br />
                     </div>
                     <div class="span4">
-                        <input type="text" id="rentPeriodStart" placeholder="Rent period start" th:field="*{rentStart}"/>
+                        <input type="text" id="rentStart" placeholder="Rent period start" th:field="*{rentStart}"/>
                         <i class="icon-calendar"></i>
-                        <input type="text" id="rentPeriodStop" placeholder="Rent period stop" th:field="*{rentStop}"/>
+                        <input type="text" id="rentStop" placeholder="Rent period stop" th:field="*{rentStop}"/>
                         <i class="icon-calendar"></i>
                         <h4>Pictures</h4>
                         <input type="file" name="pict1" /><br />
