@@ -8,7 +8,7 @@ target : all (typeahead, maps, ...)
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, service, target, temp;
+  var ckeckin, formatDate, geocoder, service, target;
 
   ckeckin = null;
 
@@ -77,14 +77,24 @@ target : all (typeahead, maps, ...)
     }
   });
 
-  temp = $('#city-maps').split(",");
+  $('#city-maps').on("focus", function(event) {
+    var maps_data, maps_data_tab;
+    maps_data = event.target.val();
+    if (maps_data !== "") {
+      maps_data_tab = maps_data.split(",");
+      if (maps_data_tab.lenght > 2) {
+        $('#city').text(maps_data_tab[0] + maps_data_tab[1]);
+        return $('#country').text(maps_data_tab[maps_data_tab.length - 1]);
+      } else {
+        $('#city').text(maps_data_tab[0]);
+        return $('#country').text(maps_data_tab[maps_data_tab.length - 1]);
+      }
+    }
+  });
 
-  $('#city').text(temp[0]);
-
-  $('#country').text(temp[temp.length - 1]);
-
-  $('#rentPeriodStart').text($('#rentStart') + " 00:00:00");
-
-  $('#rentPeriodStop').text($('#rentStop') + " 00:00:00");
+  $('#rentPeriodStart').on("focus", function(event) {
+    $('#rentPeriodStart').text(event.targer.val() + " 00:00:00");
+    return $('#rentPeriodStop').text($('#rentStop').val() + " 00:00:00");
+  });
 
 }).call(this);

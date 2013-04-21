@@ -36,9 +36,14 @@
                     <br/>
                     <div>
                         <h4>
-                            <span th:if="${evaluation} &gt; 49">Note: <span class="text-success" th:text="${evaluation} + '/100'"></span></span>
-                            <span th:if="${evaluation} &lt; 30">Note: <span class="text-error" th:text="${evaluation} + '/100'"></span></span>
-                            <span th:if="${evaluation &lt; 50 and evaluation &gt; 29}">Note: <span class="text-warning" th:text="${evaluation} + '/100'"></span></span>
+                            <span th:if="${evaluation}">
+                                <span th:if="${evaluation} &gt; 49">Note: <span class="text-success" th:text="${evaluation} + '/100'"></span></span>
+                                <span th:if="${evaluation} &lt; 30">Note: <span class="text-error" th:text="${evaluation} + '/100'"></span></span>
+                                <span th:if="${evaluation &lt; 50 and evaluation &gt; 29}">Note: <span class="text-warning" th:text="${evaluation} + '/100'"></span></span>
+                            </span>
+                            <span th:unless="${evaluation}">
+                                Not yet ratted.
+                            </span>
                         </h4>
                     </div>
                     <address>

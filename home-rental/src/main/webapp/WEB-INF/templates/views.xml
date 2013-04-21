@@ -30,5 +30,10 @@
         <put-attribute name="title" value="/new.html :: title" type="thymeleaf"/>
         <put-attribute name="body" value="/new.html :: content" type="thymeleaf"/>
     </definition>
+    
+    <definition name="newbis" extends="baseLayout">
+        <put-attribute name="title" value="/newbis.html :: title" type="thymeleaf"/>
+        <put-attribute name="body" value="/newbis.html :: content" type="thymeleaf"/>
+    </definition>
 
 </tiles-definitions>

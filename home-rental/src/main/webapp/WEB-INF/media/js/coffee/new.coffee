@@ -77,14 +77,33 @@ $('#city-maps').typeahead(
 #   Split typeahead Maps    #
 #############################
 
+$('#city-maps').on "focus", (event) ->
+  maps_data = event.target.val()
+  if maps_data != "" 
+    maps_data_tab = maps_data.split(",")
+    if maps_data_tab.lenght > 2
+      $('#city').text(maps_data_tab[0] + maps_data_tab[1])
+      $('#country').text(maps_data_tab[maps_data_tab.length - 1])
+    else
+      $('#city').text(maps_data_tab[0])
+      $('#country').text(maps_data_tab[maps_data_tab.length - 1])
+  
 
-temp = $('#city-maps').split(",")
-$('#city').text(temp[0])
-$('#country').text(temp[temp.length - 1])
+#temp = $('#city-maps').text(split(","))
+#$('#city').text(temp[0])
+#$('#country').text(temp[temp.length - 1])
 
 #############################
 #   Format Datetime         #
 #############################
 
-$('#rentPeriodStart').text($('#rentStart') + " 00:00:00")
-$('#rentPeriodStop').text($('#rentStop') + " 00:00:00")
+$('#rentPeriodStart').on "focus", (event) ->
+  $('#rentPeriodStart').text(event.targer.val() + " 00:00:00")
+  $('#rentPeriodStop').text($('#rentStop').val() + " 00:00:00")
+
+#$('#rentPeriodStart').text($('#rentStart') + " 00:00:00")
+#$('#rentPeriodStop').text($('#rentStop') + " 00:00:00")
+
+#$("#city-map).on "focus", (event) ->
+ #   maps_data = event.target.val().split()
+  #  # contrôle si maps_data est égale à "" avant le split

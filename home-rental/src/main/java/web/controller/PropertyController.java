@@ -68,6 +68,24 @@ public class PropertyController {
         return "property";
     }
 
+//    @RequestMapping(value = "/s/property/new", method = RequestMethod.GET)
+//    public String newView(Model model) {
+//        Property property = new Property();
+//        PropertyOptions options = new PropertyOptions();
+//        property.setAddress("test");
+//
+//        List<PropertyType> types = Arrays.asList(PropertyType.values());
+//        options.setLaundry(Boolean.FALSE);
+//        options.setParking(Boolean.FALSE);
+//        options.setSwimmingPool(Boolean.FALSE);
+//        options.setWifi(Boolean.FALSE);
+//
+//        model.addAttribute("property", property);
+//        model.addAttribute("options", options);
+//        model.addAttribute("types", types);
+//
+//        return "newbis";
+//    }
     @RequestMapping(value = "/s/property/new", method = RequestMethod.GET)
     public String newView(final NewProperty newProperty, Model model) {
 
@@ -78,6 +96,26 @@ public class PropertyController {
         return "new";
     }
     
+//    @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)
+//    public String saveProperty(final Property property, final PropertyOptions options, final BindingResult bindingResult, final Model model, Principal current) {
+//        if (current != null) {
+//            property.setOwner(userService.findByUsername(current.getName()));
+//        } else {
+//            property.setOwner(userService.findByUsername("johndoe"));
+//        }
+////        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+////        DateTime rentStart = formatter.parseDateTime(newProperty.getRentStart() + " 00:00:00");
+////        DateTime rentStop = formatter.parseDateTime(newProperty.getRentStop() + " 00:00:00");
+////        newProperty.getProperty().setRentPeriodStart(rentStart.toLocalDateTime());
+////        newProperty.getProperty().setRentPeriodStop(rentStop.toLocalDateTime());
+//        
+////        handle new property
+//        propertyService.saveProperty(property);
+//        options.setProperty(property);
+//        propertyOptionsService.savePropertyOptions(options);
+//        return "redirect:/property/" + property.getId();
+//    }
+    
     @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)
     public String saveProperty(final NewProperty newProperty, final BindingResult bindingResult, final Model model, Principal current) {
         if (current != null) {
@@ -85,11 +123,11 @@ public class PropertyController {
         } else {
             newProperty.getProperty().setOwner(userService.findByUsername("johndoe"));
         }
-//        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
-//        DateTime rentStart = formatter.parseDateTime(newProperty.getRentStart() + " 00:00:00");
-//        DateTime rentStop = formatter.parseDateTime(newProperty.getRentStop() + " 00:00:00");
-//        newProperty.getProperty().setRentPeriodStart(rentStart.toLocalDateTime());
-//        newProperty.getProperty().setRentPeriodStop(rentStop.toLocalDateTime());
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+        DateTime rentStart = formatter.parseDateTime(newProperty.getRentStart() + " 00:00:00");
+        DateTime rentStop = formatter.parseDateTime(newProperty.getRentStop() + " 00:00:00");
+        newProperty.getProperty().setRentPeriodStart(rentStart.toLocalDateTime());
+        newProperty.getProperty().setRentPeriodStop(rentStop.toLocalDateTime());
         
 //        handle new property
         Property property = newProperty.getProperty();

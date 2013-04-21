@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home Rental | New Property</title>
+
+
+    </head>
+    <body tiles:fragment="content">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div id="map">
+                        <input type="text" class="city-maps" id="city-maps" placeholder="Please type the city here"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <form id="propertyForm" th:action="@{/s/property/new}" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="span4">
+                        <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}"/>
+                        <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}"/>
+                        <input id="city" type="hidden"  name="city" th:value="${property.city}"/>
+                        <input id="country" type="hidden" name="country" th:value="${property.country}"/>
+<!--                        <input id="rentPeriodStart" type="hidden"  name="rentPeriodStart" th:value="${property.rentPeriodStart}"/>
+                        <input id="rentPediodStop" type="hidden" name="rentPeriodStop" th:value="${property.rentPeriodStop}"/>-->
+                        <input id="shortDesc" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}"/>
+                        <select id="type" name="type" th:value="${property.type}">
+                            <option th:each="type : ${types}" 
+                                    th:value="${type}" th:text="${type}"></option>
+                        </select>
+                        <select id="rooms" name="rooms" th:value="${property.rooms}">
+                            <option th:value="1">1 room</option>
+                            <option th:value="2">2 rooms</option>
+                            <option th:value="3">3 rooms</option>
+                            <option th:value="4">4 rooms</option>
+                            <option th:value="5">5 rooms</option>
+                            <option th:value="6">6+ rooms</option>
+
+                        </select>
+                        <div class="submit">
+                            <button class="btn btn-success btn-large" type="submit" >Save</button> 
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <input id="price" type="text" placeholder="Price" th:value="${property.price}"/>
+                        <textarea id="longDesc" placeholder="Complete description of the property" th:value="${property.longDesc}"/>
+<!--                        <h4>Options :</h4>
+                        <input type="checkbox" th:value="${options.parking}"/>Parking<br />
+                        <input type="checkbox" th:value="${options.swimmingPool}"/>Swimming pool<br />
+                        <input type="checkbox" th:value="${options.wifi}"/>Wi-Fi<br />
+                        <input type="checkbox" th:value="${options.laundry}"/>Laundry<br />-->
+                    </div>
+                    <div class="span4">
+                        <input type="text" id="rentStart" placeholder="Rent period start" name="rentPeriodStart" th:value="${property.rentPeriodStart}"/>
+                        <i class="icon-calendar"></i>
+                        <input type="text" id="rentStop" placeholder="Rent period stop" name="rentPeriodStop" th:value="${property.rentPeriodStop}"/>
+                        <i class="icon-calendar"></i>
+                        <h4>Pictures</h4>
+                        <input type="file" name="pict1" /><br />
+                        <input type="file" name="pict2" /><br />
+                        <input type="file" name="pict3" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
