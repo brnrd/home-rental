@@ -6,20 +6,19 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home Rental | New Property</title>
-
-
     </head>
     <body tiles:fragment="content">
         <div class="container">
             <div class="row">
                 <div class="span12">
                     <div id="map">
+                        <div id="map-canvas"></div>
                         <input type="text" class="city-maps" id="city-maps" placeholder="Please type the city here"/>
                     </div>
                 </div>
             </div>
         </div>
-       <form id="propertyForm" th:object="${newProperty}" th:action="@{/s/property/new}" method="post">
+        <form id="propertyForm" th:object="${newProperty}" th:action="@{/s/property/new}" method="post">
             <div class="container">
                 <div class="row">
                     <div class="span4">
