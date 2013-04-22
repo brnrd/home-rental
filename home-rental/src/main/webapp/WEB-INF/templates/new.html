@@ -6,8 +6,8 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home Rental | New Property</title>
-
-
+        
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/search.css" th:href="@{/css/new.css}" />
     </head>
     <body tiles:fragment="content">
         <div id="map">
@@ -16,16 +16,16 @@
         <form id="propertyForm" th:action="@{/s/property/new}" th:object="${options}" method="post">
             <div class="row">
                  <div class="span12">
-                    <input id="shortDesc" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}"/>
-                    <textarea id="longDesc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc"/>
+                        <input id="shortDesc" class="short-desc" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
+                    <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
                 </div>
             </div>
             <div class="row">
                 <div class="span4">
-                    <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}"/>
-                    <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}"/>
-                    <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}"/>
-                    <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}"/>
+                    <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>
+                    <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}" required="required"/>
+                    <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}" required="required"/>
+                    <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}" required="required"/>
 
                     <select id="type" name="type" th:value="${property.type}">
                         <option th:each="type : ${types}" 
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="span4">
-                    <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price"/>
+                    <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price" required="required"/>
 
                     <h4>Options :</h4>
                     <ul class="unstyled">
@@ -56,9 +56,9 @@
                     </ul>
                 </div>
                 <div class="span4">
-                    <input type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" />
+                    <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
                     <i class="icon-calendar"></i>
-                    <input type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" />
+                    <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
                     <i class="icon-calendar"></i>
                     <h4>Pictures</h4>
                     <input type="file" name="pict1" /><br />
