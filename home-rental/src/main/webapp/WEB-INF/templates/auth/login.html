@@ -15,18 +15,20 @@
             </div>
             <div class="auth-body">
                 <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
-                <p class="form-error"></p>
+                <p class="form-error">
+                    <span th:if="${login_error}">Warning ! Your login/password are incorrects. Please try again !</span>
+                </p>
                 <form method="POST" th:action="@{/login}" id="auth-process-login">
                     <div class="form-group">
                         <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
-                        <div class="pull-left field-container">
+                        <div th:class="${login_error} ? pull-left field-container : pull-left field-container error">
                             <input type="text" id="auth_username" name="auth_username" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="pull-left" for="auth_pwd"><strong>Password :</strong></label>
-                        <div class="pull-left field-container">
+                        <div th:class="${login_error} ? pull-left field-container : pull-left field-container error">
                             <input type="password" id="auth_pwd" name="auth_pwd" maxlength="30" />
                         </div>
                         <div class="clearfix"></div>

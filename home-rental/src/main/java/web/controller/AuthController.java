@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import web.model.Role;
 import web.model.User;
 import web.service.UserService;
+import web.utils.Utilities;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -52,7 +54,7 @@ public class AuthController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginProcess(@RequestParam("auth_username") String username, 
                                         @RequestParam("auth_pwd") String password,
-                                        HttpServletRequest request, HttpServletResponse response) {
+                                        HttpServletRequest request, HttpServletResponse response, Model model) {
         
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
@@ -62,6 +64,7 @@ public class AuthController {
             rememberMeServices.loginSuccess(request, response, auth);
             return "redirect:/";
         } catch (BadCredentialsException ex) {
+            model.addAttribute("login_error", true);
             return "login";
         }
     }
@@ -75,9 +78,18 @@ public class AuthController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupProcess(@ModelAttribute("userData") User userData, BindingResult bindingResult, Model model) {
         
-        // Check if th username already exists (TODO : Implement an ajax control later)
+        // Check form integrity
+        List<String> formError = Utilities.checkForm(userData);
+        if (formError != null) {
+            for  (String e : formError) {
+                model.addAttribute(e, true);
+            }
+            return "signup";
+        }
+        
+        // Check if the username already exists (TODO : Implement an ajax control later)
         if (userService.findByUsername(userData.getUsername()) != null) {
-            model.addAttribute("username_error", true);
+            model.addAttribute("username_duplicate_error", true);
             return "signup";
         }
         
