@@ -3,6 +3,7 @@ package web.dao.impl;
 import java.util.List;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Repository;
 import web.dao.UserDao;
 import web.model.User;
@@ -23,6 +24,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDa
         if (user == null) {
             return false;
         }
+        user.setLastConnection(LocalDateTime.now());
         saveOrUpdate(user);
         return true;
     }

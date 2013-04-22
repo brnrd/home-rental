@@ -30,6 +30,9 @@ public class User implements Serializable {
     @Column(name = "created", insertable = true, updatable = false, nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
+     @Column(name = "last_connection", insertable = true, updatable = true, nullable = false)
+    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime lastConnection;
     @Column(columnDefinition = "enum('USER', 'ADMIN')")
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -100,6 +103,14 @@ public class User implements Serializable {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+    
+    public LocalDateTime getLastConnection() {
+        return lastConnection;
+    }
+
+    public void setLastConnection(LocalDateTime last) {
+        this.lastConnection = last;
     }
 
     public Role getRole() {

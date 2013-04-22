@@ -19,6 +19,7 @@ CREATE TABLE user (
     password VARCHAR(70) NOT NULL,
     role VARCHAR(12) NOT NULL,
     created TIMESTAMP DEFAULT NOW(),
+    last_connection TIMESTAMP NOT NULL,
     enabled BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (user_id),
     UNIQUE KEY (user_id)

@@ -58,7 +58,16 @@ public class HomeController {
         model.addAttribute("home", true);
                 
         if (current != null) {
-            model.addAttribute("current", userService.findByUsername(current.getName()));
+            User u_log = userService.findByUsername(current.getName());
+            if (u_log.getCreated().plusSeconds(60).isAfter(LocalDateTime.now())) {
+                model.addAttribute("new_user", true);
+            } else  {
+                if (u_log.getLastConnection().plusSeconds(60).isAfter(LocalDateTime.now())) {
+                    model.addAttribute("logged_user", true);
+                }
+            }
+            
+            model.addAttribute("current", u_log);
         }
         return "home";
     }
