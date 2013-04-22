@@ -12,21 +12,19 @@
         <div class="page-header">
             <h3 th:text="${user.username}"></h3>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="span9">
-                    <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
-                </div>
-                <div class="span3">
-                    <ul class="unstyled">
-                        <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
-                        <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
-                        <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
-                        <li><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
-                    </ul>
-                    <button class="btn">Modify</button><br />
-                    <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
-                </div>
+        <div class="row">
+            <div class="span9">
+                <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
+                    <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
+                    <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
+                    <li><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
+                </ul>
+                <button class="btn">Modify</button><br />
+                <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
             </div>
         </div>
     </body>
