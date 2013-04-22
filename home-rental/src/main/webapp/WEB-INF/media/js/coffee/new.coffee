@@ -4,9 +4,20 @@ Date of creation : 17/04/2013
 Creator : brnrd
 target : all (typeahead, maps, ...)
 ###
+jQuery -> 
+  initialize()
+  
+###################
+#   Google Maps   #
+###################
 
-
-
+initialize = () ->
+  mapOptions =
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  map = new google.maps.Map $('#map-canvas')[0], mapOptions
+  
 ##################
 #   Datepicker   #
 ##################
@@ -71,45 +82,24 @@ $('#city-maps').typeahead(
                 map.setCenter(results[0].geometry.location)
                 map.setZoom(12)
         )
+        splitCity(item)
         item
 )
-
-###################
-#   Google Maps   #
-###################
-
-#$ ->
-#    initialize()
-#
-#initialize = ->
-#  mapOptions =
-#    zoom: 8,
-#    center: new google.maps.LatLng(-34.397, 150.644),
-#    mapTypeId: google.maps.MapTypeId.ROADMAP
-#  map = new google.maps.Map $('#map-canvas')[0], mapOptions
-  
-  
 
 #############################
 #   Split typeahead Maps    #
 #############################
 
-$('#city-maps').on "focus", (event) ->
-  maps_data = event.target.val()
+splitCity = (item) =>
+  maps_data = item
+  console.log maps_data
   if maps_data != "" 
     maps_data_tab = maps_data.split(",")
-    if maps_data_tab.lenght > 2
-      $('#city').text(maps_data_tab[0] + maps_data_tab[1])
-      $('#country').text(maps_data_tab[maps_data_tab.length - 1])
+    console.log maps_data_tab
+    if maps_data_tab.length > 2
+      $('#city').val(maps_data_tab[0] + ", " + maps_data_tab[1])
+      $('#country').val(maps_data_tab[maps_data_tab.length - 1])
     else
-      $('#city').text(maps_data_tab[0])
-      $('#country').text(maps_data_tab[maps_data_tab.length - 1])
+      $('#city').val(maps_data_tab[0])
+      $('#country').val(maps_data_tab[maps_data_tab.length - 1])
   
-
-#############################
-#   Format Datetime         #
-#############################
-
-$('#rentPeriodStart').on "focus", (event) ->
-  $('#rentPeriodStart').text(event.targer.val() + " 00:00:00")
-  $('#rentPeriodStop').text($('#rentStop').val() + " 00:00:00")

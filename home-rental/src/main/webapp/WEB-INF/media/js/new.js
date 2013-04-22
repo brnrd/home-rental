@@ -8,7 +8,22 @@ target : all (typeahead, maps, ...)
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, service, target;
+  var ckeckin, formatDate, geocoder, initialize, service, splitCity, target,
+    _this = this;
+
+  jQuery(function() {
+    return initialize();
+  });
+
+  initialize = function() {
+    var map, mapOptions;
+    mapOptions = {
+      zoom: 8,
+      center: new google.maps.LatLng(-34.397, 150.644),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    return map = new google.maps.Map($('#map-canvas')[0], mapOptions);
+  };
 
   ckeckin = null;
 
@@ -73,28 +88,26 @@ target : all (typeahead, maps, ...)
         map.setCenter(results[0].geometry.location);
         return map.setZoom(12);
       });
+      splitCity(item);
       return item;
     }
   });
 
-  $('#city-maps').on("focus", function(event) {
+  splitCity = function(item) {
     var maps_data, maps_data_tab;
-    maps_data = event.target.val();
+    maps_data = item;
+    console.log(maps_data);
     if (maps_data !== "") {
       maps_data_tab = maps_data.split(",");
-      if (maps_data_tab.lenght > 2) {
-        $('#city').text(maps_data_tab[0] + maps_data_tab[1]);
-        return $('#country').text(maps_data_tab[maps_data_tab.length - 1]);
+      console.log(maps_data_tab);
+      if (maps_data_tab.length > 2) {
+        $('#city').val(maps_data_tab[0] + maps_data_tab[1]);
+        return $('#country').val(maps_data_tab[maps_data_tab.length - 1]);
       } else {
-        $('#city').text(maps_data_tab[0]);
-        return $('#country').text(maps_data_tab[maps_data_tab.length - 1]);
+        $('#city').val(maps_data_tab[0] + ", " + maps_data_tab[1]);
+        return $('#country').val(maps_data_tab[maps_data_tab.length - 1]);
       }
     }
-  });
-
-  $('#rentPeriodStart').on("focus", function(event) {
-    $('#rentPeriodStart').text(event.targer.val() + " 00:00:00");
-    return $('#rentPeriodStop').text($('#rentStop').val() + " 00:00:00");
-  });
+  };
 
 }).call(this);
