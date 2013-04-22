@@ -87,6 +87,7 @@
                         <!-- Noty to throw -->
                         <span th:if="${logged_user}" id="logged_user"></span>
                         <span th:if="${new_user}" id="new_user"></span>
+                        <span th:if="${logout_success}" id="logout_success"></span>
                     </div>
                 </div>
             </div>
@@ -109,6 +110,7 @@
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery-ui.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/layouts/topCenter.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/themes/default.js}"></script>
 
         <!-- Bootstrap imports -->
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>

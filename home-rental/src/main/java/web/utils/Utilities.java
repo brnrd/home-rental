@@ -1,5 +1,6 @@
 package web.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import web.model.User;
 
@@ -10,7 +11,7 @@ import web.model.User;
 public class Utilities {
 
     public static List<String> checkForm(User userData) {
-        List<String> res = null;
+        List<String> res = new ArrayList<String>();
         if (userData.getUsername() == "") {
             res.add("username_error");
         }

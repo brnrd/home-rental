@@ -18,16 +18,17 @@ notifyMessage = (type, msg) ->
     )
 
 if $('#new_user').length > 0
-  console.log "new user"
   notifyMessage("success", "Your new account has been successfully created")
   
 if $('#logged_user').length > 0
-  console.log "logged user"
   notifyMessage("success", "You are successfully logged")
+  
+if $('#logout_success').length > 0
+  notifyMessage("success", "You are successfully logged out")
 
-##################
+##############
 #   Datepicker   #
-##################
+##############
 
 ckeckin = null
 target = null

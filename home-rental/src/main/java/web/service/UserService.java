@@ -15,4 +15,5 @@ public interface UserService {
     void saveUser(User user);
     void deleteUser(String user_id);
     List<User> findAll();
+    void connected(User current_user);
 }

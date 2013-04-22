@@ -27,10 +27,10 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password", length = 40)
     private String password;
-    @Column(name = "created", insertable = true, updatable = false, nullable = false)
+    @Column(name = "created", nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime created;
-     @Column(name = "last_connection", insertable = true, updatable = true, nullable = false)
+     @Column(name = "last_connection", nullable = false)
     @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime lastConnection;
     @Column(columnDefinition = "enum('USER', 'ADMIN')")
@@ -50,6 +50,12 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+    
+    @PrePersist
+    protected void onCreate() {
+        created =  LocalDateTime.now();
+        lastConnection =  LocalDateTime.now();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter/setter">

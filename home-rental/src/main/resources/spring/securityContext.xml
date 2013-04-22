@@ -26,7 +26,7 @@
         
         <remember-me />
         <form-login login-page="/login" />
-        <logout />
+        <logout logout-success-url="/logout/success" />
     </http>
         
     <beans:bean id="pwd-encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">

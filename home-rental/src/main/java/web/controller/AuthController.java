@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import web.model.Role;
 import web.model.User;
 import web.service.UserService;
@@ -46,6 +45,8 @@ public class AuthController {
     @Autowired
     RememberMeServices rememberMeServices;
     
+    /** LOGIN **/
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
@@ -62,12 +63,24 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(auth);
             repository.saveContext(SecurityContextHolder.getContext(), request, response);
             rememberMeServices.loginSuccess(request, response, auth);
+            
+            // Update last connection
+            userService.connected(userService.findByUsername(username));
+            
             return "redirect:/";
         } catch (BadCredentialsException ex) {
             model.addAttribute("login_error", true);
             return "login";
         }
     }
+    
+    @RequestMapping(value = "/logout/success", method = RequestMethod.GET)
+    public String logoutSucess(Model model) {
+        model.addAttribute("loggout_success", true);
+        return "redirect:/";
+    }
+    
+    /** SIGNUP**/
     
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model) {
@@ -80,7 +93,7 @@ public class AuthController {
         
         // Check form integrity
         List<String> formError = Utilities.checkForm(userData);
-        if (formError != null) {
+        if (formError.size() > 0) {
             for  (String e : formError) {
                 model.addAttribute(e, true);
             }
