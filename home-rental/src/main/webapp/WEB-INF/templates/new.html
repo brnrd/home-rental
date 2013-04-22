@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <form id="propertyForm" th:action="@{/s/property/new}" method="post">
+        <form id="propertyForm" th:action="@{/s/property/new}" th:object="${options}" method="post">
             <div class="container">
                 <div class="row">
                     <div class="span4">
@@ -49,10 +49,12 @@
                         <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price"/>
                         <textarea id="longDesc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc"/>
                         <h4>Options :</h4>
-                        <input type="checkbox" th:value="${options.parking}" name="parking"/>Parking<br />
-                        <input type="checkbox" th:value="${options.swimmingPool}" name="swimmingPool"/>Swimming pool<br />
-                        <input type="checkbox" th:value="${options.wifi}" name="wifi"/>Wi-Fi<br />
-                        <input type="checkbox" th:value="${options.laundry}" name="laundry"/>Laundry<br />
+                        <ul class="unstyled">
+                            <li><input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/><span>Parking</span></li>
+                            <li><input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/><span>Swimming pool</span></li>
+                            <li><input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/><span>Wi-Fi</span></li>
+                            <li><input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/><span>Laundry</span></li>
+                        </ul>
                     </div>
                     <div class="span4">
                         <input type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" />

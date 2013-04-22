@@ -94,12 +94,16 @@ splitCity = (item) =>
   maps_data = item
   console.log maps_data
   if maps_data != "" 
-    maps_data_tab = maps_data.split(",")
+    maps_data_tab = maps_data.split(", ")
     console.log maps_data_tab
     if maps_data_tab.length > 2
       $('#city').val(maps_data_tab[0] + ", " + maps_data_tab[1])
       $('#country').val(maps_data_tab[maps_data_tab.length - 1])
     else
-      $('#city').val(maps_data_tab[0])
-      $('#country').val(maps_data_tab[maps_data_tab.length - 1])
+      if maps_data_tab[1].length == 2
+        $('#city').val(maps_data_tab[0] + ", " +maps_data_tab[1])
+        $('#country').val("USA")
+      else
+        $('#city').val(maps_data_tab[0])
+        $('#country').val(maps_data_tab[maps_data_tab.length - 1])
   
