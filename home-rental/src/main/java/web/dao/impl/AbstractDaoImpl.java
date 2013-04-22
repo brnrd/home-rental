@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import web.dao.AbstractDao;
+import web.model.User;
 
 /** 
  * @author Romain <ro.foncier@gmail.com>
@@ -36,6 +37,7 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     @Override
     public void saveOrUpdate(E e) {
         getCurrentSession().saveOrUpdate(e);
+        getCurrentSession().flush();
     }
 
     @Override
@@ -58,5 +60,9 @@ public abstract class AbstractDaoImpl<E, I extends Serializable> implements Abst
     @Override
     public List<String> listDistinctCriteria(String criterion, String table) {
         return sessionFactory.getCurrentSession().createQuery("SELECT DISTINCT "+criterion+" FROM "+table).list();
+    }
+    
+    public List<E> findByCriterion(String table, String criterion, String value) {
+        return sessionFactory.getCurrentSession().createQuery("FROM "+table+" WHERE "+criterion+"="+value).list();
     }
 }

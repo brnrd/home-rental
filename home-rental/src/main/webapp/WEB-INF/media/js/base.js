@@ -8,8 +8,35 @@ comment :
 */
 
 
+/* Noty
+*/
+
+
 (function() {
-  var ckeckin, formatDate, geocoder, service, target;
+  var ckeckin, formatDate, geocoder, notifyMessage, service, target;
+
+  notifyMessage = function(type, msg) {
+    return noty({
+      text: msg,
+      type: type,
+      dismissQueue: false,
+      timeout: 2000,
+      layout: 'topCenter',
+      theme: 'defaultTheme'
+    });
+  };
+
+  if ($('#new_user').length > 0) {
+    notifyMessage("success", "Your new account has been successfully created");
+  }
+
+  if ($('#logged_user').length > 0) {
+    notifyMessage("success", "You are successfully logged");
+  }
+
+  if ($('#logout_success').length > 0) {
+    notifyMessage("success", "You are successfully logged out");
+  }
 
   ckeckin = null;
 

@@ -34,11 +34,10 @@ comment :
     }
   };
 
-  jQuery(function() {
-    setInterval(function() {
-      return check_change(current_slide + 1);
-    }, TIME);
-    return true;
-  });
+  setInterval(function() {
+    return check_change(current_slide + 1);
+  }, TIME);
+
+  true;
 
 }).call(this);

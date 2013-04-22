@@ -6,9 +6,29 @@ target : all (datepicker, ...)
 comment :
 ###
 
-##################
+### Noty ###
+notifyMessage = (type, msg) ->
+    noty (
+      text: msg
+      type: type
+      dismissQueue: false
+      timeout: 2000
+      layout: 'topCenter'
+      theme: 'defaultTheme'
+    )
+
+if $('#new_user').length > 0
+  notifyMessage("success", "Your new account has been successfully created")
+  
+if $('#logged_user').length > 0
+  notifyMessage("success", "You are successfully logged")
+  
+if $('#logout_success').length > 0
+  notifyMessage("success", "You are successfully logged out")
+
+##############
 #   Datepicker   #
-##################
+##############
 
 ckeckin = null
 target = null

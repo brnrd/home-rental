@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="en">
 
     <head>
@@ -13,12 +14,12 @@
 
         <!-- JQuery UI CSS -->
         <link rel="stylesheet" href="/css/jquery-ui/jquery-ui.css" th:href="@{/css/jquery-ui/jquery-ui.css}" />
-        <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.core.css" th:href="@{/css/jquery-ui/jquery.ui.core.css}" />
-        <link rel="stylesheet" href="/css/jquery-ui/jquery.ui.datepicker.css" th:href="@{/css/jquery-ui/jquery.ui.datepicker.css}" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
-        <link rel="stylesheet" href="/css/home.css" th:href="@{/css/home.css}" />
+        
+        <!-- Custom CSS page specific import -->
+        <link rel="stylesheet" tiles:substituteby="css-specific" />
 
         <!-- Google Maps API import -->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
@@ -30,25 +31,40 @@
                     <div class="row">
                         <div class="span12">
                             <div class="pull-right login">
-                                <div class="btn-login">
-                                    <a href="/signin/">
-                                        <span>Connexion</span>
-                                    </a>
+                                
+                                <div class="user-logged" sec:authorize="isAuthenticated()">
+                                    <div class="btn-group">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <!--<img src="" class="avatar avatar28">-->
+                                            <span class="username"><strong th:text="${current.username}"></strong></span>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/user/__${current.username}__}">Account</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/home-rental/s/user/__${current.username}__/properties}">My Properties</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/user/__${current.username}__/reservations}">My Reservations</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-login" th:disabled="! ${#authentication}">
+                                    <a href="#" th:href="@{/signup}" id="signup"><span>Signup</span></a> - <a href="#" th:href="@{/login}" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->
                             <ul class="nav">
                                 <li>
-                                    <a href="/" id="logo">
+                                    <a href="/home-rental/" id="logo">
                                         <img src="/img/global/logo.png" th:src="@{/img/global/logo.png}" alt="logo home rental" />
                                     </a>
                                 </li>
                                 <li th:class="${home} ? 'active' : ''">
-                                    <a href="/">
+                                    <a href="/home-rental/">
                                         <span>Home</span>
                                     </a>
                                 </li>
                                 <li th:class="${help} ? 'active' : ''">
-                                    <a href="/help/">
+                                    <a href="/home-rental/help/">
                                         <span>Help</span>
                                     </a>
                                 </li>
@@ -65,45 +81,13 @@
             <div class="container">
                 <div class="row">
                     <div class="span12">
-                        <div id="search-bar">
-                            <form action="" id="search_form">
-                                <div class="input-wrapper">
-                                    <input type="text" class="location" id="location-search" placeholder="Where do you want to go ?" />
-                                </div>
-                                <div class="input-wrapper">
-                                    <input type="text" class="checkin" id="checkin" placeholder="Check In" />
-                                    <i class="icon-calendar"></i>
-                                </div>
-                                <div class="input-wrapper">
-                                    <input type="text" class="checkout" id="checkout" placeholder="Check Out" />
-                                    <i class="icon-calendar"></i>
-                                </div>
-                                <div class="btn-group pull-left">
-                                    <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
-                                    <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                        <li><a tabindex="-1" href="#">2 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">3 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">4 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">5 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">6 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">7 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">8 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">9 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">10 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">11 hosts</a></li>
-                                        <li><a tabindex="-1" href="#">12+ hosts</a></li>
-                                    </ul>
-                                </div>
-
-                                <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>
-
+                        <div class="content" tiles:include="search_bar"></div>
                         <div class="content" tiles:include="body"></div>
+                        
+                        <!-- Noty to throw -->
+                        <span th:if="${logged_user}" id="logged_user"></span>
+                        <span th:if="${new_user}" id="new_user"></span>
+                        <span th:if="${logout_success}" id="logout_success"></span>
                     </div>
                 </div>
             </div>
@@ -124,20 +108,23 @@
         <!-- Global imports -->
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/global/jquery-ui.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/layouts/topCenter.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/themes/default.js}"></script>
 
         <!-- Bootstrap imports -->
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-typeahead.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-modal.js}"></script>
 
         <!-- Custom js -->
-        <script type="text/javascript" src="#" th:src="@{/js/carousel.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/base.js}"></script>
 
         <!-- Custom JS page specific imports - Little hack to import page specific js ! ;-) -->
-        <!--<div tiles:substituteby="js"></div>-->
-        
+        <div tiles:include="js-specific" ></div>
+
         <!-- JS Inline -->
 
     </body>

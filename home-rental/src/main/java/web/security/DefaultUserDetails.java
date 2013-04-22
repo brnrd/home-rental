@@ -12,13 +12,13 @@ import web.model.User;
 public class DefaultUserDetails implements UserDetails {
     private Long id;
     private final String login;
-    private final String passwordHash;
+    private final String password;
     private final boolean enabled;
     private Collection<GrantedAuthority> grantedAuthorities;
  
     public DefaultUserDetails(User user, Collection<GrantedAuthority> authorities) {
         this.login = user.getUsername();
-        this.passwordHash = user.getPassword();
+        this.password = user.getPassword();
         this.enabled = user.isEnabled();
         this.grantedAuthorities = authorities;
     }
@@ -30,7 +30,7 @@ public class DefaultUserDetails implements UserDetails {
  
     @Override
     public String getPassword() {
-        return passwordHash;
+        return password;
     }
  
     @Override
