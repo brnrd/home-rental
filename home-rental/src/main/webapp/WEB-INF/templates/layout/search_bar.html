@@ -7,35 +7,36 @@
 
     <body tiles:fragment="search_bar">
         <div id="search-bar">
-            <form action="" id="search_form">
+            <form method="GET" th:action="@{/search}" id="search_form">
                 <div class="input-wrapper">
-                    <input type="text" class="location" id="location-search" placeholder="Where do you want to go ?" />
+                    <input type="text" class="location" id="location-search" name="location" placeholder="Where do you want to go ?" />
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" class="checkin" id="checkin" placeholder="Check In" />
+                    <input type="text" class="checkin" id="checkin" name="checkin" placeholder="Check In" />
                     <i class="icon-calendar"></i>
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" class="checkout" id="checkout" placeholder="Check Out" />
+                    <input type="text" class="checkout" id="checkout" name="checkout" placeholder="Check Out" />
                     <i class="icon-calendar"></i>
                 </div>
                 <div class="btn-group pull-left">
-                    <button class="btn btn-inverse btn-dpd"><strong>1 host</strong><i class="icon-user icon-white"></i></button>
+                    <input type="hidden" id="guests-number" name="guests_number" value="" />
+                    <button class="btn btn-inverse btn-dpd"><strong>1 guest</strong><i class="icon-user icon-white"></i></button>
                     <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                        <li><a tabindex="-1" href="#">2 hosts</a></li>
-                        <li><a tabindex="-1" href="#">3 hosts</a></li>
-                        <li><a tabindex="-1" href="#">4 hosts</a></li>
-                        <li><a tabindex="-1" href="#">5 hosts</a></li>
-                        <li><a tabindex="-1" href="#">6 hosts</a></li>
-                        <li><a tabindex="-1" href="#">7 hosts</a></li>
-                        <li><a tabindex="-1" href="#">8 hosts</a></li>
-                        <li><a tabindex="-1" href="#">9 hosts</a></li>
-                        <li><a tabindex="-1" href="#">10 hosts</a></li>
-                        <li><a tabindex="-1" href="#">11 hosts</a></li>
-                        <li><a tabindex="-1" href="#">12+ hosts</a></li>
+                    <ul id="guests-list" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                        <li><a tabindex="-1" href="#">2 guests</a></li>
+                        <li><a tabindex="-1" href="#">3 guests</a></li>
+                        <li><a tabindex="-1" href="#">4 guests</a></li>
+                        <li><a tabindex="-1" href="#">5 guests</a></li>
+                        <li><a tabindex="-1" href="#">6 guests</a></li>
+                        <li><a tabindex="-1" href="#">7 guests</a></li>
+                        <li><a tabindex="-1" href="#">8 guests</a></li>
+                        <li><a tabindex="-1" href="#">9 guests</a></li>
+                        <li><a tabindex="-1" href="#">10 guests</a></li>
+                        <li><a tabindex="-1" href="#">11 guests</a></li>
+                        <li><a tabindex="-1" href="#">12+ guests</a></li>
                     </ul>
                 </div>
 

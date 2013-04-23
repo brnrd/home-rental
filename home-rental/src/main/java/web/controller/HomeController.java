@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.model.User;
-import web.service.PropertyService;
 import web.service.UserService;
-import web.utils.PasswordHasher;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -21,12 +19,7 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
-    
-    @Autowired
-    private PropertyService propertyService;
-        
-    private PasswordHasher hash = new PasswordHasher();
-    
+                
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model, Principal current) {
         // Specified if the current page is active and set the tab in the navbar.
@@ -47,10 +40,5 @@ public class HomeController {
             model.addAttribute("current", u_log);
         }
         return "home";
-    }
-    
-    @RequestMapping(value = "/search/", method = RequestMethod.GET)
-    public String searchView(Model model) {
-        return "search";
     }
 }

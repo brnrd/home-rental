@@ -6,6 +6,10 @@ target : all (datepicker, ...)
 comment :
 ###
 
+### Utils methods ###
+pluralize = (i, title) ->
+    if i > 1 then i+" "+title+"s" else i+" "+title
+
 ### Noty ###
 notifyMessage = (type, msg) ->
     noty (
@@ -26,6 +30,16 @@ if $('#logged_user').length > 0
 if $('#logout_success').length > 0
   notifyMessage("success", "You are successfully logged out")
 
+### Guests selector ###
+$('#search-bar #guests-list li a').on "click", (event) ->
+    event.preventDefault()
+    nb = $(this).text().split(" ")[0]
+    console.log "nb guests = "+nb
+    
+    # Update button and input hidden
+    $('#search-bar button.btn-dpd strong').text(pluralize(nb, "guest"))
+    $('#search-bar #guests-number').val(nb)
+
 ##############
 #   Datepicker   #
 ##############
@@ -42,11 +56,8 @@ formatDate = (date) ->
 
 $('#checkin').datepicker(
     onClose: (selectedDate) ->
-        console.log selectedDate
         checkin = new Date(selectedDate)
-        console.log checkin
         target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+1)
-        console.log target
         $('#checkout').datepicker( "option", "minDate", selectedDate)
         $('#checkout').val(formatDate(target))
 )
