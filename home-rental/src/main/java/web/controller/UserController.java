@@ -20,12 +20,12 @@ import web.service.UserService;
  */
 @Controller
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
     @Autowired
     private PropertyService propertyService;
-    
+
     @RequestMapping(value = "/s/account/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model, Principal current) {
 
@@ -41,17 +41,23 @@ public class UserController {
                 nbEval++;
             }
         }
-        evaluation = evaluation/nbEval;
+        if (nbEval > 0) {
+            evaluation = evaluation / nbEval;
+        } else {
+            evaluation = -1;
+        }
         String pathMap;
         pathMap = StaticMap.buildMapURL(properties);
 
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("current", u_log);
+        }
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
         model.addAttribute("map", pathMap);
         model.addAttribute("evaluation", evaluation);
-        model.addAttribute("current", current);
-        
+
         return "user";
     }
-
 }
