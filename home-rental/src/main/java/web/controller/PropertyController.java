@@ -82,7 +82,7 @@ public class PropertyController {
         model.addAttribute("rentStop", rentStop);
         model.addAttribute("current", current);
         
-        return "new";
+        return "new_property";
     }
     
     @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)

@@ -59,7 +59,6 @@ comment :
     var nb;
     event.preventDefault();
     nb = $(this).text().split(" ")[0];
-    console.log("nb guests = " + nb);
     $('#search-bar button.btn-dpd strong').text(pluralize(nb, "guest"));
     return $('#search-bar #guests-number').val(nb);
   });

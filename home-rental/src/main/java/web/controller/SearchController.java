@@ -1,6 +1,8 @@
 package web.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +33,19 @@ public class SearchController {
         if (current != null) {
             model.addAttribute("current", current);
         }
-        System.out.println(location);
-        System.out.println(checkin);
-        System.out.println(checkout);
-        System.out.println(guests);
+        Map types = new HashMap<String, Integer>();
+        types.put("FLAT", 10);
+        types.put("HOUSE", 8);
+        types.put("LOFT", 6);
+        
+        Map options = new HashMap<String, Integer>();
+        options.put("Parking", 10);
+        options.put("Wifi", 2);
+        options.put("Laundry", 4);
+        
+        model.addAttribute("params", "[\""+location+"\", \""+checkin+"\", \""+checkout+"\", \""+guests+"\", [0, 300]]");
+        model.addAttribute("types", types);
+        model.addAttribute("options", options);
         return "search";
     }
 }

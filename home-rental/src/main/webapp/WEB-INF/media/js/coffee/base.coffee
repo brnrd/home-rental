@@ -34,7 +34,6 @@ if $('#logout_success').length > 0
 $('#search-bar #guests-list li a').on "click", (event) ->
     event.preventDefault()
     nb = $(this).text().split(" ")[0]
-    console.log "nb guests = "+nb
     
     # Update button and input hidden
     $('#search-bar button.btn-dpd strong').text(pluralize(nb, "guest"))
