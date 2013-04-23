@@ -21,7 +21,8 @@
                     <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
                     <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
                     <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
-                    <li><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
+                    <li th:if="${evaluation} &lt; 0">This user has no evaluation yet.</li>
+                    <li th:if="${evaluation} &gt; -1"><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
                 </ul>
                 <button class="btn">Modify</button><br />
                 <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>

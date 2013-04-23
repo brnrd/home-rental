@@ -19,6 +19,7 @@ import web.model.Comment;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
+import web.model.User;
 import web.service.CommentService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
@@ -54,14 +55,16 @@ public class PropertyController {
         for (int i = 1; i < 4; i++) {
             pictures.add(new Integer(i).toString() + ".jpg");
         }
-
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("current", u_log);
+        }
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("evaluation", evaluation);
         model.addAttribute("comments", comments);
         model.addAttribute("map", pathMap);
         model.addAttribute("pictures", pictures);
-        model.addAttribute("current", current);
 
         return "property";
     }
@@ -75,37 +78,35 @@ public class PropertyController {
 
         List<PropertyType> types = Arrays.asList(PropertyType.values());
 
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("current", u_log);
+        }
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("types", types);
         model.addAttribute("rentStart", rentStart);
         model.addAttribute("rentStop", rentStop);
-        model.addAttribute("current", current);
-        
         return "new_property";
     }
-    
+
     @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)
-    public String saveProperty(final Property property, final PropertyOptions 
-            options, final String rentStart, final String rentStop, 
+    public String saveProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
             final BindingResult bindingResult, final Model model, Principal current) {
-        
+
         if (current != null) {
             property.setOwner(userService.findByUsername(current.getName()));
-        } else {
-            property.setOwner(userService.findByUsername("johndoe"));
         }
         DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
         DateTime rentStartTmp = formatter.parseDateTime(rentStart + " 00:00:00");
         DateTime rentStopTmp = formatter.parseDateTime(rentStop + " 00:00:00");
         property.setRentPeriodStart(rentStartTmp.toLocalDateTime());
         property.setRentPeriodStop(rentStopTmp.toLocalDateTime());
-        
+
 //        handle new property
-            propertyService.saveProperty(property);
+        propertyService.saveProperty(property);
         options.setProperty(property);
         propertyOptionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
-    
 }

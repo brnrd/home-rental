@@ -42,8 +42,7 @@
         <put-attribute name="css-specific" value="/new_property.html :: css-specific" type="thymeleaf"/>
         <put-attribute name="search_bar" value="layout/search_bar.html :: search_bar" type="thymeleaf"/>
         <put-attribute name="body" value="/new_property.html :: content" type="thymeleaf"/>
-        <put-attribute name="js-specific" value="/new_property.html :: js-specific" type="thymeleaf"/>
-        
+        <put-attribute name="js-specific" value="/new_property.html :: js-specific" type="thymeleaf"/>   
     </definition>
    
 </tiles-definitions>
