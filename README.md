@@ -15,18 +15,19 @@ Holiday Cottages/Homes/Flats Rental Website
 + Hibernate
 + HTML (jsp, jstl tags), CSS, JS
 
-+ [Less Css][13] - Find here a [plugin](http://plugins.netbeans.org/plugin/32782/lesscss-module) for Netbeans ! ;-)
++ [Less Css][13] - Find here a [plugin][21] for Netbeans ! ;-)
 + [CoffeeScript][14]
 + [thymeleaf][15] - Template framework
 
 ### Database Access ###
 
-Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
+Access to PHPMyAdmin [here][20]]
 
 ### Maps API ###
 
-+ Infos are readable [here][16]
-+ The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
++The doc on the Maps API is [here][16]
++The doc on the Static Maps API is [here][17]
++The API key is : AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I
 
 #### To read ####
 
@@ -36,8 +37,8 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 + Introduction au framework Spring : [cours 1][5] | [cours 2][7] | [cours 3][8]
 + Hibernate : [cours 1][9] | [cours 2][11] | [cours 3][12]
 + [Spring Framework General Reference][10]
-+ [Java Persistence API](http://en.wikibooks.org/w/index.php?title=Java_Persistence&stable=1)
-+ [Spring Transaction Management](http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html)
++ [Java Persistence API][18]]
++ [Spring Transaction Management][19]
 
 [1]: http://fr.wikipedia.org/wiki/Spring_framework
 [2]: http://fr.wikipedia.org/wiki/Spring_framework
@@ -56,3 +57,7 @@ Access to PHPMyAdmin [here](https://phpmyadmin.alwaysdata.com/)
 [15]: http://www.thymeleaf.org/documentation.html
 [16]: https://developers.google.com/maps/documentation/javascript/?hl=fr
 [17]: https://developers.google.com/maps/documentation/staticmaps/?hl=fr
+[18]: http://en.wikibooks.org/w/index.php?title=Java_Persistence&stable=1
+[19]: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
+[20]: https://phpmyadmin.alwaysdata.com/
+[21]: http://plugins.netbeans.org/plugin/32782/lesscss-module

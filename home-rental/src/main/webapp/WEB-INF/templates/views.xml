@@ -36,5 +36,13 @@
         <put-attribute name="body" value="/property.html :: content" type="thymeleaf"/>
         <put-attribute name="js-specific" value="/property.html :: js-specific" type="thymeleaf"/>
     </definition>
-
+    
+    <definition name="new" extends="baseLayout">
+        <put-attribute name="title" value="/new.html :: title" type="thymeleaf"/>
+        <put-attribute name="css-specific" value="/new.html :: css-specific" type="thymeleaf"/>
+        <put-attribute name="body" value="/new.html :: content" type="thymeleaf"/>
+        <put-attribute name="js-specific" value="/new.html :: js-specific" type="thymeleaf"/>
+        
+    </definition>
+   
 </tiles-definitions>

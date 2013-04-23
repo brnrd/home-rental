@@ -13,13 +13,12 @@ import web.service.UserService;
 /**
  * @author Romain <ro.foncier@gmail.com>
  */
-
 @Controller
 public class HomeController {
 
     @Autowired
     private UserService userService;
-                
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homeView(Model model, Principal current) {
         // Specified if the current page is active and set the tab in the navbar.
@@ -36,7 +35,6 @@ public class HomeController {
                     model.addAttribute("logged_user", true);
                 }
             }
-            
             model.addAttribute("current", u_log);
         }
         return "home";

@@ -29,12 +29,12 @@ public class CommentDaoImpl extends AbstractDaoImpl<Comment, Integer> implements
     }
     
     @Override
-    public Comment findByProperty(Property property) {
+    public List<Comment> findByProperty(Property property) {
         List<Comment> res = findByCriteria(Restrictions.eq("property", property));
-        if (res != null && res.size() > 0) {
-            return res.get(0);
-        }
-        return null;
+//        if (res != null && res.size() > 0) {
+//            return res.get(0);
+//        }
+        return res;
     }
     
     @Override

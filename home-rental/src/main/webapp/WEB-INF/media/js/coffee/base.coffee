@@ -87,6 +87,7 @@ $('#location-search').typeahead(
                             predictions,
                             (prediction) ->
                                 prediction.description
+                                
                         )
                     )
         )

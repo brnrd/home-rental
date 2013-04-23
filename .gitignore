@@ -16,3 +16,6 @@ build-impl.xml
 # Vim, OS, ...
 *.un~
 *.swp
+
+# Project specific
+/home-rental/src/main/webapp/WEB-INF/media/img/property/
