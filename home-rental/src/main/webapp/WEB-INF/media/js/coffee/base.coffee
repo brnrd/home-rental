@@ -6,9 +6,42 @@ target : all (datepicker, ...)
 comment :
 ###
 
-##################
+### Utils methods ###
+pluralize = (i, title) ->
+    if i > 1 then i+" "+title+"s" else i+" "+title
+
+### Noty ###
+notifyMessage = (type, msg) ->
+    noty (
+      text: msg
+      type: type
+      dismissQueue: false
+      timeout: 2000
+      layout: 'topCenter'
+      theme: 'defaultTheme'
+    )
+
+if $('#new_user').length > 0
+  notifyMessage("success", "Your new account has been successfully created")
+  
+if $('#logged_user').length > 0
+  notifyMessage("success", "You are successfully logged")
+  
+if $('#logout_success').length > 0
+  notifyMessage("success", "You are successfully logged out")
+
+### Guests selector ###
+$('#search-bar #guests-list li a').on "click", (event) ->
+    event.preventDefault()
+    nb = $(this).text().split(" ")[0]
+    
+    # Update button and input hidden
+    $('#search-bar button.btn-dpd strong').text(pluralize(nb, "guest"))
+    $('#search-bar #guests-number').val(nb)
+
+##############
 #   Datepicker   #
-##################
+##############
 
 ckeckin = null
 target = null
@@ -22,11 +55,8 @@ formatDate = (date) ->
 
 $('#checkin').datepicker(
     onClose: (selectedDate) ->
-        console.log selectedDate
         checkin = new Date(selectedDate)
-        console.log checkin
         target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+1)
-        console.log target
         $('#checkout').datepicker( "option", "minDate", selectedDate)
         $('#checkout').val(formatDate(target))
 )

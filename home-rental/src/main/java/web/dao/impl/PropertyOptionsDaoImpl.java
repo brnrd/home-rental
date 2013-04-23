@@ -1,5 +1,6 @@
 package web.dao.impl;
 
+import java.util.List;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import web.dao.PropertyOptionsDao;
@@ -19,7 +20,11 @@ public class PropertyOptionsDaoImpl extends AbstractDaoImpl<PropertyOptions, Int
     
     @Override
     public PropertyOptions findByProperty(Property property) {
-        return findByCriteria(Restrictions.eq("property", property)).get(0);
+        List<PropertyOptions> res = findByCriteria(Restrictions.eq("property", property));
+        if (res != null && res.size() > 0) {
+            return res.get(0);
+        }
+        return null;
     }
     
     @Override

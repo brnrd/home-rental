@@ -1,4 +1,4 @@
-package web.common;
+package web.utils;
 
 import java.util.List;
 import web.model.Property;

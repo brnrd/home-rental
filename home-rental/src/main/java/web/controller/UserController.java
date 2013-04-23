@@ -1,5 +1,6 @@
 package web.controller;
 
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import web.common.StaticMap;
+import web.utils.StaticMap;
 import web.model.Property;
 import web.model.User;
 import web.service.PropertyService;
@@ -19,14 +20,14 @@ import web.service.UserService;
  */
 @Controller
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
     @Autowired
     private PropertyService propertyService;
-    
+
     @RequestMapping(value = "/s/account/{username}", method = RequestMethod.GET)
-    public String userView(@PathVariable String username, Model model) {
+    public String userView(@PathVariable String username, Model model, Principal current) {
 
         // Get User
         User user = userService.findByUsername(username);
@@ -40,16 +41,23 @@ public class UserController {
                 nbEval++;
             }
         }
-        evaluation = evaluation/nbEval;
+        if (nbEval > 0) {
+            evaluation = evaluation / nbEval;
+        } else {
+            evaluation = -1;
+        }
         String pathMap;
         pathMap = StaticMap.buildMapURL(properties);
 
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("current", u_log);
+        }
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
         model.addAttribute("map", pathMap);
         model.addAttribute("evaluation", evaluation);
-        
+
         return "user";
     }
-
 }

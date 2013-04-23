@@ -5,13 +5,42 @@
 
     <head>
         <title tiles:fragment="title">Home Rental | Search</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/search.css" th:href="@{/css/search.css}" />
     </head>
 
-    <body tiles:fragment="content">
-        <div class="map-container">
-            <div id="map" class="pull-left map"></div>
-            <div class="pull-left map-container-caption"></div>
-            <div class="clearfix"></div>
+    <body tiles:fragment="content">        
+        <div class="row map-container">
+            <div id="search-params" th:attr="data-search-params=${params}"></div>
+            <div id="map" class="span9 map"></div>
+            <div class="span3 map-container-caption">
+                <!-- Property type selector -->
+                <div class="search-selector">
+                    <ul id="property-type">
+                        <li class="list-selector" th:each="type : ${types}">
+                            <input type="checkbox" name="property_type" th:value="${type.key}" />
+                            <span th:text="${type.key}"></span>
+                            <span class="badge badge-info" th:text="${type.value}"></span>
+                        </li>
+                    </ul>
+                </div><!-- /end search-selector -->
+                
+                <!-- Property price selector -->
+                <div class="search-selector">
+                    <span>Price selector</span>
+                    <div id="slider"></div>
+                </div><!-- /end search-selector -->
+                
+                <!-- Property options selector -->
+                <div class="search-selector">
+                    <ul id="property-options">
+                        <li class="list-selector" th:each="option : ${options}">
+                            <input type="checkbox" name="property_options" th:value="${option.key}" />
+                            <span th:text="${option.key}"></span>
+                            <span class="badge badge-info" th:text="${option.value}"></span>
+                        </li>
+                    </ul>
+                </div><!-- /end search-selector -->
+            </div>
         </div>
         
         <!-- Bloc Search results -->
@@ -20,11 +49,9 @@
         </div>
         
         <!-- Custom js page specific -->
-        <!--
         <div tiles:fragment="js-specific">
-            <script type="text/javascript" src="#"></script>
+            <script type="text/javascript" src="#" th:src="@{/js/search.js}"></script>
         </div>
-        -->
         
     </body>
 </html>

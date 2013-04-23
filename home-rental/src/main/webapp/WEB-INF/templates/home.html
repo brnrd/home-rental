@@ -5,9 +5,12 @@
 
     <head>
         <title tiles:fragment="title">Home Rental | Home</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/home.css" th:href="@{/css/home.css}" />
     </head>
 
+    
     <body tiles:fragment="content">
+        
         <div id="carousel">
             <ul id="frame-container">
                 <li id="loft_1" class="active">
@@ -51,6 +54,11 @@
                     </div>
                 </li>
             </ul>
+        </div>
+        
+        <!-- Custom js page specific -->
+        <div tiles:fragment="js-specific">
+            <!--<script type="text/javascript" src="#" th:src="@{/js/carousel.js}"></script>-->
         </div>
         
     </body>
