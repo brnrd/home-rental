@@ -14,6 +14,6 @@ public interface CommentService {
     Comment findById(Integer com_id);
     void saveComment(Comment com);
     void deleteComment(Integer com_id);
-    Comment findByProperty(Property property);
+    List<Comment> findByProperty(Property property);
     List<Comment> findByUser(User user);
 }

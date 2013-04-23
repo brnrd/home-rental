@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
     }
     
     @Override
-    public Comment findByProperty(Property property) {
+    public List<Comment> findByProperty(Property property) {
         return comDao.findByProperty(property);
     }
     

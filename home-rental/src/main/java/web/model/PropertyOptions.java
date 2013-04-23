@@ -32,7 +32,12 @@ public class PropertyOptions implements Serializable {
     @Column(name="laundry")
     private Boolean laundry;
     
-    public PropertyOptions() {}
+    public PropertyOptions() {
+        setParking(Boolean.FALSE);
+        setSwimmingPool(Boolean.FALSE);
+        setWifi(Boolean.FALSE);
+        setLaundry(Boolean.FALSE);
+    }
     
     public PropertyOptions(Property property, Boolean hasParking, Boolean hasSwim, Boolean hasWifi, Boolean hasLaundry) {
         this.property = property;

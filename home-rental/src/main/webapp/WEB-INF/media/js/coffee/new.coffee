@@ -1,34 +1,26 @@
 ###
-JS - Base
-Date of creation : 12/04/2013
-Creator : Romain FONCIER
-target : all (datepicker, ...)
-comment :
+JS - New
+Date of creation : 17/04/2013
+Creator : brnrd
+target : all (typeahead, maps, ...)
 ###
-
-### Noty ###
-notifyMessage = (type, msg) ->
-    noty (
-      text: msg
-      type: type
-      dismissQueue: false
-      timeout: 2000
-      layout: 'topCenter'
-      theme: 'defaultTheme'
-    )
-
-if $('#new_user').length > 0
-  notifyMessage("success", "Your new account has been successfully created")
+jQuery -> 
+  initialize()
   
-if $('#logged_user').length > 0
-  notifyMessage("success", "You are successfully logged")
-  
-if $('#logout_success').length > 0
-  notifyMessage("success", "You are successfully logged out")
+###################
+#   Google Maps   #
+###################
 
-##############
+initialize = () ->
+  mapOptions =
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  map = new google.maps.Map $('#map-canvas')[0], mapOptions
+  
+##################
 #   Datepicker   #
-##############
+##################
 
 ckeckin = null
 target = null
@@ -40,22 +32,22 @@ formatDate = (date) ->
         return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
     return t_res.join("/")
 
-$('#checkin').datepicker(
+$('#rentStart').datepicker(
     onClose: (selectedDate) ->
         console.log selectedDate
         checkin = new Date(selectedDate)
         console.log checkin
-        target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+1)
+        target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+7)
         console.log target
-        $('#checkout').datepicker( "option", "minDate", selectedDate)
-        $('#checkout').val(formatDate(target))
+        $('#rentStop').datepicker('option', 'minDate', selectedDate)
+        $('#rentStop').val(formatDate(target))
 )
 
-$('#checkout').datepicker(
+$('#rentStop').datepicker(
     defaultDate: if target then target else ''
     onClose: (selectedDate) ->
         if checkin
-            $('#checkin').datepicker('option', 'maxDate', selectedDate)
+            $('#rentStart').datepicker('option', 'maxDate', selectedDate)
 )
 
 #############################
@@ -65,7 +57,7 @@ $('#checkout').datepicker(
 service = new google.maps.places.AutocompleteService()
 geocoder = new google.maps.Geocoder()
 
-$('#location-search').typeahead(
+$('#city-maps').typeahead(
     source: (query, process) ->
         service.getPlacePredictions(
             input: query,
@@ -76,7 +68,6 @@ $('#location-search').typeahead(
                             predictions,
                             (prediction) ->
                                 prediction.description
-                                
                         )
                     )
         )
@@ -91,5 +82,28 @@ $('#location-search').typeahead(
                 map.setCenter(results[0].geometry.location)
                 map.setZoom(12)
         )
+        splitCity(item)
         item
 )
+
+#############################
+#   Split typeahead Maps    #
+#############################
+
+splitCity = (item) =>
+  maps_data = item
+  console.log maps_data
+  if maps_data != "" 
+    maps_data_tab = maps_data.split(", ")
+    console.log maps_data_tab
+    if maps_data_tab.length > 2
+      $('#city').val(maps_data_tab[0] + ", " + maps_data_tab[1])
+      $('#country').val(maps_data_tab[maps_data_tab.length - 1])
+    else
+      if maps_data_tab[1].length == 2
+        $('#city').val(maps_data_tab[0] + ", " +maps_data_tab[1])
+        $('#country').val("USA")
+      else
+        $('#city').val(maps_data_tab[0])
+        $('#country').val(maps_data_tab[maps_data_tab.length - 1])
+  
