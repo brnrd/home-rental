@@ -4,6 +4,7 @@ import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
 import web.model.User;
@@ -35,13 +36,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void saveUser(User user) {
         userDao.saveUser(user);
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void deleteUser(String user_id) {
         User user = userDao.findById(user_id);
         if (user != null) {
@@ -55,11 +56,9 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void connected(User current_user) {
-        System.out.println(current_user.getLastConnection());
         current_user.setLastConnection(LocalDateTime.now());
-        //current_user.setUsername("test");
         userDao.saveUser(current_user);
-        System.out.println(current_user.getLastConnection());
     }
 }
