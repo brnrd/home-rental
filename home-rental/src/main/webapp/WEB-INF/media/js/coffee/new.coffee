@@ -4,19 +4,23 @@ Date of creation : 17/04/2013
 Creator : brnrd
 target : all (typeahead, maps, ...)
 ###
-jQuery -> 
-  initialize()
+$(document).ready -> 
+  mapOptions =
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  map = new google.maps.Map $('#map-canvas').get(0), mapOptions
   
 ###################
 #   Google Maps   #
 ###################
 
-initialize = () ->
-  mapOptions =
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  map = new google.maps.Map $('#map-canvas')[0], mapOptions
+#initialize = () ->
+#  mapOptions =
+#    zoom: 8,
+#    center: new google.maps.LatLng(-34.397, 150.644),
+#    mapTypeId: google.maps.MapTypeId.ROADMAP
+#  map = new google.maps.Map $('#map-canvas').get(0), mapOptions
   
 ##################
 #   Datepicker   #
