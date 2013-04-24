@@ -44,8 +44,10 @@ public class Property implements Serializable {
     private String city;
     @Column(name = "address", length = 255)
     private String address;
-    @Column(name = "coordinates", length = 45, nullable = true)
-    private String coordinates;
+    @Column(name="latitude")
+    private double latitude;
+    @Column(name="longitude")
+    private double longitude;
     @Column(name = "note", nullable = true)
     private Integer note;
     @Column(name = "rent_period_start")
@@ -173,12 +175,20 @@ public class Property implements Serializable {
         this.address = newAddress;
     }
 
-    public String getCoordinates() {
-        return coordinates;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setCoordinates(String newCoordinates) {
-        this.coordinates = newCoordinates;
+    public void setLatitude(double lat) {
+        this.latitude = lat;
+    }
+    
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longi) {
+        this.longitude = longi;
     }
 
     public Integer getNote() {
