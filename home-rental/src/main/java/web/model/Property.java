@@ -1,5 +1,6 @@
 package web.model;
 
+import com.javadocmd.simplelatlng.LatLng;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Type;
@@ -189,6 +190,13 @@ public class Property implements Serializable {
 
     public void setLongitude(double longi) {
         this.longitude = longi;
+    }
+    
+    public LatLng getCoordinates() {
+        if (this.latitude != 0 && this.longitude != 0) {
+            return new LatLng(this.latitude, this.longitude);
+        }
+        return null;
     }
 
     public Integer getNote() {
