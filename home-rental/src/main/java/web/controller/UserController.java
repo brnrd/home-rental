@@ -60,4 +60,27 @@ public class UserController {
 
         return "user";
     }
+    
+    @RequestMapping(value = "/s/account/{username}/properties", method = RequestMethod.GET)
+    public String userPropertiesView(@PathVariable String username, Model model, Principal current) {
+
+        // Get User
+        User user = userService.findByUsername(username);
+        List<Property> properties = propertyService.findProperty(user);
+        
+        String pathMap;
+        pathMap = StaticMap.buildMapURL(properties);
+        
+
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("current", u_log);
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("map", pathMap);
+        
+        
+
+        return "user_properties";
+    }
 }

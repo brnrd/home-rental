@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home rental | Properties</title>
+
+    </head>
+    <body tiles:fragment="content">
+        <div class="page-header">
+            <h3 th:text="${user.username} + ''properties'"></h3>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="span12">
+                <div th:each="property : ${properties}">
+                    <h4 th:text="${property.title}"></h4>
+                    <p th:text="${property.shortDesc}"></p>
+                    <p th:text="'Price : ' + ${property.price}"></p>
+                    <p th:text="'Note : ' + ${property.note}"></p>
+                    <button class="btn">Modify</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
