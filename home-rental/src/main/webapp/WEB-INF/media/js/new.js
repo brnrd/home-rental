@@ -8,8 +8,10 @@ target : all (typeahead, maps, ...)
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, initialize, mapOptions, service, splitCity, target,
+  var ckeckin, formatDate, geocoder, initialize, map, mapOptions, service, splitCity, target,
     _this = this;
+
+  map = null;
 
   mapOptions = {
     zoom: 8,
@@ -18,7 +20,6 @@ target : all (typeahead, maps, ...)
   };
 
   initialize = function() {
-    var map;
     map = new google.maps.Map($('#map-canvas')[0], mapOptions);
     return true;
   };
@@ -86,6 +87,8 @@ target : all (typeahead, maps, ...)
           return;
         }
         map.setCenter(results[0].geometry.location);
+        console.log(results[0]);
+        console.log(map);
         return map.setZoom(12);
       });
       splitCity(item);
@@ -100,9 +103,16 @@ target : all (typeahead, maps, ...)
       if (maps_data.length > 2) {
         $('#city').val(maps_data[0] + ", " + maps_data[1]);
         return $('#country').val(maps_data[maps_data.length - 1]);
+      } else if (maps_data.length === 2) {
+        if (maps_data[1].length === 2) {
+          $('#city').val(maps_data[0] + ", " + maps_data[1]);
+          return $('#country').val("USA");
+        } else {
+          $('#city').val(maps_data[0]);
+          return $('#country').val(maps_data[maps_data.length - 1]);
+        }
       } else {
-        $('#city').val(maps_data[0] + ", " + maps_data[1]);
-        return $('#country').val("USA");
+        return $('#country').val(maps_data[0]);
       }
     }
   };

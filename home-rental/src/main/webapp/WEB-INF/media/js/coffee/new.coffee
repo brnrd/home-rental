@@ -9,6 +9,8 @@ target : all (typeahead, maps, ...)
 #   Google Maps   #
 ###################
 
+map = null
+
 mapOptions =
     zoom: 8,
     center: new google.maps.LatLng(-34.397, 150.644),
@@ -82,6 +84,8 @@ $('#city-maps').typeahead(
                     alert('Cannot find address')
                     return
                 map.setCenter(results[0].geometry.location)
+                console.log results[0]
+                console.log map
                 map.setZoom(12)
         )
         splitCity(item)
@@ -94,11 +98,22 @@ $('#city-maps').typeahead(
 
 splitCity = (item) =>
   if item 
-    maps_data = $.trim(item).split(",")
-    if maps_data.length >2
-        $('#city').val(maps_data[0] + ", " + maps_data[1])
-        $('#country').val(maps_data[maps_data.length - 1])
-    else
-        # Only one case maps_data.length == 2 && never < 2
+    maps_data = $.trim(item).split(",")  
+#   If there is a city, a state and a country
+    if maps_data.length > 2
+      $('#city').val(maps_data[0] + ", " + maps_data[1])
+      $('#country').val(maps_data[maps_data.length - 1])
+#   If there is a city and a state/country
+    else if maps_data.length == 2
+#     If the length of the second elem is 2 then it's a american state
+      if maps_data[1].length == 2
         $('#city').val(maps_data[0] + ", " +maps_data[1])
+#       So add USA as country
         $('#country').val("USA")
+#     else that's the city country pattern  
+      else
+        $('#city').val(maps_data[0])
+        $('#country').val(maps_data[maps_data.length - 1])
+#   else that's only a country, so nothing is add in the city input 
+    else
+      $('#country').val(maps_data[0])
