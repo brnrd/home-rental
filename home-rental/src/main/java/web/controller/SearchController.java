@@ -26,7 +26,7 @@ public class SearchController {
     private UserService userService;
     
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchView(Model model, Principal current, @RequestParam("location") String location, @RequestParam("checkin") String checkin, @RequestParam("checkout") String checkout, @RequestParam("guests_number") String guests) {
+    public String searchView(Model model, Principal current, @RequestParam("location") String location, @RequestParam("latlong") String latlong, @RequestParam("checkin") String checkin, @RequestParam("checkout") String checkout, @RequestParam("guests_number") String guests) {
         // Specified if the current page is active and set the tab in the navbar.
         model.addAttribute("home", true);
                 

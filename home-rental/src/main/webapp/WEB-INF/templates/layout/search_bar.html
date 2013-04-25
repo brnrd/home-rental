@@ -10,6 +10,7 @@
             <form method="GET" th:action="@{/search}" id="search_form">
                 <div class="input-wrapper">
                     <input type="text" class="location" id="location-search" name="location" placeholder="Where do you want to go ?" />
+                    <input type="hidden" id="latlong" name="latlong" value="" />
                 </div>
                 <div class="input-wrapper">
                     <input type="text" class="checkin" id="checkin" name="checkin" placeholder="Check In" />

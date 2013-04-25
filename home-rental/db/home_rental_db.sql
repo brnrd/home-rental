@@ -40,7 +40,8 @@ CREATE TABLE property (
     country VARCHAR(45) NOT NULL,
     city VARCHAR(45) NOT NULL,
     address VARCHAR(255) NOT NULL,
-    coordinates VARCHAR(45),
+    latitude DOUBLE(18,14),
+    longitude DOUBLE(18,14)
     note INT,
     rent_period_start DATETIME NOT NULL,
     rent_period_stop DATETIME NOT NULL,

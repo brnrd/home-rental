@@ -13,7 +13,7 @@ comment :
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, notifyMessage, pluralize, service, target;
+  var ckeckin, formatDate, geocoder, getCoordinates, notifyMessage, pluralize, service, target;
 
   pluralize = function(i, title) {
     if (i > 1) {
@@ -95,6 +95,14 @@ comment :
     }
   });
 
+  getCoordinates = function(location) {
+    return $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + location.replace(' ', '+') + '&sensor=false', function(data) {
+      var coord;
+      coord = data.results[0].geometry.location;
+      return console.log(coord.lat + ',' + coord.lng);
+    });
+  };
+
   service = new google.maps.places.AutocompleteService();
 
   geocoder = new google.maps.Geocoder();
@@ -112,16 +120,7 @@ comment :
       });
     },
     updater: function(item) {
-      geocoder.geocode({
-        address: item
-      }, function(results, status) {
-        if (status !== google.maps.GeocoderStatus.OK) {
-          alert('Cannot find address');
-          return;
-        }
-        map.setCenter(results[0].geometry.location);
-        return map.setZoom(12);
-      });
+      $('#search-bar #latlong').val(getCoordinates(item));
       return item;
     }
   });

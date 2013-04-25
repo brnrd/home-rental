@@ -39,6 +39,8 @@ Access to PHPMyAdmin [here][20]]
 + [Spring Framework General Reference][10]
 + [Java Persistence API][18]]
 + [Spring Transaction Management][19]
++ [Haversine Fromula](http://en.wikipedia.org/wiki/Haversine_formula)
++ [MySQL Google Search API - Find location in neighborhood](https://developers.google.com/maps/articles/phpsqlsearch_v3)
 
 [1]: http://fr.wikipedia.org/wiki/Spring_framework
 [2]: http://fr.wikipedia.org/wiki/Spring_framework

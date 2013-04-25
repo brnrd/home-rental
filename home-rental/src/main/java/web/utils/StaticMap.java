@@ -69,10 +69,10 @@ public class StaticMap {
             string.append(LABEL);
             string.append(i + 1);
             string.append(MARKER_SEPARATOR);
-            if ((properties.get(i).getCoordinates() == null) || ("".equals(properties.get(i).getCoordinates()))) {
+            if ((properties.get(i).getCoordinates() == null)) {
                 string.append(formatAddress(properties.get(i).getAddress(), properties.get(i).getCity(), properties.get(i).getCountry()));
             } else {
-                string.append(properties.get(i).getCoordinates());
+                string.append(properties.get(i).getCoordinates().getLatitude() +","+ properties.get(i).getCoordinates().getLongitude());
             }
         }
         return string.toString();
@@ -83,10 +83,10 @@ public class StaticMap {
         string.append(MARKER);
         string.append(COLOR_RED);
         string.append(MARKER_SEPARATOR);
-        if ((property.getCoordinates() == null) || ("".equals(property.getCoordinates()))) {
+        if ((property.getCoordinates() == null)) {
             string.append(formatAddress(property.getAddress(), property.getCity(), property.getCountry()));
         } else {
-            string.append(property.getCoordinates());
+            string.append(property.getCoordinates().getLatitude() +","+ property.getCoordinates().getLongitude());
         }
         return string.toString();
     }

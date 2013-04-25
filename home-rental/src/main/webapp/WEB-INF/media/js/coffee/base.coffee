@@ -72,6 +72,12 @@ $('#checkout').datepicker(
 #   Typeahead Google Maps   #
 #############################
 
+getCoordinates = (location) ->
+    $.getJSON 'http://maps.googleapis.com/maps/api/geocode/json?address='+location.replace(' ', '+')+'&sensor=false',
+        (data) ->
+            coord = data.results[0].geometry.location
+            coord.lat+','+coord.lng
+
 service = new google.maps.places.AutocompleteService()
 geocoder = new google.maps.Geocoder()
 
@@ -92,14 +98,7 @@ $('#location-search').typeahead(
         )
     ,
     updater: (item) ->
-        geocoder.geocode(
-            address: item,
-            (results, status) ->
-                if status != google.maps.GeocoderStatus.OK
-                    alert('Cannot find address')
-                    return
-                map.setCenter(results[0].geometry.location)
-                map.setZoom(12)
-        )
+        # Get the lat/long coordinates and save them in hidden
+        $('#search-bar #latlong').val(getCoordinates(item))
         item
 )
