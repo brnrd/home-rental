@@ -77,6 +77,7 @@ public class UserController {
             model.addAttribute("current", u_log);
         }
         model.addAttribute("user", user);
+        model.addAttribute("properties", properties);
         model.addAttribute("map", pathMap);
         
         

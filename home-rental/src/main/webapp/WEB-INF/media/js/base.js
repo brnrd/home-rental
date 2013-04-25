@@ -99,7 +99,7 @@ comment :
     return $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + location.replace(' ', '+') + '&sensor=false', function(data) {
       var coord;
       coord = data.results[0].geometry.location;
-      return console.log(coord.lat + ',' + coord.lng);
+      return coord.lat + ',' + coord.lng;
     });
   };
 
