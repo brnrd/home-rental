@@ -28,12 +28,12 @@ modalActionHandler = () ->
 
 # Modify user
 $('#modify-property').on "click", (event) ->
-  setContext('modify', '/home-rental/s/property/modal/')
+  setContext('modify', '/home-rental/s/property/' + $('#property-id').val() + '/modal/')
   console.log context
   modalActionHandler()
 
 # Delete user
 $('#delete-property').on "click", (event) ->
-  setContext('delete', '/home-rental/s/property/modal/')
+  setContext('delete', '/home-rental/s/property/' + $('#property-id').val() + '/modal/')
   modalActionHandler()
   

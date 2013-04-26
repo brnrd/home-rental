@@ -17,6 +17,7 @@
             </div>
             <div class="span3">
                 <h4>Description</h4>
+                <input id="property-id" type="hidden" th:value="${property.id}" />
                 <ul class="unstyled">
                     <li th:text="${property.shortDesc}"></li>
                     <li th:text="${property.type}"></li>

@@ -18,7 +18,7 @@
         </div>
 
 
-        <form id="modify-form">
+        <form id="modify-form" th:object="${options}">
             <ul class="unstyled">
                 <li>
                     <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>

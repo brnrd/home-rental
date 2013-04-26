@@ -34,13 +34,14 @@ target : modal, submit form
   };
 
   $('#modify-property').on("click", function(event) {
-    setContext('modify', '/home-rental/s/property/modal/');
+    console.log($('#property-id').val());
+    setContext('modify', '/home-rental/s/property/' + $('#property-id').val() + '/modal/');
     console.log(context);
     return modalActionHandler();
   });
 
   $('#delete-property').on("click", function(event) {
-    setContext('delete', '/home-rental/s/property/modal/');
+    setContext('delete', '/home-rental/s/property/' + $('#property-id').val() + '/modal/');
     return modalActionHandler();
   });
 
