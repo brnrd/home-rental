@@ -19,13 +19,23 @@
         </div>
         <div class ="row">
             <div class="span12">
-                <div th:each="property : ${properties}">
-                    <h4 th:text="${property.title}"></h4>
-                    <p th:text="${property.shortDesc}"></p>
-                    <p th:text="'Price : ' + ${property.price}"></p>
-                    <p th:text="'Note : ' + ${property.note}"></p>
-                    <button class="btn">Modify</button>
-                </div>
+                <table class="table table-bordered table-hover">
+                    <tbody th:each="property : ${properties}">
+                        <tr>
+                            <td>
+                                <h4><a th:href="'/home-rental/property/'+${property.id}" th:text="${property.title}"></a></h4>
+                                <p th:text="${property.shortDesc}"></p>
+                            </td>
+                            <td>
+                                <p th:text="'Price : ' + ${property.price}"></p>
+                                <p th:text="'Note : ' + ${property.note}"></p>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-small">Modify</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
