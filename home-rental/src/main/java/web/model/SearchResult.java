@@ -20,11 +20,11 @@ public class SearchResult {
     private BigInteger places;
     
     // Geoloc attribute
-    private Integer distance = 0;
+    private Double distance = 0.0;
     
     // Property Options attributes.
     private Boolean parking;
-    private Boolean swimming_pool;
+    private Boolean swim;
     private Boolean wifi;
     private Boolean laundry;
     
@@ -32,7 +32,7 @@ public class SearchResult {
     
     public SearchResult(Integer p_id, String p_title, String p_sdesc, Integer p_price, String p_city, 
             String p_country, String p_type, Integer p_note, BigInteger p_places, Boolean po_park,
-            Boolean po_swim, Boolean po_wifi, Boolean po_laundry, Integer distance) {
+            Boolean po_swim, Boolean po_wifi, Boolean po_laundry, Double distance) {
         this.property_id = p_id;
         this.title = p_title;
         this.short_desc = p_sdesc;
@@ -43,7 +43,7 @@ public class SearchResult {
         this.note = p_note;
         this.places = p_places;
         this.parking = po_park;
-        this.swimming_pool = po_swim;
+        this.swim = po_swim;
         this.wifi = po_wifi;
         this.laundry = po_laundry;
         this.distance = distance;
@@ -58,71 +58,71 @@ public class SearchResult {
         this.property_id = id;
     }
     
-    public String getPropertyTitle() {
+    public String getTitle() {
         return this.title;
     }
     
-    public void setPropertyTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
     
-    public String getPropertyShortDesc() {
+    public String getShortDesc() {
         return this.short_desc;
     }
     
-    public void setPropertyShortDesc(String desc) {
+    public void setShortDesc(String desc) {
         this.short_desc = desc;
     }
     
-    public Integer getPropertyPrice() {
+    public Integer getPrice() {
         return this.price;
     }
     
-    public void setPropertyPrice(Integer price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
     
-    public String getPropertyCity() {
+    public String getCity() {
         return this.city;
     }
     
-    public void setPropertyCity(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
     
-    public String getPropertyCountry() {
+    public String getCountry() {
         return this.country;
     }
     
-    public void setPropertyCountry(String country) {
+    public void setCountry(String country) {
         this.country = country;
     }
     
-    public String getPropertyType() {
+    public String getType() {
         return this.type;
     }
     
-    public void setPropertyType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
     
-    public Integer getPropertyNote() {
+    public Integer getNote() {
         return this.note;
     }
     
-    public void setPropertyNote(Integer note) {
+    public void setNote(Integer note) {
         this.note = note;
     }
     
-    public BigInteger getPropertyPlaces() {
+    public BigInteger getPlaces() {
         return this.places;
     }
     
-    public void setPropertyPlaces(BigInteger places) {
+    public void setPlaces(BigInteger places) {
         this.places = places;
     }
     
-    public void setDistance(Integer dist) {
+    public void setDistance(Double dist) {
         this.distance = dist;
     }
     
@@ -134,12 +134,12 @@ public class SearchResult {
         this.parking = park;
     }
 
-    public Boolean getPoSwimmingPool() {
-        return this.swimming_pool;
+    public Boolean getPoSwim() {
+        return this.swim;
     }
     
-    public void setPoSwimmingPool(Boolean swim) {
-        this.swimming_pool = swim;
+    public void setPoSwim(Boolean swim) {
+        this.swim = swim;
     }
     
     public Boolean getPoWifi() {

@@ -30,7 +30,7 @@ public class SearchDaoImpl implements SearchDao {
     public List<SearchResult> searchForSpecificCountry(String country, LocalDateTime checkin, LocalDateTime checkout, Integer guests) {
         String hql = "SELECT p.property_id, p.title, p.short_desc, p.price, p.city, p.country, " +
                                      "p.type, p.note, p.rooms*2 AS places,  " +
-                                     "po.parking, po.swimming_pool, po.wifi, po.laundry " +
+                                     "po.parking, po.swimming_pool AS swim, po.wifi, po.laundry " +
                                      "FROM property AS p " +
                                      "JOIN property_options AS po ON p.property_id=po.target_property " +
                                      "WHERE p.country=:country " +
@@ -50,10 +50,10 @@ public class SearchDaoImpl implements SearchDao {
     }
     
     @Override
-    public List<SearchResult> searchInRadius25(Integer lat, Integer lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests) {
+    public List<SearchResult> searchInRadius25(Long lat, Long lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests) {
         String hql = "SELECT p.property_id, p.title, p.short_desc, p.price, p.city, p.country, " +
                                      "p.type, p.note, p.rooms*2 AS places, " +
-                                     "po.parking, po.swimming_pool, po.wifi, po.laundry " +
+                                     "po.parking, po.swimming_pool AS swim, po.wifi, po.laundry, " +
                                      "( 3959 * acos( cos( radians(:lat) ) * cos( radians( p.latitude ) ) * cos( radians( p.longitude ) " +
                                      " - radians(:lng) ) + sin( radians(:lat) ) * sin( radians( p.latitude ) ) ) ) AS distance " +
                                      "FROM property AS p " +

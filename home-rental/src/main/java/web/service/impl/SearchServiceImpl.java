@@ -26,7 +26,7 @@ public class SearchServiceImpl implements SearchService {
     }
     
     @Override
-    public List<SearchResult> searchInRadius25(Integer lat, Integer lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests) {
-        return searchDao.searchInRadius25(lat, lng, checkin, checkout, guests);
+    public List<SearchResult> searchInRadius25(Double lat, Double lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests) {
+        return searchDao.searchInRadius25(Math.round(lat), Math.round(lng), checkin, checkout, guests);
     }
 }

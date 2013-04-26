@@ -11,5 +11,5 @@ import web.model.SearchResult;
 public interface SearchDao {
     
     List<SearchResult> searchForSpecificCountry(String country, LocalDateTime checkin, LocalDateTime checkout, Integer guests);
-    List<SearchResult> searchInRadius25(Integer lat, Integer lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests);
+    List<SearchResult> searchInRadius25(Long lat, Long lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests);
 }
