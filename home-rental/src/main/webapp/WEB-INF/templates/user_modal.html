@@ -7,11 +7,15 @@
     <head>
     </head>
     <body>
+        <div id="modify-header">
+                <h3 id="modify-label" th:text="'Modify account ' + ${user.username}"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
 
-        <h3 id="modify-label" th:text="'Modify account ' + ${user.username}"></h3>
-
-        <h3 id="delete-label" th:text="'Delete account ' + ${user.username}"></h3>
-
+        <div id="delete-header">
+            <h3 id="delete-label" th:text="'Delete account ' + ${user.username}"></h3>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
 
 
         <form id="modify-form">
@@ -37,10 +41,13 @@
             with all the properties that you created.
         </p>
 
-
-        <button id="modify-submit" class="btn btn-primary btn-success">Save changes</button>
-
-
-        <button id="delete-submit" class="btn btn-primary btn-error">Delete account</button>
+        <div id="modify-buttons">
+            <button id="modify-submit" class="btn btn-primary btn-success">Save changes</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        </div>
+        <div id="delete-buttons">
+            <button id="delete-submit" class="btn btn-primary btn-danger">Delete account</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        </div>
     </body>
 </html>

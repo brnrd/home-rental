@@ -19,14 +19,16 @@ public class UserModalController {
     @Autowired
     private UserService userService;
     
-     @RequestMapping(value = "/s/account/modal/", method = RequestMethod.GET)
-     public String userModalView(Model model, Principal current) {
-         
-         if (current != null) {
+    @RequestMapping(value = "/s/account/modal/", method = RequestMethod.GET)
+    public String userModalView(Model model, Principal current) {
+
+        if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("user", u_log);
         }
-         
-         return "user_modal";
-     }
+
+        return "user_modal";
+    }
+    
+    
 }

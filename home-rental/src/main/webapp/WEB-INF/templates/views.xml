@@ -54,5 +54,6 @@
     </definition>
     
     <definition name="user_modal" template="/user_modal.html" templateType="thymeleaf" />
+    <definition name="property_modal" template="/property_modal.html" templateType="thymeleaf" />
    
 </tiles-definitions>

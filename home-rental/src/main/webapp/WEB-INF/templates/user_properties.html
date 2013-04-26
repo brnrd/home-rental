@@ -23,7 +23,7 @@
                     <tbody th:each="property : ${properties}">
                         <tr>
                             <td>
-                                <h4><a th:href="'/home-rental/propertyq/'+${property.id}" th:text="${property.title}"></a></h4>
+                                <h4><a th:href="'/home-rental/property/'+${property.id}" th:text="${property.title}"></a></h4>
                                 <p th:text="${property.shortDesc}"></p>
                             </td>
                             <td>
