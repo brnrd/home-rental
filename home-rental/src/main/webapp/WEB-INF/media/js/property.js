@@ -34,7 +34,6 @@ target : modal, submit form
   };
 
   $('#modify-property').on("click", function(event) {
-    console.log($('#property-id').val());
     setContext('modify', '/home-rental/s/property/' + $('#property-id').val() + '/modal/');
     console.log(context);
     return modalActionHandler();
