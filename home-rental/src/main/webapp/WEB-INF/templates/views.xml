@@ -52,5 +52,7 @@
         <put-attribute name="body" value="/user_properties.html :: content" type="thymeleaf"/>
         <put-attribute name="js-specific" value="/user_properties.html :: js-specific" type="thymeleaf"/>   
     </definition>
+    
+    <definition name="user_modal" template="/user_modal.html" templateType="thymeleaf" />
    
 </tiles-definitions>

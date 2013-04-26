@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+    </head>
+    <body>
+
+        <h3 id="modify-label" th:text="'Modify account ' + ${user.username}"></h3>
+
+        <h3 id="delete-label" th:text="'Delete account ' + ${user.username}"></h3>
+
+
+
+        <form id="modify-form">
+            <ul class="unstyled">
+                <li>
+                    <input type="text" placeholder="Username" th:value="${user.username}" />
+                </li>
+                <li>
+                    <input type="text" placeholder="Name" th:value="${user.name}" />
+                </li>
+                <li>
+                    <input type="text" placeholder="Firstname" th:value="${user.firstname}" />
+                </li>
+                <li>
+                    <input type="text" placeholder="Email" th:value="${user.email}" />
+                </li>
+            </ul>
+            <p>Check your data prior saving !</p>
+        </form>
+
+        <p id="delete-body">
+            Warning, you're about to delete your account 
+            with all the properties that you created.
+        </p>
+
+
+        <button id="modify-submit" class="btn btn-primary btn-success">Save changes</button>
+
+
+        <button id="delete-submit" class="btn btn-primary btn-error">Delete account</button>
+    </body>
+</html>

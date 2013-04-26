@@ -24,9 +24,24 @@
                     <li th:if="${evaluation} &lt; 0">This user has no evaluation yet.</li>
                     <li th:if="${evaluation} &gt; -1"><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
                 </ul>
-                <button class="btn">Modify</button><br />
-                <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                <button id="modify-user" class="btn btn-success">Modify</button>
+                <button id="delete-user" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
             </div>
+        </div>
+        <!--Modal Modify-->
+        <div id="modal-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalUser" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+        <div tiles:fragment="js-specific">
+            <script type="text/javascript" src="#" th:src="@{/js/user.js}"></script>
         </div>
     </body>
 </html>
