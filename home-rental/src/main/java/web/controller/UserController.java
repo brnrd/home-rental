@@ -52,7 +52,10 @@ public class UserController {
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
+            Boolean isUserCurrent = (u_log.getId() == null ? user.getId() == null : u_log.getId().equals(user.getId()));
+            model.addAttribute("isUserCurrent", isUserCurrent);
         }
+        
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
         model.addAttribute("map", pathMap);

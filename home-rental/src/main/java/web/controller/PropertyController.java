@@ -81,6 +81,8 @@ public class PropertyController {
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
+            Boolean isOwnerCurrent = (u_log.getId() == null ? property.getOwner().getId() == null : u_log.getId().equals(property.getOwner().getId()));
+            model.addAttribute("isOwnerCurrent", isOwnerCurrent);
         }
         model.addAttribute("property", property);
         model.addAttribute("options", options);
@@ -109,14 +111,11 @@ public class PropertyController {
         propertyOptionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
-    
+
     @RequestMapping(value = "/s/property/{id}/update", method = RequestMethod.POST)
     public String updateProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
             final BindingResult bindingResult, final Model model, Principal current) {
 
-        if (current != null) {
-            property.setOwner(userService.findByUsername(current.getName()));
-        }
         DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
         DateTime rentStartTmp = formatter.parseDateTime(rentStart + " 00:00:00");
         DateTime rentStopTmp = formatter.parseDateTime(rentStop + " 00:00:00");

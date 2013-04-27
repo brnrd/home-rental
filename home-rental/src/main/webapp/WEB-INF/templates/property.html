@@ -53,8 +53,10 @@
                     <strong>Owner's page</strong><br/>
                     <a th:href="'/home-rental/s/account/'+${property.owner.username}" th:text="${property.owner.username}" />
                 </address>
-                <button id="modify-property" class="btn btn-success">Modify</button>
-                <button id="delete-property" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                <div  th:if="${isOwnerCurrent}">
+                    <button id="modify-property" class="btn btn-success">Modify</button>
+                    <button id="delete-property" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                </div>
             </div>
         </div>
         <div class="row">
