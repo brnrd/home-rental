@@ -2,6 +2,8 @@ package web.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +37,15 @@ public class PropertyModalController {
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         List<PropertyType> types = Arrays.asList(PropertyType.values());
         
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        String rentStart = property.getRentPeriodStart().toString(formatter);
+        String rentStop = property.getRentPeriodStop().toString(formatter);
+        
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("types", types);
+        model.addAttribute("rentStart", rentStart);
+        model.addAttribute("rentStop", rentStop);
         
         return "property_modal";
     }

@@ -8,7 +8,7 @@ target : modal, submit form
 
 
 (function() {
-  var context, modalActionHandler, setContext;
+  var context, modalActionHandler, sendForm, setContext;
 
   context = {
     type: null,
@@ -33,6 +33,23 @@ target : modal, submit form
     return $('#modal-property').modal('show');
   };
 
+  sendForm = function(dataToSend) {
+    var target;
+    $.post('/s/property/' + $('#property-id').val() + '/update', dataToSend, function(data) {
+      $('#modal-property').modal('hide');
+      resetModal();
+      switch (data) {
+        case 'success-update':
+          return notifyMessage('success', 'Successfull editing');
+        case 'success-delete':
+          return notifyMessage('success', 'Property deleted');
+      }
+    });
+    target = element.parent();
+    element.remove();
+    return updateDiscusLists(target);
+  };
+
   $('#modify-property').on("click", function(event) {
     setContext('modify', '/home-rental/s/property/' + $('#property-id').val() + '/modal/');
     console.log(context);
@@ -42,6 +59,11 @@ target : modal, submit form
   $('#delete-property').on("click", function(event) {
     setContext('delete', '/home-rental/s/property/' + $('#property-id').val() + '/modal/');
     return modalActionHandler();
+  });
+
+  $('#modify-form').on("submit", function(event) {
+    event.preventDefault();
+    return sendForm($(this).serialize());
   });
 
 }).call(this);

@@ -109,4 +109,23 @@ public class PropertyController {
         propertyOptionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
+    
+    @RequestMapping(value = "/s/property/{id}/update", method = RequestMethod.POST)
+    public String updateProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
+            final BindingResult bindingResult, final Model model, Principal current) {
+
+        if (current != null) {
+            property.setOwner(userService.findByUsername(current.getName()));
+        }
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+        DateTime rentStartTmp = formatter.parseDateTime(rentStart + " 00:00:00");
+        DateTime rentStopTmp = formatter.parseDateTime(rentStop + " 00:00:00");
+        property.setRentPeriodStart(rentStartTmp.toLocalDateTime());
+        property.setRentPeriodStop(rentStopTmp.toLocalDateTime());
+
+//        handle new property
+        propertyService.saveProperty(property);
+        propertyOptionsService.savePropertyOptions(options);
+        return "redirect:/property/" + property.getId();
+    }
 }

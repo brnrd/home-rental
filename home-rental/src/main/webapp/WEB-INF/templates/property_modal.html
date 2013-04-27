@@ -55,7 +55,7 @@
                     <input id="shortDesc" class="short-desc" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
                 </li>
                 <li>
-                    <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+                    <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" th:text="${property.longDesc}" name="longDesc" required="required"/>
                 </li>
                 <li>
                     <h4>Options :</h4>
@@ -67,11 +67,11 @@
                     </ul>
                 </li>
                 <li>
-                    <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${property.rentPeriodStart}" name="rentStart" required="required"/>
+                    <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
                     <i class="icon-calendar"></i>
                 </li>
                 <li>
-                    <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${property.rentPeriodStop}" name="rentStop" required="required"/>
+                    <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
                     <i class="icon-calendar"></i>
                 </li>
             </ul>
@@ -84,11 +84,11 @@
         </p>
 
         <div id="modify-buttons">
-            <button id="modify-submit" class="btn btn-primary btn-success">Save changes</button>
+            <button id="modify-submit" type="submit" class="btn btn-primary btn-success">Save changes</button>
             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
         </div>
         <div id="delete-buttons">
-            <button id="delete-submit" class="btn btn-primary btn-danger">Delete account</button>
+            <button id="delete-submit" type="submit" class="btn btn-primary btn-danger">Delete account</button>
             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
         </div>
     </body>
