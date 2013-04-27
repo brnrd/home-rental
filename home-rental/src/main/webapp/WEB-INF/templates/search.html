@@ -12,7 +12,9 @@
         <div class="row map-wrapper">
             <div id="search-params" th:attr="data-search-params=${params}"></div>
             <div class="span9">
-                <div id="map-container"></div>
+                <div id="map-container">
+                    <img th:src="${map}" alt="Google Maps Results"></img>
+                </div>
             </div>
             <div class="span3">
                  <div id="map-caption">

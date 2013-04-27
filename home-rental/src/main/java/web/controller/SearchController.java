@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -15,6 +16,7 @@ import web.model.SearchResult;
 import web.service.PropertyService;
 import web.service.SearchService;
 import web.service.UserService;
+import web.utils.StaticMap;
 
 /**
  * @author Romain <ro.foncier@gmail.com>
@@ -52,7 +54,6 @@ public class SearchController {
         String[] dest = location.split(", ");
         if (dest.length > 1) {
             // City and country are known. We request by using the lat/lng coordinates.
-            System.out.println(latlong);
             String[] coords = latlong.split(",");
             search = searchService.searchInRadius25(Math.ceil(Float.parseFloat(coords[0])), 
                     Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, s_guests);
@@ -63,12 +64,16 @@ public class SearchController {
         
         // Check if search found results.
        Integer[] specs = null;
+       String pathMap = null;
         if (!search.isEmpty()) {
             // Get the number of different types, options and the price range (min and max).
+            // SetUp the Google Static Maps.
             specs = processSpecs(search);
+            pathMap = StaticMap.buildMapURL(search, "700x350");
         } // else offer other extra results
         
         model.addAttribute("specs", specs);
+        model.addAttribute("map", pathMap);
         model.addAttribute("results", search);
         model.addAttribute("params", "[\""+location+"\", \""+checkin+"\", \""+checkout+"\", \""+guests+"\"]");
         return "search";

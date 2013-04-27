@@ -1,11 +1,12 @@
 package web.utils;
 
+import com.javadocmd.simplelatlng.LatLng;
 import java.util.List;
 import web.model.Property;
+import web.model.SearchResult;
 
 /**
- *
- * @author Bernard <bernard.debecker@gmail.com>
+ * @author Bernard <bernard.debecker@gmail.com>, R. FONCIER <ro.foncier@gmail.com>
  */
 public class StaticMap {
 
@@ -24,42 +25,27 @@ public class StaticMap {
     public StaticMap() {
     }
 
-    public static String buildMapURL(List<Property> properties) {
+    public static String buildMapURL(Object data, String preferedSize) {
         StringBuilder url = new StringBuilder();
         url.append(BASE_URL);
         url.append(SEPARATOR);
-        url.append(SIZE);
+        url.append((preferedSize != null) ? "size=" + preferedSize : SIZE);
         url.append(SEPARATOR);
         url.append(SCALE);
         url.append(SEPARATOR);
         url.append(KEY);
         url.append(SEPARATOR);
-        url.append(addMarkers(properties));
+        // If we send only one property, send only lat/lng, otherwise send a list of SearchResult
+        // or a list of Property.
+        url.append((data instanceof String) ? data : addMarkers((List<Object>) data));
         url.append(SEPARATOR);
         url.append(SENSOR);
         return url.toString();
     }
-
-    public static String buildMapURL(Property property) {
-        StringBuilder url = new StringBuilder();
-        url.append(BASE_URL);
-        url.append(ZOOM);
-        url.append(SEPARATOR);
-        url.append(SIZE);
-        url.append(SEPARATOR);
-        url.append(SCALE);
-        url.append(SEPARATOR);
-        url.append(KEY);
-        url.append(SEPARATOR);
-        url.append(addMarkers(property));
-        url.append(SEPARATOR);
-        url.append(SENSOR);
-        return url.toString();
-    }
-
-    private static String addMarkers(List<Property> properties) {
+    
+    private static String addMarkers(List<Object> data) {
         StringBuilder string = new StringBuilder();
-        for (int i = 0; i < properties.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             if (i > 0) {
                 string.append(SEPARATOR);
             }
@@ -69,31 +55,15 @@ public class StaticMap {
             string.append(LABEL);
             string.append(i + 1);
             string.append(MARKER_SEPARATOR);
-            if ((properties.get(i).getCoordinates() == null)) {
-                string.append(formatAddress(properties.get(i).getAddress(), properties.get(i).getCity(), properties.get(i).getCountry()));
+            if (data.get(i) instanceof Property) {
+                LatLng coord = ((Property) data.get(i)).getCoordinates();
+                string.append(coord.getLatitude()).append(",").append(coord.getLongitude());
             } else {
-                string.append(properties.get(i).getCoordinates().getLatitude() +","+ properties.get(i).getCoordinates().getLongitude());
+                // Only available case : List of SearchResult
+                SearchResult s = (SearchResult) data.get(i);
+                string.append(s.getLatitude()).append(",").append(s.getLongitude());
             }
         }
         return string.toString();
-    }
-
-    private static String addMarkers(Property property) {
-        StringBuilder string = new StringBuilder();
-        string.append(MARKER);
-        string.append(COLOR_RED);
-        string.append(MARKER_SEPARATOR);
-        if ((property.getCoordinates() == null)) {
-            string.append(formatAddress(property.getAddress(), property.getCity(), property.getCountry()));
-        } else {
-            string.append(property.getCoordinates().getLatitude() +","+ property.getCoordinates().getLongitude());
-        }
-        return string.toString();
-    }
-
-    private static String formatAddress(String address, String city, String country) {
-        StringBuilder result = new StringBuilder();
-        result.append(address).append("+").append(city).append(" ").append(country);
-        return result.toString().replaceAll(" ", "+");
     }
 }

@@ -33,7 +33,6 @@ comment :
     $('#search-bar button.btn-dpd strong').text(pluralize(params[3], "guest"));
     smin = $('.map-wrapper #min_price').text();
     smax = $('.map-wrapper #max_price').text();
-    console.log(smin + " - " + smax);
     return $("#slider").slider({
       range: true,
       min: smin,

@@ -18,6 +18,8 @@ public class SearchResult {
     private String type;
     private Integer note;
     private BigInteger places;
+    private Float latitude;
+    private Float longitude;
     
     // Geoloc attribute
     private Double distance = 0.0;
@@ -31,7 +33,7 @@ public class SearchResult {
     public SearchResult() {}
     
     public SearchResult(Integer p_id, String p_title, String p_sdesc, Integer p_price, String p_city, 
-            String p_country, String p_type, Integer p_note, BigInteger p_places, Boolean po_park,
+            String p_country, String p_type, Integer p_note, BigInteger p_places, Float lat, Float lng, Boolean po_park,
             Boolean po_swim, Boolean po_wifi, Boolean po_laundry, Double distance) {
         this.property_id = p_id;
         this.title = p_title;
@@ -42,6 +44,8 @@ public class SearchResult {
         this.type = p_type;
         this.note = p_note;
         this.places = p_places;
+        this.latitude = lat;
+        this.longitude = lng;
         this.parking = po_park;
         this.swim = po_swim;
         this.wifi = po_wifi;
@@ -120,6 +124,22 @@ public class SearchResult {
     
     public void setPlaces(BigInteger places) {
         this.places = places;
+    }
+    
+    public Float getLatitude() {
+        return this.latitude;
+    }
+    
+    public void setLatitude(Float lat) {
+        this.latitude = lat;
+    }
+    
+    public Float getLongitude() {
+        return this.longitude;
+    }
+    
+    public void setLongitude(Float lng) {
+        this.longitude = lng;
     }
     
     public void setDistance(Double dist) {

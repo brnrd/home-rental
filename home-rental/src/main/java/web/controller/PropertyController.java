@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import web.utils.StaticMap;
 import web.model.Comment;
 import web.model.Property;
 import web.model.PropertyOptions;
@@ -24,6 +23,7 @@ import web.service.CommentService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
 import web.service.UserService;
+import web.utils.StaticMap;
 
 /**
  *
@@ -49,8 +49,7 @@ public class PropertyController {
         PropertyOptions options = propertyOptionsService.findByProperty(property);
         List<Comment> comments = comService.findByProperty(property);
         Integer evaluation = property.getNote();
-        String pathMap;
-        pathMap = StaticMap.buildMapURL(property);
+        String pathMap = StaticMap.buildMapURL(property.getLatitude()+","+property.getLongitude(), null);
         List<String> pictures = new LinkedList<String>();
         for (int i = 1; i < 4; i++) {
             pictures.add(new Integer(i).toString() + ".jpg");
