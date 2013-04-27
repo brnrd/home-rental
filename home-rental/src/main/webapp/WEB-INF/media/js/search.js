@@ -24,20 +24,25 @@ comment :
   };
 
   jQuery(function() {
-    var params, slider_params;
-    params = $('.map-container #search-params').data('search-params');
+    var params, smax, smin;
+    params = $('.map-wrapper #search-params').data('search-params');
     $('#search-bar #location-search').val(params[0]);
     $('#search-bar #checkin').val(params[1]);
     $('#search-bar #checkout').val(params[2]);
     $('#search-bar #guests-number').val(params[3]);
     $('#search-bar button.btn-dpd strong').text(pluralize(params[3], "guest"));
-    slider_params = params[4];
+    smin = $('.map-wrapper #min_price').text();
+    smax = $('.map-wrapper #max_price').text();
+    console.log(smin + " - " + smax);
     return $("#slider").slider({
       range: true,
-      min: slider_params[0],
-      max: slider_params[1],
-      values: [slider_params[0], slider_params[1]],
-      slide: function(event, ui) {}
+      min: smin,
+      max: smax,
+      values: [smin, smax],
+      slide: function(event, ui) {
+        $("#min_price").val(ui.values[0]);
+        return $("#max_price").val(ui.values[1]);
+      }
     });
   });
 

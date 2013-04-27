@@ -9,91 +9,102 @@
     </head>
 
     <body tiles:fragment="content">        
-        <div class="row map-container">
+        <div class="row map-wrapper">
             <div id="search-params" th:attr="data-search-params=${params}"></div>
-            <div id="map" class="span9 map"></div>
-            <div class="span3 map-container-caption">
-                <!-- Property type selector -->
-                <div class="search-selector">
-                    <span class="selector-title">TYPE</span>
-                    <ul id="property-type">
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_type" value="FLAT" />
-                            <span>FLAT</span>
-                            <span class="badge badge-info" th:text="${specs[0]}"></span>
-                        </li>
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_type" value="HOUSE" />
-                            <span>HOUSE</span>
-                            <span class="badge badge-info" th:text="${specs[1]}"></span>
-                        </li>
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_type" value="LOFT" />
-                            <span>LOFT</span>
-                            <span class="badge badge-info" th:text="${specs[2]}"></span>
-                        </li>
-                    </ul>
-                </div><!-- /end search-selector -->
-                
-                <!-- Property price selector -->
-                <div class="search-selector">
-                    <span class="selector-title">PRICE</span>
-                    <span id="min_price" th:text="${specs[7]}"></span>
-                    <span id="max_price" th:text="${specs[8]}"></span>
-                    <div id="slider"></div>
-                </div><!-- /end search-selector -->
-                
-                <!-- Property options selector -->
-                <div class="search-selector">
-                    <ul id="property-options">
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_options" value="parking" />
-                            <span>Parking</span>
-                            <span class="badge badge-info" th:text="${specs[3]}"></span>
-                        </li>
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_options" value="swimming_pool" />
-                            <span>Parking</span>
-                            <span class="badge badge-info" th:text="${specs[4]}"></span>
-                        </li>
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_options" value="wifi" />
-                            <span>Parking</span>
-                            <span class="badge badge-info" th:text="${specs[5]}"></span>
-                        </li>
-                        <li class="list-selector">
-                            <input type="checkbox" name="property_options" value="laundry" />
-                            <span>Parking</span>
-                            <span class="badge badge-info" th:text="${specs[6]}"></span>
-                        </li>
-                    </ul>
-                </div><!-- /end search-selector -->
+            <div class="span9">
+                <div id="map-container"></div>
             </div>
-        </div><!-- /end map-container -->
+            <div class="span3">
+                 <div id="map-caption">
+                    <!-- Property type selector -->
+                    <div class="search-selector">
+                        <span class="selector-title"><strong>TYPE</strong></span>
+                        <ul id="property-type">
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_type" value="FLAT" />
+                                <span class="pull-right badge badge-info" th:text="${specs[0]}"></span>
+                                <span>FLAT</span>
+                            </li>
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_type" value="HOUSE" />
+                                <span class="pull-right badge badge-info" th:text="${specs[1]}"></span>
+                                <span>HOUSE</span>
+                            </li>
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_type" value="LOFT" />
+                                <span class="pull-right badge badge-info" th:text="${specs[2]}"></span>
+                                <span>LOFT</span>
+                            </li>
+                        </ul>
+                    </div><!-- /end search-selector -->
+
+                    <!-- Property price selector -->
+                    <div class="search-selector">
+                        <span class="selector-title"><strong>PRICE</strong></span>
+                        <span id="max_price" class="pull-right price" th:text="${specs[8]}"></span>
+                        <span id="min_price" class="price" th:text="${specs[7]}"></span>
+                        <div id="slider"></div>
+                    </div><!-- /end search-selector -->
+
+                    <!-- Property options selector -->
+                    <div class="search-selector">
+                        <span class="selector-title"><strong>OPTIONS</strong></span>
+                        <ul id="property-options">
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_options" value="parking" />
+                                <span class="pull-right badge badge-info" th:text="${specs[3]}"></span>
+                                <span>Parking</span>
+                            </li>
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_options" value="swimming_pool" />
+                                <span class="pull-right badge badge-info" th:text="${specs[4]}"></span>
+                                <span>Swimming Pool</span>
+                            </li>
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_options" value="wifi" />
+                                <span class="pull-right badge badge-info" th:text="${specs[5]}"></span>
+                                <span>Wifi</span>
+                            </li>
+                            <li class="list-selector">
+                                <input type="checkbox" name="property_options" value="laundry" />
+                                <span class="pull-right badge badge-info" th:text="${specs[6]}"></span>
+                                <span>Laundry</span>
+                            </li>
+                        </ul>
+                    </div><!-- /end search-selector -->
+                </div><!-- /end map-caption -->
+            </div>
+        </div><!-- /end row -->
         
         <!-- Bloc Search results -->
-        <div class="search-results">
-            <div id="sort-bar">
-                <span id="sort-bar-results">RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(results)}"></span></span>
-                <span id="sort-bar-sorter">SORT BY : </span><span class="btn-sort">PRICE</span><span class="btn-sort">NOTE</span>
-            </div>
-            <ul id="search-results-list">
-                <li class="search-results-item" th:each="r : ${results}">
-                    <div class="pull-left search-results-item-pict"></div>
-                    <div class="pull-left search-results-item-content">
-                        <p class="item-content-title" th:text="${r.title}"></p>
-                        <p class="item-content-address" th:text="${r.country} + ' - ' + ${r.city}"></p>
-                        <p class="item-content-desc" th:text="${r.shortDesc}"></p>
-                    </div>
-                    <div class="pull-left search-results-item-action">
-                        <div class="item-action-price" th:text="${r.price}"></div>
-                        <div class="item-action-btn">
-                            <a href="#" th:href="@{/s/reservation/__${r.propertyId}__}">Book it !</a>
+        <div class="row">
+            <div id="search-results">
+                <div id="sort-bar">
+                    <span id="sort-bar-results"><strong>RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(results)}"></span></strong></span>
+                    <span id="sort-bar-sorter"><strong>SORT BY :</strong></span>
+                    <div class="btn-group">
+                        <button class="btn" id="sorter-price">PRICE</button>
+                        <button class="btn" id="sorter-note">NOTE</button>
+                      </div>
+                </div>
+                <ul id="search-results-list">
+                    <li class="search-results-item" th:each="r : ${results}">
+                        <div class="pull-left search-results-item-pict"></div>
+                        <div class="pull-left search-results-item-content">
+                            <p class="item-content-title" th:text="${r.title}"></p>
+                            <p class="item-content-address" th:text="${r.country} + ' - ' + ${r.city}"></p>
+                            <p class="item-content-desc" th:text="${r.shortDesc}"></p>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
+                        <div class="pull-left search-results-item-action">
+                            <div class="item-action-price" th:text="'€' + ${r.price}"></div>
+                            <div class="item-action-btn">
+                                <a href="#" th:href="@{/s/reservation/__${r.propertyId}__}" class="btn btn-info">Book it !</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div><!-- /end search-results -->
         </div>
         
         <!-- Custom js page specific -->
