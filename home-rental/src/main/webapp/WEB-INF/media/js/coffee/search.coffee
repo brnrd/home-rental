@@ -22,7 +22,6 @@ jQuery ->
     # Init slider price range
     smin = $('.map-wrapper #min_price').text()
     smax = $('.map-wrapper #max_price').text()
-    console.log smin+" - "+smax
     $( "#slider" ).slider(
         range: true
         min: smin
