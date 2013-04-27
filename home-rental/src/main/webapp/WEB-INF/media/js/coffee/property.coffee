@@ -37,10 +37,6 @@ sendForm = (dataToSend) ->
                                 when 'success-delete'
                                         notifyMessage('success', 'Property deleted')
 
-        target = element.parent()
-        element.remove()
-        updateDiscusLists(target)
-
 # Modify user
 $('#modify-property').on "click", (event) ->
   setContext('modify', '/home-rental/s/property/' + $('#property-id').val() + '/modal/')

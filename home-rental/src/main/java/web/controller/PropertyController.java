@@ -58,6 +58,8 @@ public class PropertyController {
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
+            Boolean isOwnerCurrent = (u_log.getId() == null ? property.getOwner().getId() == null : u_log.getId().equals(property.getOwner().getId()));
+            model.addAttribute("isOwnerCurrent", isOwnerCurrent);
         }
         model.addAttribute("property", property);
         model.addAttribute("options", options);
@@ -81,8 +83,6 @@ public class PropertyController {
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
-            Boolean isOwnerCurrent = (u_log.getId() == null ? property.getOwner().getId() == null : u_log.getId().equals(property.getOwner().getId()));
-            model.addAttribute("isOwnerCurrent", isOwnerCurrent);
         }
         model.addAttribute("property", property);
         model.addAttribute("options", options);
