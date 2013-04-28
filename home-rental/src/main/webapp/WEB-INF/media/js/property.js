@@ -34,8 +34,7 @@ target : modal, submit form
   };
 
   sendForm = function(dataToSend) {
-    var target;
-    $.post('/s/property/' + $('#property-id').val() + '/update', dataToSend, function(data) {
+    return $.post('/s/property/' + $('#property-id').val() + '/update', dataToSend, function(data) {
       $('#modal-property').modal('hide');
       resetModal();
       switch (data) {
@@ -45,9 +44,6 @@ target : modal, submit form
           return notifyMessage('success', 'Property deleted');
       }
     });
-    target = element.parent();
-    element.remove();
-    return updateDiscusLists(target);
   };
 
   $('#modify-property').on("click", function(event) {

@@ -127,4 +127,19 @@ public class PropertyController {
         propertyOptionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
+
+    @RequestMapping(value = "/s/property/{id}/delete", method = RequestMethod.GET)
+    public String updateProperty(@PathVariable Integer id, Model model, Principal current) {
+        Property property = propertyService.findById(id);
+        String username = property.getOwner().getUsername();
+
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            if (u_log.getId().equals(property.getOwner().getId())) {
+                System.out.println("Delete property " + property.getId());
+            }
+        }
+
+        return "redirect:/s/account/" + username;
+    }
 }

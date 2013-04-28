@@ -36,4 +36,3 @@ $('#modify-user').on "click", (event) ->
 $('#delete-user').on "click", (event) ->
   setContext('delete', '/home-rental/s/account/modal/')
   modalActionHandler()
-  

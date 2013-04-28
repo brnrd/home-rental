@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import web.utils.StaticMap;
 import web.model.Property;
 import web.model.User;
+import web.service.CommentService;
+import web.service.EvaluationService;
+import web.service.PropertyOptionsService;
 import web.service.PropertyService;
+import web.service.ReservationService;
 import web.service.UserService;
 
 /**
@@ -25,6 +29,14 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PropertyService propertyService;
+//    @Autowired
+//    private PropertyOptionsService optionsService;
+//    @Autowired
+//    private CommentService commentService;
+//    @Autowired
+//    private ReservationService reservationService;
+//    @Autowired
+//    private EvaluationService evaluationService;
 
     @RequestMapping(value = "/s/account/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model, Principal current) {
@@ -55,7 +67,7 @@ public class UserController {
             Boolean isUserCurrent = (u_log.getId() == null ? user.getId() == null : u_log.getId().equals(user.getId()));
             model.addAttribute("isUserCurrent", isUserCurrent);
         }
-        
+
         model.addAttribute("user", user);
         model.addAttribute("propertyCount", propertyCount);
         model.addAttribute("map", pathMap);
@@ -63,17 +75,32 @@ public class UserController {
 
         return "user";
     }
-    
+
+    @RequestMapping(value = "/s/account/{username}/delete", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable String username, Model model, Principal current) {
+
+        User user = userService.findByUsername(username);
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            if (u_log.getId().equals(user.getId())) {
+                System.out.println("DELETE USER " + username);
+            }
+        }
+//        List<Property> properties = propertyService.findProperty(user);
+
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/s/account/{username}/properties", method = RequestMethod.GET)
     public String userPropertiesView(@PathVariable String username, Model model, Principal current) {
 
         // Get User
         User user = userService.findByUsername(username);
         List<Property> properties = propertyService.findProperty(user);
-        
+
         String pathMap;
         pathMap = StaticMap.buildMapURL(properties);
-        
+
 
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
@@ -82,8 +109,8 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("properties", properties);
         model.addAttribute("map", pathMap);
-        
-        
+
+
 
         return "user_properties";
     }
