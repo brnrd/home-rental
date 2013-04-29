@@ -6,61 +6,66 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home Rental | Property Details</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/property.css}" />
     </head>
     <body tiles:fragment="content">
         <div class="page-header">
             <h2 th:text="${property.title}"></h2>
         </div>
-        <div class="row">
+        <div class="row map-wrapper">
             <div class="span9">
-                <img th:src="${map}"></img>
+                <div id="map-container">
+                    <img th:src="${map}"></img>
+                </div>
             </div>
             <div class="span3">
-                <h4>Description</h4>
-                <input id="property-id" type="hidden" th:value="${property.id}" />
-                <ul class="unstyled">
-                    <li th:text="${property.shortDesc}"></li>
-                    <li th:text="${property.type}"></li>
-                    <li th:if="${property.rooms} &lt; 2">1 room</li>
-                    <li th:if="${property.rooms} &gt; 1" th:text="${property.rooms}+' rooms'">1 room</li>
-                </ul>
-                <h5>Options</h5>
-                <ul class="unstyled">
-                    <li th:if="${options.parking}"><i class="icon-check"></i> Parking</li>
-                    <li th:if="${options.swimmingPool}"><i class="icon-check"></i> Swimming pool</li>
-                    <li th:if="${options.wifi}"><i class="icon-check"></i> Wi-Fi</li>
-                    <li th:if="${options.laundry}"><i class="icon-check"></i> Laundry</li>
-                </ul>
-                <br/>
-                <div>
-                    <h4>
-                        <span th:if="${evaluation}">
-                            <span th:if="${evaluation} &gt; 49">Note: <span class="text-success" th:text="${evaluation} + '/100'"></span></span>
-                            <span th:if="${evaluation} &lt; 30">Note: <span class="text-error" th:text="${evaluation} + '/100'"></span></span>
-                            <span th:if="${evaluation &lt; 50 and evaluation &gt; 29}">Note: <span class="text-warning" th:text="${evaluation} + '/100'"></span></span>
-                        </span>
-                        <span th:unless="${evaluation}">
-                            Not yet ratted.
-                        </span>
-                    </h4>
-                </div>
-                <address>
-                    <strong th:text="${property.title}"></strong><br />
-                    <span th:text="${property.address}"></span><br />
-                    <span th:text="${property.city} + ', ' + ${property.country}"></span>
-                </address>
-                <address>
-                    <strong>Owner's page</strong><br/>
-                    <a th:href="'/home-rental/s/account/'+${property.owner.username}" th:text="${property.owner.username}" />
-                </address>
-                <div  th:if="${isOwnerCurrent}">
-                    <button id="modify-property" class="btn btn-success">Modify</button>
-                    <button id="delete-property" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                <div id="property-desc">
+                    <h4>Description</h4>
+                    <input id="property-id" type="hidden" th:value="${property.id}" />
+                    <ul class="unstyled">
+                        <li th:text="${property.shortDesc}"></li>
+                        <li th:text="${property.type}"></li>
+                        <li th:if="${property.rooms} &lt; 2">1 room</li>
+                        <li th:if="${property.rooms} &gt; 1" th:text="${property.rooms}+' rooms'">1 room</li>
+                    </ul>
+                    <h5>Options</h5>
+                    <ul class="unstyled">
+                        <li th:if="${options.parking}"><i class="icon-check"></i> Parking</li>
+                        <li th:if="${options.swimmingPool}"><i class="icon-check"></i> Swimming pool</li>
+                        <li th:if="${options.wifi}"><i class="icon-check"></i> Wi-Fi</li>
+                        <li th:if="${options.laundry}"><i class="icon-check"></i> Laundry</li>
+                    </ul>
+                    <br/>
+                    <div>
+                        <h4>
+                            <span th:if="${evaluation}">
+                                <span th:if="${evaluation} &gt; 49">Note: <span class="text-success" th:text="${evaluation} + '/100'"></span></span>
+                                <span th:if="${evaluation} &lt; 30">Note: <span class="text-error" th:text="${evaluation} + '/100'"></span></span>
+                                <span th:if="${evaluation &lt; 50 and evaluation &gt; 29}">Note: <span class="text-warning" th:text="${evaluation} + '/100'"></span></span>
+                            </span>
+                            <span th:unless="${evaluation}">
+                                Not yet ratted.
+                            </span>
+                        </h4>
+                    </div>
+                    <address>
+                        <strong th:text="${property.title}"></strong><br />
+                        <span th:text="${property.address}"></span><br />
+                        <span th:text="${property.city} + ', ' + ${property.country}"></span>
+                    </address>
+                    <address>
+                        <strong>Owner's page</strong><br/>
+                        <a th:href="'/home-rental/s/account/'+${property.owner.username}" th:text="${property.owner.username}" />
+                    </address>
+                    <div class="buttons" th:if="${isOwnerCurrent}">
+                        <button id="modify-property" class="btn btn-success">Modify</button>
+                        <button id="delete-property" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="span12">
+            <div class="span12 tab-wrapper">
                 <ul class="nav nav-tabs" id="proprety-tab">
                     <li class="active"><a href="#presentation" data-toggle="tab">Presentation</a></li>
                     <li><a href="#pictures" data-toggle="tab">Pictures</a></li>

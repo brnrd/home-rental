@@ -50,7 +50,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="btn-login" th:disabled="! ${#authentication}">
+                                <div class="btn-login" sec:authorize="!isAuthenticated()">
                                     <a href="#" th:href="@{/signup}" id="signup"><span>Signup</span></a> - <a href="#" th:href="@{/login}" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->

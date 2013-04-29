@@ -38,17 +38,17 @@
                 <li>
                     <select id="type" name="type" th:value="${property.type}">
                         <option th:each="type : ${types}" 
-                                th:value="${type}" th:text="${type}"></option>
+                                th:value="${type}" th:text="${type}" th:selected="${property.type == type}"></option>
                     </select>
-                </li>
+                </li>   
                 <li>
                     <select id="rooms" name="rooms" th:value="${property.rooms}">
-                        <option th:value="1">1 room</option>
-                        <option th:value="2">2 rooms</option>
-                        <option th:value="3">3 rooms</option>
-                        <option th:value="4">4 rooms</option>
-                        <option th:value="5">5 rooms</option>
-                        <option th:value="6">6+ rooms</option>
+                        <option th:value="1" th:selected="${property.rooms} == 1">1 room</option>
+                        <option th:value="2" th:selected="${property.rooms} == 2">2 rooms</option>
+                        <option th:value="3" th:selected="${property.rooms} == 3">3 rooms</option>
+                        <option th:value="4" th:selected="${property.rooms} == 4">4 rooms</option>
+                        <option th:value="5" th:selected="${property.rooms} == 5">5 rooms</option>
+                        <option th:value="6" th:selected="${property.rooms} == 6">6+ rooms</option>
                     </select>
                 </li>
                 <li>

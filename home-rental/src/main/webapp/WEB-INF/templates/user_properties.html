@@ -6,19 +6,21 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home rental | Properties</title>
-
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/user-properties.css}" />
     </head>
     <body tiles:fragment="content">
         <div class="page-header">
             <h3 th:text="${user.username} + ' properties'"></h3>
         </div>
         <div class="row">
-            <div class="span12">
-                <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+            <div class="span12 map-wrapper">
+                <div id="map-container">
+                    <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+                </div>
             </div>
         </div>
         <div class ="row">
-            <div class="span12">
+            <div class="span12 properties-wrapper">
                 <table class="table table-bordered table-hover">
                     <tbody th:each="property : ${properties}">
                         <tr>
@@ -27,16 +29,29 @@
                                 <p th:text="${property.shortDesc}"></p>
                             </td>
                             <td>
-                                <p th:text="'Price : ' + ${property.price}"></p>
-                                <p th:text="'Note : ' + ${property.note}"></p>
+                                <p class="price" th:text="'Price : ' + ${property.price}"></p>
+                                <p class="note" th:text="'Note : ' + ${property.note}"></p>
                             </td>
-                            <td>
-                                <button class="btn btn-success btn-small">Modify</button>
+                            <td class="buttons">
+                                <button id="modify-property" class="btn btn-success btn-small">Modify</button>
+                                <button id="delete-property" class="btn btn-danger btn-small"><i class="icon-warning-sign icon-white"></i> Delete</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <!--Modal-->
+        <div id="modal-property" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalUser" aria-hidden="true">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <div tiles:fragment="js-specific">
+            <script type="text/javascript" src="#" th:src="@{/js/user-properties.js}"></script>
         </div>
     </body>
 </html>

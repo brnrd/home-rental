@@ -1,6 +1,6 @@
 ###
-JS - Property
-Date of creation : 26/04/2013
+JS - User-properties
+Date of creation : 28/04/2013
 Creator : brnrd
 target : modal, submit form
 ###
