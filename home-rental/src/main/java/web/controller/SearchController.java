@@ -1,7 +1,6 @@
 package web.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;

@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="span3">
-                 <div id="map-caption">
+                <div id="map-caption">
                     <!-- Property type selector -->
                     <div class="search-selector">
                         <span class="selector-title"><strong>TYPE</strong></span>
@@ -77,7 +77,7 @@
                 </div><!-- /end map-caption -->
             </div>
         </div><!-- /end row -->
-        
+
         <!-- Bloc Search results -->
         <div class="row">
             <div id="search-results">
@@ -87,7 +87,7 @@
                     <div class="btn-group">
                         <button class="btn" id="sorter-price">PRICE</button>
                         <button class="btn" id="sorter-note">NOTE</button>
-                      </div>
+                    </div>
                 </div>
                 <ul id="search-results-list">
                     <li class="search-results-item" th:each="r : ${results}" th:attr="data-property-id=${r.propertyId}">
@@ -109,11 +109,24 @@
                 </ul>
             </div><!-- /end search-results -->
         </div>
-        
+
+        <!-- Modals -->
+        <div id="ajax-login-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="ajax-login-label" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="ajax-login-label"></h3>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <input type="submit" form="auth-process-ajax-login" id="btn-ajax-login" class="btn btn-primary" value="" />
+            </div>
+        </div>
+
         <!-- Custom js page specific -->
         <div tiles:fragment="js-specific">
             <script type="text/javascript" src="#" th:src="@{/js/search.js}"></script>
         </div>
-        
+
     </body>
 </html>

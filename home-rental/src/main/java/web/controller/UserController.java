@@ -8,11 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import web.utils.StaticMap;
 import web.model.Property;
 import web.model.User;
 import web.service.PropertyService;
 import web.service.UserService;
+import web.utils.StaticMap;
 
 /**
  *
@@ -47,7 +47,7 @@ public class UserController {
             evaluation = -1;
         }
         String pathMap;
-        pathMap = StaticMap.buildMapURL(properties);
+        pathMap = StaticMap.buildMapURL(properties, null);
 
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());

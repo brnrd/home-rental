@@ -20,5 +20,7 @@
         <put-attribute name="body" value="auth/signup.html :: content" type="thymeleaf"/>
         <put-attribute name="js-specific" value="auth/signup.html :: js-specific" type="thymeleaf"/>
     </definition>
+    
+    <definition name="ajax-login" template="auth/ajax-login.html" templateType="thymeleaf"/>
     	
 </tiles-definitions>
