@@ -7,47 +7,33 @@
     <head>
     </head>
     <body>
-        <div id="modify-header">
-                <h3 id="modify-label" th:text="'Modify account ' + ${user.username}"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <div id="modify">
+            <form id="modify-form">
+                <ul class="unstyled">
+                    <li>
+                        <input type="text" id="username" placeholder="Username" th:value="${user.username}" />
+                    </li>
+                    <li>
+                        <input type="text" id="name" placeholder="Name" th:value="${user.name}" />
+                    </li>
+                    <li>
+                        <input type="text" id="firstname" placeholder="Firstname" th:value="${user.firstname}" />
+                    </li>
+                    <li>
+                        <input type="text" id="email" placeholder="Email" th:value="${user.email}" />
+                    </li>
+                </ul>
+                <p>Check your data prior saving !</p>
+            </form>
         </div>
-
-        <div id="delete-header">
-            <h3 id="delete-label" th:text="'Delete account ' + ${user.username}"></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        </div>
-
-
-        <form id="modify-form">
-            <ul class="unstyled">
-                <li>
-                    <input type="text" placeholder="Username" th:value="${user.username}" />
-                </li>
-                <li>
-                    <input type="text" placeholder="Name" th:value="${user.name}" />
-                </li>
-                <li>
-                    <input type="text" placeholder="Firstname" th:value="${user.firstname}" />
-                </li>
-                <li>
-                    <input type="text" placeholder="Email" th:value="${user.email}" />
-                </li>
-            </ul>
-            <p>Check your data prior saving !</p>
-        </form>
-
-        <p id="delete-body">
-            Warning, you're about to delete your account 
-            with all the properties that you created.
-        </p>
-
-        <div id="modify-buttons">
-            <button id="modify-submit" class="btn btn-success">Save changes</button>
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        </div>
-        <div id="delete-buttons">
-            <a id="delete-submit" class="btn btn-danger" th:href="'/home-rental/s/account/' + ${user.username} + '/delete'">Delete account</a>
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <div id="delete">
+            <p id="delete-body">
+                Warning, you're about to delete your account 
+                with all the properties that you created.
+            </p>
+            <form id="delete-form">
+                <input type="hidden" th:value="${user.id}" />
+            </form>
         </div>
     </body>
 </html>

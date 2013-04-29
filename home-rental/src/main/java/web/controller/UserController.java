@@ -76,19 +76,34 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping(value = "/s/account/{username}/delete", method = RequestMethod.GET)
-    public String deleteUser(@PathVariable String username, Model model, Principal current) {
+    @RequestMapping(value = "/s/account/delete", method = RequestMethod.POST)
+    public String deleteUser(final String id, Model model, Principal current) {
 
-        User user = userService.findByUsername(username);
+        User user = userService.findById(id);
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             if (u_log.getId().equals(user.getId())) {
-                System.out.println("DELETE USER " + username);
+                System.out.println("DELETE USER " + user.getUsername());
             }
         }
 //        List<Property> properties = propertyService.findProperty(user);
 
         return "redirect:/";
+    }
+    
+    @RequestMapping(value = "/s/account/update", method = RequestMethod.POST)
+    public String updateUser(final User user, Model model, Principal current) {
+        
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            if (u_log.getId().equals(user.getId())) {
+                System.out.println("Update USER " + user.getUsername());
+                userService.saveUser(user);
+            }
+        }
+//        List<Property> properties = propertyService.findProperty(user);
+
+        return "redirect:/s/account/" + user.getUsername();
     }
 
     @RequestMapping(value = "/s/account/{username}/properties", method = RequestMethod.GET)
