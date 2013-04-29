@@ -16,12 +16,12 @@ setContext = (type, url) ->
 modalActionHandler = () ->
   if context.type is "modify"
     $('#modal-user .modal-header h3').text('Modify your account')
-    $('#modal-user .modal-body').load(context.url + ' #modify-form')
+    $('#modal-user .modal-body').load(context.url + ' #modify')
     $('#modal-user .modal-footer #submit').html('Save')
     $('#modal-user .modal-footer #submit').removeClass('btn-danger').addClass('btn-success')
   else
     $('#modal-user .modal-header h3').text('Delete your account')
-    $('#modal-user .modal-body').load(context.url + ' #delete-body')
+    $('#modal-user .modal-body').load(context.url + ' #delete')
     $('#modal-user .modal-footer #submit').html('Delete')
     $('#modal-user .modal-footer #submit').removeClass('btn-success').addClass('btn-danger')
   
@@ -32,14 +32,14 @@ modifyHandler = (dataToSend) ->
   $.post '/s/account/update',
   dataToSend
   (data) ->
-    $('#discus-action-modal').modal('hide')
+    $('#modal-user').modal('hide')
 
 # Delete handler
 deleteHandler = (dataToSend) ->
   $.post '/s/account/delete',
     dataToSend
     (data) ->
-      $('#discus-action-modal').modal('hide')
+      $('#modal-user').modal('hide')
 
 
 # Modify user

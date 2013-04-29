@@ -112,7 +112,7 @@ public class PropertyController {
         return "redirect:/property/" + property.getId();
     }
 
-    @RequestMapping(value = "/s/property/{id}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/s/property/update", method = RequestMethod.POST)
     public String updateProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
             final BindingResult bindingResult, final Model model, Principal current) {
 
@@ -128,7 +128,7 @@ public class PropertyController {
         return "redirect:/property/" + property.getId();
     }
 
-    @RequestMapping(value = "/s/property/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/s/property/delete", method = RequestMethod.GET)
     public String updateProperty(@PathVariable Integer id, Model model, Principal current) {
         Property property = propertyService.findById(id);
         String username = property.getOwner().getUsername();

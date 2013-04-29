@@ -106,10 +106,14 @@
         <!--Modal-->
         <div id="modal-property" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalUser" aria-hidden="true">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="header-label"></h3>
             </div>
             <div class="modal-body">
             </div>
             <div class="modal-footer">
+                <button type="submit" id="submit" class="btn"></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
             </div>
         </div>
         <div tiles:fragment="js-specific">
