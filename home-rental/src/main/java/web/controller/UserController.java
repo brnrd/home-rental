@@ -77,9 +77,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/s/account/delete", method = RequestMethod.POST)
-    public String deleteUser(final String id, Model model, Principal current) {
+    public String deleteUser(final User user, Model model, Principal current) {
 
-        User user = userService.findById(id);
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             if (u_log.getId().equals(user.getId())) {

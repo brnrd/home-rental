@@ -8,31 +8,32 @@
     </head>
     <body>
         <div id="modify">
-            <form id="modify-form">
+            <form id="modify-form" th:object="${user}">
                 <ul class="unstyled">
                     <li>
-                        <input type="text" id="username" placeholder="Username" th:value="${user.username}" />
+                        <input type="text" id="username" placeholder="Username" th:field="*{username}" th:value="${user.username}" />
                     </li>
                     <li>
-                        <input type="text" id="name" placeholder="Name" th:value="${user.name}" />
+                        <input type="text" id="name" placeholder="Name" th:field="*{name}" th:value="${user.name}" />
                     </li>
                     <li>
-                        <input type="text" id="firstname" placeholder="Firstname" th:value="${user.firstname}" />
+                        <input type="text" id="firstname" placeholder="Firstname" th:field="*{firstname}" th:value="${user.firstname}" />
                     </li>
                     <li>
-                        <input type="text" id="email" placeholder="Email" th:value="${user.email}" />
+                        <input type="text" id="email" placeholder="Email" th:field="*{email}" th:value="${user.email}" />
                     </li>
                 </ul>
                 <p>Check your data prior saving !</p>
             </form>
         </div>
+        
         <div id="delete">
             <p id="delete-body">
                 Warning, you're about to delete your account 
                 with all the properties that you created.
             </p>
-            <form id="delete-form">
-                <input type="hidden" id="id" name="id" th:value="${user.id}" />
+            <form id="delete-form" th:object="${user}">
+                <input type="hidden" id="id" name="id" th:field="*{id}" th:value="${user.id}" />
             </form>
         </div>
     </body>

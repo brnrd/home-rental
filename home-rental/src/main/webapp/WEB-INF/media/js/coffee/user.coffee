@@ -18,25 +18,29 @@ modalActionHandler = () ->
     $('#modal-user .modal-header h3').text('Modify your account')
     $('#modal-user .modal-body').load(context.url + ' #modify')
     $('#modal-user .modal-footer #submit').html('Save')
+    $('#modal-user .modal-footer #submit').attr('form','modify-form')
     $('#modal-user .modal-footer #submit').removeClass('btn-danger').addClass('btn-success')
   else
     $('#modal-user .modal-header h3').text('Delete your account')
     $('#modal-user .modal-body').load(context.url + ' #delete')
     $('#modal-user .modal-footer #submit').html('Delete')
+    $('#modal-user .modal-footer #submit').attr('form','delete-form')
     $('#modal-user .modal-footer #submit').removeClass('btn-success').addClass('btn-danger')
   
   $('#modal-user').modal('show')
   
 # Modify handler
 modifyHandler = (dataToSend) ->
-  $.post '/s/account/update',
+  console.log(dataToSend)
+  $.post '/home-rental/s/account/update',
   dataToSend
   (data) ->
     $('#modal-user').modal('hide')
 
 # Delete handler
 deleteHandler = (dataToSend) ->
-  $.post '/s/account/delete',
+  console.log(dataToSend)
+  $.post '/home-rental/s/account/delete',
     dataToSend
     (data) ->
       $('#modal-user').modal('hide')
@@ -52,13 +56,6 @@ $('#modify-user').on "click", (event) ->
 $('#delete-user').on "click", (event) ->
   setContext('delete', '/home-rental/s/account/modal/')
   modalActionHandler()
-  
-# Submit button click to submit form
-$('#submit').on "click", (event) ->
-  if ($('#submit').hasClass('btn-success'))
-    $('#modify-form').submit()
-  else
-    $('#delete-form').submit()
 
 # Modify form submit
 $('#modify-form').on "submit", (event) ->
