@@ -64,6 +64,5 @@ $('#modify-form').on "submit", (event) ->
 
 # Delete form submit
 $('#delete-form').on "submit", (event) ->
-  console.log ('DELETE FORM SUBMIT')
   event.preventDefault()
   deleteHandler($(this).serialize())

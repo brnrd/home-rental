@@ -16,13 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.utils.StaticMap;
 import web.model.Comment;
+import web.model.Evaluation;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.PropertyType;
+import web.model.Reservation;
 import web.model.User;
 import web.service.CommentService;
+import web.service.EvaluationService;
 import web.service.PropertyOptionsService;
 import web.service.PropertyService;
+import web.service.ReservationService;
 import web.service.UserService;
 
 /**
@@ -35,19 +39,23 @@ public class PropertyController {
     @Autowired
     private PropertyService propertyService;
     @Autowired
-    private PropertyOptionsService propertyOptionsService;
+    private PropertyOptionsService optionsService;
     @Autowired
-    private CommentService comService;
+    private CommentService commentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private EvaluationService evaluationService;
 
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
     public String propertyView(@PathVariable Integer id, Model model, Principal current) {
 
         // Get Property
         Property property = propertyService.findById(id);
-        PropertyOptions options = propertyOptionsService.findByProperty(property);
-        List<Comment> comments = comService.findByProperty(property);
+        PropertyOptions options = optionsService.findByProperty(property);
+        List<Comment> comments = commentService.findByProperty(property);
         Integer evaluation = property.getNote();
         String pathMap;
         pathMap = StaticMap.buildMapURL(property);
@@ -108,38 +116,70 @@ public class PropertyController {
 //        handle new property
         propertyService.saveProperty(property);
         options.setProperty(property);
-        propertyOptionsService.savePropertyOptions(options);
+        optionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
 
     @RequestMapping(value = "/s/property/update", method = RequestMethod.POST)
-    public String updateProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
-            final BindingResult bindingResult, final Model model, Principal current) {
-
+    public String updateProperty(final Property modifProperty, final PropertyOptions modifOptions, final String rentStart, final String rentStop,
+            final BindingResult bindingResult, final Integer id, final Model model, Principal current) {
+        Property property = propertyService.findById(id);
+        property.setAddress(modifProperty.getAddress());
+        property.setCity(modifProperty.getCity());
+        property.setCountry(modifProperty.getCountry());
+        property.setPrice(modifProperty.getPrice());
+        property.setRooms(modifProperty.getRooms());
+        property.setShortDesc(modifProperty.getShortDesc());
+        property.setTitle(modifProperty.getTitle());
+        property.setType(modifProperty.getType());
+        property.setLongDesc(modifProperty.getLongDesc());
         DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
         DateTime rentStartTmp = formatter.parseDateTime(rentStart + " 00:00:00");
         DateTime rentStopTmp = formatter.parseDateTime(rentStop + " 00:00:00");
         property.setRentPeriodStart(rentStartTmp.toLocalDateTime());
         property.setRentPeriodStop(rentStopTmp.toLocalDateTime());
 
+        PropertyOptions options = optionsService.findByProperty(property);
+        options.setLaundry(modifOptions.getLaundry());
+        options.setParking(modifOptions.getParking());
+        options.setSwimmingPool(modifOptions.getSwimmingPool());
+        options.setWifi(modifOptions.getWifi());
 //        handle new property
         propertyService.saveProperty(property);
-        propertyOptionsService.savePropertyOptions(options);
+        optionsService.savePropertyOptions(options);
         return "redirect:/property/" + property.getId();
     }
 
-    @RequestMapping(value = "/s/property/delete", method = RequestMethod.GET)
-    public String updateProperty(@PathVariable Integer id, Model model, Principal current) {
+    @RequestMapping(value = "/s/property/delete", method = RequestMethod.POST)
+    public String deleteProperty(final Integer id, Model model, Principal current) {
         Property property = propertyService.findById(id);
         String username = property.getOwner().getUsername();
 
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             if (u_log.getId().equals(property.getOwner().getId())) {
-                System.out.println("Delete property " + property.getId());
+                PropertyOptions options = optionsService.findByProperty(property);
+                    if (options != null) {
+                        optionsService.deletePropertyOptions(options.getId());
+                    }
+                    List<Comment> comments = commentService.findByProperty(property);
+                    for (int j = 0; j < comments.size(); j++) {
+                        Comment comment = comments.get(j);
+                        commentService.deleteComment(comment.getId());
+                    }
+                    List<Reservation> reservations = reservationService.findByProperty(property);
+                    for (int j = 0; j < reservations.size(); j++) {
+                        Reservation reservation = reservations.get(j);
+                        reservationService.deleteReservation(reservation.getId());
+                    }
+                    Evaluation evaluation = evaluationService.findByProperty(property);
+                    if (evaluation != null) {
+                        evaluationService.deleteEvaluation(evaluation.getId());
+                    }
+                    propertyService.deleteProperty(property.getId());
             }
         }
 
-        return "redirect:/s/account/" + username;
+        return "redirect:/s/account/" + username + "/properties";
     }
 }

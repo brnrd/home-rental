@@ -25,27 +25,30 @@ target : modal, submit form
       $('#modal-property .modal-header h3').text('Modify this property');
       $('#modal-property .modal-body').load(context.url + ' #modify');
       $('#modal-property .modal-footer #submit').html('Save');
+      $('#modal-property .modal-footer #submit').attr('form', 'modify-form');
       $('#modal-property .modal-footer #submit').removeClass('btn-danger').addClass('btn-success');
     } else {
       $('#modal-property .modal-header h3').text('Delete this property');
       $('#modal-property .modal-body').load(context.url + ' #delete');
       $('#modal-property .modal-footer #submit').html('Delete');
+      $('#modal-property .modal-footer #submit').attr('form', 'delete-form');
       $('#modal-property .modal-footer #submit').removeClass('btn-success').addClass('btn-danger');
     }
     return $('#modal-property').modal('show');
   };
 
   modifyHandler = function(dataToSend) {
-    return $.post('/s/property/update', dataToSend, function(data) {
-      $('#modal-property').modal('hide');
-      return resetModal();
-    });
+    console.log(dataToSend);
+    $.post('/home-rental/s/property/update', dataToSend);
+    return function(data) {
+      return $('#modal-property').modal('hide');
+    };
   };
 
   deleteHandler = function(dataToSend) {
-    return $.post('/s/property/delete', dataToSend, function(data) {
-      $('#modal-property').modal('hide');
-      return resetModal();
+    console.log(dataToSend);
+    return $.post('/home-rental/s/property/delete', dataToSend, function(data) {
+      return $('#modal-property').modal('hide');
     });
   };
 
@@ -60,12 +63,12 @@ target : modal, submit form
     return modalActionHandler();
   });
 
-  $('#modify-form').on("submit", function(event) {
+  $('#modify-property').on("submit", function(event) {
     event.preventDefault();
     return modifyHandler($(this).serialize());
   });
 
-  $('#delete-form').on("submit", function(event) {
+  $('#delete-property').on("submit", function(event) {
     event.preventDefault();
     return deleteHandler($(this).serialize());
   });

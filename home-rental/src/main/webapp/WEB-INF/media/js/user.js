@@ -69,7 +69,6 @@ target : modal, submit form
   });
 
   $('#delete-form').on("submit", function(event) {
-    console.log('DELETE FORM SUBMIT');
     event.preventDefault();
     return deleteHandler($(this).serialize());
   });
