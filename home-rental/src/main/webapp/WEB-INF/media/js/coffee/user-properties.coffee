@@ -14,28 +14,33 @@ setContext = (type, url) ->
 
 modalActionHandler = () ->
   if context.type is "modify"
-    $('#modal-property .modal-header').load(context.url + ' #modify-header')
-    $('#modal-property .modal-body').load(context.url + ' #modify-form')
-    $('#modal-property .modal-footer').load(context.url + ' #modify-buttons')
+    $('#modal-property .modal-header h3').text('Modify this property')
+    $('#modal-property .modal-body').load(context.url + ' #modify')
+    $('#modal-property .modal-footer #submit' ).html('Save')
+    $('#modal-property .modal-footer #submit' ).removeClass('btn-danger').addClass('btn-success')
   else
-    $('#modal-property .modal-header').load(context.url + ' #delete-header')
-    $('#modal-property .modal-body').load(context.url + ' #delete-body')
-    $('#modal-property .modal-footer').load(context.url + ' #delete-buttons')
+    $('#modal-property .modal-header h3').text('Delete this property')
+    $('#modal-property .modal-body').load(context.url + ' #delete')
+    $('#modal-property .modal-footer #submit' ).html('Delete')
+    $('#modal-property .modal-footer #submit' ).removeClass('btn-success').addClass('btn-danger')
   
   $('#modal-property').modal('show')
   
   
-sendForm = (dataToSend) ->
-        $.post '/s/property/' + $('#property-id').val() + '/update',
+modifyHandler = (dataToSend) ->
+        $.post '/s/property/update',
                 dataToSend
                 (data) ->
                         $('#modal-property').modal('hide')
                         resetModal()
-                        switch data
-                                when 'success-update'
-                                        notifyMessage('success', 'Successfull editing')
-                                when 'success-delete'
-                                        notifyMessage('success', 'Property deleted')
+
+deleteHandler = (dataToSend) ->
+        $.post '/s/property/delete',
+                dataToSend
+                (data) ->
+                        $('#modal-property').modal('hide')
+                        resetModal()
+                        
 
 # Modify property
 $('#modify-property').on "click", (event) ->
@@ -51,4 +56,9 @@ $('#delete-property').on "click", (event) ->
 # Submit modify
 $('#modify-form').on "submit", (event) ->
   event.preventDefault()
-  sendForm($(this).serialize())
+  modifyHandler($(this).serialize())
+
+# Submit delete
+$('#delete-form').on "submit", (event) ->
+  event.preventDefault()
+  deleteHandler($(this).serialize())

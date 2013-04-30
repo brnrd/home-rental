@@ -42,21 +42,31 @@ deleteHandler = (dataToSend) ->
       $('#modal-user').modal('hide')
 
 
-# Modify user
+# Modify user click to open modal
 $('#modify-user').on "click", (event) ->
   setContext('modify', '/home-rental/s/account/modal/')
   console.log context
   modalActionHandler()
 
-# Delete user
+# Delete user clieck to open modal
 $('#delete-user').on "click", (event) ->
   setContext('delete', '/home-rental/s/account/modal/')
   modalActionHandler()
   
+# Submit button click to submit form
+$('#submit').on "click", (event) ->
+  if ($('#submit').hasClass('btn-success'))
+    $('#modify-form').submit()
+  else
+    $('#delete-form').submit()
+
+# Modify form submit
 $('#modify-form').on "submit", (event) ->
   event.preventDefault()
   modifyHandler($(this).serialize())
 
+# Delete form submit
 $('#delete-form').on "submit", (event) ->
+  console.log ('DELETE FORM SUBMIT')
   event.preventDefault()
   deleteHandler($(this).serialize())

@@ -8,7 +8,7 @@ target : modal, submit form
 
 
 (function() {
-  var context, modalActionHandler, sendForm, setContext;
+  var context, deleteHandler, modalActionHandler, modifyHandler, setContext;
 
   context = {
     type: null,
@@ -22,27 +22,30 @@ target : modal, submit form
 
   modalActionHandler = function() {
     if (context.type === "modify") {
-      $('#modal-property .modal-header').load(context.url + ' #modify-header');
-      $('#modal-property .modal-body').load(context.url + ' #modify-form');
-      $('#modal-property .modal-footer').load(context.url + ' #modify-buttons');
+      $('#modal-property .modal-header h3').text('Modify this property');
+      $('#modal-property .modal-body').load(context.url + ' #modify');
+      $('#modal-property .modal-footer #submit').html('Save');
+      $('#modal-property .modal-footer #submit').removeClass('btn-danger').addClass('btn-success');
     } else {
-      $('#modal-property .modal-header').load(context.url + ' #delete-header');
-      $('#modal-property .modal-body').load(context.url + ' #delete-body');
-      $('#modal-property .modal-footer').load(context.url + ' #delete-buttons');
+      $('#modal-property .modal-header h3').text('Delete this property');
+      $('#modal-property .modal-body').load(context.url + ' #delete');
+      $('#modal-property .modal-footer #submit').html('Delete');
+      $('#modal-property .modal-footer #submit').removeClass('btn-success').addClass('btn-danger');
     }
     return $('#modal-property').modal('show');
   };
 
-  sendForm = function(dataToSend) {
-    return $.post('/s/property/' + $('#property-id').val() + '/update', dataToSend, function(data) {
+  modifyHandler = function(dataToSend) {
+    return $.post('/s/property/update', dataToSend, function(data) {
       $('#modal-property').modal('hide');
-      resetModal();
-      switch (data) {
-        case 'success-update':
-          return notifyMessage('success', 'Successfull editing');
-        case 'success-delete':
-          return notifyMessage('success', 'Property deleted');
-      }
+      return resetModal();
+    });
+  };
+
+  deleteHandler = function(dataToSend) {
+    return $.post('/s/property/delete', dataToSend, function(data) {
+      $('#modal-property').modal('hide');
+      return resetModal();
     });
   };
 
@@ -59,7 +62,12 @@ target : modal, submit form
 
   $('#modify-form').on("submit", function(event) {
     event.preventDefault();
-    return sendForm($(this).serialize());
+    return modifyHandler($(this).serialize());
+  });
+
+  $('#delete-form').on("submit", function(event) {
+    event.preventDefault();
+    return deleteHandler($(this).serialize());
   });
 
 }).call(this);
