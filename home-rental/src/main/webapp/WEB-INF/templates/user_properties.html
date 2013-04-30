@@ -33,8 +33,8 @@
                                 <p class="note" th:text="'Note : ' + ${property.note}"></p>
                             </td>
                             <td class="buttons">
-                                <button id="modify-property" class="btn btn-success btn-small">Modify</button>
-                                <button id="delete-property" class="btn btn-danger btn-small"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                                <button id="modify-property" class="btn btn-success btn-small" th:name="${property.id}">Modify</button>
+                                <button id="delete-property" class="btn btn-danger btn-small" th:name="${property.id}"><i class="icon-warning-sign icon-white"></i> Delete</button>
                             </td>
                         </tr>
                     </tbody>
