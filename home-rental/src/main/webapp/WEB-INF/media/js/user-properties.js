@@ -52,20 +52,20 @@ target : modal, submit form
     });
   };
 
-  $('#modify-property').on("click", function(event) {
-    var id;
-    id = $(this).getAttribute('name');
-    console.log('id = ' + id);
-    setContext('modify', '/home-rental/s/property/' + id + '/modal/');
+  $('.modify-property').on("click", function(event) {
+    var property_id;
+    property_id = $(this).data("property-id");
+    console.log('id = ' + property_id);
+    setContext('modify', '/home-rental/s/property/' + property_id + '/modal/');
     console.log(context);
     return modalActionHandler();
   });
 
-  $('#delete-property').on("click", function(event) {
-    var id;
-    id = $(this).getAttribute('name');
-    console.log('id = ' + id);
-    setContext('delete', '/home-rental/s/property/' + id + '/modal/');
+  $('.delete-property').on("click", function(event) {
+    var property_id;
+    property_id = $(this).data("property-id");
+    console.log('id = ' + property_id);
+    setContext('delete', '/home-rental/s/property/' + property_id + '/modal/');
     return modalActionHandler();
   });
 
