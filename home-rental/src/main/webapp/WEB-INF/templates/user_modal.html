@@ -8,7 +8,8 @@
     </head>
     <body>
         <div id="modify">
-            <form id="modify-form" th:object="${user}">
+            <form id="modify-form" th:object="${user}" th:action="@{/s/account/update}" method="post">
+                <input type="hidden" id="id" name="id" th:field="*{id}" th:value="${user.id}" />
                 <ul class="unstyled">
                     <li>
                         <input type="text" id="username" placeholder="Username" th:field="*{username}" th:value="${user.username}" />
@@ -32,8 +33,8 @@
                 Warning, you're about to delete your account 
                 with all the properties that you created.
             </p>
-            <form id="delete-form" th:object="${user}">
-                <input type="hidden" id="id" name="id" th:field="*{id}" th:value="${user.id}" />
+            <form id="delete-form" th:action="@{/s/account/delete}" method="post">
+                <input type="hidden" id="id" name="id" th:value="${user.id}" />
             </form>
         </div>
     </body>

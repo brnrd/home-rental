@@ -13,7 +13,7 @@ import web.model.User;
 
 @Repository
 public class UserDaoImpl extends AbstractDaoImpl<User, String> implements UserDao {
-
+    
     protected UserDaoImpl() {
         super(User.class);
     }

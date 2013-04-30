@@ -8,8 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import web.model.Comment;
+import web.model.Evaluation;
 import web.utils.StaticMap;
 import web.model.Property;
+import web.model.PropertyOptions;
+import web.model.Reservation;
 import web.model.User;
 import web.service.CommentService;
 import web.service.EvaluationService;
@@ -29,14 +33,14 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PropertyService propertyService;
-//    @Autowired
-//    private PropertyOptionsService optionsService;
-//    @Autowired
-//    private CommentService commentService;
-//    @Autowired
-//    private ReservationService reservationService;
-//    @Autowired
-//    private EvaluationService evaluationService;
+    @Autowired
+    private PropertyOptionsService optionsService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private EvaluationService evaluationService;
 
     @RequestMapping(value = "/s/account/{username}", method = RequestMethod.GET)
     public String userView(@PathVariable String username, Model model, Principal current) {
@@ -77,31 +81,51 @@ public class UserController {
     }
 
     @RequestMapping(value = "/s/account/delete", method = RequestMethod.POST)
-    public String deleteUser(final User user, Model model, Principal current) {
-
+    public String deleteUser(final String id, Model model, Principal current) {
+        User user = userService.findById(id);
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             if (u_log.getId().equals(user.getId())) {
-                System.out.println("DELETE USER " + user.getUsername());
+//                user.setEnabled(!user.isEnabled());
+//                userService.saveUser(user);
+                List<Property> properties = propertyService.findProperty(user);
+                for (int i = 0; i < properties.size(); i++) {
+                    Property property = properties.get(i);
+                    PropertyOptions options = optionsService.findByProperty(property);
+                    if (options != null) {
+                        optionsService.deletePropertyOptions(options.getId());
+                    }
+                    List<Comment> comments = commentService.findByProperty(property);
+                    for (int j = 0; j < comments.size(); j++) {
+                        Comment comment = comments.get(j);
+                        commentService.deleteComment(comment.getId());
+                    }
+                    List<Reservation> reservations = reservationService.findByProperty(property);
+                    for (int j = 0; j < reservations.size(); j++) {
+                        Reservation reservation = reservations.get(j);
+                        reservationService.deleteReservation(reservation.getId());
+                    }
+                    Evaluation evaluation = evaluationService.findByProperty(property);
+                    if (evaluation != null) {
+                        evaluationService.deleteEvaluation(evaluation.getId());
+                    }
+                    propertyService.deleteProperty(property.getId());
+                }
             }
         }
-//        List<Property> properties = propertyService.findProperty(user);
-
         return "redirect:/";
     }
-    
+
     @RequestMapping(value = "/s/account/update", method = RequestMethod.POST)
     public String updateUser(final User user, Model model, Principal current) {
-        
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
-            if (u_log.getId().equals(user.getId())) {
-                System.out.println("Update USER " + user.getUsername());
-                userService.saveUser(user);
-            }
+            u_log.setName(user.getName());
+            u_log.setUsername(user.getUsername());
+            u_log.setFirstname(user.getFirstname());
+            u_log.setEmail(user.getEmail());
+            userService.saveUser(u_log);
         }
-//        List<Property> properties = propertyService.findProperty(user);
-
         return "redirect:/s/account/" + user.getUsername();
     }
 
