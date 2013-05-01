@@ -62,11 +62,11 @@ $('.delete-property').on "click", (event) ->
   modalActionHandler()
 
 # Modify form submit
-$('#modify-property').on "submit", (event) ->
+$('#modify-form').on "submit", (event) ->
   event.preventDefault()
   modifyHandler($(this).serialize())
 
 # Delete form submit
-$('#delete-property').on "submit", (event) ->
+$('#delete-form').on "submit", (event) ->
   event.preventDefault()
   deleteHandler($(this).serialize())

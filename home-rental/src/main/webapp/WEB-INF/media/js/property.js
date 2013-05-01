@@ -63,12 +63,12 @@ target : modal, submit form
     return modalActionHandler();
   });
 
-  $('#modify-property').on("submit", function(event) {
+  $('#modify-form').on("submit", function(event) {
     event.preventDefault();
     return modifyHandler($(this).serialize());
   });
 
-  $('#delete-property').on("submit", function(event) {
+  $('#delete-form').on("submit", function(event) {
     event.preventDefault();
     return deleteHandler($(this).serialize());
   });
