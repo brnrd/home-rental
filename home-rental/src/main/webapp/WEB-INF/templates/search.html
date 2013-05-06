@@ -111,17 +111,7 @@
         </div>
 
         <!-- Modals -->
-        <div id="ajax-login-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="ajax-login-label" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="ajax-login-label"></h3>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <input type="submit" form="auth-process-ajax-login" id="btn-ajax-login" class="btn btn-primary" value="" />
-            </div>
-        </div>
+        <div id="modal-container"></div>
 
         <!-- Custom js page specific -->
         <div tiles:fragment="js-specific">

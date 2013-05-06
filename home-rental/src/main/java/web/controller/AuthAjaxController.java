@@ -1,11 +1,5 @@
 package web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.AsyncContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +10,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +23,7 @@ import web.service.UserService;
  * @author Romain Foncier <ro.foncier at gmail.com>
  */
 @Controller
-//@WebServlet(urlPatterns = "/login-ajax", asyncSupported = true)
+@RequestMapping(value = "/ajax-login")
 public class AuthAjaxController extends HttpServlet {
 
     @Autowired
@@ -41,33 +34,18 @@ public class AuthAjaxController extends HttpServlet {
     @Autowired
     private UserService userService;
 
-    /*
-     public void doGet(HttpServletRequest request, HttpServletResponse response)
-     throws ServletException, IOException {
-     AsyncContext asyncCtx = request.startAsync();
-     ServletRequest req = asyncCtx.getRequest();
-     if (req.isAsyncStarted()) {
-     asyncCtx.dispatch("ajax-login.html");
-     }
-     }
-
-     public void doPost(HttpServletRequest request, HttpServletResponse response)
-     throws ServletException, IOException {
-     response.setContentType("text/json");
-     PrintWriter out = response.getWriter();
-     out.print("{\"status\": \"success\"}");
-     }*/
-    @RequestMapping(value = "/login-ajax", method = RequestMethod.GET)
-    public String loginAjax() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String ajaxLogin() {
         return "ajax-login";
     }
 
-    @RequestMapping(value = "/login-ajax", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    String loginAjaxProcess(@RequestParam("auth_username") String username,
+    String ajaxLoginProcess(@RequestParam("auth_username") String username,
             @RequestParam("auth_pwd") String password,
             HttpServletRequest request, HttpServletResponse response, Model model) {
-
+        System.out.println("Username : " + username);
+        System.out.println("Password : " + password);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
             Authentication auth = authenticationManager.authenticate(token);
@@ -77,9 +55,8 @@ public class AuthAjaxController extends HttpServlet {
             // Update last connection
             userService.connected(userService.findByUsername(username));
             return "{\"status\": \"success\"}";
-        } catch (BadCredentialsException ex) {
-            return "{\"status\": \"error\"}";
-            //return "login";
+        } catch (BadCredentialsException bce) {
+            return "{\"status\": \"success\"}";
         }
     }
 }

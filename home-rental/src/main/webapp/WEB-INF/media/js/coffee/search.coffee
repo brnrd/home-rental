@@ -25,14 +25,12 @@ notifyMessage = (type, msg) ->
     )
 
 loadAjaxLoginModal = () ->
-    $('#ajax-login-modal .modal-header h3').text("Home Rental Login")
-    $('#ajax-login-modal #btn-ajax-login').val('Login')
-    
-    # Load login form body
-    $('#ajax-login-modal .modal-body').load('/home-rental/login-ajax .auth-body')    
-    
-    # Load modal
-    $('#ajax-login-modal').modal('show')
+    console.log "Load ajax login form"
+    # Load ajax login modal
+    $('#modal-container').load '/home-rental/ajax-login #ajax-login-modal',
+        () ->
+            # Load modal
+            $('#ajax-login-modal').modal('show')
 
 checkLogin = () ->
     if $('.user-logged').length > 0
@@ -43,10 +41,12 @@ checkLogin = () ->
 
 loginHandler = (dataToSend) ->
     $('.ajax-loader').show()
-    $.post 'login-ajax',
-        dataToSendj,
+    $.post '/ajax-login',
+        dataToSend
         (data) ->
             $('.ajax-loader').hide()
+            console.log data
+            ###
             switch data.status
                 when 'success'
                     notifyMessage("success", "You are successfully logged")
@@ -56,6 +56,7 @@ loginHandler = (dataToSend) ->
                     $('#ajax-login-modal .field-container').each (item) ->
                         item.addClass('error')
                     false
+            ###
                     
 jQuery ->
     # Filled the search bar with search parameters #
@@ -83,9 +84,13 @@ jQuery ->
     $('#btn-booking').on "click", (event) ->
         reservation_target = $(this).parents('li').data('property-id')
         if checkLogin()
-            prepareModalForReservation()
-            
-    $('#auth-process-ajax-login').on "submit", (event) ->
-        event.preventDefault()
+            console.log "OK"
+            #prepareModalForReservation()
+        
+    $('#ajax-login-btn').on "click", (event) ->
+        console.log "test"
+        ###
         if loginHandler($(this).serialize())
             prepareModalForReservation()
+        ###
+    true
