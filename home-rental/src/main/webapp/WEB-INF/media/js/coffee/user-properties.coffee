@@ -5,6 +5,10 @@ Creator : brnrd
 target : modal, submit form
 ###
 
+###########
+#  Modal  #
+###########
+
 context = type: null, url: null
 
 # Modal handler
@@ -31,7 +35,6 @@ modalActionHandler = () ->
   
 # Modify handler
 modifyHandler = (dataToSend) ->
-  console.log(dataToSend)
   $.post '/home-rental/s/property/update',
   dataToSend
   (data) ->
@@ -39,7 +42,6 @@ modifyHandler = (dataToSend) ->
 
 # Delete handler
 deleteHandler = (dataToSend) ->
-  console.log(dataToSend)
   $.post '/home-rental/s/property/delete',
     dataToSend
     (data) ->
@@ -49,15 +51,12 @@ deleteHandler = (dataToSend) ->
 # Modify user click to open modal
 $('.modify-property').on "click", (event) ->
   property_id = $(this).data("property-id")
-  console.log ('id = ' + property_id)
   setContext('modify', '/home-rental/s/property/' + property_id + '/modal/')
-  console.log context
   modalActionHandler()
 
 # Delete user clieck to open modal
 $('.delete-property').on "click", (event) ->
   property_id = $(this).data("property-id")
-  console.log ('id = ' + property_id)
   setContext('delete', '/home-rental/s/property/' + property_id + '/modal/')
   modalActionHandler()
 
@@ -70,3 +69,35 @@ $('#modify-form').on "submit", (event) ->
 $('#delete-form').on "submit", (event) ->
   event.preventDefault()
   deleteHandler($(this).serialize())
+  
+  ##################
+#   Datepicker   #
+##################
+
+ckeckin = null
+target = null
+
+formatDate = (date) ->
+    res = date.toLocaleString().split(" ")[0]
+    t_res = res.split("/")
+    if t_res[0].length == 1
+        return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
+    return t_res.join("/")
+
+$('#rentStart').datepicker(
+    onClose: (selectedDate) ->
+        console.log selectedDate
+        checkin = new Date(selectedDate)
+        console.log checkin
+        target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate()+7)
+        console.log target
+        $('#rentStop').datepicker('option', 'minDate', selectedDate)
+        $('#rentStop').val(formatDate(target))
+)
+
+$('#rentStop').datepicker(
+    defaultDate: if target then target else ''
+    onClose: (selectedDate) ->
+        if checkin
+            $('#rentStart').datepicker('option', 'maxDate', selectedDate)
+)

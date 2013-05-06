@@ -8,7 +8,7 @@ target : modal, submit form
 
 
 (function() {
-  var context, deleteHandler, modalActionHandler, modifyHandler, setContext;
+  var ckeckin, context, deleteHandler, formatDate, modalActionHandler, modifyHandler, setContext, target;
 
   context = {
     type: null,
@@ -38,7 +38,6 @@ target : modal, submit form
   };
 
   modifyHandler = function(dataToSend) {
-    console.log(dataToSend);
     $.post('/home-rental/s/property/update', dataToSend);
     return function(data) {
       return $('#modal-property').modal('hide');
@@ -46,7 +45,6 @@ target : modal, submit form
   };
 
   deleteHandler = function(dataToSend) {
-    console.log(dataToSend);
     return $.post('/home-rental/s/property/delete', dataToSend, function(data) {
       return $('#modal-property').modal('hide');
     });
@@ -55,16 +53,13 @@ target : modal, submit form
   $('.modify-property').on("click", function(event) {
     var property_id;
     property_id = $(this).data("property-id");
-    console.log('id = ' + property_id);
     setContext('modify', '/home-rental/s/property/' + property_id + '/modal/');
-    console.log(context);
     return modalActionHandler();
   });
 
   $('.delete-property').on("click", function(event) {
     var property_id;
     property_id = $(this).data("property-id");
-    console.log('id = ' + property_id);
     setContext('delete', '/home-rental/s/property/' + property_id + '/modal/');
     return modalActionHandler();
   });
@@ -77,6 +72,42 @@ target : modal, submit form
   $('#delete-form').on("submit", function(event) {
     event.preventDefault();
     return deleteHandler($(this).serialize());
+  });
+
+  ckeckin = null;
+
+  target = null;
+
+  formatDate = function(date) {
+    var res, t_res;
+    res = date.toLocaleString().split(" ")[0];
+    t_res = res.split("/");
+    if (t_res[0].length === 1) {
+      return '0' + t_res[0] + "/" + t_res[1] + "/" + t_res[2];
+    }
+    return t_res.join("/");
+  };
+
+  $('#rentStart').datepicker({
+    onClose: function(selectedDate) {
+      var checkin;
+      console.log(selectedDate);
+      checkin = new Date(selectedDate);
+      console.log(checkin);
+      target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 7);
+      console.log(target);
+      $('#rentStop').datepicker('option', 'minDate', selectedDate);
+      return $('#rentStop').val(formatDate(target));
+    }
+  });
+
+  $('#rentStop').datepicker({
+    defaultDate: target ? target : '',
+    onClose: function(selectedDate) {
+      if (checkin) {
+        return $('#rentStart').datepicker('option', 'maxDate', selectedDate);
+      }
+    }
   });
 
 }).call(this);

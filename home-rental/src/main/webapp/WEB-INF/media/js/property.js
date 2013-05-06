@@ -8,7 +8,43 @@ target : modal, submit form
 
 
 (function() {
-  var context, deleteHandler, modalActionHandler, modifyHandler, setContext;
+  var ckeckin, context, deleteHandler, formatDate, modalActionHandler, modifyHandler, setContext, target;
+
+  ckeckin = null;
+
+  target = null;
+
+  formatDate = function(date) {
+    var res, t_res;
+    res = date.toLocaleString().split(" ")[0];
+    t_res = res.split("/");
+    if (t_res[0].length === 1) {
+      return '0' + t_res[0] + "/" + t_res[1] + "/" + t_res[2];
+    }
+    return t_res.join("/");
+  };
+
+  $('#rentStart').datepicker({
+    onClose: function(selectedDate) {
+      var checkin;
+      console.log(selectedDate);
+      checkin = new Date(selectedDate);
+      console.log(checkin);
+      target = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate() + 7);
+      console.log(target);
+      $('#rentStop').datepicker('option', 'minDate', selectedDate);
+      return $('#rentStop').val(formatDate(target));
+    }
+  });
+
+  $('#rentStop').datepicker({
+    defaultDate: target ? target : '',
+    onClose: function(selectedDate) {
+      if (checkin) {
+        return $('#rentStart').datepicker('option', 'maxDate', selectedDate);
+      }
+    }
+  });
 
   context = {
     type: null,

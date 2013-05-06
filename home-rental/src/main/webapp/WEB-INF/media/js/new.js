@@ -8,8 +8,24 @@ target : all (typeahead, maps, ...)
 
 
 (function() {
-  var ckeckin, formatDate, geocoder, initialize, map, mapOptions, service, splitCity, target,
+  var ckeckin, currentLat, currentLong, formatDate, geocoder, getLocation, initialize, map, mapOptions, service, splitCity, target,
     _this = this;
+
+  currentLat = null;
+
+  currentLong = null;
+
+  getLocation = $.getJSON("http://jsonip.com?callback=?", function(data) {
+    console.log(data);
+    return $.getJSON("http://freegeoip.net/json/" + data.ip, function(fulldata) {
+      console.log(fulldata);
+      currentLat = fulldata.latitude;
+      currentLong = fulldata.longitude;
+      return console.log(currentLat + ' ' + currentLong);
+    });
+  });
+
+  $(document).ready(getLocation);
 
   map = null;
 

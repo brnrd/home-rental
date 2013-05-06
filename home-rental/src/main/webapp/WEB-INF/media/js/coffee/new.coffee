@@ -5,23 +5,31 @@ Creator : brnrd
 target : all (typeahead, maps, ...)
 ###
 
+
 ###################
 #   Google Maps   #
 ###################
 
 map = null
 
-mapOptions =
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-    
-initialize = () ->
-    map = new google.maps.Map($('#map-canvas')[0], mapOptions)
-    true
+initialize = (lat, long) ->
+    map = new google.maps.Map(
+      $('#map-canvas')[0], 
+        zoom: 9 
+        center: new google.maps.LatLng(lat, long)
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    )
 
-google.maps.event.addDomListener(window, 'load', initialize)
-  
+getLocation = () -> 
+  $.getJSON("http://jsonip.com?callback=?", (data) ->
+    $.getJSON("http://freegeoip.net/json/" + data.ip, (fulldata) ->
+      currentLat= fulldata.latitude
+      currentLong = fulldata.longitude
+      google.maps.event.addDomListener(window, 'load', initialize(currentLat, currentLong))
+    )
+  )
+      
+$(document).ready getLocation
 ##################
 #   Datepicker   #
 ##################
