@@ -9,7 +9,7 @@ comment :
 
 
 (function() {
-  var bookingHandler, calculatePrice, checkLogin, loginHandler, notifyMessage, param, params, pluralize, prepareModalForReservation, reservation_price, reservation_target, reservation_title, smax, smin, updateUserMenu;
+  var bookingHandler, calculatePrice, checkLogin, loginHandler, notifyMessage, param, prepareModalForReservation, reservation_price, reservation_target, reservation_title, smax, smin, updateUserMenu;
 
   param = null;
 
@@ -18,14 +18,6 @@ comment :
   /* Utils methods
   */
 
-
-  pluralize = function(i, title) {
-    if (i > 1) {
-      return i + " " + title + "s";
-    } else {
-      return i + " " + title;
-    }
-  };
 
   calculatePrice = function(number) {
     return Math.ceil(number / 2) * reservation_price;
@@ -107,7 +99,7 @@ comment :
 
   bookingHandler = function(dataToSend) {
     $('.ajax-loader').show();
-    return $.post('/home-rental/booking', dataToSend, function(data) {
+    return $.post('/home-rental/s/booking', dataToSend, function(data) {
       $('.ajax-loader').hide();
       data = JSON.parse(data);
       switch (data.status) {
@@ -124,18 +116,6 @@ comment :
   /* HANDLERS
   */
 
-
-  params = $('.map-wrapper #search-params').data('search-params');
-
-  $('#search-bar #location-search').val(params[0]);
-
-  $('#search-bar #checkin').val(params[1]);
-
-  $('#search-bar #checkout').val(params[2]);
-
-  $('#search-bar #guests-number').val(params[3]);
-
-  $('#search-bar button.btn-dpd strong').text(pluralize(params[3], "guest"));
 
   smin = $('.map-wrapper #min_price').text();
 
@@ -159,7 +139,7 @@ comment :
     reservation_title = $(prop).find('.item-content-title').text();
     reservation_price = $(prop).find('.item-action-price').text().split("$")[1];
     if (checkLogin()) {
-      return console.log("OK");
+      return prepareModalForReservation();
     }
   });
 

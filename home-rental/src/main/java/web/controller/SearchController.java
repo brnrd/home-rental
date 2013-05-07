@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.SearchResult;
+import web.model.User;
 import web.service.PropertyService;
 import web.service.SearchService;
 import web.service.UserService;
@@ -39,7 +40,10 @@ public class SearchController {
         model.addAttribute("home", true);
                 
         if (current != null) {
-            model.addAttribute("current", current);
+            User u_log = userService.findByUsername(current.getName());
+            if (u_log != null) {
+                model.addAttribute("current", u_log);
+            }
         }
         
         // Check results from Search Service.
@@ -74,7 +78,7 @@ public class SearchController {
         model.addAttribute("specs", specs);
         model.addAttribute("map", pathMap);
         model.addAttribute("results", search);
-        model.addAttribute("params", "[\""+location+"\", \""+checkin+"\", \""+checkout+"\", \""+guests+"\"]");
+        model.addAttribute("params", new String[]{location, checkin, checkout, guests});
         return "search";
     }
     

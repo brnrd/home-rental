@@ -10,9 +10,6 @@ param = null
 reservation_target = reservation_title = reservation_price = null
 
 ### Utils methods ###
-pluralize = (i, title) ->
-    if i > 1 then i+" "+title+"s" else i+" "+title
-
 calculatePrice = (number) ->
     # the rental prices are indicated for two persons
    Math.ceil(number / 2) * reservation_price
@@ -106,14 +103,6 @@ loginHandler = (dataToSend) ->
 ################
 ### HANDLERS ###
 ################
-
-# Filled the search bar with search parameters #
-params = $('.map-wrapper #search-params').data('search-params')
-$('#search-bar #location-search').val(params[0])
-$('#search-bar #checkin').val(params[1])
-$('#search-bar #checkout').val(params[2])
-$('#search-bar #guests-number').val(params[3])
-$('#search-bar button.btn-dpd strong').text(pluralize(params[3], "guest"))
 
 # Init slider price range
 smin = $('.map-wrapper #min_price').text()

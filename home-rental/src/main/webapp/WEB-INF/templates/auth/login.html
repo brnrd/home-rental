@@ -18,7 +18,7 @@
                 <p class="form-error">
                     <span th:if="${login_error}">Warning ! Your login/password are incorrects. Please try again !</span>
                 </p>
-                <form method="POST" th:action="@{/login/}" id="auth-process-login">
+                <form method="POST" th:action="@{/login}" id="auth-process-login">
                     <div class="form-group">
                         <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
                         <div th:class="${login_error} ? 'pull-left field-container error' : 'pull-left field-container'">

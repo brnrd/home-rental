@@ -21,6 +21,75 @@
 
 @hrr: #F02E51; //red
 
+.searcher-bar {
+    #search-bar {
+        margin-top: 80px;
+        margin-bottom: 20px;
+        padding: 4px 2px;
+        .gradientBar(#e5e5e5, #f6f6f6);
+        .border-radius(5px);
+        form { margin: 0px }
+        .input-wrapper {
+            float: left;
+            margin: 0px 2px;
+            padding: 10px;
+            border: 1px solid #777;
+            .border-radius(4px);
+            .box-shadow(inset 1px 1px 5px rgba(0, 0, 0, 0.5));
+            background: #fff;
+            input, input[type="text"] {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                box-shadow: none;
+                font-size: 18px;
+            }
+            .location {
+                height: 20px;
+                width: 316px;
+            }
+            .checkin, .checkout {
+                height: 20px;
+                width: 98px;
+                z-index: 150;
+            }
+            .icon-calendar {
+                position: relative;
+                top: 3px;
+                left: -6px;
+            }
+        }
+        .btn-group {
+            margin: 0px 2px;
+            .btn-dpd {
+                height: 43px;
+                width: 117px;
+                font-size: 18px;
+            }
+            .carret-dpd {
+                height: 43px;
+                width: 25px;
+            }
+            .icon-user {
+                position: relative;
+                top: 2px;
+                left: 12px;
+            }
+        }
+        #btn-search {
+            height: 43px;
+            width: 156px;
+            margin: 0px 2px;
+            font-size: 18px;
+            .icon-search {
+                position: relative;
+                top: 2px;
+                left: -8px;
+            }
+        }
+    }
+}
+
 .map-wrapper {
     height: 350px;
     margin-bottom: 20px;
@@ -74,9 +143,9 @@
     #sort-bar {
         margin-bottom: 10px;
         padding: 10px;
+        .gradientBar(#f6f6f6, #e5e5e5, #222);
         border: 1px solid #bbb;
         .border-radius(5px);
-        background-color: #eee;
         #sort-bar-results-value {
             color: @hrb;
         }

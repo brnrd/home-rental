@@ -8,9 +8,55 @@
         <link rel="stylesheet" tiles:fragment="css-specific" href="/css/search.css" th:href="@{/css/search.css}" />
     </head>
 
-    <body tiles:fragment="content">        
+    <body tiles:fragment="content">                
+        <div class="row searcher-bar">
+            <div class="span12">
+                <!-- specific search-bar -->
+                <div id="search-bar">
+                    <form method="GET" th:action="@{/search}" id="search_form">
+                        <fieldset form="search_form">
+                            <div class="input-wrapper">
+                                <input type="text" class="location" id="location-search" name="location" placeholder="Where do you want to go ?" th:value="${params[0]}" />
+                                <input type="hidden" id="latlong" name="latlong" value="" />
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" class="checkin" id="checkin" name="checkin" placeholder="Check In" th:value="${params[1]}" />
+                                <i class="icon-calendar"></i>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" class="checkout" id="checkout" name="checkout" placeholder="Check Out" th:value="${params[2]}" />
+                                <i class="icon-calendar"></i>
+                            </div>
+                            <div class="btn-group pull-left">
+                                <input type="hidden" id="guests-number" name="guests_number" th:value="${params[3]}" />
+                                <button class="btn btn-inverse btn-dpd"><strong th:text="${params[3] == '1'} ? ${params[3]} + ' guest' : ${params[3]} + ' guests'">1 guest</strong><i class="icon-user icon-white"></i></button>
+                                <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul id="guests-list" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                    <li><a tabindex="-1" href="#">2 guests</a></li>
+                                    <li><a tabindex="-1" href="#">3 guests</a></li>
+                                    <li><a tabindex="-1" href="#">4 guests</a></li>
+                                    <li><a tabindex="-1" href="#">5 guests</a></li>
+                                    <li><a tabindex="-1" href="#">6 guests</a></li>
+                                    <li><a tabindex="-1" href="#">7 guests</a></li>
+                                    <li><a tabindex="-1" href="#">8 guests</a></li>
+                                    <li><a tabindex="-1" href="#">9 guests</a></li>
+                                    <li><a tabindex="-1" href="#">10 guests</a></li>
+                                    <li><a tabindex="-1" href="#">11 guests</a></li>
+                                    <li><a tabindex="-1" href="#">12+ guests</a></li>
+                                </ul>
+                            </div>
+
+                            <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
+                            <div class="clearfix"></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /end searcher-bar -->
+        
         <div class="row map-wrapper">
-            <div id="search-params" th:attr="data-search-params=${params}"></div>
             <div class="span9">
                 <div id="map-container">
                     <img th:src="${map}" alt="Google Maps Results"></img>
@@ -21,27 +67,33 @@
                     <!-- Property type selector -->
                     <div class="search-selector">
                         <span class="selector-title"><strong>TYPE</strong></span>
-                        <ul id="property-type">
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_type" th:disabled="${specs[0]} == 0" value="FLAT" />
-                                <span class="pull-right badge badge-info" th:text="${specs[0]}"></span>
-                                <span>FLAT</span>
-                            </li>
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_type" th:disabled="${specs[1]} == 0" value="HOUSE" />
-                                <span class="pull-right badge badge-info" th:text="${specs[1]}"></span>
-                                <span>HOUSE</span>
-                            </li>
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_type" th:disabled="${specs[2]} == 0" value="LOFT" />
-                                <span class="pull-right badge badge-info" th:text="${specs[2]}"></span>
-                                <span>LOFT</span>
-                            </li>
-                        </ul>
+                        <fieldset name="type_selector" form="search_form">
+                            <ul id="property-type">
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_type[]" th:disabled="${specs[0]} == 0" value="FLAT" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[0]}"></span>
+                                    <span>FLAT</span>
+                                </li>
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_type[]" th:disabled="${specs[1]} == 0" value="HOUSE" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[1]}"></span>
+                                    <span>HOUSE</span>
+                                </li>
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_type[]" th:disabled="${specs[2]} == 0" value="LOFT" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[2]}"></span>
+                                    <span>LOFT</span>
+                                </li>
+                            </ul>
+                        </fieldset>
                     </div><!-- /end search-selector -->
 
                     <!-- Property price selector -->
                     <div class="search-selector">
+                        <fieldset name="price_range" form="search-form">
+                            <input type="hidden" name="min_price" th:value="${specs[7]}" />
+                            <input type="hidden" name="max_price" th:value="${specs[8]}" />
+                        </fieldset>
                         <span class="selector-title"><strong>PRICE</strong></span>
                         <span id="max_price" class="pull-right price" th:text="${specs[8]}"></span>
                         <span id="min_price" class="price" th:text="${specs[7]}"></span>
@@ -51,28 +103,30 @@
                     <!-- Property options selector -->
                     <div class="search-selector">
                         <span class="selector-title"><strong>OPTIONS</strong></span>
-                        <ul id="property-options">
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_options" th:disabled="${specs[3]} == 0" value="parking" />
-                                <span class="pull-right badge badge-info" th:text="${specs[3]}"></span>
-                                <span>Parking</span>
-                            </li>
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_options" th:disabled="${specs[4]} == 0" value="swimming_pool" />
-                                <span class="pull-right badge badge-info" th:text="${specs[4]}"></span>
-                                <span>Swimming Pool</span>
-                            </li>
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_options" th:disabled="${specs[5]} == 0" value="wifi" />
-                                <span class="pull-right badge badge-info" th:text="${specs[5]}"></span>
-                                <span>Wifi</span>
-                            </li>
-                            <li class="list-selector">
-                                <input type="checkbox" name="property_options" th:disabled="${specs[6]} == 0" value="laundry" />
-                                <span class="pull-right badge badge-info" th:text="${specs[6]}"></span>
-                                <span>Laundry</span>
-                            </li>
-                        </ul>
+                        <fieldset name="property_options" form="search-form">
+                            <ul id="property-options">
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_options[]" th:disabled="${specs[3]} == 0" value="parking" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[3]}"></span>
+                                    <span>Parking</span>
+                                </li>
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_options[]" th:disabled="${specs[4]} == 0" value="swimming_pool" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[4]}"></span>
+                                    <span>Swimming Pool</span>
+                                </li>
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_options[]" th:disabled="${specs[5]} == 0" value="wifi" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[5]}"></span>
+                                    <span>Wifi</span>
+                                </li>
+                                <li class="list-selector">
+                                    <input type="checkbox" name="property_options[]" th:disabled="${specs[6]} == 0" value="laundry" />
+                                    <span class="pull-right badge badge-info" th:text="${specs[6]}"></span>
+                                    <span>Laundry</span>
+                                </li>
+                            </ul>
+                        </fieldset>
                     </div><!-- /end search-selector -->
                 </div><!-- /end map-caption -->
             </div>
