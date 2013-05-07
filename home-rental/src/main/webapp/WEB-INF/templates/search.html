@@ -98,7 +98,7 @@
                             <p class="item-content-desc" th:text="${r.shortDesc}"></p>
                         </div>
                         <div class="pull-left search-results-item-action">
-                            <div class="item-action-price" th:text="'€' + ${r.price}"></div>
+                            <div class="item-action-price" th:text="'$' + ${r.price}"></div>
                             <div class="item-action-btn">
                                 <a href="#" id="btn-booking" class="btn btn-info">Book it !</a>
                                 <a href="#" th:href="@{/property/__${r.propertyId}__}" id="btn-consult" class="btn">Consult</a>
@@ -121,7 +121,7 @@
                 <p class="form-error">
                     <span></span>
                 </p>
-                <form method="POST" th:action="@{/ajax-login}" id="auth-ajax-login">
+                <form method="POST" action="" id="auth-ajax-login">
                     <div class="form-group">
                         <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
                         <div class="pull-left field-container">
@@ -141,6 +141,61 @@
             <div class="modal-footer">
                 <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 <input type="submit" id="ajax-login-btn" form="auth-ajax-login" class="btn btn-primary" value="Login" />
+            </div>
+        </div>
+        
+        <div id="booking-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="booking-label" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="booking-label">Home Rental Booking</h3>
+            </div>
+            <div class="modal-body">
+                <div id="booking-container">
+                    <p>Please, confirm your booking for the following rental : </p>
+                    <form method="POST" action="" id="booking-process">
+                        <ul class="unstyled">
+                            <li class="booking-item">
+                                <input type="hidden" name="target_property" value="" />
+                                <dl class="booking-desc">
+                                    <dd class="pull-right hrb" id="b-title"></dd>
+                                    <dt>Title :</dt>
+                                </dl>
+                            </li>
+                            <li class="booking-item">
+                                <input type="hidden" name="date_rent_start" value="" />
+                                <dl class="booking-desc">
+                                    <dd class="pull-right hrb" id="b-checkin"></dd>
+                                    <dt>Date rent start :</dt>
+                                </dl>
+                            </li>
+                            <li class="booking-item">
+                                <input type="hidden" name="date_rent_stop" value="" />
+                                <dl class="booking-desc">
+                                    <dd class="pull-right hrb" id="b-checkout"></dd>
+                                    <dt>Date rent stop :</dt>
+                                </dl>
+                            </li>
+                            <li class="booking-item">
+                                <input type="hidden" name="guests_number" value="" />
+                                <dl class="booking-desc">
+                                    <dd class="pull-right hrb" id="b-guests"></dd>
+                                    <dt>Number of guests :</dt>
+                                </dl>
+                            </li>
+                            <li class="booking-item">
+                                <input type="hidden" name="price" value="" />
+                                <dl class="booking-desc">
+                                    <dd class="pull-right hrb" id="b-price"></dd>
+                                    <dt>Price ($) :</dt>
+                                </dl>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <input type="submit" form="booking-process" class="btn btn-danger" value="Confirm booking" />
             </div>
         </div>
 

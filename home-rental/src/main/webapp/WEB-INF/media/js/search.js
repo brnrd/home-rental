@@ -9,13 +9,11 @@ comment :
 
 
 (function() {
-  var authentication_success, checkLogin, loadAjaxLoginModal, loginHandler, notifyMessage, param, params, pluralize, reservation_target, smax, smin;
+  var bookingHandler, calculatePrice, checkLogin, loginHandler, notifyMessage, param, params, pluralize, prepareModalForReservation, reservation_price, reservation_target, reservation_title, smax, smin, updateUserMenu;
 
   param = null;
 
-  reservation_target = null;
-
-  authentication_success = false;
+  reservation_target = reservation_title = reservation_price = null;
 
   /* Utils methods
   */
@@ -27,6 +25,10 @@ comment :
     } else {
       return i + " " + title;
     }
+  };
+
+  calculatePrice = function(number) {
+    return Math.ceil(number / 2) * reservation_price;
   };
 
   /* Noty
@@ -44,11 +46,31 @@ comment :
     });
   };
 
-  loadAjaxLoginModal = function() {
-    console.log("Load ajax login form");
-    return $('#modal-container').load('/home-rental/ajax-login #ajax-login-modal', function() {
-      return $('#ajax-login-modal').modal('show');
-    });
+  updateUserMenu = function(data) {
+    var user_logged;
+    user_logged = "<div class=\"user-logged\"><div class=\"btn-group\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"username\"><strong>" + data.username + "</strong></span><span class=\"caret\"></span></a><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "\">Account</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "/properties\">My Properties</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "/reservations\">My Reservations</a></li><li class=\"divider\"></li><li><a tabindex=\"-1\" href=\"/home-rental/j_spring_security_logout\">Signout</a></li></ul></div></div>";
+    $('.login').find('.btn-login').remove();
+    return $('.login').prepend(user_logged);
+  };
+
+  prepareModalForReservation = function() {
+    var checkin, checkout, guests, price;
+    checkin = $('#search-bar #checkin').val();
+    checkout = $('#search-bar #checkout').val();
+    guests = $('#search-bar #guests-number').val();
+    $('#booking-modal .booking-item input[name="date_rent_start"]').val(checkin);
+    $('#booking-modal .booking-desc #b-checkin').html(checkin);
+    $('#booking-modal .booking-item input[name="date_rent_stop"]').val(checkout);
+    $('#booking-modal .booking-desc #b-checkout').html(checkout);
+    $('#booking-modal .booking-item input[name="guests_number"]').val(guests);
+    $('#booking-modal .booking-desc #b-guests').html(guests);
+    $('#booking-modal .booking-item input[name="target_property"]').val(reservation_target);
+    $('#booking-modal .booking-desc #b-title').html(reservation_title);
+    price = calculatePrice(parseInt(guests));
+    $('#booking-modal .booking-item input[name="price"]').val(price);
+    $('#booking-modal .booking-desc #b-price').html(price);
+    $('#booking-modal').modal('show');
+    return true;
   };
 
   checkLogin = function() {
@@ -56,27 +78,46 @@ comment :
       return true;
     } else {
       $('#ajax-login-modal').modal('show');
+      $('#ajax-login-modal #auth_username').focus();
       return false;
     }
   };
 
   loginHandler = function(dataToSend) {
     $('.ajax-loader').show();
-    return $.post('/ajax-login', dataToSend, function(data) {
+    return $.post('/home-rental/ajax-login', dataToSend, function(data) {
       $('.ajax-loader').hide();
-      return console.log(data);
-      /*
-                  switch data.status
-                      when 'success'
-                          notifyMessage("success", "You are successfully logged")
-                          true
-                      when 'error'
-                          $('#ajax-login-modal .form-error span').text("Warning ! Your username/password are incorrects !")
-                          $('#ajax-login-modal .field-container').each (item) ->
-                              item.addClass('error')
-                          false
-      */
+      data = JSON.parse(data);
+      switch (data.status) {
+        case 'success':
+          $('#ajax-login-modal').modal('hide');
+          notifyMessage("success", "You are successfully logged");
+          updateUserMenu(data);
+          prepareModalForReservation();
+          return true;
+        case 'error':
+          $('#ajax-login-modal .form-error span').html("Warning ! Your username/password are incorrects !");
+          $('#ajax-login-modal .field-container').each(function(item) {
+            return item.addClass('error');
+          });
+          return false;
+      }
+    });
+  };
 
+  bookingHandler = function(dataToSend) {
+    $('.ajax-loader').show();
+    return $.post('/home-rental/booking', dataToSend, function(data) {
+      $('.ajax-loader').hide();
+      data = JSON.parse(data);
+      switch (data.status) {
+        case 'success':
+          $('#booking-modal').modal('hide');
+          return notifyMessage("success", "Your booking has been successfully registered");
+        case 'error':
+          $('#booking-modal').modal('hide');
+          return notifyMessage("error", "Warning ! An error has been encountered during sending data. Please, try again !");
+      }
     });
   };
 
@@ -112,7 +153,11 @@ comment :
   });
 
   $('#btn-booking').on("click", function(event) {
-    reservation_target = $(this).parents('li').data('property-id');
+    var prop;
+    prop = $(this).parents('li');
+    reservation_target = $(prop).data('property-id');
+    reservation_title = $(prop).find('.item-content-title').text();
+    reservation_price = $(prop).find('.item-action-price').text().split("$")[1];
     if (checkLogin()) {
       return console.log("OK");
     }
@@ -120,7 +165,12 @@ comment :
 
   $('#auth-ajax-login').on("submit", function(event) {
     event.preventDefault();
-    return console.log("loginHandler : " + loginHandler($(this).serialize()));
+    return loginHandler($(this).serialize());
+  });
+
+  $('#booking-process').on("submit", function(event) {
+    event.preventDefault();
+    return bookingHandler($(this).serialize());
   });
 
   true;
