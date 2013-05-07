@@ -111,7 +111,38 @@
         </div>
 
         <!-- Modals -->
-        <div id="modal-container"></div>
+        <div id="ajax-login-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="ajax-login-label" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><h3 id="ajax-login-label">Home Rental Registration</h3>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>. If you don't have an account yet, click <a th:href="@{/signup}">here</a>.</p>
+                <p class="form-error">
+                    <span></span>
+                </p>
+                <form method="POST" th:action="@{/ajax-login}" id="auth-ajax-login">
+                    <div class="form-group">
+                        <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
+                        <div class="pull-left field-container">
+                            <input type="text" id="auth_username" name="auth_username" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="pull-left" for="auth_pwd"><strong>Password :</strong></label>
+                        <div class="pull-left field-container">
+                            <input type="password" id="auth_pwd" name="auth_pwd" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <input type="submit" id="ajax-login-btn" form="auth-ajax-login" class="btn btn-primary" value="Login" />
+            </div>
+        </div>
 
         <!-- Custom js page specific -->
         <div tiles:fragment="js-specific">

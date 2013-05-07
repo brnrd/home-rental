@@ -23,7 +23,6 @@ import web.service.UserService;
  * @author Romain Foncier <ro.foncier at gmail.com>
  */
 @Controller
-@RequestMapping(value = "/ajax-login")
 public class AuthAjaxController extends HttpServlet {
 
     @Autowired
@@ -34,23 +33,24 @@ public class AuthAjaxController extends HttpServlet {
     @Autowired
     private UserService userService;
 
+    /*
     @RequestMapping(method = RequestMethod.GET)
     public String ajaxLogin() {
         return "ajax-login";
     }
+    */
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax-login", method = RequestMethod.POST)
     public @ResponseBody
     String ajaxLoginProcess(@RequestParam("auth_username") String username,
             @RequestParam("auth_pwd") String password,
             HttpServletRequest request, HttpServletResponse response, Model model) {
-        System.out.println("Username : " + username);
-        System.out.println("Password : " + password);
+
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
-            Authentication auth = authenticationManager.authenticate(token);
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            repository.saveContext(SecurityContextHolder.getContext(), request, response);
+            //Authentication auth = authenticationManager.authenticate(token);
+            //SecurityContextHolder.getContext().setAuthentication(auth);
+            //repository.saveContext(SecurityContextHolder.getContext(), request, response);
 
             // Update last connection
             userService.connected(userService.findByUsername(username));
