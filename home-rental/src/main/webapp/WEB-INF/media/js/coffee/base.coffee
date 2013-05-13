@@ -43,7 +43,7 @@ $('#search-bar #guests-list li a').on "click", (event) ->
 #   Datepicker   #
 ##############
 
-ckeckin = null
+checkin = null
 target = null
 
 formatDate = (date) ->

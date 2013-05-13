@@ -14,6 +14,9 @@ calculatePrice = (number) ->
     # the rental prices are indicated for two persons
    Math.ceil(number / 2) * reservation_price
 
+pluralize = (i, title) ->
+    if i > 1 then i+" "+title+"s" else i+" "+title
+
 ### Noty ###
 notifyMessage = (type, msg) ->
     noty (
@@ -104,17 +107,20 @@ sendSearchRequest = () ->
   # Get form
   dataToSend = $('#hr-search_form').serialize()
   console.log dataToSend
+  
+  # Display modal
+  $('#ajax-search-modal').modal('show')
 
 ################
 ### HANDLERS ###
 ################
 
 # Typeahead Google Maps
-service = new google.maps.places.AutocompleteService()
+gService = new google.maps.places.AutocompleteService()
 
 $('#hr-location-search').typeahead(
     source: (query, process) ->
-        service.getPlacePredictions(
+        gService.getPlacePredictions(
             input: query,
             (predictions, status) ->
                 if status == google.maps.places.PlacesServiceStatus.OK
@@ -143,17 +149,72 @@ $('#hr-location-search').typeahead(
         item
 )
 
+# Datepicker
+hr_checkin = null
+hr_target = null
+
+formatDate = (date) ->
+    res = date.toLocaleString().split(" ")[0]
+    t_res = res.split("/")
+    if t_res[0].length == 1
+        return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
+    return t_res.join("/")
+
+$('#hr-checkin').datepicker(
+    onClose: (selectedDate) ->
+        hr_checkin = new Date(selectedDate)
+        if not $('#hr-checkout').val()?
+            hr_target = new Date(hr_checkin.getFullYear(), hr_checkin.getMonth(), hr_checkin.getDate()+1)
+            $('#hr-checkout').datepicker( "option", "minDate", selectedDate)
+            $('#hr-checkout').val(formatDate(hr_target))
+        
+        # Call to sendSearchRequest
+        sendSearchRequest()
+)
+
+$('#hr-checkout').datepicker(
+    onClose: (selectedDate) ->
+        if hr_checkin?
+            $('#hr-checkin').datepicker('option', 'maxDate', selectedDate)
+            
+        # Call to sendSearchRequest
+        sendSearchRequest()
+)
+
+# Guests selector
+$('.searcher-bar #hr-guests-list li a').on "click", (event) ->
+    event.preventDefault()
+    nb = $(this).text().split(" ")[0]
+    
+    # Update button and input hidden
+    $('#hr-search-bar button.btn-dpd strong').text(pluralize(nb, "guest"))
+    $('#hr-search-bar #hr-guests-number').val(nb)
+    
+    # Call to sendSearchRequest
+    sendSearchRequest()
+
+# Types & Options selectors
+$('#hr-search_form input:checkbox').on "change", (event) ->
+    # Call to sendSearchRequest
+    sendSearchRequest()
+
 # Init slider price range
-smin = $('.map-wrapper #min_price').text()
-smax = $('.map-wrapper #max_price').text()
+smin = parseInt($('.map-wrapper #min_price').text())
+smax = parseInt($('.map-wrapper #max_price').text())
 $( "#slider" ).slider(
     range: true
     min: smin
     max: smax
-    values: [smin, smax],
-    slide: ( event, ui ) ->
-        $( "#min_price" ).val( ui.values[ 0 ] )
-        $( "#max_price" ).val( ui.values[ 1 ] )
+    values: [smin, smax]
+    slide: (event, ui) ->
+        $( "#min_price" ).html( ui.values[ 0 ] )
+        $( "#max_price" ).html( ui.values[ 1 ] )
+    stop: (event, ui) ->
+        $( "#hr-min_price" ).val( ui.values[ 0 ] )
+        $( "#hr-max_price" ).val( ui.values[ 1 ] )
+        
+        # Call to sendSearchRequest
+        sendSearchRequest()
 )
 
 # Handle ajax login and booking

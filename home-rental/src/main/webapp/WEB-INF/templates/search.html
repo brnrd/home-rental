@@ -90,8 +90,8 @@
                         <!-- Property price selector -->
                         <div class="search-selector">
                             <fieldset name="price_range" form="hr-search-form">
-                                <input type="hidden" name="min_price" th:value="${specs[7]}" />
-                                <input type="hidden" name="max_price" th:value="${specs[8]}" />
+                                <input type="hidden" id="hr-min_price" name="min_price" th:value="${specs[7]}" />
+                                <input type="hidden" id="hr-max_price" name="max_price" th:value="${specs[8]}" />
                             </fieldset>
                             <span class="selector-title"><strong>PRICE</strong></span>
                             <span id="max_price" class="pull-right price" th:text="${specs[8]}"></span>
@@ -250,6 +250,12 @@
             <div class="modal-footer">
                 <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 <input type="submit" form="booking-process" class="btn btn-danger" value="Confirm booking" />
+            </div>
+        </div>
+        
+        <div id="ajax-search-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="ajax-search-label" aria-hidden="true">
+            <div class="modal-body">
+                <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><p><strong>Fetching data ...</strong></p>
             </div>
         </div>
 
