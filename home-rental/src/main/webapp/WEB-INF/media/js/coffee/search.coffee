@@ -104,12 +104,18 @@ loginHandler = (dataToSend) ->
                     notifyMessage("error", "Warning ! An error has been encountered during sending data. Please, try again !")
 
 sendSearchRequest = () ->
-  # Get form
-  dataToSend = $('#hr-search_form').serialize()
-  console.log dataToSend
+    # Get form
+    dataToSend = $('#hr-search_form').serialize()
+    console.log dataToSend
+
+    # Display modal
+    $('#ajax-search-modal').modal('show')
   
-  # Display modal
-  $('#ajax-search-modal').modal('show')
+    # Call the server
+    $.post '/home-rental/search',
+        dataToSend,
+        (data) ->
+            console.log "ok"
 
 ################
 ### HANDLERS ###

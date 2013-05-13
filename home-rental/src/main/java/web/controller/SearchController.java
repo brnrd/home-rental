@@ -59,7 +59,7 @@ public class SearchController {
             // City and country are known. We request by using the lat/lng coordinates.
             String[] coords = latlong.split(",");
             search = searchService.searchInRadius25(Math.ceil(Float.parseFloat(coords[0])), 
-                    Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, s_guests);
+                    Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, s_guests, null, null, null, null);
         } else {
             // Only country are known. We request by using the country.
             search = searchService.searchForSpecificCountry(dest[0], s_checkin, s_checkout, s_guests);
@@ -106,5 +106,52 @@ public class SearchController {
            if (s.getPrice() > specs[8]) { specs[8] = s.getPrice(); }
         }
         return specs;
+    }
+    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public void searchViewProcess(Model model, Principal current, @RequestParam("location") String location, @RequestParam("latlong") String latlong, @RequestParam("checkin") String checkin, @RequestParam("checkout") String checkout, @RequestParam("guests_number") Integer guests, @RequestParam(value="property_type", required=false) String[] p_type, @RequestParam(value="property_options", required=false) String[] p_options, @RequestParam("min_price") Integer min, @RequestParam("max_price") Integer max) {
+        
+        // Check results from Search Service.
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+        LocalDateTime s_checkin = formatter.parseLocalDateTime(checkin + " 00:00:00");
+        LocalDateTime s_checkout = formatter.parseLocalDateTime(checkout + " 00:00:00");
+        
+        List<SearchResult> search;
+        String[] coords = latlong.split(",");
+        search = searchService.searchInRadius25(Math.ceil(Float.parseFloat(coords[0])), 
+                    Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, s_guests, null, null, null, null);
+        
+        // Check if search found results.
+       Integer[] specs = null;
+       String pathMap = null;
+        if (!search.isEmpty()) {
+            // Get the number of different types, options and the price range (min and max).
+            // SetUp the Google Static Maps.
+            specs = processSpecs(search);
+            pathMap = StaticMap.buildMapURL(search, "700x350");
+        } // else offer other extra results
+        
+        model.addAttribute("specs", specs);
+        model.addAttribute("map", pathMap);
+        model.addAttribute("results", search);
+        model.addAttribute("params", new String[]{location, checkin, checkout, guests});
+        return "search";
+        
+        
+        // DEBUG
+        System.out.println("search POST : ");
+        System.out.println("location : " + location);
+        System.out.println("latlong : " + latlong);
+        System.out.println("checkin : " + checkin);
+        System.out.println("checkout : " + checkout);
+        System.out.println("guests : " + guests);
+        for (int i = 0; i < p_type.length; i++) {
+            System.out.println("type [" + (i+1) + "] : " + p_type[i]);
+        }
+        for (int i = 0; i < p_type.length; i++) {
+            System.out.println("options [" + (i+1) + "] : " + p_options[i]);
+        }
+        System.out.println("min : " + min);
+        System.out.println("max : " + max);
     }
 }

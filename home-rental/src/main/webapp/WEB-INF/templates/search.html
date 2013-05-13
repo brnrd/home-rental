@@ -69,17 +69,17 @@
                             <fieldset name="type_selector" form="hr-search_form">
                                 <ul id="property-type">
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_type[]" th:disabled="${specs[0]} == 0" value="FLAT" />
+                                        <input type="checkbox" name="property_type" th:disabled="${specs[0]} == 0" value="FLAT" />
                                         <span class="pull-right badge badge-info" th:text="${specs[0]}"></span>
                                         <span>FLAT</span>
                                     </li>
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_type[]" th:disabled="${specs[1]} == 0" value="HOUSE" />
+                                        <input type="checkbox" name="property_type" th:disabled="${specs[1]} == 0" value="HOUSE" />
                                         <span class="pull-right badge badge-info" th:text="${specs[1]}"></span>
                                         <span>HOUSE</span>
                                     </li>
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_type[]" th:disabled="${specs[2]} == 0" value="LOFT" />
+                                        <input type="checkbox" name="property_type" th:disabled="${specs[2]} == 0" value="LOFT" />
                                         <span class="pull-right badge badge-info" th:text="${specs[2]}"></span>
                                         <span>LOFT</span>
                                     </li>
@@ -105,22 +105,22 @@
                             <fieldset name="property_options" form="hr-search-form">
                                 <ul id="property-options">
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_options[]" th:disabled="${specs[3]} == 0" value="parking" />
+                                        <input type="checkbox" name="property_options" th:disabled="${specs[3]} == 0" value="parking" />
                                         <span class="pull-right badge badge-info" th:text="${specs[3]}"></span>
                                         <span>Parking</span>
                                     </li>
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_options[]" th:disabled="${specs[4]} == 0" value="swimming_pool" />
+                                        <input type="checkbox" name="property_options" th:disabled="${specs[4]} == 0" value="swimming_pool" />
                                         <span class="pull-right badge badge-info" th:text="${specs[4]}"></span>
                                         <span>Swimming Pool</span>
                                     </li>
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_options[]" th:disabled="${specs[5]} == 0" value="wifi" />
+                                        <input type="checkbox" name="property_options" th:disabled="${specs[5]} == 0" value="wifi" />
                                         <span class="pull-right badge badge-info" th:text="${specs[5]}"></span>
                                         <span>Wifi</span>
                                     </li>
                                     <li class="list-selector">
-                                        <input type="checkbox" name="property_options[]" th:disabled="${specs[6]} == 0" value="laundry" />
+                                        <input type="checkbox" name="property_options" th:disabled="${specs[6]} == 0" value="laundry" />
                                         <span class="pull-right badge badge-info" th:text="${specs[6]}"></span>
                                         <span>Laundry</span>
                                     </li>
