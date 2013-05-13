@@ -12,7 +12,9 @@
 
     <context:component-scan base-package="web"/>
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:async-support default-timeout="3000"/>
+    </mvc:annotation-driven>
     
     <mvc:resources location="/WEB-INF/media/img/" mapping="/img/**" /> 
     <mvc:resources location="/WEB-INF/media/css/" mapping="/css/**" />
