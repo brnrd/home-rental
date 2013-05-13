@@ -12,24 +12,25 @@ target : all (typeahead, maps, ...)
 
 map = null
 
-initialize = (lat, long) ->
-    map = new google.maps.Map(
-      $('#map-canvas')[0], 
-        zoom: 9 
-        center: new google.maps.LatLng(lat, long)
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    )
+Initialize = (lat, lng) ->
+  map = new google.maps.Map(
+    $('#map-canvas')[0]
+    zoom: 9 
+    center: new google.maps.LatLng(lat, lng)
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  )
 
 getLocation = () -> 
   $.getJSON("http://jsonip.com?callback=?", (data) ->
     $.getJSON("http://freegeoip.net/json/" + data.ip, (fulldata) ->
       currentLat= fulldata.latitude
       currentLong = fulldata.longitude
-      google.maps.event.addDomListener(window, 'load', initialize(currentLat, currentLong))
+      google.maps.event.addDomListener(window, 'load', Initialize(currentLat, currentLong))
     )
   )
       
 $(document).ready getLocation
+
 ##################
 #   Datepicker   #
 ##################
