@@ -99,10 +99,49 @@ loginHandler = (dataToSend) ->
                 when 'error'
                     $('#booking-modal').modal('hide')
                     notifyMessage("error", "Warning ! An error has been encountered during sending data. Please, try again !")
- 
+
+sendSearchRequest = () ->
+  # Get form
+  dataToSend = $('#hr-search_form').serialize()
+  console.log dataToSend
+
 ################
 ### HANDLERS ###
 ################
+
+# Typeahead Google Maps
+service = new google.maps.places.AutocompleteService()
+
+$('#hr-location-search').typeahead(
+    source: (query, process) ->
+        service.getPlacePredictions(
+            input: query,
+            (predictions, status) ->
+                if status == google.maps.places.PlacesServiceStatus.OK
+                    process(
+                        $.map(
+                            predictions,
+                            (prediction) ->
+                                prediction.description
+                                
+                        )
+                    )
+        )
+    ,
+    updater: (item) ->
+        # Get the lat/long coordinates and save them in hidden
+        location = item
+        address = 'http://maps.googleapis.com/maps/api/geocode/json?address='+location.replace(', ', '+').replace(' ', '+')+'&sensor=false'
+        $.getJSON address,
+            (data) ->
+                coord = data.results[0].geometry.location
+                console.log coord
+                $('.searcher-bar #hr-latlong').val(coord.lat+","+coord.lng)
+                
+                # Call to sendSearchRequest
+                sendSearchRequest()
+        item
+)
 
 # Init slider price range
 smin = $('.map-wrapper #min_price').text()
