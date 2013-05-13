@@ -125,23 +125,41 @@
             
             <!-- CoffeeScript plugin -->
             <plugin>
-                <groupId>com.github.iron9light</groupId>
-                <artifactId>coffeescript-maven-plugin</artifactId>
-                <version>1.1.2</version>
+                <groupId>com.theoryinpractise</groupId>
+                <artifactId>coffee-maven-plugin</artifactId>
+                <version>1.4.7</version>
+
                 <configuration>
-                    <srcDir>${basedir}/src/main/webapp/WEB-INF/media/js/coffee/</srcDir>
-                    <outputDir>${basedir}/src/main/webapp/WEB-INF/media/js/</outputDir>
-                    <bare>false</bare>
-                    <modifiedOnly>false</modifiedOnly>
-                    <allowedDelete>true</allowedDelete>
-                    <compilerUrl></compilerUrl>
+                    <minifiedFile>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/main.min.js</minifiedFile>
+                    <setOfFilesToMinify>
+                        <directory>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/js</directory>
+                        <includes>
+                            <include>*.js</include>
+                        </includes>
+                    </setOfFilesToMinify>
+
+                    <version>1.6.1</version>
+                    <coffeeOutputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/js</coffeeOutputDirectory>
+                    <compileIndividualFiles>true</compileIndividualFiles>
+                    <coffeeJoinSets>
+                        <joinSet>
+                            <id>main</id>
+                            <fileSet>
+                                <directory>${basedir}/src/main/webapp/WEB-INF/media/js/coffee</directory>
+                                <includes>
+                                    <include>**/*.coffee</include>
+                                </includes>
+                            </fileSet>
+                        </joinSet>
+                    </coffeeJoinSets>
                 </configuration>
+
                 <executions>
                     <execution>
-                        <id>coffeescript</id>
-                        <phase>generate-resources</phase>
+                        <id>coffee</id>
                         <goals>
-                            <goal>compile</goal>
+                            <goal>coffee</goal>
+                            <goal>minify</goal>
                         </goals>
                     </execution>
                 </executions>
