@@ -19,57 +19,67 @@
         <form id="propertyForm" th:action="@{/s/property/new}" th:object="${options}" method="post">
             <div class="row">
                 <div class="span12">
-                    <input id="shortDesc" class="short-desc" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
-                    <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+                    <div class="well">
+                        <input id="shortDesc" class="short-desc input-xlarge" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
+                        <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="span4">
-                    <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>
-                    <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}" required="required"/>
-                    <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}" required="required"/>
-                    <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}" required="required"/>
+                    <div class="well">
+                        <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>
+                        <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}" required="required"/>
+                        <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}" required="required"/>
+                        <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}" required="required"/>
 
-                    <select id="type" name="type" th:value="${property.type}">
-                        <option th:each="type : ${types}" 
-                                th:value="${type}" th:text="${type}"></option>
-                    </select>
-                    <select id="rooms" name="rooms" th:value="${property.rooms}">
-                        <option th:value="1">1 room</option>
-                        <option th:value="2">2 rooms</option>
-                        <option th:value="3">3 rooms</option>
-                        <option th:value="4">4 rooms</option>
-                        <option th:value="5">5 rooms</option>
-                        <option th:value="6">6+ rooms</option>
-                    </select>
-                    <div class="submit">
-                        <button class="btn btn-success btn-large" type="submit" >Save</button> 
+                        <select id="type" name="type" th:value="${property.type}">
+                            <option th:each="type : ${types}" 
+                                    th:value="${type}" th:text="${type}"></option>
+                        </select>
+                        <select id="rooms" name="rooms" th:value="${property.rooms}">
+                            <option th:value="1">1 room</option>
+                            <option th:value="2">2 rooms</option>
+                            <option th:value="3">3 rooms</option>
+                            <option th:value="4">4 rooms</option>
+                            <option th:value="5">5 rooms</option>
+                            <option th:value="6">6+ rooms</option>
+                        </select>
+                        <div class="submit">
+                            <button class="btn btn-success btn-large" type="submit" >Save</button> 
+                        </div>
                     </div>
                 </div>
                 <div class="span4">
-                    <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price" required="required"/>
+                    <div class="well">
+                        <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price" required="required"/>
 
-                    <h4>Options :</h4>
-                    <ul class="unstyled">
-                        <li><input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/><span>Parking</span></li>
-                        <li><input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/><span>Swimming pool</span></li>
-                        <li><input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/><span>Wi-Fi</span></li>
-                        <li><input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/><span>Laundry</span></li>
-                    </ul>
+                        <h4>Options :</h4>
+                        <ul class="unstyled">
+                            <li><input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/><span class="span-check">Parking</span></li>
+                            <li><input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/><span class="span-check">Swimming pool</span></li>
+                            <li><input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/><span class="span-check">Wi-Fi</span></li>
+                            <li><input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/><span class="span-check">Laundry</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="span4 column-left">
-                    <div class="input-wrapper">
-                        <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
-                        <i class="icon-calendar"></i>
+                <div class="span4">
+                    <div class="well">
+                        <div class="input-wrapper">
+                            <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <h4>Pictures</h4>
+                        <ul class="unstyled">
+                            <li><input type="file" name="pict1" disabled="disabled" /></li>
+                            <li><input type="file" name="pict2" disabled="disabled" /></li>
+                            <li><input type="file" name="pict3" disabled="disabled" /></li>
+                        </ul>
                     </div>
-                    <div class="input-wrapper">
-                        <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
-                        <i class="icon-calendar"></i>
-                    </div>
-                    <h4>Pictures</h4>
-                    <input type="file" name="pict1" /><br />
-                    <input type="file" name="pict2" /><br />
-                    <input type="file" name="pict3" />
                 </div>
             </div>
         </form>
