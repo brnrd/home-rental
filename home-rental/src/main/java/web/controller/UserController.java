@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.model.Comment;
 import web.model.Evaluation;
-import web.utils.StaticMap;
 import web.model.Property;
 import web.model.PropertyOptions;
 import web.model.Reservation;
@@ -21,6 +20,7 @@ import web.service.PropertyOptionsService;
 import web.service.PropertyService;
 import web.service.ReservationService;
 import web.service.UserService;
+import web.utils.StaticMap;
 
 /**
  *
@@ -63,7 +63,7 @@ public class UserController {
             evaluation = -1;
         }
         String pathMap;
-        pathMap = StaticMap.buildMapURL(properties);
+        pathMap = StaticMap.buildMapURL(properties, null);
 
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
@@ -137,7 +137,7 @@ public class UserController {
         List<Property> properties = propertyService.findProperty(user);
 
         String pathMap;
-        pathMap = StaticMap.buildMapURL(properties);
+        pathMap = StaticMap.buildMapURL(properties, "640");
 
 
         if (current != null) {

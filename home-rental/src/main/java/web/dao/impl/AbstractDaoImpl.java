@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import web.dao.AbstractDao;
-import web.model.User;
 
 /** 
  * @author Romain <ro.foncier@gmail.com>

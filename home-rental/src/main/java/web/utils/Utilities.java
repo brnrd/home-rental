@@ -27,7 +27,6 @@ public class Utilities {
         if (userData.getPassword() == "") {
             res.add("pwd_error");
         }
-        
         return res;
     }
 }

@@ -159,7 +159,7 @@ li { list-style-type: none; }
     }
 }
 #search-bar-empty {
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 #ui-datepicker-div.ui-datepicker {
@@ -194,16 +194,33 @@ li { list-style-type: none; }
     .ajax-loader {
         display: none;
         position: relative;
-        top: 8px;
+        top: 4px;
         left: -26px;
     }
     .modal-header {
         h3 { color: @hrb; }
     }
     .modal-body {
+        padding: 20px 20px;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
         background-color: #eee;
         text-align: center;
-        p { color: #111; }
+        p { 
+            width: 100%;
+            color: #111;
+        }
+        label {
+            width: 40%;
+            margin-top: 6px;
+        }
+        .form-error {
+            height: 20px;
+            width: 100%;
+            span {
+                color: @hrr;
+            }
+        }
     }
 }
 
@@ -281,5 +298,31 @@ li { list-style-type: none; }
     }
     .field-container.error {
         border-color: @hrr;
+    }
+}
+
+/** BOOKING **/
+#booking-container {
+    p {
+        text-align: center;
+    }
+    form {
+        margin: 0;
+        ul {
+            width: 360px;
+            margin: auto;
+            dl {
+                margin: 5px 0px;
+                dt {
+                    width: 40%;
+                    text-align: right;
+                }
+                dd {
+                    width: 58%;
+                    font-weight: bold;
+                    text-align: left;
+                }
+            }
+        }
     }
 }

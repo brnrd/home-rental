@@ -49,8 +49,8 @@
                                             <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="btn-login" sec:authorize="!isAuthenticated()">
+                                </div><!-- /end user-logged -->
+                                <div class="btn-login" sec:authorize="! isAuthenticated()">
                                     <a href="#" th:href="@{/signup}" id="signup"><span>Signup</span></a> - <a href="#" th:href="@{/login}" id="login"><span>Login</span></a>
                                 </div>
                             </div><!-- /end login -->
@@ -122,10 +122,7 @@
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-modal.js}"></script>
 
         <!-- Custom js -->
-        <script type="text/javascript" src="#" th:src="@{/js/base.js}"></script>
-
-        <!-- Custom JS page specific imports - Little hack to import page specific js ! ;-) -->
-        <div tiles:include="js-specific" ></div>
+        <script type="text/javascript" src="#" th:src="@{/js/main.min.js}"></script>
 
         <!-- JS Inline -->
 
