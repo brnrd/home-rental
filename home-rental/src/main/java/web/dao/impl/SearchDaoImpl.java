@@ -78,7 +78,7 @@ public class SearchDaoImpl implements SearchDao {
         }
         
         // Add property options selection if required
-        if (property_types != null) {
+        if (property_options != null) {
             String ohql = "(";
             for (int j = 0; j < property_options.length; j++) {
                 ohql += "po." + property_options[j] + "=1";

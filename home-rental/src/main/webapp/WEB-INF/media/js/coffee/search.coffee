@@ -115,8 +115,14 @@ sendSearchRequest = () ->
     $.post '/home-rental/search',
         dataToSend,
         (data) ->
-            console.log "ok"
-
+            template = $('#search-results-item-template').html()
+            html = Mustache.to_html(template, JSON.parse(data))
+            # Remove all results and refill container with news
+            $('#search-results-list').empty()
+            $('#search-results-list').append(html)
+            $('#ajax-search-modal').modal('hide')
+            true
+            
 ################
 ### HANDLERS ###
 ################

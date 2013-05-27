@@ -17,19 +17,19 @@
                         <fieldset form="hr-search_form">
                             <div class="input-wrapper">
                                 <input type="text" class="location" id="hr-location-search" name="location" placeholder="Where do you want to go ?" th:value="${params[0]}" />
-                                <input type="hidden" id="hr-latlong" name="latlong" value="" />
+                                <input type="hidden" id="hr-latlong" name="latlong" th:value="${params[1]}" />
                             </div>
                             <div class="input-wrapper">
-                                <input type="text" class="checkin" id="hr-checkin" name="checkin" placeholder="Check In" th:value="${params[1]}" />
+                                <input type="text" class="checkin" id="hr-checkin" name="checkin" placeholder="Check In" th:value="${params[2]}" />
                                 <i class="icon-calendar"></i>
                             </div>
                             <div class="input-wrapper">
-                                <input type="text" class="checkout" id="hr-checkout" name="checkout" placeholder="Check Out" th:value="${params[2]}" />
+                                <input type="text" class="checkout" id="hr-checkout" name="checkout" placeholder="Check Out" th:value="${params[3]}" />
                                 <i class="icon-calendar"></i>
                             </div>
                             <div class="btn-group pull-left">
-                                <input type="hidden" id="hr-guests-number" name="guests_number" th:value="${params[3]}" />
-                                <button class="btn btn-inverse btn-dpd"><strong th:text="${params[3] == '1'} ? ${params[3]} + ' guest' : ${params[3]} + ' guests'">1 guest</strong><i class="icon-user icon-white"></i></button>
+                                <input type="hidden" id="hr-guests-number" name="guests_number" th:value="${params[4]}" />
+                                <button class="btn btn-inverse btn-dpd"><strong th:text="${params[4] == '1'} ? ${params[4]} + ' guest' : ${params[4]} + ' guests'">1 guest</strong><i class="icon-user icon-white"></i></button>
                                 <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
@@ -197,7 +197,7 @@
                 <input type="submit" id="ajax-login-btn" form="auth-ajax-login" class="btn btn-primary" value="Login" />
             </div>
         </div>
-        
+
         <div id="booking-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="booking-label" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -252,12 +252,34 @@
                 <input type="submit" form="booking-process" class="btn btn-danger" value="Confirm booking" />
             </div>
         </div>
-        
+
         <div id="ajax-search-modal" class="modal hide fade" tabindex="1" role="dialog" aria-labelledby="ajax-search-label" aria-hidden="true">
             <div class="modal-body">
                 <img th:src="@{/img/global/ajax-loader.gif}" class="ajax-loader pull-right" alt="Ajax loader animated gif" /><p><strong>Fetching data ...</strong></p>
             </div>
         </div>
+
+        <!-- Templates -->
+        <script id="search-results-item-template" type="text/template">
+            {{#data}}
+            <li class="search-results-item" data-property-id="{{property_id}}">
+                <div class="pull-left search-results-item-pict"></div>
+                <div class="pull-left search-results-item-content">
+                    <p class="item-content-title">{{title}}</p>
+                    <p class="item-content-address">{{city}} - {{country}}</p>
+                    <p class="item-content-desc">{{short_desc}}</p>
+                </div>
+                <div class="pull-left search-results-item-action">
+                    <div class="item-action-price">$ {{price}}</div>
+                    <div class="item-action-btn">
+                        <a href="#" id="btn-booking" class="btn btn-info">Book it !</a>
+                        <a href="/home-rental/property/{{property_id}}" id="btn-consult" class="btn">Consult</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </li>
+            {{/data}}
+        </script>
 
     </body>
 </html>
