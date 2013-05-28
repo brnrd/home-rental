@@ -48,26 +48,43 @@ public class PropertyController {
     private ReservationService reservationService;
     @Autowired
     private EvaluationService evaluationService;
-
+    
+    
+    /**
+     * Get the property view
+     * @param id the property id
+     * @param model the model that receive the data to generate the template
+     * @param current the current user
+     * @return the property String that gonna call the property page.
+     */
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
     public String propertyView(@PathVariable Integer id, Model model, Principal current) {
 
-        // Get Property
+//        Get Property by its id
         Property property = propertyService.findById(id);
+//        Get option of this property
         PropertyOptions options = optionsService.findByProperty(property);
+//        Get the comments of this property
         List<Comment> comments = commentService.findByProperty(property);
+//        Extract the note from the property object
         Integer evaluation = property.getNote();
+//        Generate the static map url based on the latitude and longitude of the property
         String pathMap = StaticMap.buildMapURL(property.getLatitude()+","+property.getLongitude(), null);
         List<String> pictures = new LinkedList<String>();
         for (int i = 1; i < 4; i++) {
             pictures.add(new Integer(i).toString() + ".jpg");
         }
+//        If there the user calling the page is logged
         if (current != null) {
+//            Find the user by its username
             User u_log = userService.findByUsername(current.getName());
+//            Add the current value of the model with the user
             model.addAttribute("current", u_log);
+//            Check if the owner of the property is the current user
             Boolean isOwnerCurrent = (u_log.getId() == null ? property.getOwner().getId() == null : u_log.getId().equals(property.getOwner().getId()));
             model.addAttribute("isOwnerCurrent", isOwnerCurrent);
         }
+//        Add the attributes to the model
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("evaluation", evaluation);
@@ -78,19 +95,29 @@ public class PropertyController {
         return "property";
     }
 
+    /**
+     * Get the new property view
+     * @param model the model that receive the data to generate the template
+     * @param current the current user
+     * @return the new property String that gonna call the property page.
+     */
     @RequestMapping(value = "/s/property/new", method = RequestMethod.GET)
     public String newView(Model model, Principal current) {
+//        Create a new Property
         Property property = new Property();
+//        Create a new PropertyOption
         PropertyOptions options = new PropertyOptions();
+//        Twist to get the rentPeriodStart and Stop
         String rentStart = null;
         String rentStop = null;
-
+//        Get the different existing types of property
         List<PropertyType> types = Arrays.asList(PropertyType.values());
-
+//        If there the user calling the page is logged
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
         }
+//        Add the attributes to the model
         model.addAttribute("property", property);
         model.addAttribute("options", options);
         model.addAttribute("types", types);
@@ -99,6 +126,17 @@ public class PropertyController {
         return "new_property";
     }
 
+    /**
+     * POST new property
+     * @param property the property object
+     * @param options the options
+     * @param rentStart the String with the rent start date
+     * @param rentStop the String with the rent stop date
+     * @param bindingResult 
+     * @param model the model that receive the data to generate the template
+     * @param current the current user
+     * @return 
+     */
     @RequestMapping(value = "/s/property/new", method = RequestMethod.POST)
     public String saveProperty(final Property property, final PropertyOptions options, final String rentStart, final String rentStop,
             final BindingResult bindingResult, final Model model, Principal current) {
