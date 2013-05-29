@@ -1,5 +1,6 @@
 package web.controller;
 
+import com.javadocmd.simplelatlng.LatLng;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -69,7 +70,7 @@ public class PropertyController {
 //        Extract the note from the property object
         Integer evaluation = property.getNote();
 //        Generate the static map url based on the latitude and longitude of the property
-        String pathMap = StaticMap.buildMapURL(property.getLatitude()+","+property.getLongitude(), null);
+        String pathMap = StaticMap.buildMapURL(property.getCoordinates(), null);
         List<String> pictures = new LinkedList<String>();
         for (int i = 1; i < 4; i++) {
             pictures.add(new Integer(i).toString() + ".jpg");

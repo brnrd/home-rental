@@ -37,10 +37,17 @@ public class StaticMap {
         url.append(SEPARATOR);
         // If we send only one property, send only lat/lng, otherwise send a list of SearchResult
         // or a list of Property.
-        url.append((data instanceof String) ? data : addMarkers((List<Object>) data));
+        url.append((data instanceof LatLng) ? addMarker(data) : addMarkers((List<Object>) data));
         url.append(SEPARATOR);
         url.append(SENSOR);
         return url.toString();
+    }
+    
+    private static String addMarker(Object data) {
+        LatLng coord = (LatLng) data;
+        StringBuilder string = new StringBuilder();
+        string.append(MARKER).append(coord.getLatitude()).append(",").append(coord.getLongitude());
+        return string.toString();
     }
     
     private static String addMarkers(List<Object> data) {

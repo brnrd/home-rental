@@ -137,7 +137,7 @@ public class UserController {
         List<Property> properties = propertyService.findProperty(user);
 
         String pathMap;
-        pathMap = StaticMap.buildMapURL(properties, "640");
+        pathMap = StaticMap.buildMapURL(properties, null);
 
 
         if (current != null) {
