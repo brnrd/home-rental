@@ -22,7 +22,7 @@
         <link rel="stylesheet" tiles:substituteby="css-specific" />
 
         <!-- Google Maps API import -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I&amp;sensor=false&amp;libraries=places"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
     </head>
     <body>
         <div class="navbar navbar-fixed-top navbar-inverse">
@@ -43,8 +43,6 @@
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__}">Account</a></li>
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/properties}">My Properties</a></li>
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/reservations}">My Reservations</a></li>
-                                            <li class="divider"></li>
-                                            <li><a tabindex="-1" href="#" th:href="@{/s/property/new}">Add a property</a></li>
                                             <li class="divider"></li>
                                             <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
                                         </ul>
@@ -99,7 +97,7 @@
             <div class="container">
                 <div class="row">
                     <div class="span12">
-                        <p><a href="">Report a bug</a> - <a href="/home-rental/help/">Help center</a></p>
+                        <p><a href="">Report a bug</a> - <a href="/help/">Help center</a></p>
                         <p id="app-ref"><a href="http://www.springsource.org/spring-framework" target="_blank">Spring 3.2.2</a> - Home Rental © 2013 - version: <span class="warning">0.1.0</span></p>
                     </div>
                 </div>
@@ -113,6 +111,7 @@
         <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/layouts/topCenter.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/themes/default.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/mustache/mustache.js}"></script>
 
         <!-- Bootstrap imports -->
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
@@ -120,10 +119,12 @@
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-typeahead.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-modal.js}"></script>
-
+        
         <!-- Custom js -->
+        <!-- Only for production
         <script type="text/javascript" src="#" th:src="@{/js/main.min.js}"></script>
-
+        -->
+        <script type="text/javascript" src="#" th:src="@{/js/js/main.js}"></script>
         <!-- JS Inline -->
 
     </body>

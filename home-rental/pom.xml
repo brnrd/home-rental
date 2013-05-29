@@ -133,6 +133,7 @@
                 <version>1.4.7</version>
 
                 <configuration>
+                    <!--
                     <minifiedFile>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/main.min.js</minifiedFile>
                     <setOfFilesToMinify>
                         <directory>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/js</directory>
@@ -140,6 +141,7 @@
                             <include>*.js</include>
                         </includes>
                     </setOfFilesToMinify>
+                    -->
 
                     <version>1.6.1</version>
                     <coffeeOutputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/media/js/js</coffeeOutputDirectory>
@@ -162,7 +164,7 @@
                         <id>coffee</id>
                         <goals>
                             <goal>coffee</goal>
-                            <goal>minify</goal>
+                            <!--<goal>minify</goal>-->
                         </goals>
                     </execution>
                 </executions>

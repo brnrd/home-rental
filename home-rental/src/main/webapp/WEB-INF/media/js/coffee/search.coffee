@@ -14,6 +14,9 @@ calculatePrice = (number) ->
     # the rental prices are indicated for two persons
    Math.ceil(number / 2) * reservation_price
 
+pluralize = (i, title) ->
+    if i > 1 then i+" "+title+"s" else i+" "+title
+
 ### Noty ###
 notifyMessage = (type, msg) ->
     noty (
@@ -99,22 +102,131 @@ loginHandler = (dataToSend) ->
                 when 'error'
                     $('#booking-modal').modal('hide')
                     notifyMessage("error", "Warning ! An error has been encountered during sending data. Please, try again !")
- 
+
+sendSearchRequest = () ->
+    # Get form
+    dataToSend = $('#hr-search_form').serialize()
+    console.log dataToSend
+
+    # Display modal
+    $('#ajax-search-modal').modal('show')
+  
+    # Call the server
+    $.post '/home-rental/search',
+        dataToSend,
+        (data) ->
+            template = $('#search-results-item-template').html()
+            html = Mustache.to_html(template, JSON.parse(data))
+            # Remove all results and refill container with news
+            $('#search-results-list').empty()
+            $('#search-results-list').append(html)
+            $('#ajax-search-modal').modal('hide')
+            true
+            
 ################
 ### HANDLERS ###
 ################
 
+# Typeahead Google Maps
+gService = new google.maps.places.AutocompleteService()
+
+$('#hr-location-search').typeahead(
+    source: (query, process) ->
+        gService.getPlacePredictions(
+            input: query,
+            (predictions, status) ->
+                if status == google.maps.places.PlacesServiceStatus.OK
+                    process(
+                        $.map(
+                            predictions,
+                            (prediction) ->
+                                prediction.description
+                                
+                        )
+                    )
+        )
+    ,
+    updater: (item) ->
+        # Get the lat/long coordinates and save them in hidden
+        location = item
+        address = 'http://maps.googleapis.com/maps/api/geocode/json?address='+location.replace(', ', '+').replace(' ', '+')+'&sensor=false'
+        $.getJSON address,
+            (data) ->
+                coord = data.results[0].geometry.location
+                console.log coord
+                $('.searcher-bar #hr-latlong').val(coord.lat+","+coord.lng)
+                
+                # Call to sendSearchRequest
+                sendSearchRequest()
+        item
+)
+
+# Datepicker
+hr_checkin = null
+hr_target = null
+
+formatDate = (date) ->
+    res = date.toLocaleString().split(" ")[0]
+    t_res = res.split("/")
+    if t_res[0].length == 1
+        return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
+    return t_res.join("/")
+
+$('#hr-checkin').datepicker(
+    onClose: (selectedDate) ->
+        hr_checkin = new Date(selectedDate)
+        if not $('#hr-checkout').val()?
+            hr_target = new Date(hr_checkin.getFullYear(), hr_checkin.getMonth(), hr_checkin.getDate()+1)
+            $('#hr-checkout').datepicker( "option", "minDate", selectedDate)
+            $('#hr-checkout').val(formatDate(hr_target))
+        
+        # Call to sendSearchRequest
+        sendSearchRequest()
+)
+
+$('#hr-checkout').datepicker(
+    onClose: (selectedDate) ->
+        if hr_checkin?
+            $('#hr-checkin').datepicker('option', 'maxDate', selectedDate)
+            
+        # Call to sendSearchRequest
+        sendSearchRequest()
+)
+
+# Guests selector
+$('.searcher-bar #hr-guests-list li a').on "click", (event) ->
+    event.preventDefault()
+    nb = $(this).text().split(" ")[0]
+    
+    # Update button and input hidden
+    $('#hr-search-bar button.btn-dpd strong').text(pluralize(nb, "guest"))
+    $('#hr-search-bar #hr-guests-number').val(nb)
+    
+    # Call to sendSearchRequest
+    sendSearchRequest()
+
+# Types & Options selectors
+$('#hr-search_form input:checkbox').on "change", (event) ->
+    # Call to sendSearchRequest
+    sendSearchRequest()
+
 # Init slider price range
-smin = $('.map-wrapper #min_price').text()
-smax = $('.map-wrapper #max_price').text()
+smin = parseInt($('.map-wrapper #min_price').text())
+smax = parseInt($('.map-wrapper #max_price').text())
 $( "#slider" ).slider(
     range: true
     min: smin
     max: smax
-    values: [smin, smax],
-    slide: ( event, ui ) ->
-        $( "#min_price" ).val( ui.values[ 0 ] )
-        $( "#max_price" ).val( ui.values[ 1 ] )
+    values: [smin, smax]
+    slide: (event, ui) ->
+        $( "#min_price" ).html( ui.values[ 0 ] )
+        $( "#max_price" ).html( ui.values[ 1 ] )
+    stop: (event, ui) ->
+        $( "#hr-min_price" ).val( ui.values[ 0 ] )
+        $( "#hr-max_price" ).val( ui.values[ 1 ] )
+        
+        # Call to sendSearchRequest
+        sendSearchRequest()
 )
 
 # Handle ajax login and booking
