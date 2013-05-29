@@ -70,7 +70,8 @@ public class PropertyController {
 //        Extract the note from the property object
         Integer evaluation = property.getNote();
 //        Generate the static map url based on the latitude and longitude of the property
-        String pathMap = StaticMap.buildMapURL(property.getCoordinates(), null);
+        String pathMap;
+        pathMap = StaticMap.buildMapURL(new Double(property.getLatitude()).toString() + "," + new Double(property.getLongitude()).toString(), null);
         List<String> pictures = new LinkedList<String>();
         for (int i = 1; i < 4; i++) {
             pictures.add(new Integer(i).toString() + ".jpg");
