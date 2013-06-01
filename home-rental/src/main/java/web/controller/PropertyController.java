@@ -1,9 +1,12 @@
 package web.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -58,12 +61,19 @@ public class PropertyController {
      * @return the property String that gonna call the property page.
      */
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
-    public String propertyView(@PathVariable Integer id, Model model, Principal current) {
+    public String propertyView(@PathVariable Integer id, Model model, Principal current, 
+        HttpServletRequest request, HttpServletResponse response) {
 
 //        Get Property by its id
         Property property = propertyService.findById(id);
         if (property == null) {
-            return "redirect:/404";
+            try {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return null;
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
         }
 //        Get option of this property
         PropertyOptions options = optionsService.findByProperty(property);
