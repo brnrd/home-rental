@@ -233,4 +233,25 @@ public class PropertyController {
 
         return "redirect:/s/account/" + username + "/properties";
     }
+    
+    // Mapping for dynamically load the property form within modal during the edition operations
+    @RequestMapping(value = "/s/property/{id}/modal/", method = RequestMethod.GET)
+    public String propertyModalView(@PathVariable Integer id, Model model) {
+        
+        Property property = propertyService.findById(id);
+        PropertyOptions options = optionsService.findByProperty(property);
+        List<PropertyType> types = Arrays.asList(PropertyType.values());
+        
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        String rentStart = property.getRentPeriodStart().toString(formatter);
+        String rentStop = property.getRentPeriodStop().toString(formatter);
+        
+        model.addAttribute("property", property);
+        model.addAttribute("options", options);
+        model.addAttribute("types", types);
+        model.addAttribute("rentStart", rentStart);
+        model.addAttribute("rentStop", rentStop);
+        
+        return "property_modal";
+    }
 }

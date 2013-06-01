@@ -139,7 +139,6 @@ public class UserController {
         String pathMap;
         pathMap = StaticMap.buildMapURL(properties, null);
 
-
         if (current != null) {
             User u_log = userService.findByUsername(current.getName());
             model.addAttribute("current", u_log);
@@ -147,9 +146,18 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("properties", properties);
         model.addAttribute("map", pathMap);
-
-
-
+        
         return "user_properties";
+    }
+    
+    // Mapping for dynamically load the user form within modal during the edition operations
+    @RequestMapping(value = "/s/account/modal/", method = RequestMethod.GET)
+    public String userModalView(Model model, Principal current) {
+
+        if (current != null) {
+            User u_log = userService.findByUsername(current.getName());
+            model.addAttribute("user", u_log);
+        }
+        return "user_modal";
     }
 }
