@@ -13,4 +13,9 @@ public class HttpErrorController {
     public String handle404() {
         return "404";
     }
+    
+    @RequestMapping(value = "/error/401")
+    public String handle401() {
+        return "401";
+    }
 }
