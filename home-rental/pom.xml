@@ -115,6 +115,7 @@
                         <include>property.less</include>
                         <include>user.less</include>
                         <include>user-properties.less</include>
+                        <include>reservation.less</include>
                     </includes>
                 </configuration>
                 <executions>
