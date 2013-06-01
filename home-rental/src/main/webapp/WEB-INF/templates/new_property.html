@@ -22,6 +22,8 @@
                     <div class="well">
                         <input id="shortDesc" class="short-desc input-xlarge" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
                         <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+                        <input id="latitude" type="hidden" name="latitude" th:value="${property.latitude}"/>
+                        <input id="longitude" type="hidden" name="longitude" th:value="${property.longitude}"/>
                     </div>
                 </div>
             </div>

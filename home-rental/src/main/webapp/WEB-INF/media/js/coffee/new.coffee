@@ -111,7 +111,7 @@ splitCity = (item) =>
 #   If there is a city, a state and a country
     if maps_data.length > 2
       $('#city').val(maps_data[0] + ", " + maps_data[1])
-      $('#country').val(maps_data[maps_data.length - 1])
+      $('#country').val(maps_data[maps_data.length - 1].replace /^\s+/g, "")
 #   If there is a city and a state/country
     else if maps_data.length == 2
 #     If the length of the second elem is 2 then it's a american state
@@ -122,7 +122,23 @@ splitCity = (item) =>
 #     else that's the city country pattern  
       else
         $('#city').val(maps_data[0])
-        $('#country').val(maps_data[maps_data.length - 1])
+        $('#country').val(maps_data[maps_data.length - 1].replace /^\s+/g, "")
 #   else that's only a country, so nothing is add in the city input 
     else
-      $('#country').val(maps_data[0])
+      $('#country').val(maps_data[0].replace /^\s+/g, "")
+      
+      
+#############################
+#   get lat/long address    #
+#############################
+
+$('#address').focusout ->
+  fullAddress = $('#address').val() + ' ' + $('#city').val() + ' ' + $('#country').val() 
+  geocoder.geocode 
+    address: fullAddress
+  , (locationResult) ->
+    console.log locationResult
+    latitude = locationResult[0].geometry.location.lat()
+    longitude = locationResult[0].geometry.location.lng()
+    $('#latitude').val(latitude)
+    $('#longitude').val(longitude)
