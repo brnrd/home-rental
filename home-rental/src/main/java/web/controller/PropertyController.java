@@ -1,11 +1,9 @@
 package web.controller;
 
-import com.javadocmd.simplelatlng.LatLng;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -16,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import web.model.Comment;
 import web.model.Evaluation;
 import web.model.Property;
@@ -65,6 +62,9 @@ public class PropertyController {
 
 //        Get Property by its id
         Property property = propertyService.findById(id);
+        if (property == null) {
+            return "redirect:/404";
+        }
 //        Get option of this property
         PropertyOptions options = optionsService.findByProperty(property);
 //        Get the comments of this property

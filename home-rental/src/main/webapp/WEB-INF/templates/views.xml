@@ -45,10 +45,16 @@
         <put-attribute name="css-specific" value="/user_properties.html :: css-specific" type="thymeleaf"/>
         <put-attribute name="search_bar" value="layout/search_bar.html :: search_bar" type="thymeleaf"/>
         <put-attribute name="body" value="/user_properties.html :: content" type="thymeleaf"/>
-        <put-attribute name="js-specific" value="/user_properties.html :: js-specific" type="thymeleaf"/>   
     </definition>
     
     <definition name="user_modal" template="/user_modal.html" templateType="thymeleaf" />
     <definition name="property_modal" template="/property_modal.html" templateType="thymeleaf" />
+    
+    <definition name="404" extends="baseLayout">
+        <put-attribute name="title" value="/404.html :: title" type="thymeleaf"/>
+        <put-attribute name="css-specific" value="/404.html :: css-specific" type="thymeleaf"/>
+        <put-attribute name="search_bar" value="layout/search_bar.html :: search_bar" type="thymeleaf"/>
+        <put-attribute name="body" value="/404.html :: content" type="thymeleaf"/>
+    </definition>
    
 </tiles-definitions>

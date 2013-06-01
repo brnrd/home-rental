@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home Rental | New Property</title>
+
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/new.css" th:href="@{/css/new.css}" />
+    </head>
+    <body tiles:fragment="content">
+        <h1>You went too far, looks like you just landed on the moon</h1>
+        <img src="http://apod.nasa.gov/apod/image/0309/aldrinswc_apollo11_big.jpg"/>
+        <h2><a th:href="@{/}">Go back on earth</a></h2>
+    </body>
+</html>
