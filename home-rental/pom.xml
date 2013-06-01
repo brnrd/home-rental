@@ -112,6 +112,9 @@
                         <include>home.less</include>
                         <include>search.less</include>
                         <include>new.less</include>
+                        <include>property.less</include>
+                        <include>user.less</include>
+                        <include>user-properties.less</include>
                     </includes>
                 </configuration>
                 <executions>

@@ -6,27 +6,49 @@
       lang="en">
     <head>
         <title tiles:fragment="title">Home rental | Account</title>
-
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/user.css}" />
     </head>
     <body tiles:fragment="content">
         <div class="page-header">
             <h3 th:text="${user.username}"></h3>
         </div>
-        <div class="row">
+        <div class="row map-wrapper">
             <div class="span9">
-                <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+                <div class="map-container">
+                    <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+                </div>
             </div>
             <div class="span3">
-                <ul class="unstyled">
-                    <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
-                    <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
-                    <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
-                    <li th:if="${evaluation} &lt; 0">This user has no evaluation yet.</li>
-                    <li th:if="${evaluation} &gt; -1"><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
-                </ul>
-                <button class="btn">Modify</button><br />
-                <button class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                <div id="user-desc">
+                    <ul class="unstyled">
+                        <li><i class="icon-user"></i><span th:text="' ' + ${user.firstname} + ' ' + ${user.name}"></span></li>
+                        <li><i class="icon-envelope"></i><span th:text="' ' + ${user.email}"></span></li>
+                        <li><i class="icon-home"></i><span th:text="' ' + ${propertyCount}"></span></li>
+                        <li th:if="${evaluation} &lt; 0">This user has no evaluation yet.</li>
+                        <li th:if="${evaluation} &gt; -1"><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></li>
+                    </ul>
+                    <div th:if="${isUserCurrent}" class="buttons">
+                        <button id="modify-user" class="btn btn-success">Modify</button>
+                        <button id="delete-user" class="btn btn-danger"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <!--Modal-->
+        <div id="modal-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalUser" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="header-label"></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="submit" class="btn"></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+        <div tiles:fragment="js-specific">
+            <script type="text/javascript" src="#" th:src="@{/js/user.js}"></script>
         </div>
     </body>
 </html>

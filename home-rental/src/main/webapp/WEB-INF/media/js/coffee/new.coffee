@@ -4,20 +4,33 @@ Date of creation : 17/04/2013
 Creator : brnrd
 target : all (typeahead, maps, ...)
 ###
-jQuery -> 
-  initialize()
-  
+
+
 ###################
 #   Google Maps   #
 ###################
 
-initialize = () ->
-  mapOptions =
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644),
+map = null
+
+Initialize = (lat, lng) ->
+  map = new google.maps.Map(
+    $('#map-canvas')[0]
+    zoom: 9 
+    center: new google.maps.LatLng(lat, lng)
     mapTypeId: google.maps.MapTypeId.ROADMAP
-  map = new google.maps.Map $('#map-canvas')[0], mapOptions
-  
+  )
+
+getLocation = () -> 
+  $.getJSON("http://jsonip.com?callback=?", (data) ->
+    $.getJSON("http://freegeoip.net/json/" + data.ip, (fulldata) ->
+      currentLat= fulldata.latitude
+      currentLong = fulldata.longitude
+      google.maps.event.addDomListener(window, 'load', Initialize(currentLat, currentLong))
+    )
+  )
+      
+$(document).ready getLocation
+
 ##################
 #   Datepicker   #
 ##################
@@ -80,6 +93,8 @@ $('#city-maps').typeahead(
                     alert('Cannot find address')
                     return
                 map.setCenter(results[0].geometry.location)
+                console.log results[0]
+                console.log map
                 map.setZoom(12)
         )
         splitCity(item)
@@ -92,11 +107,38 @@ $('#city-maps').typeahead(
 
 splitCity = (item) =>
   if item 
-    maps_data = $.trim(item).split(",")
-    if maps_data.length >2
-        $('#city').val(maps_data[0] + ", " + maps_data[1])
-        $('#country').val(maps_data[maps_data.length - 1])
-    else
-        # Only one case maps_data.length == 2 && never < 2
+    maps_data = $.trim(item).split(",")  
+#   If there is a city, a state and a country
+    if maps_data.length > 2
+      $('#city').val(maps_data[0] + ", " + maps_data[1])
+      $('#country').val(maps_data[maps_data.length - 1].replace /^\s+/g, "")
+#   If there is a city and a state/country
+    else if maps_data.length == 2
+#     If the length of the second elem is 2 then it's a american state
+      if maps_data[1].length == 2
         $('#city').val(maps_data[0] + ", " +maps_data[1])
+#       So add USA as country
         $('#country').val("USA")
+#     else that's the city country pattern  
+      else
+        $('#city').val(maps_data[0])
+        $('#country').val(maps_data[maps_data.length - 1].replace /^\s+/g, "")
+#   else that's only a country, so nothing is add in the city input 
+    else
+      $('#country').val(maps_data[0].replace /^\s+/g, "")
+      
+      
+#############################
+#   get lat/long address    #
+#############################
+
+$('#address').focusout ->
+  fullAddress = $('#address').val() + ' ' + $('#city').val() + ' ' + $('#country').val() 
+  geocoder.geocode 
+    address: fullAddress
+  , (locationResult) ->
+    console.log locationResult
+    latitude = locationResult[0].geometry.location.lat()
+    longitude = locationResult[0].geometry.location.lng()
+    $('#latitude').val(latitude)
+    $('#longitude').val(longitude)

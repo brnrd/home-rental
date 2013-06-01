@@ -12,19 +12,19 @@ public class Utilities {
 
     public static List<String> checkForm(User userData) {
         List<String> res = new ArrayList<String>();
-        if (userData.getUsername() == "") {
+        if ("".equals(userData.getUsername())) {
             res.add("username_error");
         }
-        if (userData.getName() == "") {
+        if ("".equals(userData.getName())) {
             res.add("name_error");
         }
-        if (userData.getFirstname() == "") {
+        if ("".equals(userData.getFirstname())) {
             res.add("fname_error");
         }
-        if (userData.getEmail() == "") {
+        if ("".equals(userData.getEmail())) {
             res.add("email_error");
         }
-        if (userData.getPassword() == "") {
+        if ("".equals(userData.getPassword())) {
             res.add("pwd_error");
         }
         return res;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+    </head>
+    <body>
+        <div id="modify">
+            <form id="modify-form" th:object="${user}" th:action="@{/s/account/update}" method="post">
+                <input type="hidden" id="id" name="id" th:field="*{id}" th:value="${user.id}" />
+                <ul class="unstyled">
+                    <li>
+                        <input type="text" id="username" placeholder="Username" th:field="*{username}" th:value="${user.username}" />
+                    </li>
+                    <li>
+                        <input type="text" id="name" placeholder="Name" th:field="*{name}" th:value="${user.name}" />
+                    </li>
+                    <li>
+                        <input type="text" id="firstname" placeholder="Firstname" th:field="*{firstname}" th:value="${user.firstname}" />
+                    </li>
+                    <li>
+                        <input type="text" id="email" placeholder="Email" th:field="*{email}" th:value="${user.email}" />
+                    </li>
+                </ul>
+                <p>Check your data prior saving !</p>
+            </form>
+        </div>
+        
+        <div id="delete">
+            <p id="delete-body">
+                Warning, you're about to delete your account 
+                with all the properties that you created.
+            </p>
+            <form id="delete-form" th:action="@{/s/account/delete}" method="post">
+                <input type="hidden" id="id" name="id" th:value="${user.id}" />
+            </form>
+        </div>
+    </body>
+</html>

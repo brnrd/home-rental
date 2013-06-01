@@ -17,7 +17,7 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
-        
+
         <!-- Custom CSS page specific import -->
         <link rel="stylesheet" tiles:substituteby="css-specific" />
 
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="span12">
                             <div class="pull-right login">
-                                
+
                                 <div class="user-logged" sec:authorize="isAuthenticated()">
                                     <div class="btn-group">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -43,6 +43,8 @@
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__}">Account</a></li>
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/properties}">My Properties</a></li>
                                             <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/reservations}">My Reservations</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/property/new}">Add a property</a></li>
                                             <li class="divider"></li>
                                             <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
                                         </ul>
@@ -83,7 +85,7 @@
                     <div class="span12">
                         <div class="content" tiles:include="search_bar"></div>
                         <div class="content" tiles:include="body"></div>
-                        
+
                         <!-- Noty to throw -->
                         <span th:if="${logged_user}" id="logged_user"></span>
                         <span th:if="${new_user}" id="new_user"></span>
@@ -119,7 +121,7 @@
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-typeahead.js}"></script>
         <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-modal.js}"></script>
-        
+
         <!-- Custom js -->
         <!-- Only for production
         <script type="text/javascript" src="#" th:src="@{/js/main.min.js}"></script>

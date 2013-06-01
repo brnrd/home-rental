@@ -6,5 +6,5 @@ package web.model;
  */
 public enum PropertyType {
     
-    FLAT, HOUSE, LOFT;   
+    FLAT, HOUSE, LOFT, DUPLEX, VILLA, ASYLUM, COTTAGE, IGLOO, YURT, PENTHOUSE, TENT, SHELTER;   
 }

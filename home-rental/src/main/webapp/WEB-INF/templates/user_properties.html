@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home rental | Properties</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/user-properties.css}" />
+    </head>
+    <body tiles:fragment="content">
+        <div class="page-header">
+            <h3 th:text="${user.username} + ' properties'"></h3>
+        </div>
+        <div class="row">
+            <div class="span12 map-wrapper">
+                <div id="map-container">
+                    <img th:src="${map}" th:alt="'Properties of' + ${user.username}"></img>
+                </div>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="span12 properties-wrapper">
+                <table class="table table-bordered table-hover">
+                    <tbody th:each="property : ${properties}">
+                        <tr>
+                            <td>
+                                <h4><a th:href="'/home-rental/property/'+${property.id}" th:text="${property.title}"></a></h4>
+                                <p th:text="${property.shortDesc}"></p>
+                            </td>
+                            <td>
+                                <p class="price" th:text="'Price : ' + ${property.price}"></p>
+                                <p class="note" th:text="'Note : ' + ${property.note}"></p>
+                            </td>
+                            <td class="buttons">
+                                <button class="btn btn-success btn-small modify-property" th:attr="data-property-id=${property.id}">Modify</button>
+                                <button class="btn btn-danger btn-small delete-property" th:attr="data-property-id=${property.id}"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Modal-->
+        <div id="modal-property" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalProperty" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="header-label"></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="submit" class="btn"></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+        <div tiles:fragment="js-specific">
+            <script type="text/javascript" src="#" th:src="@{/js/user-properties.js}"></script>
+        </div>
+    </body>
+</html>
