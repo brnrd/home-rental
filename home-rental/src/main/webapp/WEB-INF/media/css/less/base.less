@@ -1,0 +1,378 @@
+/* CSS - base - Home Renatl Project
+ * Date of creation : 08/04/2013
+ * Creator : Romain FONCIER
+ * Target : all
+ * Last modification : 08/04/2013
+ * Comment :
+ *
+ * ------------------------------------------------------------------- */
+
+/* Bootstrap Imports */
+@import "../bootstrap/bootstrap";
+
+/* Color Palette */
+@hrg: #1BE0A5; // green
+@hrb: #1BB5E0; // blue
+@bghr: #FAFEFF; //white-blue
+
+@hrg-light: #96E0CA;
+@hrg-light: #96D0E0;
+
+@hrr: #F02E51; //red
+
+/*** COLORS ***/
+.hrg {
+    color: @hrg;
+}
+
+.hrb {
+    color: @hrb;
+}
+
+/*** BASICS HTML ***/
+body {
+    background-color: @bghr;
+}
+
+/*** AVATAR ***/
+.avatar {
+    display: inline;
+}
+
+.avatar32 {
+    height: 32px;
+    width: 32px;
+    .border-radius(3px);
+}
+
+/*** BASICS ***/
+li { list-style-type: none; }
+
+/*** BASE ***/
+.definition {
+    margin: 3px 0;
+    padding: 3px;
+    border-bottom: 1px solid #aaa;
+    font-size: 12px;
+    font-weight: bold;
+    color: #888;
+}
+
+#page-header {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #aaa;
+    background: #ddd;
+    text-transform: uppercase;
+    p {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+#logo img {
+    height: 19px;
+    width: 160px;
+}
+
+.login {
+    height: 40px;
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .user-logged {
+        padding: 6px 0;
+        .btn-group {
+            margin: 6px 0px 0px 0px;
+            .username {
+                font-size: 16px;
+                padding: 0 10px;
+                color: @hrb;
+            }
+            .caret {
+                position: relative;
+                top: 10px;
+                border-top: 4px solid #fff; // Override bootstrap
+            }
+            ul.dropdown-menu {
+                margin-top: 6px;
+            }
+        }
+    }
+    .btn-login {
+        margin-top: 10px;
+        a {
+            color: #999;
+            &:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+#search-bar {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    padding: 4px 2px;
+    .gradientBar(#f6f6f6, #e5e5e5, #222);
+    border: 1px solid #bbb;
+    .border-radius(5px);
+    form { margin: 0px }
+    .input-wrapper {
+        float: left;
+        margin: 0px 2px;
+        padding: 10px;
+        border: 1px solid #777;
+        .border-radius(4px);
+        .box-shadow(inset 1px 1px 5px rgba(0, 0, 0, 0.5));
+        background: #fff;
+        input, input[type="text"] {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none;
+            font-size: 18px;
+        }
+        .location {
+            height: 20px;
+            width: 316px;
+        }
+        .checkin, .checkout {
+            height: 20px;
+            width: 98px;
+            z-index: 150;
+        }
+        .icon-calendar {
+            position: relative;
+            top: 3px;
+            left: -6px;
+        }
+    }
+    .btn-group {
+        margin: 0px 2px;
+        .btn-dpd {
+            height: 43px;
+            width: 117px;
+            font-size: 18px;
+        }
+        .carret-dpd {
+            height: 43px;
+            width: 25px;
+        }
+        .icon-user {
+            position: relative;
+            top: 2px;
+            left: 12px;
+        }
+    }
+    #btn-search {
+        height: 43px;
+        width: 156px;
+        margin: 0px 2px;
+        font-size: 18px;
+        .icon-search {
+            position: relative;
+            top: 2px;
+            left: -8px;
+        }
+    }
+}
+#search-bar-empty {
+    margin-top: 60px;
+}
+
+#ui-datepicker-div.ui-datepicker {
+    margin-top: 12px !important;
+    margin-left: -10px !important;
+    width: 220px;
+    z-index: 200 !important;
+}
+
+#wrapper {
+    margin-top: 20px;
+}
+
+#footer-wrapper {
+    height: 60px;
+    margin-top: 20px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    .span12 {
+        text-align: center;
+        color: @hrb;
+        #app-ref {
+            font-size: 12px;
+        }
+    }
+}
+
+/** MODAL **/
+.modal {
+    width: 600px;
+    margin-left: -300px;
+    .ajax-loader {
+        display: none;
+        position: relative;
+        top: 4px;
+        left: -26px;
+    }
+    .modal-header {
+        h3 { color: @hrb; }
+    }
+    .modal-body {
+        padding: 20px 20px;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        background-color: #eee;
+        text-align: center;
+        p { 
+            width: 100%;
+            color: #111;
+        }
+        label {
+            width: 40%;
+            margin-top: 6px;
+        }
+        .form-error {
+            height: 20px;
+            width: 100%;
+            span {
+                color: @hrr;
+            }
+        }
+    }
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/** AUTH **/
+#auth-container {
+    width: 600px;
+    margin: auto;
+    border: 1px solid #bbb;
+    .border-radius(5px);
+    background: #fff;
+    .auth-header {
+        padding: 0px 20px;
+        h3 { color: @hrb; }
+    }
+    .auth-body {
+        padding: 20px 20px;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        background-color: #eee;
+        text-align: center;
+        p { 
+            width: 100%;
+            color: #111;
+        }
+        label {
+            width: 40%;
+            margin-top: 6px;
+        }
+        .form-error {
+            height: 20px;
+            width: 100%;
+            span {
+                color: @hrr;
+            }
+        }
+    }
+    .auth-footer {
+        padding: 20px;
+        text-align: center;
+        .btn {
+            width: 120px;
+            margin: 0px 10px;
+        }
+    }
+}
+
+/** FORM **/
+.form-group {
+    margin-bottom: 10px;
+    text-align: center;
+    p {
+        width: 30%;
+        margin: 6px 0px;
+        padding: 0px 20px;
+        text-align: right;
+    }
+    .field-container {
+        height: 26px;
+        width: 40%;
+        padding: 4px;
+        border: 1px solid #ccc;
+        background: #fff;
+        .border-radius(3px);
+        input {
+            height: 24px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none;
+        }
+    }
+    .field-container.error {
+        border-color: @hrr;
+    }
+}
+
+/** BOOKING **/
+#booking-container {
+    p {
+        text-align: center;
+    }
+    form {
+        margin: 0;
+        ul {
+            width: 360px;
+            margin: auto;
+            dl {
+                margin: 5px 0px;
+                dt {
+                    width: 40%;
+                    text-align: right;
+                }
+                dd {
+                    width: 58%;
+                    font-weight: bold;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+/** 404 **/
+
+#error-container {
+    margin-top: 10px;
+    text-align: center;
+    #error-header {
+        background: #ddd;
+    }
+    #error-body {
+        #lunar-map {
+            height: 400px;
+            width: 100%;
+            img {
+                max-width: none;
+            }
+            label { 
+                width: auto; 
+                display:inline; 
+            }
+        }
+    }
+    #error-footer {
+        margin-top: 10px;
+        padding: 10px;
+        background: #eee;
+    }
+}

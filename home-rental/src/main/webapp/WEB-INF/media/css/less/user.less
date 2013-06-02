@@ -1,0 +1,46 @@
+/* CSS - base - Home Rental Project
+ * Date of creation : 29/04/2013
+ * Creator : brnrd
+ * Target : user
+ * Last modification : 29/04/2013
+ * ------------------------------------------------------------------- */
+/* Bootstrap Imports */
+@import "../bootstrap/variables";
+@import "../bootstrap/mixins";
+
+.map-wrapper {
+    height: 410px;
+    margin-bottom: 20px;
+    .span9 {
+        #map-container {
+            height: 410px;
+            img {
+                height: 420px;
+                width: 100%;
+            }
+        }
+    }
+    .span3 {
+        #user-desc {
+            height: 320px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            .border-radius(5px);
+            background-color: #eee;
+            text-align: center;
+            ul {
+                height: 275px;
+                border-bottom: 1px solid #ccc;
+                text-align: left;
+            }
+        }
+        #buttons {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #bbb;
+            .border-radius(5px);
+            background-color: #ddd;
+            text-align: center;
+        }
+    }
+}

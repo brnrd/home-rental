@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+    <head>
+        <title tiles:include="title"></title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="home rental" />
+        <meta name="authors" content="airboy and brnrd" />
+
+        <!-- JQuery UI CSS -->
+        <link rel="stylesheet" href="/css/jquery-ui/jquery-ui.css" th:href="@{/css/jquery-ui/jquery-ui.css}" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/base.css" th:href="@{/css/base.css}" />
+
+        <!-- Custom CSS page specific import -->
+        <link rel="stylesheet" tiles:substituteby="css-specific" />
+
+        <!-- Google Maps API import -->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="pull-right login">
+
+                                <div class="user-logged" sec:authorize="isAuthenticated()">
+                                    <div class="btn-group">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <!--<img src="" class="avatar avatar28">-->
+                                            <span class="username"><strong th:text="${current.username}"></strong></span>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__}">Profile</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__/properties}">My Properties</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__/reservations}">My Reservations</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/property/new}">Add a property</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="/home-rental/j_spring_security_logout">Signout</a></li>
+                                        </ul>
+                                    </div>
+                                </div><!-- /end user-logged -->
+                                <div class="btn-login" sec:authorize="! isAuthenticated()">
+                                    <a href="#" th:href="@{/signup}" id="signup"><span>Signup</span></a> - <a href="#" th:href="@{/login}" id="login"><span>Login</span></a>
+                                </div>
+                            </div><!-- /end login -->
+                            <ul class="nav">
+                                <li>
+                                    <a href="/home-rental/" id="logo">
+                                        <img src="/img/global/logo.png" th:src="@{/img/global/logo.png}" alt="logo home rental" />
+                                    </a>
+                                </li>
+                                <li th:class="${home} ? 'active' : ''">
+                                    <a href="/home-rental/">
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li th:class="${help} ? 'active' : ''">
+                                    <a href="/home-rental/help/">
+                                        <span>Help</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- /end span12 -->
+                    </div><!-- /end row -->
+                </div><!-- /end container -->
+            </div><!-- /end navbar-inner -->
+        </div><!-- /end navbar -->
+
+        <div class="clearfix"></div>
+
+        <div id="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="content" tiles:include="search_bar"></div>
+                        <div class="content" tiles:include="body"></div>
+
+                        <!-- Noty to throw -->
+                        <span th:if="${logged_user}" id="logged_user"></span>
+                        <span th:if="${new_user}" id="new_user"></span>
+                        <span th:if="${logout_success}" id="logout_success"></span>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /end wrapper -->
+
+        <div id="footer-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p><a href="">Report a bug</a> - <a href="/help/">Help center</a></p>
+                        <p id="app-ref"><a href="http://www.springsource.org/spring-framework" target="_blank">Spring 3.2.2</a> - Home Rental © 2013 - version: <span class="warning">0.1.0</span></p>
+                    </div>
+                </div>
+            </div><!-- /end container -->
+        </div><!-- /end footer-wrapper -->
+
+        <!-- JS import -->
+        <!-- Global imports -->
+        <script type="text/javascript" src="#" th:src="@{/js/global/jquery.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/global/jquery-ui.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/jquery.noty.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/layouts/topCenter.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/noty/themes/default.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/vendor/mustache/mustache.js}"></script>
+
+        <!-- Bootstrap imports -->
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-button.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-dropdown.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-tab.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-typeahead.js}"></script>
+        <script type="text/javascript" src="#" th:src="@{/js/bootstrap/bootstrap-modal.js}"></script>
+
+        <!-- Custom js -->
+        <!-- Only for production
+        <script type="text/javascript" src="#" th:src="@{/js/main.min.js}"></script>
+        -->
+        <script type="text/javascript" src="#" th:src="@{/js/js/main.js}"></script>
+        <!-- JS Inline -->
+
+    </body>
+</html>

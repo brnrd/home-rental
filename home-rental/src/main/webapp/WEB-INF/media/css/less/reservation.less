@@ -1,0 +1,118 @@
+/* CSS - base - Home Rental Project
+ * Date of creation : 01/06/2013
+ * Creator : Romain FONCIER
+ * Target : reservation
+ * Last modification : 01/06/2013
+ * Comment :
+ *
+ * ------------------------------------------------------------------- */
+
+/* Imports */
+@import "../bootstrap/variables";
+@import "../bootstrap/mixins";
+
+/* Color Palette */
+@hrg: #1BE0A5; // green
+@hrb: #1BB5E0; // blue
+@bghr: #FAFEFF; //white-blue
+
+@hrg-light: #96E0CA;
+@hrg-light: #96D0E0;
+
+@hrr: #F02E51; //red
+
+.map-wrapper {
+    height: 350px;
+    margin-bottom: 20px;
+    #map-container {
+        height: 350px;
+        img {
+            height: 355px;
+            width: 100%;
+        }
+    }
+}
+
+#reservation-container {
+    #sort-bar {
+        margin-bottom: 10px;
+        padding: 10px;
+        .gradientBar(#f6f6f6, #e5e5e5, #222);
+        border: 1px solid #bbb;
+        .border-radius(5px);
+        #sort-bar-results-value {
+            color: @hrb;
+        }
+        #sort-bar-sorter {
+            margin-left: 560px;
+        }
+    }
+    .reservation-separator {
+        padding: 5px;
+        border-bottom: 1px solid #aaa;
+        background: #ddd;
+        span {
+            font-size: 12px;
+            color: #888;
+        }
+    }
+    ul#reservation-list {
+        margin: 0;
+        li.reservation-item {
+            padding: 5px 15px;
+            border-bottom: 1px solid #ccc;
+            .reservation-item-pict {
+                height: 100px;
+                width: 20%;
+                border-right: 1px solid #eee;
+            }
+            .reservation-item-content {
+                height: 100px;
+                width: 62%;
+                margin: 0 15px;
+                border-right: 1px solid #eee;
+                .item-content-title {
+                    margin-bottom: 5px;
+                    font-size: 22px;
+                }
+                .item-content-address {
+                    font-style: italic;
+                    color: #006dcc;
+                }
+            }
+            .reservation-item-action {
+                height: 100px;
+                width: 12.5%;
+                text-align: center;
+                .item-action-price {
+                    font-size:  30px;
+                    color: @hrr;
+                }
+                .item-action-note {
+                    font-size:  30px;
+                    color: @hrb;
+                }
+                .item-action-btn {
+                    margin-top: 15px;
+                    .btn { width: 70px; }
+                    .btn-warning, .btn-info { 
+                        width: 120px;
+                        margin-bottom: 5px;
+                    }
+                    #btn-modify {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+            &:hover {
+                background: #eee;
+            }
+        }
+        li.no-reservation {
+            span {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    }
+}

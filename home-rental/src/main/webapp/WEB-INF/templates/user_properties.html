@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home rental | User Properties</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/property.css}" />
+    </head>
+    <body tiles:fragment="content">
+        <div id="page-header">
+            <p th:text="${user.username} + ' properties'"></p>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div id="map-wrapper">
+                    <div id="map-container">
+                        <img th:src="${map} ? ${map} : @{/img/global/aldrin-moon.jpg}" th:alt="'Properties of ' + ${user.username}"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="span12" id="properties-wrapper">
+                <div id="sort-bar">
+                    <span id="sort-bar-results"><strong>RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(properties)}"></span></strong></span>
+                    <span id="sort-bar-sorter"><strong>SORT BY :</strong></span>
+                    <div class="btn-group">
+                        <button class="btn" id="sorter-price">PRICE</button>
+                        <button class="btn" id="sorter-note">NOTE</button>
+                    </div>
+                </div>
+                <ul id="properties-list" th:with="p1=!${#lists.isEmpty(properties)}">
+                    <li class="property-item" th:if="${p1}" th:each="p : ${properties}" th:attr="data-property-id=${p.id}">
+                        <div class="pull-left property-item-pict"></div>
+                        <div class="pull-left property-item-content">
+                            <p class="item-content-title">
+                                <a th:href="'/home-rental/property/'+${p.id}" th:text="${p.title}"></a>
+                            </p>
+                            <p class="item-content-address" th:text="${p.country} + ' - ' + ${p.city}"></p>
+                            <p class="item-content-desc" th:text="${p.shortDesc}"></p>
+                        </div>
+                        <div class="pull-left property-item-action">
+                            <div class="item-action-price" th:text="'$' + ${p.price}"></div>
+                            <div class="item-action-btn" th:attr="data-property-id=${p.id}">
+                                <button id="btn-modify" class="btn btn-success btn-small">Modify</button>
+                                <button id="btn-delete" class="btn btn-danger btn-small"><i class="icon-warning-sign icon-white"></i> Delete</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li tf:unless="${p1}" class="no-property">
+                            <span>You have not registered properties yet ! Put a property to rent <a th:href="@{/s/property/new}">now</a></span>
+                        </li>
+                </ul>
+            </div><!-- /end properties-wrapper -->
+        </div>
+        
+        <!--Modal-->
+        <div id="modal-property" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalProperty" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="header-label"></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="submit" class="btn"></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+    </body>
+</html>

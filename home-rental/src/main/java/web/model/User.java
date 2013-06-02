@@ -1,81 +1,138 @@
 package web.model;
 
-/**
- * @author Romain <ro.foncier@gmail.com>
- */
-public class User {
+import java.io.Serializable;
+import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.joda.time.LocalDateTime;
 
+/**
+ * @author Romain <ro.foncier@gmail.com>, Bernard <bernard.debecker@gmail.com>
+ */
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "user_id", unique = true)
     private String id;
+    @Column(name = "username", length = 30)
+    private String username;
+    @Column(name = "name", length = 30)
     private String name;
-    private String fname;
-    private String address;
+    @Column(name = "firstname", length = 30)
+    private String firstname;
+    @Column(name = "email", length = 100)
     private String email;
-    private String phone;
-    private int region;
+    @Column(name = "password", length = 40)
+    private String password;
+    @Column(name = "created", nullable = false)
+    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime created;
+     @Column(name = "last_connection", nullable = false)
+    @org.hibernate.annotations.Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime lastConnection;
+    @Column(columnDefinition = "enum('USER', 'ADMIN')")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    @Column(name="enabled")
+    private Boolean enabled = true;
 
     public User() {
     }
 
-    public String getId() {
-        return id.toString();
+    public User(String username, String name, String firstname, String email,
+            String password, Role role) {
+        this.username = username;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+    
+    @PrePersist
+    protected void onCreate() {
+        created =  LocalDateTime.now();
+        lastConnection =  LocalDateTime.now();
     }
 
-    private void setID(String user_id) {
-        id = user_id;
+    // <editor-fold defaultstate="collapsed" desc="Getter/setter">
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String newName) {
-        name = newName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFName() {
-        return fname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFName(String newFName) {
-        fname = newFName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String newAddress) {
-        address = newAddress;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String newEmail) {
-        email = newEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhone(String newPhone) {
-        phone = newPhone;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getRegion() {
-        return region;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setRegion(int newRegion) {
-        region = newRegion;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+    
+    public LocalDateTime getLastConnection() {
+        return lastConnection;
     }
 
-    @Override
-    public String toString() {
-        return "{\"id\": \"+id+\", \"name\": \"+name+\", \"fname\": \"+fname+\","
-                + " \"address\": \"+address+\", \"email\": \"+email+\","
-                + " \"phone\": \"+phone+\", \"region\": " + region + "}";
+    public void setLastConnection(LocalDateTime last) {
+        this.lastConnection = last;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+    
+    public void setEnabled(Boolean e) {
+        this.enabled = e;
+    }
+    // </editor-fold>
 }

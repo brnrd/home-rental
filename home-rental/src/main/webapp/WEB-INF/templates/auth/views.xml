@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="auth/login.html :: title" type="thymeleaf"/>
+        <put-attribute name="css-specific" value="auth/login.html :: css-specific" type="thymeleaf"/>
+        <put-attribute name="search_bar" value="layout/search_bar_empty.html :: search_bar" type="thymeleaf"/>
+        <put-attribute name="body" value="auth/login.html :: content" type="thymeleaf"/>
+        <put-attribute name="js-specific" value="auth/login.html :: js-specific" type="thymeleaf"/>
+    </definition>
+    
+    <definition name="signup" extends="baseLayout">
+        <put-attribute name="title" value="auth/signup.html :: title" type="thymeleaf"/>
+        <put-attribute name="css-specific" value="auth/signup.html :: css-specific" type="thymeleaf"/>
+        <put-attribute name="search_bar" value="layout/search_bar_empty.html :: search_bar" type="thymeleaf"/>
+        <put-attribute name="body" value="auth/signup.html :: content" type="thymeleaf"/>
+        <put-attribute name="js-specific" value="auth/signup.html :: js-specific" type="thymeleaf"/>
+    </definition>
+        	
+</tiles-definitions>

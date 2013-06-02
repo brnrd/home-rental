@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home rental | Profile</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/user.css}" />
+    </head>
+    <body tiles:fragment="content">
+        <div id="page-header">
+            <p th:text="${user.username}"></p>
+        </div>
+        <div class="row map-wrapper">
+            <div class="span9">
+                <div id="map-container">
+                    <img th:src="${map} ? ${map} : @{/img/global/default_place.jpg}" th:alt="'Properties of ' + ${user.username}"></img>
+                </div>
+            </div>
+            <div class="span3">
+                <div id="user-desc">
+                    <ul class="unstyled">
+                        <li>
+                            <p class="definition">USER</p>
+                            <i class="icon-user"></i> <span th:text="${user.firstname} + ' ' + ${user.name}"></span>
+                        </li>
+                        <li>
+                            <p class="definition">EMAIL</p>
+                            <i class="icon-envelope"></i> <span th:text="${user.email}"></span>
+                        </li>
+                        <li>
+                            <p class="definition">PROPERTY NUMBER</p>
+                            <i class="icon-home"></i> <span th:text="${propertyCount}"></span>
+                        </li>
+                        <li th:with="ev=${evaluation}">
+                            <p class="definition">EVALUATION</p>
+                            <span th:if="${ev} &lt; 0">This user has no evaluation yet.</span>
+                            <span th:unless="${ev} &lt; 0"><i class="icon-ok"></i><span th:text="' ' + ${evaluation} + '/100'"></span></span>
+                        </li>
+                    </ul>
+                    <a th:href="@{/s/__${user.username}__/properties}" id="user-properties" class="btn btn-info">Show user properties</a>
+                </div>
+                <div id="buttons" th:if="${isUserCurrent}">
+                    <button id="modify-user" class="btn btn-success">Modify</button>
+                    <button id="delete-user" class="btn btn-danger"><i class="icon-warning-sign icon-white"> </i>Delete</button>
+                </div>
+            </div>
+        </div>
+        <!--Modal-->
+        <div id="modal-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalUser" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="header-label"></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="submit" class="btn"></button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+        <div tiles:fragment="js-specific">
+            <script type="text/javascript" src="#" th:src="@{/js/user.js}"></script>
+        </div>
+    </body>
+</html>

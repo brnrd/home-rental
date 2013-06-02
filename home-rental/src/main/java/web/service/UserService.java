@@ -1,16 +1,19 @@
 package web.service;
 
-import web.mongo.entity.UserItem;
-import web.service.exceptions.BeanAlreadyExistException;
-import web.service.exceptions.BeanNotExistException;
+import java.util.List;
+import web.model.User;
 
 /**
- *
- * @author Romain <ro.foncier@gmail.com>,  Bernard <bernard.debecker@gmail.com>
+ * @author Romain <ro.foncier@gmail.com>
  */
-public interface UserService {
 
-    public void createUser(UserItem user) throws BeanAlreadyExistException;
-    public void updateUser(UserItem user) throws BeanNotExistException;
-    public UserItem getPersonne(String id);
+public interface UserService {
+    
+    User findById(String user_id);
+    User findByEmail(String email);
+    User findByUsername(String username);
+    void saveUser(User user);
+    void deleteUser(String user_id);
+    List<User> findAll();
+    void connected(User current_user);
 }

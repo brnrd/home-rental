@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+
+    <head></head>
+
+    <body tiles:fragment="search_bar">
+        <div id="search-bar">
+            <form method="GET" th:action="@{/search}" id="search_form">
+                <div class="input-wrapper">
+                    <input type="text" class="location" id="location-search" name="location" placeholder="Where do you want to go ?" />
+                    <input type="hidden" id="latlong" name="latlong" value="" />
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="checkin" id="checkin" name="checkin" placeholder="Check In" />
+                    <i class="icon-calendar"></i>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="checkout" id="checkout" name="checkout" placeholder="Check Out" />
+                    <i class="icon-calendar"></i>
+                </div>
+                <div class="btn-group pull-left">
+                    <input type="hidden" id="guests-number" name="guests_number" value="1" />
+                    <button class="btn btn-inverse btn-dpd"><strong>1 guest</strong><i class="icon-user icon-white"></i></button>
+                    <button class="btn btn-inverse carret-dpd dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="guests-list" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                        <li><a tabindex="-1" href="#">2 guests</a></li>
+                        <li><a tabindex="-1" href="#">3 guests</a></li>
+                        <li><a tabindex="-1" href="#">4 guests</a></li>
+                        <li><a tabindex="-1" href="#">5 guests</a></li>
+                        <li><a tabindex="-1" href="#">6 guests</a></li>
+                        <li><a tabindex="-1" href="#">7 guests</a></li>
+                        <li><a tabindex="-1" href="#">8 guests</a></li>
+                        <li><a tabindex="-1" href="#">9 guests</a></li>
+                        <li><a tabindex="-1" href="#">10 guests</a></li>
+                        <li><a tabindex="-1" href="#">11 guests</a></li>
+                        <li><a tabindex="-1" href="#">12+ guests</a></li>
+                    </ul>
+                </div>
+
+                <button type="submit" id="btn-search" class="pull-left btn btn-primary"><i class="icon-search icon-white"></i><strong>Search</strong></button>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </body>
+</html>

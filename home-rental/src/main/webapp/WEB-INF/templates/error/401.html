@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title tiles:fragment="title">Home Rental | 401</title>
+
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/base.css" th:href="@{/css/base.css}" />
+    </head>
+    <body tiles:fragment="content">
+        <div id="error-container">
+            <div id="error-header">
+                <h3>Oups ! Something went wrong. Apparently you don't have access to this section !</h3>
+            </div>
+            <div id="error-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <img src="/img/global/gentlemanly_escort_cube_3d.png" th:src="@{/img/global/gentlemanly_escort_cube_3d.png}" alt="All rights on Josh Maule - http://joshmaule.deviantart.com/"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="error-footer">
+                <a class="btn btn-large btn-info" th:href="@{/}">Go back Home</a>
+                <a class="btn btn-large btn-success" th:href="@{/signup}">Create a new account</a>
+            </div>
+        </div>
+    </body>
+</html>

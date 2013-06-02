@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+
+    <head>
+        <title tiles:fragment="title">Home Rental | Login</title>
+    </head>
+
+    <body tiles:fragment="content">
+
+        <div id="auth-container">
+            <div class="auth-header">
+                <h3 id="auth-label">Home Rental Login</h3>
+            </div>
+            <div class="auth-body">
+                <p>Welcome to <strong>Home Rental</strong> Website. Please enter your username/password and click on <strong>Login</strong>.</p>
+                <p class="form-error">
+                    <span th:if="${login_error}">Warning ! Your login/password are incorrects. Please try again !</span>
+                </p>
+                <form method="POST" th:action="@{/login}" id="auth-process-login">
+                    <div class="form-group">
+                        <label class="pull-left" for="auth_username"><strong>Username :</strong></label>
+                        <div th:class="${login_error} ? 'pull-left field-container error' : 'pull-left field-container'">
+                            <input type="text" id="auth_username" name="auth_username" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="pull-left" for="auth_pwd"><strong>Password :</strong></label>
+                        <div th:class="${login_error} ? 'pull-left field-container error' : 'pull-left field-container'">
+                            <input type="password" id="auth_pwd" name="auth_pwd" maxlength="30" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="auth-footer">
+                <button class="btn" data-dismiss="auth" aria-hidden="true">Cancel</button>
+                <input type="submit" form="auth-process-login" class="btn btn-primary" value="Login" />
+            </div>
+        </div><!-- /end auth-container -->
+        
+        <!-- Custom js page specific -->
+        <div tiles:fragment="js-specific">
+            <!--<script type="text/javascript" src="#" th:src="@{/js/auth.js}"></script>-->
+        </div>
+        
+    </body>
+</html>

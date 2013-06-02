@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      lang="en">
+
+    <head>
+        <title tiles:fragment="title">Home Rental | My Reservations</title>
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/reservation.css" th:href="@{/css/reservation.css}" />
+    </head>
+
+    <body tiles:fragment="content">
+        <div class="row map-wrapper">
+            <div class="span12">
+                <div id="map-container">
+                    <img th:src="${map}" alt="Google Maps Results"></img>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bloc Reservations List -->
+        <div class="row">
+            <div class="span12">
+                <div id="reservation-container">
+                    <div id="sort-bar">
+                        <span id="sort-bar-results"><strong>RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(reservations)} + ${#lists.size(p_reservations)}"></span></strong></span>
+                        <span id="sort-bar-sorter"><strong>SORT BY :</strong></span>
+                        <div class="btn-group">
+                            <button class="btn" id="sorter-price">PRICE</button>
+                            <button class="btn" id="sorter-note">NOTE</button>
+                        </div>
+                    </div>
+                    <!-- Expected Reservation -->
+                    <div class="reservation-separator">
+                        <span><strong>EXPECTED BOOKINGS</strong></span>
+                    </div>
+                    <ul id="reservation-list" th:with="r1=!${#lists.isEmpty(reservations)}">
+                        <li class="reservation-item" th:if="${r1}" th:each="r : ${reservations}" th:attr="data-property-id=${r.property.id}">
+                            <div class="pull-left reservation-item-pict"></div>
+                            <div class="pull-left reservation-item-content">
+                                <p class="item-content-title" th:text="${r.property.title}"></p>
+                                <p class="item-content-address" th:text="${r.property.country} + ' - ' + ${r.property.city}"></p>
+                                <p class="item-content-desc" th:text="${r.property.shortDesc}"></p>
+                            </div>
+                            <div class="pull-left reservation-item-action">
+                                <div class="item-action-price" th:text="'$' + ${r.price}"></div>
+                                <div class="item-action-btn">
+                                    <a href="#" id="btn-modify" class="btn btn-danger">Modify</a>
+                                    <a href="#" th:href="@{/property/__${r.property.id}__}" id="btn-consult" class="btn">Consult</a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li th:unless="${r1}" class="no-reservation">
+                            <span>You have not expected booking yet ! Find a rent for your next holidays, <a th:href="@{/}">here</a> ?</span>
+                        </li>
+                    </ul>
+
+                    <!-- Passed Reservation -->
+                    <div class="reservation-separator" th:if="! ${#lists.isEmpty(p_reservations)}">
+                        <span><strong>PASSED BOOKINGS</strong></span>
+                    </div>
+                    <ul id="reservation-list">
+                        <li class="reservation-item" th:each="pr : ${p_reservations}" th:attr="data-property-id=${pr.property.id}">
+                            <div class="pull-left reservation-item-pict"></div>
+                            <div class="pull-left reservation-item-content">
+                                <p class="item-content-title" th:text="${pr.property.title}"></p>
+                                <p class="item-content-address" th:text="${pr.property.country} + ' - ' + ${pr.property.city}"></p>
+                                <p class="item-content-desc" th:text="${pr.property.shortDesc}"></p>
+                            </div>
+                            <div class="pull-left reservation-item-action">
+                                <div th:class="${pr.evaluated} ? 'item-action-note' : 'item-action-price'" th:with="c=${pr.evaluated}">
+                                    <span id="pr_note" th:if="${c}" th:text="${pr.note}"></span>
+                                    <span id="pr_price" th:unless="${c}" th:text="'$' + ${pr.price}"></span>
+                                </div>
+                                <div class="item-action-btn">
+                                    <div th:with="co=${pr.commented}">
+                                        <a th:if="! ${co}" href="#" id="btn-comment" class="btn btn-warning">Leave a comment</a>
+                                    </div>
+                                    <div th:with="ev=${pr.evaluated}">
+                                        <a th:if="! ${ev}" href="#" id="btn-eval" class="btn btn-info">Evaluate Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                </div><!-- /end reservation-container -->
+            </div>
+        </div>
+
+    </body>
+</html>
