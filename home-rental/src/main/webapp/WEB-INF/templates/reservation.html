@@ -50,7 +50,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-                        <li tf:unless="${r1}" class="no-reservation">
+                        <li th:unless="${r1}" class="no-reservation">
                             <span>You have not expected booking yet ! Find a rent for your next holidays, <a th:href="@{/}">here</a> ?</span>
                         </li>
                     </ul>

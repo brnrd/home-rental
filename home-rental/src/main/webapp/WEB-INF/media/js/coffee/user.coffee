@@ -31,7 +31,7 @@ modalActionHandler = () ->
 # Modify handler
 modifyHandler = (dataToSend) ->
   console.log(dataToSend)
-  $.post '/home-rental/s/' + $('.page-header h3').text() + '/update',
+  $.post '/home-rental/s/' + $('#page-header p').text() + '/update',
   dataToSend
   (data) ->
     $('#modal-user').modal('hide')
@@ -39,7 +39,7 @@ modifyHandler = (dataToSend) ->
 # Delete handler
 deleteHandler = (dataToSend) ->
   console.log(dataToSend)
-  $.post '/home-rental/s/' + $('.page-header h3').text() + '/delete',
+  $.post '/home-rental/s/' + $('#page-header p').text() + '/delete',
     dataToSend
     (data) ->
       $('#modal-user').modal('hide')
@@ -47,13 +47,13 @@ deleteHandler = (dataToSend) ->
 
 # Modify user click to open modal
 $('#modify-user').on "click", (event) ->
-  setContext('modify', '/home-rental/s/' + $('.page-header h3').text() + '/modal')
+  setContext('modify', '/home-rental/s/' + $('#page-header p').text() + '/modal')
   console.log context
   modalActionHandler()
 
 # Delete user clieck to open modal
 $('#delete-user').on "click", (event) ->
-  setContext('delete', '/home-rental/s/' + $('.page-header h3').text() + '/modal')
+  setContext('delete', '/home-rental/s/' + $('#page-header p').text() + '/modal')
   modalActionHandler()
 
 # Modify form submit

@@ -86,7 +86,7 @@ formatDate = (date) ->
         return '0'+t_res[0]+"/"+t_res[1]+"/"+t_res[2]
     return t_res.join("/")
 
-$('#rentStart').datepicker(
+$('#modal-property #rentStart').datepicker(
     onClose: (selectedDate) ->
         console.log selectedDate
         checkin = new Date(selectedDate)
@@ -97,7 +97,7 @@ $('#rentStart').datepicker(
         $('#rentStop').val(formatDate(target))
 )
 
-$('#rentStop').datepicker(
+$('#modal-property #rentStop').datepicker(
     defaultDate: if target then target else ''
     onClose: (selectedDate) ->
         if checkin
