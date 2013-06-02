@@ -11,6 +11,7 @@
 @hrb: #1BB5E0; // blue
 @hrr: #F02E51; //red
 
+/** PROPERTY **/
 #map-wrapper {
     height: 450px;
     margin-bottom: 10px;
@@ -37,6 +38,80 @@
     }
 }
 
+/** NEW PROPERTY **/
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    img {
+        max-width: none;
+    }
+    label { 
+        width: auto; 
+        display:inline; 
+    }
+    #map-canvas {
+        height: 100%;
+        width: 100%;
+    }
+    .city-maps-container {
+        position: relative;
+        top: -80px;
+        left: 340px;
+        height: 36px;
+        width: 260px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        background: #fff;
+        text-align: center;
+        #city-maps {
+            margin: 8px 0px 0px 0px;
+            padding: 0;
+            border: 0;
+            font-size: 16px;
+            .box-shadow(none);
+        }
+    }
+}
+
+#longDesc {
+    position: relative;
+    left: 108px;
+}
+
+textarea {
+    resize: none;
+    padding: 5px;
+    margin: 0;
+    width: 500px;
+    height: 100px;
+    overflow: auto;
+}
+
+.check {
+    position: relative;
+    top: 3px;
+    left: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+}
+
+.icon-calendar {
+    position: relative;
+    top: -3px;
+    left: -27px;
+}
+
+.dollar {
+    position: relative;
+    top: -2px;
+    left: -18px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/** USER PROPERTIES **/
 #properties-wrapper {
     #sort-bar {
         margin-bottom: 10px;

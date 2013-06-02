@@ -28,6 +28,7 @@
                         <li th:text="${property.type}"></li>
                         <li th:if="${property.rooms} &lt; 2">1 room</li>
                         <li th:if="${property.rooms} &gt; 1" th:text="${property.rooms}+' rooms'">1 room</li>
+                        <li th:text="'$ ' + ${property.price} + ' per night'"></li>
                     </ul>
                     <h5>Options</h5>
                     <ul class="unstyled">

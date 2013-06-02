@@ -50,14 +50,14 @@ deleteHandler = (dataToSend) ->
 
 
 # Modify user click to open modal
-$('#btn-modify').on "click", (event) ->
+$('#properties-list #btn-modify').on "click", (event) ->
   id = $(this).parent('.item-action-btn').data("property-id")
   console.log id
   setContext('modify', '/home-rental/s/property/' + id + '/modal', id)
   modalActionHandler()
 
 # Delete user clieck to open modal
-$('#btn-delete').on "click", (event) ->
+$('#properties-list #btn-delete').on "click", (event) ->
   id = $(this).parent('.item-action-btn').data("property-id")
   setContext('delete', '/home-rental/s/property/' + id + '/modal', id)
   modalActionHandler()

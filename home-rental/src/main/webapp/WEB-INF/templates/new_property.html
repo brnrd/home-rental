@@ -7,7 +7,7 @@
     <head>
         <title tiles:fragment="title">Home Rental | New Property</title>
 
-        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/new.css" th:href="@{/css/new.css}" />
+        <link rel="stylesheet" tiles:fragment="css-specific" href="/css/property.css" th:href="@{/css/property.css}" />
     </head>
     <body tiles:fragment="content">
         <div id="map">
@@ -54,14 +54,26 @@
                 </div>
                 <div class="span4">
                     <div class="well">
-                        <input id="price" type="text" placeholder="Price" th:value="${property.price}" name="price" required="required"/>
+                        <input id="price" type="text" placeholder="Price per night" th:value="${property.price}" name="price" required="required"/><i class="dollar">$</i>
 
                         <h4>Options :</h4>
                         <ul class="unstyled">
-                            <li><input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/><span class="span-check">Parking</span></li>
-                            <li><input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/><span class="span-check">Swimming pool</span></li>
-                            <li><input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/><span class="span-check">Wi-Fi</span></li>
-                            <li><input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/><span class="span-check">Laundry</span></li>
+                            <li>
+                                <input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/>
+                                <span class="check">PARKING</span>
+                            </li>
+                            <li>
+                                <input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/>
+                                <span class="check">SWIMMING POOL</span>
+                            </li>
+                            <li>
+                                <input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/>
+                                <span class="check">WIFI</span>
+                            </li>
+                            <li>
+                                <input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/>
+                                <span class="check">LAUNDRY</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -111,7 +111,6 @@
                         <include>base.less</include>
                         <include>home.less</include>
                         <include>search.less</include>
-                        <include>new.less</include>
                         <include>property.less</include>
                         <include>user.less</include>
                         <include>reservation.less</include>
