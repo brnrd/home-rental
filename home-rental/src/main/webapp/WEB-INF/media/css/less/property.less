@@ -60,7 +60,7 @@
         left: 340px;
         height: 36px;
         width: 260px;
-        border: 1px solid #aaa;
+        border: 1px solid @hrb;
         border-radius: 5px;
         background: #fff;
         text-align: center;
@@ -74,27 +74,51 @@
     }
 }
 
-#longDesc {
-    position: relative;
-    left: 108px;
-}
-
-textarea {
-    resize: none;
-    padding: 5px;
-    margin: 0;
-    width: 500px;
-    height: 100px;
-    overflow: auto;
-}
-
-.check {
-    position: relative;
-    top: 3px;
-    left: 3px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #444;
+#new-property-wrapper {
+    .mini-section {
+        font-size: 12px;
+        font-weight: bold;
+        color: #aaa;
+    }
+    textarea {
+        height: 100px;
+        width: 96%;
+        resize: none;
+        margin: 0;
+        padding: 5px;
+        overflow: auto;
+    }
+    .long-input {
+        width: 96%;
+    }
+    .check {
+        position: relative;
+        top: 3px;
+        left: 3px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #444;
+    }
+    input[disabled] {
+        background: none;
+    }
+    .infos-container {
+        padding: 10px;
+        border: 1px solid #ccc;
+        .border-radius(5px);
+        background: #eee;
+    }
+    #submit-bloc {
+        margin-top: 10px
+        padding: 10px;
+        border: 1px solid #ccc;
+        .border-radius(5px);
+        background: #ddd;
+        text-align: center;
+    }
+    .span3 {
+        width: 240px;
+    }
 }
 
 .icon-calendar {
