@@ -8,7 +8,7 @@
     </head>
     <body>
         <div id="modify">
-            <form id="modify-form" th:object="${options}" th:action="@{/s/property/update}" method="post">
+            <form id="modify-form" th:object="${options}" th:action="@{/s/property/__${property.id}__/update}" method="post">
                 <input type="hidden" id="id" name="id" th:value="${property.id}"  />
                 <ul class="unstyled">
                     <li>
@@ -78,7 +78,7 @@
                 Warning, you're about to delete this property 
                 and lose all the comments and evaluations linked to it.
             </p>
-            <form id="delete-form" th:action="@{/s/property/delete}" method="post">
+            <form id="delete-form" th:action="@{/s/property/__${property.id}__/delete}" method="post">
                 <input type="hidden" id="id" name="id" th:value="${property.id}" />
             </form>
         </div>

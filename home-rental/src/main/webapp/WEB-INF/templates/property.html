@@ -19,9 +19,8 @@
                 </div>
             </div>
             <div class="span3">
-                <div id="property-desc">
+                <div id="property-desc" th:attr="data-property-id=${property.id}">
                     <h4>Description</h4>
-                    <input id="property-id" type="hidden" th:value="${property.id}" />
                     <ul class="unstyled">
                         <li th:text="${property.shortDesc}"></li>
                         <li th:text="${property.type}"></li>
@@ -115,9 +114,6 @@
                 <button type="submit" id="submit" class="btn"></button>
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
             </div>
-        </div>
-        <div tiles:fragment="js-specific">
-            <script type="text/javascript" src="#" th:src="@{/js/property.js}"></script>
         </div>
     </body>
 </html>

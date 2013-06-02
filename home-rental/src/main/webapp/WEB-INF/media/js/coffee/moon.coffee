@@ -23,7 +23,7 @@ initialize = () ->
         mapTypeControlOptions:
             mapTypeIds: ['moon']
 
-    map = new google.maps.Map(document.getElementById('map'),mapOptions)
+    map = new google.maps.Map(document.getElementById('lunar-map'),mapOptions)
     map.mapTypes.set('moon', moonMapType);
     map.setMapTypeId('moon');
 
