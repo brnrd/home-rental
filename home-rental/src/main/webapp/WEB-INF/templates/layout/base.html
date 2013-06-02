@@ -40,9 +40,9 @@
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                            <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__}">Account</a></li>
-                                            <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/properties}">My Properties</a></li>
-                                            <li><a tabindex="-1" href="#" th:href="@{/s/account/__${current.username}__/reservations}">My Reservations</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__}">Profile</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__/properties}">My Properties</a></li>
+                                            <li><a tabindex="-1" href="#" th:href="@{/s/__${current.username}__/reservations}">My Reservations</a></li>
                                             <li class="divider"></li>
                                             <li><a tabindex="-1" href="#" th:href="@{/s/property/new}">Add a property</a></li>
                                             <li class="divider"></li>

@@ -22,7 +22,7 @@
             <div class="span12">
                 <div id="reservation-container">
                     <div id="sort-bar">
-                        <span id="sort-bar-results"><strong>RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(reservations)}"></span></strong></span>
+                        <span id="sort-bar-results"><strong>RESULTS FOUND : <span id="sort-bar-results-value" th:text="${#lists.size(reservations)} + ${#lists.size(p_reservations)}"></span></strong></span>
                         <span id="sort-bar-sorter"><strong>SORT BY :</strong></span>
                         <div class="btn-group">
                             <button class="btn" id="sorter-price">PRICE</button>
@@ -30,8 +30,11 @@
                         </div>
                     </div>
                     <!-- Expected Reservation -->
-                    <ul id="reservation-list">
-                        <li class="reservation-item" th:each="r : ${reservations}" th:attr="data-property-id=${r.property.id}">
+                    <div class="reservation-separator">
+                        <span><strong>EXPECTED BOOKINGS</strong></span>
+                    </div>
+                    <ul id="reservation-list" th:with="r1=${#lists.isEmpty(reservations)}">
+                        <li class="reservation-item" th:if="! ${r1}" th:each="r : ${reservations}" th:attr="data-property-id=${r.property.id}">
                             <div class="pull-left reservation-item-pict"></div>
                             <div class="pull-left reservation-item-content">
                                 <p class="item-content-title" th:text="${r.property.title}"></p>
@@ -47,9 +50,15 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
+                        <li tf:unless="${r1}" class="no-reservation">
+                            <span>You have not expected booking yet ! Find a rent for your next holidays, <a th:href="@{/}">here</a> ?</span>
+                        </li>
                     </ul>
 
                     <!-- Passed Reservation -->
+                    <div class="reservation-separator" th:if="! ${#lists.isEmpty(p_reservations)}">
+                        <span><strong>PASSED BOOKINGS</strong></span>
+                    </div>
                     <ul id="reservation-list">
                         <li class="reservation-item" th:each="pr : ${p_reservations}" th:attr="data-property-id=${pr.property.id}">
                             <div class="pull-left reservation-item-pict"></div>
@@ -60,15 +69,15 @@
                             </div>
                             <div class="pull-left reservation-item-action">
                                 <div th:class="${pr.evaluated} ? 'item-action-note' : 'item-action-price'" th:with="c=${pr.evaluated}">
-                                    <span th:if="${c}" th:text="${pr.note}"></span>
-                                    <span th:unless="${c}" th:text="'$' + ${r.price}"></span>
+                                    <span id="pr_note" th:if="${c}" th:text="${pr.note}"></span>
+                                    <span id="pr_price" th:unless="${c}" th:text="'$' + ${pr.price}"></span>
                                 </div>
                                 <div class="item-action-btn">
-                                    <div th:with="${co=pr.commented}">
-                                        <a th:if="${co}" href="#" id="btn-comment" class="btn btn-warning">Leave a comment</a>
+                                    <div th:with="co=${pr.commented}">
+                                        <a th:if="! ${co}" href="#" id="btn-comment" class="btn btn-warning">Leave a comment</a>
                                     </div>
-                                    <div th:with="${ev=pr.evaluated}">
-                                        <a th:if="${ev}" href="#" id="btn-eval" class="btn btn-warning">Evaluate ?</a>
+                                    <div th:with="ev=${pr.evaluated}">
+                                        <a th:if="! ${ev}" href="#" id="btn-eval" class="btn btn-info">Evaluate Now</a>
                                     </div>
                                 </div>
                             </div>

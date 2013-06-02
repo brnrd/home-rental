@@ -47,6 +47,15 @@
             margin-left: 560px;
         }
     }
+    .reservation-separator {
+        padding: 5px;
+        border-bottom: 1px solid #aaa;
+        background: #ddd;
+        span {
+            font-size: 12px;
+            color: #888;
+        }
+    }
     ul#reservation-list {
         margin: 0;
         li.reservation-item {
@@ -59,7 +68,7 @@
             }
             .reservation-item-content {
                 height: 100px;
-                width: 63%;
+                width: 62%;
                 margin: 0 15px;
                 border-right: 1px solid #eee;
                 .item-content-title {
@@ -86,6 +95,10 @@
                 .item-action-btn {
                     margin-top: 15px;
                     .btn { width: 70px; }
+                    .btn-warning, .btn-info { 
+                        width: 120px;
+                        margin-bottom: 5px;
+                    }
                     #btn-modify {
                         margin-bottom: 5px;
                     }
@@ -93,6 +106,12 @@
             }
             &:hover {
                 background: #eee;
+            }
+        }
+        li.no-reservation {
+            span {
+                display: block;
+                margin: 10px 0;
             }
         }
     }

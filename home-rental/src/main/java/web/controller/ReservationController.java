@@ -33,7 +33,7 @@ public class ReservationController {
     @Autowired
     private ReservationService reservService;
 
-    @RequestMapping(value = "/s/account/{username}/reservations", method = RequestMethod.GET)
+    @RequestMapping(value = "/s/{username}/reservations", method = RequestMethod.GET)
     public String reservationView(@PathVariable String username, Model model, Principal current, HttpServletRequest request, HttpServletResponse response) {
         // Specified if the current page is active and set the tab in the navbar.
         model.addAttribute("home", true);
@@ -62,7 +62,7 @@ public class ReservationController {
                     properties.add(res.getProperty());
                 }
                 
-                String pathMap = StaticMap.buildMapURL(properties, null);
+                String pathMap = StaticMap.buildMapURL(properties, "940x590");
                 
                 // Return the two lists of reservations
                 model.addAttribute("reservations", exp_res);

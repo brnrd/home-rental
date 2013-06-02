@@ -6,9 +6,8 @@ target : modal, submit form
 ###
 
 context = type: null, url: null
-
 # Modal handler
-setContext = (type, url) ->
+setContext = (type, url, username) ->
         context.type = type
         context.url = url
         
@@ -32,7 +31,7 @@ modalActionHandler = () ->
 # Modify handler
 modifyHandler = (dataToSend) ->
   console.log(dataToSend)
-  $.post '/home-rental/s/account/update',
+  $.post '/home-rental/s/' + $('.page-header h3').text() + '/update',
   dataToSend
   (data) ->
     $('#modal-user').modal('hide')
@@ -40,7 +39,7 @@ modifyHandler = (dataToSend) ->
 # Delete handler
 deleteHandler = (dataToSend) ->
   console.log(dataToSend)
-  $.post '/home-rental/s/account/delete',
+  $.post '/home-rental/s/' + $('.page-header h3').text() + '/delete',
     dataToSend
     (data) ->
       $('#modal-user').modal('hide')
@@ -48,13 +47,13 @@ deleteHandler = (dataToSend) ->
 
 # Modify user click to open modal
 $('#modify-user').on "click", (event) ->
-  setContext('modify', '/home-rental/s/account/modal/')
+  setContext('modify', '/home-rental/s/' + $('.page-header h3').text() + '/modal')
   console.log context
   modalActionHandler()
 
 # Delete user clieck to open modal
 $('#delete-user').on "click", (event) ->
-  setContext('delete', '/home-rental/s/account/modal/')
+  setContext('delete', '/home-rental/s/' + $('.page-header h3').text() + '/modal')
   modalActionHandler()
 
 # Modify form submit
