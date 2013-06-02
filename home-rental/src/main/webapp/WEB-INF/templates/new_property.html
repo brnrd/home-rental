@@ -16,87 +16,143 @@
                 <input type="text" id="city-maps" placeholder="Please type the city here"/>
             </div>
         </div>
-        <form id="propertyForm" th:action="@{/s/property/new}" th:object="${options}" method="post">
-            <div class="row">
-                <div class="span12">
-                    <div class="well">
-                        <input id="shortDesc" class="short-desc input-xlarge" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
-                        <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+        
+        <!-- New property form -->
+        <div class="row">
+            <div class="span12">
+                <div id="new-property-wrapper">
+                    <!-- New property form -->
+                    <form id="propertyForm" th:action="@{/s/property/new}" th:object="${options}" method="post">
+                        <!-- Geographical coordinates -->
                         <input id="latitude" type="hidden" name="latitude" th:value="${property.latitude}"/>
                         <input id="longitude" type="hidden" name="longitude" th:value="${property.longitude}"/>
-                    </div>
+                        <div class="row">
+                            <!-- General informations -->
+                            <div class="span5">
+                                <p class="section-title"><strong>GENERAL INFORMATIONS</strong></p>
+                                <ul class="unstyled">
+                                    <li>
+                                        <p class="mini-section">TITLE</p>
+                                        <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>
+                                    </li>
+                                    <li>
+                                        <p class="mini-section">SHORT DESCRIPTION</p>
+                                        <input id="shortDesc" class="short-desc input-xlarge" type="text" placeholder="Short description of the property" name="shortDesc" th:value="${property.shortDesc}" required="required"/>
+                                    </li>
+                                    <li>
+                                        <p class="mini-section">LONG DESCRIPTION</p>
+                                        <textarea id="longDesc" class="long-desc" placeholder="Complete description of the property" th:value="${property.longDesc}" name="longDesc" required="required"/>
+                                    </li>
+                                </ul>
+                                <p class="section-title"><strong>LOCATION</strong></p>
+                                <ul class="unstyled">
+                                    <li>
+                                        <p class="mini-section">ADDRESS</p>
+                                        <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}" required="required"/>
+                                    </li>
+                                    <li>
+                                        <p class="mini-section">CITY</p>
+                                        <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}" required="required"/>
+                                    </li>
+                                    <li>
+                                        <p class="mini-section">COUNTRY</p>
+                                        <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}" required="required"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Specific informations -->
+                            <div class="span7">
+                                <div class="row">
+                                    <div class="span3">
+                                        <ul class="unstyled">
+                                            <li>
+                                                <p class="mini-section">TYPE</p>
+                                                <select id="type" name="type" th:value="${property.type}">
+                                                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+                                                </select>
+                                            </li>
+                                            <li>
+                                                <p class="mini-section">ROOMS</p>
+                                                <select id="rooms" name="rooms" th:value="${property.rooms}">
+                                                    <option th:value="1">1 room</option>
+                                                    <option th:value="2">2 rooms</option>
+                                                    <option th:value="3">3 rooms</option>
+                                                    <option th:value="4">4 rooms</option>
+                                                    <option th:value="5">5 rooms</option>
+                                                    <option th:value="6">6+ rooms</option>
+                                                </select>
+                                            </li>
+                                            <li>
+                                                <p class="mini-section">PRICE</p>
+                                                <input id="price" type="text" placeholder="Price per night" th:value="${property.price}" name="price" required="required"/><i class="dollar">$</i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="unstyled">
+                                            <li>
+                                                <p class="mini-section">RENT PERIOD START</p>
+                                                <div class="input-wrapper">
+                                                    <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
+                                                    <i class="icon-calendar"></i>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <p class="mini-section">RENT PERIOD STOP</p>
+                                                <div class="input-wrapper">
+                                                    <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
+                                                    <i class="icon-calendar"></i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <p class="section">ADDITIONAL INFORMATIONS</p>
+                                <div class="row">
+                                    <div class="span3">
+                                        <p class="mini-section">OPTIONS</p>
+                                        <ul class="unstyled">
+                                            <li>
+                                                <input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/>
+                                                <span class="check">PARKING</span>
+                                            </li>
+                                            <li>
+                                                <input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/>
+                                                <span class="check">SWIMMING POOL</span>
+                                            </li>
+                                            <li>
+                                                <input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/>
+                                                <span class="check">WIFI</span>
+                                            </li>
+                                            <li>
+                                                <input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/>
+                                                <span class="check">LAUNDRY</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="span4">
+                                        <p class="mini-section">PICTURES</p>
+                                        <ul class="unstyled">
+                                            <li><input type="file" name="pict1" disabled="disabled" /></li>
+                                            <li><input type="file" name="pict2" disabled="disabled" /></li>
+                                            <li><input type="file" name="pict3" disabled="disabled" /></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="span7" id="submit-bloc">
+                                        <p>Please check your informations before validationg.</p>
+                                        <button class="btn btn-success btn-large" type="submit" >Save new property</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="span4">
-                    <div class="well">
-                        <input id="title" type="text" placeholder="Property title" name="title" th:value="${property.title}" required="required"/>
-                        <input id="address" type="text" placeholder="Address" name="address" th:value="${property.address}" required="required"/>
-                        <input id="city" type="text" placeholder="City" name="city" th:value="${property.city}" required="required"/>
-                        <input id="country" type="text" placeholder="Country" name="country" th:value="${property.country}" required="required"/>
-
-                        <select id="type" name="type" th:value="${property.type}">
-                            <option th:each="type : ${types}" 
-                                    th:value="${type}" th:text="${type}"></option>
-                        </select>
-                        <select id="rooms" name="rooms" th:value="${property.rooms}">
-                            <option th:value="1">1 room</option>
-                            <option th:value="2">2 rooms</option>
-                            <option th:value="3">3 rooms</option>
-                            <option th:value="4">4 rooms</option>
-                            <option th:value="5">5 rooms</option>
-                            <option th:value="6">6+ rooms</option>
-                        </select>
-                        <div class="submit">
-                            <button class="btn btn-success btn-large" type="submit" >Save</button> 
-                        </div>
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="well">
-                        <input id="price" type="text" placeholder="Price per night" th:value="${property.price}" name="price" required="required"/><i class="dollar">$</i>
-
-                        <h4>Options :</h4>
-                        <ul class="unstyled">
-                            <li>
-                                <input id="parking" type="checkbox" th:field="*{parking}" th:value="${options.parking}" name="parking"/>
-                                <span class="check">PARKING</span>
-                            </li>
-                            <li>
-                                <input id="swimmingPool" type="checkbox" th:field="*{swimmingPool}" th:value="#{options.swimmingPool}" name="swimmingPool"/>
-                                <span class="check">SWIMMING POOL</span>
-                            </li>
-                            <li>
-                                <input id="wifi" type="checkbox" th:field="*{wifi}" th:value="#{options.wifi}" name="wifi"/>
-                                <span class="check">WIFI</span>
-                            </li>
-                            <li>
-                                <input id="laundry" type="checkbox" th:field="*{laundry}" th:value="${options.laundry}" name="laundry"/>
-                                <span class="check">LAUNDRY</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="well">
-                        <div class="input-wrapper">
-                            <input class="datepicker" type="text" id="rentStart" placeholder="Rent period start" th:value="${rentStart}" name="rentStart" required="required"/>
-                            <i class="icon-calendar"></i>
-                        </div>
-                        <div class="input-wrapper">
-                            <input class="datepicker" type="text" id="rentStop" placeholder="Rent period stop" th:value="${rentStop}" name="rentStop" required="required"/>
-                            <i class="icon-calendar"></i>
-                        </div>
-                        <h4>Pictures</h4>
-                        <ul class="unstyled">
-                            <li><input type="file" name="pict1" disabled="disabled" /></li>
-                            <li><input type="file" name="pict2" disabled="disabled" /></li>
-                            <li><input type="file" name="pict3" disabled="disabled" /></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
         
     </body>
 </html>
