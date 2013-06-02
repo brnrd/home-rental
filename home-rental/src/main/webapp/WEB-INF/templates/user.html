@@ -9,8 +9,8 @@
         <link rel="stylesheet" tiles:fragment="css-specific" th:href="@{/css/user.css}" />
     </head>
     <body tiles:fragment="content">
-        <div class="page-header">
-            <h3 th:text="${user.username}"></h3>
+        <div id="page-header">
+            <p th:text="${user.username}"></p>
         </div>
         <div class="row map-wrapper">
             <div class="span9">

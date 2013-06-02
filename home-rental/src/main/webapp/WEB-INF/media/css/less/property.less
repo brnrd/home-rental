@@ -8,26 +8,25 @@
 @import "../bootstrap/variables";
 @import "../bootstrap/mixins";
 
-.map-wrapper {
-    height: 350px;
-    margin-bottom: 20px;
-    .span9 {
-        #map-container {
-            height: 350px;
-            img {
-                height: 380px;
-                width: 100%;
-            }
-        }
+@hrb: #1BB5E0; // blue
+@hrr: #F02E51; //red
+
+#map-wrapper {
+    height: 450px;
+    margin-bottom: 10px;
+    img {
+        height: 450px;
+        width: 100%;
     }
-    .span3 #property-desc {
-        padding: 4px 15px;
-        border: 1px solid #ccc;
-        .border-radius(5px);
-        background-color: #eee;
-        .buttons {
-            text-align: center;
-        }
+}
+
+#property-desc {
+    padding: 4px 15px;
+    border: 1px solid #ccc;
+    .border-radius(5px);
+    background-color: #eee;
+    .buttons {
+        text-align: center;
     }
 }
 
@@ -35,5 +34,75 @@
     padding-top: 20px;
     #comments {
         padding: 5px;   
+    }
+}
+
+#properties-wrapper {
+    #sort-bar {
+        margin-bottom: 10px;
+        padding: 10px;
+        .gradientBar(#f6f6f6, #e5e5e5, #222);
+        border: 1px solid #bbb;
+        .border-radius(5px);
+        #sort-bar-results-value {
+            color: @hrb;
+        }
+        #sort-bar-sorter {
+            margin-left: 560px;
+        }
+    }     
+    ul#properties-list {
+        margin: 0;
+        li.property-item {
+            padding: 5px 15px;
+            border-bottom: 1px solid #ccc;
+            .property-item-pict {
+                height: 100px;
+                width: 20%;
+                border-right: 1px solid #eee;
+            }
+            .property-item-content {
+                height: 100px;
+                width: 62%;
+                margin: 0 15px;
+                border-right: 1px solid #eee;
+                .item-content-title {
+                    margin-bottom: 5px;
+                    font-size: 22px;
+                }
+                .item-content-address {
+                    font-style: italic;
+                    color: #006dcc;
+                }
+            }
+            .property-item-action {
+                height: 100px;
+                width: 12.5%;
+                text-align: center;
+                .item-action-price {
+                    font-size:  30px;
+                    color: @hrr;
+                }
+                .item-action-note {
+                    font-size:  30px;
+                    color: @hrb;
+                }
+                .item-action-btn {
+                    margin-top: 15px;
+                    #btn-modify {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+            &:hover {
+                background: #eee;
+            }
+        }
+        li.no-property {
+            span {
+                display: block;
+                margin: 10px 0;
+            }
+        }
     }
 }

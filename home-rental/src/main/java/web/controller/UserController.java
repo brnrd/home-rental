@@ -195,7 +195,7 @@ public class UserController {
             // Get all properties
             List<Property> properties = propertyService.findProperty(user);
 
-            String pathMap = StaticMap.buildMapURL(properties, null);
+            String pathMap = (!properties.isEmpty()) ? StaticMap.buildMapURL(properties, null) : null;
 
             model.addAttribute("user", user);
             model.addAttribute("properties", properties);

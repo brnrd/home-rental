@@ -92,6 +92,7 @@ $('#modify-property').on "click", (event) ->
 
 # Delete user clieck to open modal
 $('#delete-property').on "click", (event) ->
+  id = $('#property-desc').data('property-id')
   setContext('delete', '/home-rental/s/property/' + id + '/modal', id)
   modalActionHandler()
 

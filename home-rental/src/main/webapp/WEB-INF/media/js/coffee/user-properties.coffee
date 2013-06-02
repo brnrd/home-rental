@@ -9,12 +9,13 @@ target : modal, submit form
 #  Modal  #
 ###########
 
-context = type: null, url: null
+context = type: null, url: null, property_id:null
 
 # Modal handler
-setContext = (type, url) ->
+setContext = (type, url, id) ->
         context.type = type
         context.url = url
+        context.property_id = id
 
 modalActionHandler = () ->
   if context.type is "modify"
@@ -35,29 +36,30 @@ modalActionHandler = () ->
   
 # Modify handler
 modifyHandler = (dataToSend) ->
-  $.post '/home-rental/s/property/update',
+  $.post '/home-rental/s/property/' + context.property_id + '/update',
   dataToSend
   (data) ->
     $('#modal-property').modal('hide')
 
 # Delete handler
 deleteHandler = (dataToSend) ->
-  $.post '/home-rental/s/property/delete',
+  $.post '/home-rental/s/property/' + context.property_id + '/delete',
     dataToSend
     (data) ->
       $('#modal-property').modal('hide')
 
 
 # Modify user click to open modal
-$('.modify-property').on "click", (event) ->
-  property_id = $(this).data("property-id")
-  setContext('modify', '/home-rental/s/property/' + property_id + '/modal/')
+$('#btn-modify').on "click", (event) ->
+  id = $(this).parent('.item-action-btn').data("property-id")
+  console.log id
+  setContext('modify', '/home-rental/s/property/' + id + '/modal', id)
   modalActionHandler()
 
 # Delete user clieck to open modal
-$('.delete-property').on "click", (event) ->
-  property_id = $(this).data("property-id")
-  setContext('delete', '/home-rental/s/property/' + property_id + '/modal/')
+$('#btn-delete').on "click", (event) ->
+  id = $(this).parent('.item-action-btn').data("property-id")
+  setContext('delete', '/home-rental/s/property/' + id + '/modal', id)
   modalActionHandler()
 
 # Modify form submit
