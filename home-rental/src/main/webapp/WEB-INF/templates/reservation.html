@@ -33,8 +33,8 @@
                     <div class="reservation-separator">
                         <span><strong>EXPECTED BOOKINGS</strong></span>
                     </div>
-                    <ul id="reservation-list" th:with="r1=${#lists.isEmpty(reservations)}">
-                        <li class="reservation-item" th:if="! ${r1}" th:each="r : ${reservations}" th:attr="data-property-id=${r.property.id}">
+                    <ul id="reservation-list" th:with="r1=!${#lists.isEmpty(reservations)}">
+                        <li class="reservation-item" th:if="${r1}" th:each="r : ${reservations}" th:attr="data-property-id=${r.property.id}">
                             <div class="pull-left reservation-item-pict"></div>
                             <div class="pull-left reservation-item-content">
                                 <p class="item-content-title" th:text="${r.property.title}"></p>

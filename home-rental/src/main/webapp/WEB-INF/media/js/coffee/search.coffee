@@ -30,7 +30,7 @@ notifyMessage = (type, msg) ->
     
 updateUserMenu = (data) ->
     # Create the ".user-logged" div
-    user_logged = "<div class=\"user-logged\"><div class=\"btn-group\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"username\"><strong>" + data.username + "</strong></span><span class=\"caret\"></span></a><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "\">Account</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "/properties\">My Properties</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/account/" + data.username + "/reservations\">My Reservations</a></li><li class=\"divider\"></li><li><a tabindex=\"-1\" href=\"/home-rental/j_spring_security_logout\">Signout</a></li></ul></div></div>"
+    user_logged = "<div class=\"user-logged\"><div class=\"btn-group\"><a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"username\"><strong>" + data.username + "</strong></span><span class=\"caret\"></span></a><ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\"><li><a tabindex=\"-1\" href=\"/home-rental/s/" + data.username + "\">Profile</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/" + data.username + "/properties\">My Properties</a></li><li><a tabindex=\"-1\" href=\"/home-rental/s/" + data.username + "/reservations\">My Reservations</a></li><li class=\"divider\"></li><li><a tabindex=\"-1\" href=\"/home-rental/s/property/new\">Add a property</a></li><li class=\"divider\"></li><li><a tabindex=\"-1\" href=\"/home-rental/j_spring_security_logout\">Signout</a></li></ul></div></div>"
     
     # Remove btn loggin and add new user-logged div
     $('.login').find('.btn-login').remove()
@@ -38,9 +38,9 @@ updateUserMenu = (data) ->
 
 prepareModalForReservation = () ->
     # Get data from search bar and fill in modal
-    checkin = $('#search-bar #checkin').val()
-    checkout = $('#search-bar #checkout').val()
-    guests = $('#search-bar #guests-number').val()
+    checkin = $('#hr-search-bar #hr-checkin').val()
+    checkout = $('#hr-search-bar #hr-checkout').val()
+    guests = $('#hr-search-bar #hr-guests-number').val()
     
     $('#booking-modal .booking-item input[name="date_rent_start"]').val(checkin)
     $('#booking-modal .booking-desc #b-checkin').html(checkin)
@@ -106,7 +106,7 @@ loginHandler = (dataToSend) ->
 sendSearchRequest = () ->
     # Get form
     dataToSend = $('#hr-search_form').serialize()
-    console.log dataToSend
+    #console.log dataToSend
 
     # Display modal
     $('#ajax-search-modal').modal('show')
@@ -230,7 +230,7 @@ $( "#slider" ).slider(
 )
 
 # Handle ajax login and booking
-$('#btn-booking').on "click", (event) ->
+$('#search-results-list').on "click", '.search-results-item #btn-booking', (event) ->
     prop = $(this).parents('li')
     reservation_target = $(prop).data('property-id')
     reservation_title = $(prop).find('.item-content-title').text()
