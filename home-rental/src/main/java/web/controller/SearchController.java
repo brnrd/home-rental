@@ -59,13 +59,13 @@ public class SearchController {
         if (dest.length > 1) {
             // City and country are known. We request by using the lat/lng coordinates.
             String[] coords = latlong.split(",");
-            search = searchService.searchInRadius25(Math.ceil(Float.parseFloat(coords[0])), 
-                    Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, s_guests, null, null, null, null);
+            search = searchService.searchInRadius25(Double.valueOf(coords[0]), 
+                    Double.valueOf(coords[1]), s_checkin, s_checkout, s_guests, null, null, null, null);
         } else {
             // Only country are known. We request by using the country.
             search = searchService.searchForSpecificCountry(dest[0], s_checkin, s_checkout, s_guests);
         }
-        
+
         // Check if search found results.
        Integer[] specs = null;
        String pathMap = null;
@@ -83,7 +83,6 @@ public class SearchController {
         return "search";
     }
     
-    /* Utils methods */
     private Integer[] processSpecs(List<SearchResult> search) {
         Integer[] specs = {0, 0, 0, 0, 0, 0, 0, search.get(0).getPrice(), search.get(0).getPrice()}; // Where index are respectively : FLAT, HOUSE, LOFT, Options(4) [...], min_price, max_price.
         for (SearchResult s : search) {
@@ -121,8 +120,8 @@ public class SearchController {
         // Prepare and execute the query
         List<SearchResult> search;
         String[] coords = latlong.split(",");
-        search = searchService.searchInRadius25(Math.ceil(Float.parseFloat(coords[0])), 
-                   Math.ceil(Float.parseFloat(coords[1])), s_checkin, s_checkout, guests, min, max, p_type, p_options);
+        search = searchService.searchInRadius25(Double.valueOf(coords[0]), 
+                    Double.valueOf(coords[1]), s_checkin, s_checkout, guests, min, max, p_type, p_options);
         
         // Format the SearchResult List in JSON and return
         if (search != null) {

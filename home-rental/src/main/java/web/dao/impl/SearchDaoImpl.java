@@ -50,7 +50,7 @@ public class SearchDaoImpl implements SearchDao {
     }
     
     @Override
-    public List<SearchResult> complexSearch(Long lat, Long lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests, Integer min, Integer max, String[] property_types, String[] property_options) {
+    public List<SearchResult> complexSearch(Double lat, Double lng, LocalDateTime checkin, LocalDateTime checkout, Integer guests, Integer min, Integer max, String[] property_types, String[] property_options) {
         String hql = "SELECT p.property_id, p.title, p.short_desc, p.price, p.city, p.country, " +
                                      "p.type, p.note, p.rooms*2 AS places, p.latitude, p.longitude,  " +
                                      "po.parking, po.swimming_pool AS swim, po.wifi, po.laundry, " +
