@@ -14,7 +14,7 @@ public class StaticMap {
     private final static String ZOOM = "zoom=13";
     private final static String SIZE = "size=640x400";
     private final static String SCALE = "scale=1";
-    private final static String KEY = "key=AIzaSyCIE1oJyR-XDU30PRTTMhadZtRVI1Spf7I";
+    private final static String KEY = "MAPS_KEY";
     private final static String MARKER = "markers=";
     private final static String MARKER_SEPARATOR = "%7C";
     private final static String COLOR_RED = "color:red";
