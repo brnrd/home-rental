@@ -7,6 +7,7 @@ import web.model.User;
 
 /**
  * 
+ * comment added
  * @author Romain <ro.foncier@gmail.com>
  *Comment2
  */
